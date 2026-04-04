@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pistos Training Library</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #dde6f0;
+  --surface: #ffffff;
+  --border: #c8d4e0;
+  --text: #0a0f1a;
+  --muted: #5a6472;
+  --red: #e53e3e;
+  --teal: #2d9e8e;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* TOPBAR */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 52px;
+}
+.topbar-brand { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--text); }
+.topbar-nav { display: flex; gap: 1.5rem; }
+.topbar-nav a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.15s; }
+.topbar-nav a:hover { color: var(--text); }
+
+/* HEADER */
+.page-header {
+  background: var(--surface);
+  padding: 1.5rem 2rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.page-header h1 { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--text); }
+.page-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* FILTER TABS */
+.filter-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; gap: 0.25rem; align-items: center; height: 44px; }
+.filter-btn {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.03em;
+  padding: 5px 14px; border-radius: 20px; border: none;
+  background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { color: var(--text); }
+.filter-btn.active { background: var(--red); color: #fff; }
+.filter-btn.active-intro { background: var(--teal); color: #fff; }
+.filter-btn.active-int { background: var(--red); color: #fff; }
+.filter-btn.active-adv { background: #7c3aed; color: #fff; }
+.filter-btn.active-cs { background: #d97706; color: #fff; }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0.75rem 2rem; display: flex; gap: 2.5rem;
+}
+.stat { display: flex; align-items: baseline; gap: 6px; }
+.stat-num { font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--text); }
+.stat-label { font-size: 12px; color: var(--muted); }
+
+/* MAIN */
+.main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 4rem; }
+
+/* SECTION */
+.section { margin-bottom: 2rem; }
+.section.hidden { display: none; }
+.section-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.75rem; padding-left: 2px;
+}
+
+/* GRID */
+.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+
+/* CARD — matches module section card style */
+.module-card {
+  background: var(--surface);
+  border-radius: 6px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.15s, transform 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.module-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); transform: translateY(-1px); }
+
+.card-bar { height: 5px; flex-shrink: 0; }
+.bar-intro { background: var(--teal); }
+.bar-int { background: var(--red); }
+.bar-adv { background: #7c3aed; }
+.bar-cs { background: #d97706; }
+
+.card-body { padding: 1rem 1rem 0.875rem; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.card-num { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px; }
+.card-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-intro { background: var(--teal); }
+.dot-int { background: var(--red); }
+.dot-adv { background: #7c3aed; }
+.dot-cs { background: #d97706; }
+.card-title { font-family: var(--mono); font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--text); }
+.card-desc { font-size: 12px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.card-footer { padding: 0.5rem 1rem 0.75rem; border-top: 1px solid #eef1f5; display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.card-meta { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.card-arrow { font-size: 13px; color: var(--border); transition: color 0.15s; }
+.module-card:hover .card-arrow { color: var(--muted); }
+
+footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; justify-content: space-between; }
+footer p { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .topbar-nav, .stats-bar { display: none; }
+  .main, .filter-bar, .page-header, .topbar { padding-left: 1rem; padding-right: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">PISTOS TRAINING LIBRARY</span>
+  <nav class="topbar-nav">
+    <a href="#section-introduction">Introduction</a>
+    <a href="#section-intermediate">Intermediate</a>
+    <a href="#section-advanced">Advanced</a>
+    <a href="#section-reallife">Real Life Events</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <h1>Training Library</h1>
+  <p>Introductory &mdash; Select a section below to begin</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">44</span><span class="stat-label">total modules</span></div>
+  <div class="stat"><span class="stat-num">11</span><span class="stat-label">topics</span></div>
+  <div class="stat"><span class="stat-num">3</span><span class="stat-label">skill levels</span></div>
+  <div class="stat"><span class="stat-num">11</span><span class="stat-label">case studies</span></div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterAll(this)">All Modules</button>
+  <button class="filter-btn" onclick="filterSection('introduction',this)">Introduction</button>
+  <button class="filter-btn" onclick="filterSection('intermediate',this)">Intermediate</button>
+  <button class="filter-btn" onclick="filterSection('advanced',this)">Advanced</button>
+  <button class="filter-btn" onclick="filterSection('reallife',this)">Real Life Events</button>
+</div>
+
+<div class="main">
+
+  <div class="section" id="section-introduction" data-section="introduction">
+    <div class="section-label">Introduction &mdash; 11 modules &middot; ~17 min each</div>
+    <div class="module-grid">
+      <a class="module-card" href="Introduction/01_intro_cybersecurity.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 01</div><div class="card-title">Introduction to Cybersecurity</div><div class="card-desc">The basics every person in your organization needs to know</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/02_intro_mfa.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 02</div><div class="card-title">Introduction to Multifactor Authentication</div><div class="card-desc">How MFA stops unauthorized access to your accounts</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/03_intro_quantum.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 03</div><div class="card-title">Introduction to Quantum Computing &amp; Cybersecurity</div><div class="card-desc">Why quantum computing matters for data security</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/04_intro_malware.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 04</div><div class="card-title">Introduction to Malware</div><div class="card-desc">Recognizing and avoiding malicious software</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/05_intro_social_engineering.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 05</div><div class="card-title">Introduction to Social Engineering</div><div class="card-desc">How attackers manipulate people to gain access</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/06_intro_passwords.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 06</div><div class="card-title">Introduction to Password Security</div><div class="card-desc">Creating and managing strong passwords</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/07_intro_email_security.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 07</div><div class="card-title">Introduction to Email Security</div><div class="card-desc">Spotting phishing and malicious email content</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/08_intro_data_protection.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 08</div><div class="card-title">Introduction to Data Protection</div><div class="card-desc">Handling sensitive information safely</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/09_intro_network_security.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 09</div><div class="card-title">Introduction to Network Security</div><div class="card-desc">Understanding how networks are protected</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/10_intro_internet_security.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 10</div><div class="card-title">Introduction to Internet Security</div><div class="card-desc">Safe browsing and online behavior</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Introduction/11_intro_incident_response.html"><div class="card-bar bar-intro"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-intro"></span>INTRO &middot; 11</div><div class="card-title">Introduction to Incident Response</div><div class="card-desc">What to do when something goes wrong</div></div><div class="card-footer"><span class="card-meta">Foundational</span><span class="card-arrow">&#8594;</span></div></a>
+    </div>
+  </div>
+
+  <div class="section" id="section-intermediate" data-section="intermediate">
+    <div class="section-label">Intermediate &mdash; 11 modules &middot; ~17 min each</div>
+    <div class="module-grid">
+      <a class="module-card" href="Intermediate/int_01_security_arch_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 01</div><div class="card-title">Security Architecture</div><div class="card-desc">Layered defenses and attack surface management</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_02_mfa_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 02</div><div class="card-title">Multifactor Authentication</div><div class="card-desc">MFA bypass techniques and stronger implementations</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_03_quantum_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 03</div><div class="card-title">Quantum Computing &amp; Cybersecurity</div><div class="card-desc">Post-quantum cryptography and preparation</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_04_malware_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 04</div><div class="card-title">Malware</div><div class="card-desc">Advanced malware behavior and detection</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_05_social_eng_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 05</div><div class="card-title">Social Engineering</div><div class="card-desc">Pretexting, vishing, and complex attack chains</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_06_passwords_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 06</div><div class="card-title">Password Security</div><div class="card-desc">Credential attacks and password manager deployment</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_07_email_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 07</div><div class="card-title">Email Security</div><div class="card-desc">BEC, spoofing, and email authentication protocols</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_08_data_protection_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 08</div><div class="card-title">Data Protection</div><div class="card-desc">Classification, encryption, and data loss prevention</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_09_network_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 09</div><div class="card-title">Network Security</div><div class="card-desc">Segmentation, VPNs, and network monitoring</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_10_internet_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 10</div><div class="card-title">Internet Safety</div><div class="card-desc">Web threats, downloads, and browser security</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Intermediate/int_11_incident_intermediate.html"><div class="card-bar bar-int"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-int"></span>INT &middot; 11</div><div class="card-title">Incident Response</div><div class="card-desc">Containment, eradication, and recovery procedures</div></div><div class="card-footer"><span class="card-meta">Intermediate</span><span class="card-arrow">&#8594;</span></div></a>
+    </div>
+  </div>
+
+  <div class="section" id="section-advanced" data-section="advanced">
+    <div class="section-label">Advanced &mdash; 11 modules &middot; ~30 min each</div>
+    <div class="module-grid">
+      <a class="module-card" href="Advanced/adv_01_security_arch_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 01</div><div class="card-title">Security Architecture</div><div class="card-desc">Zero trust, threat modeling, and enterprise design</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_02_mfa_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 02</div><div class="card-title">Multifactor Authentication</div><div class="card-desc">FIDO2, passkeys, and enterprise MFA architecture</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_03_quantum_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 03</div><div class="card-title">Quantum Computing</div><div class="card-desc">Cryptographic algorithms and quantum readiness</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_04_malware_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 04</div><div class="card-title">Malware</div><div class="card-desc">Reverse engineering, IOCs, and threat hunting</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_05_social_eng_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 05</div><div class="card-title">Social Engineering</div><div class="card-desc">APT tactics, insider threats, and red team techniques</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_06_passwords_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 06</div><div class="card-title">Password Security</div><div class="card-desc">Hash cracking, PAM, and privileged access management</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_07_email_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 07</div><div class="card-title">Email Security</div><div class="card-desc">DMARC enforcement, header analysis, and mail flow</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_08_data_protection_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 08</div><div class="card-title">Data Protection</div><div class="card-desc">DLP tools, regulatory frameworks, and data governance</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_09_network_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 09</div><div class="card-title">Network Security</div><div class="card-desc">IDS/IPS, packet analysis, and perimeter hardening</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_10_internet_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 10</div><div class="card-title">Internet Safety</div><div class="card-desc">Proxy controls, DNS filtering, and web gateway policy</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Advanced/adv_11_incident_advanced.html"><div class="card-bar bar-adv"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-adv"></span>ADV &middot; 11</div><div class="card-title">Incident Response</div><div class="card-desc">IR playbooks, forensics, and regulatory notification</div></div><div class="card-footer"><span class="card-meta">Advanced</span><span class="card-arrow">&#8594;</span></div></a>
+    </div>
+  </div>
+
+  <div class="section" id="section-reallife" data-section="reallife">
+    <div class="section-label">Real Life Events &mdash; 11 case studies</div>
+    <div class="module-grid">
+      <a class="module-card" href="Real Life Events/cs_01_target.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 01</div><div class="card-title">Target Data Breach</div><div class="card-desc">Third-party vendor access leads to 40M card records stolen</div></div><div class="card-footer"><span class="card-meta">Retail &middot; 2013</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_02_ubiquiti.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 02</div><div class="card-title">Ubiquiti Insider Theft</div><div class="card-desc">Employee steals data and extorts employer for $2M</div></div><div class="card-footer"><span class="card-meta">Technology &middot; 2020</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_03_sony.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 03</div><div class="card-title">Sony Pictures Hack</div><div class="card-desc">Nation-state attack destroys systems and leaks films</div></div><div class="card-footer"><span class="card-meta">Media &middot; 2014</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_04_casino.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 04</div><div class="card-title">Casino Aquarium Hack</div><div class="card-desc">IoT thermometer used as entry point into casino network</div></div><div class="card-footer"><span class="card-meta">Hospitality &middot; IoT</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_05_tesla.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 05</div><div class="card-title">Tesla Insider Sabotage</div><div class="card-desc">Disgruntled employee manipulates manufacturing systems</div></div><div class="card-footer"><span class="card-meta">Manufacturing &middot; 2018</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_06_colonial.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 06</div><div class="card-title">Colonial Pipeline Ransomware</div><div class="card-desc">Single compromised password shuts down US fuel supply</div></div><div class="card-footer"><span class="card-meta">Infrastructure &middot; 2021</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_07_baltimore.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 07</div><div class="card-title">Baltimore City Ransomware</div><div class="card-desc">RobbinHood ransomware paralyzes city services for weeks</div></div><div class="card-footer"><span class="card-meta">Government &middot; 2019</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_08_uber.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 08</div><div class="card-title">Uber Data Breach</div><div class="card-desc">Social engineering of IT help desk grants full system access</div></div><div class="card-footer"><span class="card-meta">Technology &middot; 2022</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_09_equifax.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 09</div><div class="card-title">Equifax Breach</div><div class="card-desc">Unpatched Apache Struts exposes 147M consumer records</div></div><div class="card-footer"><span class="card-meta">Financial &middot; 2017</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_10_maersk.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 10</div><div class="card-title">Maersk NotPetya Attack</div><div class="card-desc">Wiper malware destroys 45,000 PCs and halts global shipping</div></div><div class="card-footer"><span class="card-meta">Logistics &middot; 2017</span><span class="card-arrow">&#8594;</span></div></a>
+      <a class="module-card" href="Real Life Events/cs_11_crowdstrike.html"><div class="card-bar bar-cs"></div><div class="card-body"><div class="card-num"><span class="card-dot dot-cs"></span>CASE &middot; 11</div><div class="card-title">CrowdStrike Global Outage</div><div class="card-desc">Faulty sensor update crashes 8.5M Windows systems worldwide</div></div><div class="card-footer"><span class="card-meta">Technology &middot; 2024</span><span class="card-arrow">&#8594;</span></div></a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Pistos Information Protection &mdash; pistosip.com</p>
+  <p>For internal and client use only</p>
+</footer>
+
+<script>
+function filterAll(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.className='filter-btn');
+  btn.classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('hidden'));
+}
+function filterSection(section, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.className='filter-btn');
+  const cls = {introduction:'active-intro',intermediate:'active-int',advanced:'active-adv',reallife:'active-cs'}[section];
+  btn.classList.add(cls);
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('hidden', s.dataset.section !== section));
+  document.getElementById('section-'+section)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
