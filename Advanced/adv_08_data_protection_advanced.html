@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Protection and DLP — Advanced — Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#9b7fe8;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#9b7fe822;color:#9b7fe8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#9b7fe8;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#9b7fe8;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#9b7fe8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;min-width:0;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);overflow-wrap:break-word;word-break:break-word;}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#9b7fe8;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#9b7fe8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Data Protection and DLP — Advanced</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Advanced</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Enterprise Data Classification at Scale</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Advanced DLP Architecture</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Encryption Program Governance</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Data Governance and Breach Response Maturity</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Enterprise Data Classification at Scale</span>
+  </div>
+  <div class="mc-desc">▶ ML-based automation, exact data match, and classification governance</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Advanced DLP Architecture</span>
+  </div>
+  <div class="mc-desc">▶ Layered enforcement, CASB, and program governance</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Encryption Program Governance</span>
+  </div>
+  <div class="mc-desc">▶ Key lifecycle, HSM operations, and cryptographic agility</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Data Governance and Breach Response Maturity</span>
+  </div>
+  <div class="mc-desc">▶ Program architecture, UEBA at depth, and regulatory notification strategy</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Data Protection and DLP — Advanced</div>
+  <div class="home-sub">Advanced — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Enterprise Data Classification at Scale</span>
+  </div>
+  <div class="mc-desc">▶ ML-based automation, exact data match, and classification governance</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Advanced DLP Architecture</span>
+  </div>
+  <div class="mc-desc">▶ Layered enforcement, CASB, and program governance</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Encryption Program Governance</span>
+  </div>
+  <div class="mc-desc">▶ Key lifecycle, HSM operations, and cryptographic agility</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Data Governance and Breach Response Maturity</span>
+  </div>
+  <div class="mc-desc">▶ Program architecture, UEBA at depth, and regulatory notification strategy</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Enterprise Data Classification at Scale</div>
+    <div class="ph-sub">ML-based automation, exact data match, and classification governance</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Enterprise Classification Architecture</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Trainable Classifiers: Seed (200-500 samples) + Negative samples</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Precision = % flagged that are correct · Recall = % of targets captured · Validate before deploy</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="110" width="480" height="56" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Exact Data Match: Salted hash of known customer values</text>
+    <text x="36" y="150" font-size="10" fill="#94a0b8" font-family="system-ui">Matches specific SSNs/policy#s — eliminates format-matching false positives · DB refreshed automatically</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="56" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="200" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Classification Governance: Accuracy measurement + appeals + retraining triggers</text>
+    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">Quarterly accuracy report to leadership · Governance without measurement has no feedback loop</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="246" width="480" height="82" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="268" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Maturity: Ad Hoc → Defined → Managed → Optimizing</text>
+    <text x="36" y="286" font-size="10" fill="#94a0b8" font-family="system-ui">Stage 2: SIT patterns + email/upload DLP + discovery · Stage 3: trainable + EDM + endpoint/CASB</text>
+    <text x="36" y="304" font-size="10" fill="#56617a" font-family="system-ui">Stage 4: Classification in business workflow · accuracy drives continuous improvement</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Machine learning classification: trainable classifiers at scale</div>
+    <div class="blk-body">Trainable classifiers in Microsoft Purview use machine learning models trained on curated example document sets to classify content at the point of creation, modification, or upload — without relying on pattern matching or keyword lists. The training process requires two sample sets: seed samples (200–500 representative positive examples of the content category to be classified) and negative samples (examples of similar-but-different content that should not trigger the classifier). For an insurance agency, a trainable classifier for 'submitted insurance applications' requires seed samples of actual completed application forms and negative samples of application templates, policy documents, and other forms that resemble applications without being submissions. After training, the classifier's performance is measured against a validation set before deployment; Purview reports precision and recall metrics. Precision measures what percentage of items the classifier flagged are actually in the target category; recall measures what percentage of actual target documents the classifier captured. Both must exceed thresholds before the classifier is production-ready.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Exact data match: field-level precision for known sensitive values</div>
+    <div class="blk-body">Trainable classifiers and sensitive information type patterns identify data by its structure and format — a Social Security number pattern matches any nine-digit value in the correct format. Exact data match (EDM) provides a fundamentally different capability: matching content against a specific database of known values. An insurance agency can configure EDM with the actual SSNs, policy numbers, and account numbers of their customer base — the EDM engine then detects not just SSN-formatted values but values that are specifically the SSNs of their customers. EDM eliminates false positives that occur when SSN-formatted values appear in non-sensitive contexts (test data, samples, historical policy numbers that have been deactivated). The EDM database is hashed before upload using a salted hash algorithm, so the actual sensitive values never leave the organization's environment unprotected. EDM detection requires a field match against the current hash database, ensuring that deactivated customer records are automatically removed from detection scope when the EDM database is refreshed.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Classification governance: consistency, appeals, and label accuracy measurement</div>
+    <div class="blk-body">A data classification program without governance produces inconsistent results over time: users apply incorrect labels manually, automated classifiers drift as document formats change, and regulatory examination of classification accuracy reveals gaps that create compliance risk. Classification governance requires: a published classification policy that defines what belongs in each tier with concrete examples relevant to insurance operations (these examples should be more specific than 'financial data' — they should specify which fields in which systems trigger Restricted/NPI classification), a label review and appeals process for employees who disagree with an automated classification decision, regular accuracy measurement that samples classified documents and compares machine classification to expert human review, and a classifier retraining schedule triggered when accuracy degrades below threshold. The accuracy measurement process also detects classification gaps — content categories that are not covered by any current classifier and that appear frequently enough in production that they should be added to the classification model.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Classification program maturity model: four stages</div>
+    <div class="blk-body">Data classification programs evolve through measurable maturity stages. Stage 1 (Ad Hoc): classification exists only as a policy document with no technical enforcement; employees classify manually if they do so at all; no visibility into where classified data exists or how it flows. Stage 2 (Defined): automated classification is deployed for new content; sensitive information type patterns cover structured NPI formats; DLP policies enforce classification at email and file upload boundaries; discovery has identified the highest-concentration NPI repositories. Stage 3 (Managed): trainable classifiers cover all major NPI document categories; EDM provides precision matching for known customer data; retroactive classification has labeled the existing document inventory; DLP coverage extends to endpoint and cloud applications; classification accuracy is measured quarterly. Stage 4 (Optimizing): classification decisions are integrated with the business process workflow — applications are automatically labeled at submission, policy documents at issuance, claims at adjudication; classification feeds automated records management disposition; accuracy measurement drives continuous model improvement; classification program is examined as part of regulatory compliance evidence.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Advanced DLP Architecture</div>
+    <div class="ph-sub">Layered enforcement, CASB, and program governance</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Advanced DLP Architecture</text>
+  <rect x="20" y="34" width="480" height="22" rx="4" fill="#9b7fe822"/>
+  <text x="260" y="50" text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">UNIFIED POLICY ENGINE — one definition, all enforcement points</text>
+  <g id="pg2-hl0" class="svg-hl">
+    <rect x="20" y="66" width="145" height="90" rx="7" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="93" y="90" text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">EMAIL</text>
+    <text x="93" y="108" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Block / hold</text>
+    <text x="93" y="124" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Justification</text>
+    <text x="93" y="140" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Partner allowlist</text></g>
+  <g id="pg2-hl1" class="svg-hl">
+    <rect x="188" y="66" width="144" height="90" rx="7" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="260" y="90" text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">ENDPOINT</text>
+    <text x="260" y="108" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">USB · Print · Upload</text>
+    <text x="260" y="124" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Adaptive risk score</text>
+    <text x="260" y="140" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">BYOD gap → CASB</text></g>
+  <g id="pg2-hl2" class="svg-hl">
+    <rect x="356" y="66" width="144" height="90" rx="7" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="428" y="90" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">CASB</text>
+    <text x="428" y="108" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">API: managed apps</text>
+    <text x="428" y="124" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Proxy: BYOD</text>
+    <text x="428" y="140" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Shadow IT discovery</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="174" width="480" height="152" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="198" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Program Governance Metrics</text>
+    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">False positive rate by policy → triage priority · MTTT target &lt;4hr for high severity</text>
+    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Confirmed incident rate · Coverage completeness vs data movement map</text>
+    <text x="36" y="256" font-size="10" fill="#56617a" font-family="system-ui">Executive reporting: # NPI transmissions prevented · estimated regulatory exposure avoided</text>
+    <text x="36" y="276" font-size="10" fill="#56617a" font-family="system-ui">Adaptive risk score: recipient domain + volume + time + device + user UEBA score</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Unified DLP policy framework: consistent rules across enforcement points</div>
+    <div class="blk-body">An advanced DLP architecture enforces consistent policy across all data movement vectors through a unified policy framework rather than separate, independently configured policies for email, endpoint, SharePoint, and cloud applications. Microsoft Purview DLP provides a unified policy engine where a single policy definition covering Restricted/NPI content applies consistently whether the data appears in an outbound email, a file being copied to USB, a SharePoint sharing action, or a Teams message. The enforcement point adapts the policy action to the channel — email is blocked or held for review, USB copy generates an alert and requires justification, SharePoint sharing to external users is blocked with a notification — but the underlying policy conditions are the same. Unified policy management reduces the governance burden (a single policy change propagates to all enforcement points) and eliminates coverage gaps that occur when separate policies become out of sync. The unified framework also produces unified telemetry: a single DLP dashboard shows all policy matches across all enforcement points, enabling correlation of data movement patterns that appear individually innocuous but form a recognizable exfiltration pattern in aggregate.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Adaptive DLP: risk-based enforcement that scales with context</div>
+    <div class="blk-body">Static DLP enforcement — block all transmissions matching the policy conditions regardless of context — produces both false positives (blocking legitimate business operations) and over-reliance on technology (if DLP doesn't block it, it must be allowed). Adaptive DLP uses risk scoring to calibrate enforcement intensity to the actual risk level of each transmission. A low-risk transmission (a claims examiner sending policy documents to an authorized carrier with whom the agency has an established sharing relationship, during business hours, from a managed device, matching a label authorized for external sharing) requires minimal enforcement — perhaps a logged policy match with no user interaction. A high-risk transmission (an employee sending bulk NPI to a personal email account, after hours, from an unmanaged device, for the first time) warrants aggressive enforcement — blocking with mandatory compliance review escalation. The risk score incorporates: recipient domain reputation (authorized partner vs. unknown domain vs. known data broker), transmission volume relative to user baseline, time of day relative to user pattern, device management status, user risk score from UEBA, and content sensitivity label. Adaptive enforcement reduces false positive rates while maintaining high sensitivity to genuine risk indicators.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">CASB at depth: API coverage, reverse proxy for BYOD, and shadow IT governance</div>
+    <div class="blk-body">A mature CASB deployment addresses three distinct coverage scenarios. API integration covers managed cloud applications where the CASB connects directly to the application API to inspect stored content, control sharing permissions, and receive real-time activity events — Microsoft Defender for Cloud Apps provides this for M365, Salesforce, Box, ServiceNow, and hundreds of other SaaS applications. Reverse proxy deployment extends CASB controls to BYOD devices accessing managed cloud applications: rather than installing an agent on a personal device, all traffic from any device to managed SaaS applications is routed through the CASB proxy, which applies session controls (preventing download, copy, and print of sensitive content from unmanaged devices) without requiring device enrollment. Shadow IT governance — identifying and managing unsanctioned cloud application use — requires analysis of network egress logs, proxy logs, or endpoint traffic to detect cloud application usage that is not in the approved application inventory. Shadow IT discovery typically reveals 5 to 10 times more cloud applications in use than IT is aware of; each application represents an uncontrolled data channel that may be exfiltrating NPI outside DLP coverage.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">DLP program governance: metrics, SLAs, and executive reporting</div>
+    <div class="blk-body">A DLP program that operates without governance metrics cannot demonstrate compliance value or drive systematic improvement. Key DLP program metrics: policy match volume by enforcement point and policy (trending over time to detect sudden changes in data movement patterns), false positive rate by policy (the percentage of policy matches that investigation determines are legitimate business activity — used to drive policy tuning), mean time to triage (the time from alert generation to initial analyst disposition — target under four hours for high-severity policies), confirmed incident rate (the percentage of matches that investigation confirms as actual policy violations requiring remediation action), and coverage completeness (the percentage of data movement channels covered by DLP enforcement relative to the organization's data movement map). Executive reporting translates these metrics into business risk language: DLP prevented an estimated X transmissions of customer NPI to unauthorized recipients in the quarter; the false positive rate of 3.2% is within the acceptable threshold; one confirmed exfiltration incident was detected and contained with no breach notification obligation triggered. This framing makes DLP investment visible and positions compliance spend as quantifiable risk reduction.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Encryption Program Governance</div>
+    <div class="ph-sub">Key lifecycle, HSM operations, and cryptographic agility</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Encryption Program Architecture</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="56" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Cryptographic Inventory: Algorithms · Key lengths · Cert expiry · Coverage gaps</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Automated discovery (Venafi/Keyfactor) · Integrated into change management · Living document</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="102" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="124" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Key Lifecycle: Generate → Activate → Rotate → Suspend → Revoke → Destroy</text>
+    <text x="36" y="142" font-size="10" fill="#94a0b8" font-family="system-ui">Rotation failures most common · Cryptographic destruction required (not delete) · Full audit trail</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="200" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">HSM: Split knowledge + dual control + audit log review + DR procedure</text>
+    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">On-prem (Thales/Entrust) or cloud (AWS CloudHSM / Azure Dedicated) · Single-tenant</text>
+    <text x="36" y="236" font-size="10" fill="#56617a" font-family="system-ui">No single admin can access key material alone</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="74" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="276" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Cryptographic Agility: Centralized service layer → algorithm-agnostic apps</text>
+    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">NIST 2024: ML-KEM (key exchange) · ML-DSA (signatures) · SLH-DSA (stateless hash)</text>
+    <text x="36" y="312" font-size="10" fill="#56617a" font-family="system-ui">Hybrid classical + post-quantum during transition · New dev: centralized service mandatory</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Cryptographic inventory: knowing what you are protecting and how</div>
+    <div class="blk-body">Encryption program governance begins with a complete cryptographic inventory — a catalog of every system, application, and data repository that stores or transmits sensitive data, the encryption algorithm and key length in use, the key management approach, and the certificate or key expiration date. The inventory reveals: algorithm misconfigurations (MD5 or SHA-1 still in use for data integrity functions, DES or RC4 cipher suites still enabled on TLS configurations, RSA key sizes below 2048 bits), certificate expiration risks (certificates within 90 days of expiration that are not enrolled in automated renewal), key management gaps (encryption deployed without a documented key custodian, rotation schedule, or backup procedure), and coverage gaps (systems that handle sensitive data but have no encryption at rest configured). The inventory is a living document — changes to the application portfolio, infrastructure, and certificate landscape require continuous updates. Automated cryptographic discovery tools (Venafi, AppViewX, Keyfactor) scan the network, certificate transparency logs, and application configurations to maintain the inventory without relying solely on manual declaration.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Key lifecycle management: generation, rotation, escrow, and destruction</div>
+    <div class="blk-body">A key lifecycle management program governs every stage of a cryptographic key's existence. Generation: keys must be generated using a cryptographically secure random number generator, and the generation event must be logged with the generator's state and entropy source. Activation: keys are not used before their scheduled activation date and not used after their scheduled expiration. Rotation: DEKs rotate on a defined schedule (90 to 365 days depending on sensitivity and volume of data protected); rotation requires re-encrypting all data with the new key before the old key is deactivated. Suspension: keys can be temporarily suspended if compromise is suspected, removing them from active use while investigation proceeds without destroying them and losing access to encrypted data. Revocation: a revoked key is permanently removed from active use; data encrypted with a revoked key must be re-encrypted with a new key before the revoked key is destroyed. Destruction: key material must be cryptographically destroyed (overwritten with random data multiple times or destroyed by HSM command), not merely deleted. Each stage requires documentation for audit — regulatory examiners reviewing NY DFS 500 encryption compliance will ask for evidence that key management procedures are followed.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">HSM deployment and operations: on-premises and cloud models</div>
+    <div class="blk-body">Hardware Security Modules (HSMs) provide tamper-resistant key storage and cryptographic operation execution in dedicated hardware designed to resist key extraction even under physical attack. On-premises HSM deployment (Thales Luna, Entrust nShield) requires physical installation in a secure data center, network connectivity to applications requiring HSM-protected key operations, HSM administrative access controls with split knowledge and dual control procedures (no single administrator can access key material alone), and HSM backup procedures that store encrypted key backup material in a physically separate secure location. Cloud HSM services (AWS CloudHSM, Azure Dedicated HSM) provide HSM-level security without on-premises hardware, with the customer retaining full key control — the cloud provider cannot access keys because the HSM is single-tenant customer hardware in the cloud provider's data center. The critical HSM operational decision is the activation (master) key management: the master key protects all other keys in the hierarchy and must be stored in a way that survives HSM failure (through secure backup to offline media) without creating an unauthorized access path.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Cryptographic agility: preparing for post-quantum transition</div>
+    <div class="blk-body">Cryptographic agility is the architectural property that allows an organization to replace cryptographic algorithms without redesigning its entire security infrastructure. It is relevant immediately — not just as preparation for quantum computing — because algorithm deprecations happen on a 3 to 7 year cycle: SHA-1 was deprecated for certificate signatures in 2017, TLS 1.0 and 1.1 were formally deprecated in 2021, and NIST issued final post-quantum cryptography standards in 2024 (ML-KEM replacing RSA key exchange, ML-DSA replacing ECDSA signatures). An organization without cryptographic agility discovers during each deprecation cycle that algorithm replacement requires individual remediation of each application, requiring multi-year migration programs with high risk of missed coverage. Cryptographic agility is achieved by: centralizing cryptographic operations in a library layer that applications call rather than implementing cryptography directly, using key management infrastructure that supports multiple algorithm families, and maintaining the cryptographic inventory that identifies every algorithm deployment. NIST SP 800-131A and NIST SP 800-208 provide the algorithm transition guidance that should drive the agility roadmap for regulated organizations.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Data Governance and Breach Response Maturity</div>
+    <div class="ph-sub">Program architecture, UEBA at depth, and regulatory notification strategy</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Data Governance Maturity</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="56" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Data Governance: Owner · Steward · Council · Policy with authority to enforce</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Owner has org authority to enforce access control decisions · Council has executive sponsorship</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="102" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="124" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">UEBA Threat Hunting: Hypothesis → query → sub-threshold anomaly list → investigate</text>
+    <text x="36" y="142" font-size="10" fill="#94a0b8" font-family="system-ui">Combine: volume +20% + new cloud sync + unusual external attachments = high fidelity signal</text>
+    <text x="36" y="158" font-size="10" fill="#56617a" font-family="system-ui">Weekly/monthly cadence · Track hypothesis→lead→confirmed incident conversion rate</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="200" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Multi-Jurisdiction Notification: Matrix + templates + IR retainer + 72hr DFS clock</text>
+    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">Clock runs from determination · Pre-drafted forms with variable fields · Executive approval pre-authorized</text>
+    <text x="36" y="236" font-size="10" fill="#56617a" font-family="system-ui">NY SHIELD Act · CCPA/CPRA · jurisdiction-specific timelines in matrix</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="74" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="276" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Post-Quantum: Harvest now decrypt later — migrate by sensitivity + retention period</text>
+    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">Longest-retention NPI first · ML-KEM + ML-DSA targets · Hybrid during transition</text>
+    <text x="36" y="312" font-size="10" fill="#56617a" font-family="system-ui">Migration timeline 3-7 years · Quantum timeline uncertain · Start now for 20yr retention data</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Data governance program architecture: roles, policies, and accountability</div>
+    <div class="blk-body">Data governance is the organizational framework that ensures data is managed consistently with legal, regulatory, and business requirements throughout its lifecycle. A mature data governance program defines: data ownership (each data domain — customer data, policy data, claims data, financial data — has a designated data owner who is accountable for classification, access control, and lifecycle management decisions), data stewardship (operational staff who implement the data owner's decisions for specific systems and repositories), data governance council (cross-functional body that resolves classification disputes, approves new data use cases, and reviews governance metrics), and data governance policies that are integrated with the overall information security policy framework. For NY DFS-regulated insurance agencies, data governance is the organizational mechanism that makes the technical controls — classification, DLP, encryption, access control — coherent and consistently applied. Without governance, technical controls proliferate inconsistently: DLP covers email but not endpoint, classification applies to new documents but not the legacy archive, encryption covers the production database but not the backup. Governance creates the accountability structure that drives consistent coverage.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">UEBA at depth: behavioral model construction and threat hunt integration</div>
+    <div class="blk-body">Advanced UEBA deployment goes beyond alert generation to active threat hunting and behavioral investigation capability. Behavioral model construction requires defining the relevant behavioral dimensions for the organization's risk profile: for data exfiltration, the relevant dimensions are data access volume, data movement destinations, access time relative to established pattern, and access scope relative to role. The UEBA platform ingests telemetry from multiple sources — SIEM event logs, DLP alerts, endpoint agent data, network flow data, cloud application audit logs — and constructs multi-dimensional behavioral profiles. Threat hunting with UEBA reverses the detection direction: rather than waiting for an alert to exceed a threshold, the analyst queries the UEBA platform for users who have shown multiple sub-threshold anomalies that individually would not trigger an alert but together form a recognizable pre-exfiltration pattern. A user who has accessed 20% more records than usual (below threshold), used a cloud sync application for the first time (sub-threshold anomaly), and sent two external emails with attachments in a category they have never used before (sub-threshold) may not trigger any individual alert but the combination is a high-fidelity hunting signal. UEBA hunting queries can be run as scheduled automated hunts that generate investigation queues rather than waiting for threshold-based alerts.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Breach notification program: multi-jurisdiction strategy and notification automation</div>
+    <div class="blk-body">Insurance agencies handling NY-resident customer data face a multi-jurisdiction notification obligation landscape. NY DFS 500.17 requires notification to the Superintendent within 72 hours of determination. NY SHIELD Act requires notification to affected NY residents when their private information is accessed by unauthorized parties. Other states have their own breach notification laws with varying timelines, content requirements, and notification recipients — California's CCPA/CPRA, for example, has specific requirements for California residents. A mature breach notification program maintains: a jurisdiction matrix (for each state where the agency has customers, the notification timeline, content requirements, notification authority, and exemptions for encrypted data), pre-drafted notification templates for each jurisdiction (populated with variable fields that are completed when a breach is determined), a notification decision workflow (the step-by-step process from breach determination through legal review to notification delivery), and a regulatory correspondence management system that tracks notification submissions and regulator responses. Notification automation — using the jurisdiction matrix and templates to generate draft notifications automatically once the breach parameters are confirmed — reduces the time from determination to notification submission, which is critical when the DFS clock is running.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Post-quantum data protection: long-term data at risk and harvest now decrypt later</div>
+    <div class="blk-body">The transition to post-quantum cryptography is a data protection concern now, not a future concern, because of the harvest now, decrypt later attack strategy. Adversaries — including nation-state actors — are collecting encrypted data transmitted today with the intention of decrypting it once quantum computers capable of breaking RSA and elliptic curve cryptography are available. Data that must remain confidential beyond the quantum computing horizon (expected in the 10 to 20 year range for cryptographically relevant quantum computers, though estimates vary significantly) is at risk from data already transmitted or stored using classical public-key cryptography. For insurance agencies, the long-term sensitive data categories that should be prioritized for post-quantum migration include: customer records that must be retained for the statutory minimum period (6+ years), strategic business information with ongoing confidentiality requirements, and any data that could be used for future fraud or identity theft (SSNs, financial account numbers). NIST's post-quantum standards (ML-KEM for key encapsulation, ML-DSA for digital signatures, SLH-DSA as a stateless hash-based signature alternative) provide the algorithm targets for migration. The migration sequence: inventory long-term sensitive data, identify current encryption schemes, prioritize migration based on sensitivity and retention period, and implement hybrid cryptography (classical + post-quantum) during the transition period.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">CLASSIFICATION</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">ML + EDM + governance</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">4-stage maturity model</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Accuracy drives retraining</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">DLP</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Unified + adaptive + CASB</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Shadow IT governance</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Risk reduction metrics</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">ENCRYPTION</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Inventory + lifecycle + HSM</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Cryptographic agility</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">ML-KEM / ML-DSA targets</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">GOVERNANCE</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">UEBA hunting + ownership</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">72hr DFS notification</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Post-quantum by retention</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">ML classifiers + EDM + governance metrics drive classification programs from ad hoc to optimizing maturity</div>
+    <div class="blk-body">Trainable classifiers require curated seed/negative samples and precision/recall validation before deployment. EDM matches against specific known customer values using salted hashing — eliminating false positives from format-matching. Classification governance requires accuracy measurement, appeals process, and retraining triggers. Four-stage maturity model: Ad Hoc → Defined → Managed → Optimizing.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Unified DLP policy framework + adaptive risk scoring + CASB API/proxy/shadow IT = comprehensive enforcement</div>
+    <div class="blk-body">Unified policies propagate consistently across email, endpoint, SharePoint, Teams, and cloud applications. Adaptive enforcement calibrates blocking intensity to risk score rather than applying static thresholds. CASB API covers managed apps, reverse proxy covers BYOD, shadow IT discovery finds uncontrolled data channels. DLP governance metrics (false positive rate, MTTT, confirmed incident rate) enable executive reporting of quantified risk reduction.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Cryptographic inventory + key lifecycle + HSM + cryptographic agility = defensible encryption program</div>
+    <div class="blk-body">Cryptographic inventory identifies algorithm misconfigurations, expiration risks, and coverage gaps. Key lifecycle governs generation, rotation, suspension, revocation, and destruction with audit trail. HSM on-premises or cloud provides tamper-resistant key storage with split-knowledge access controls. Cryptographic agility — centralized library layer + multi-algorithm key management + inventory — enables rapid algorithm replacement during deprecation cycles.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Data governance program + UEBA threat hunting + multi-jurisdiction notification automation + post-quantum planning</div>
+    <div class="blk-body">Data governance assigns ownership, stewardship, and council accountability to make technical controls coherent. UEBA threat hunting queries sub-threshold anomaly combinations rather than waiting for threshold alerts. Multi-jurisdiction notification program requires jurisdiction matrix, pre-drafted templates, and automated generation from breach parameters. Post-quantum harvest-now-decrypt-later threat means long-term sensitive data migration to ML-KEM and ML-DSA starts now.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Data Protection and DLP — Advanced</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">A trainable classifier for insurance applications is deployed with 95% precision on the validation set. In production, precision drops to 74% within 60 days. What is the most likely root cause, and what is the corrective action?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">The classifier algorithm is defective — replace it with a sensitive information type pattern</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">The validation set was drawn from the same document pool as the training samples and did not represent the full production document variety; additionally, document formats may have changed since training. Corrective action: build a representative validation set from actual production documents, retrain on updated samples, and establish a retraining trigger based on monthly accuracy sampling.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">The precision drop is expected — classifiers always degrade and 74% is acceptable for production</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">The DLP policy threshold needs adjustment — lower the confidence level to increase recall</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">An adaptive DLP system assigns a risk score to each potential policy match. Which combination of factors produces the highest risk score and should trigger immediate blocking and escalation?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">A claims examiner sending policy documents to an authorized carrier during business hours from a managed device</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">An agent sending a spreadsheet with 12 customer records to a personal Gmail account at 11 PM from an unmanaged device, when UEBA shows this agent's access volume increased 300% in the past week</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">A manager sending an internal memo to a personal email for remote review on a weekend</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">An HR employee sending benefits information to a benefits broker they work with daily</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">An organization's cryptographic inventory reveals that their legacy claims management system uses TLS 1.0 for all API connections because the system was built in 2008 and has not been updated. The vendor says a TLS upgrade requires a full system replacement costing $800,000. What is the appropriate risk management response?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Accept the risk permanently — the cost of remediation is too high</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Document the finding as a known exception with compensating controls (network segmentation isolating the legacy system, monitoring of all TLS 1.0 connections, accelerated replacement timeline), obtain executive approval for the exception with a defined end date, and include the system replacement in the capital planning process with the regulatory risk of TLS 1.0 use quantified as part of the business case</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Remove the system from the network immediately — TLS 1.0 cannot be used for any NPI transmission</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Disable TLS entirely and use application-layer encryption instead</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">A UEBA threat hunting query identifies an employee whose behavior matches a pre-exfiltration hypothesis: 15% above-baseline record access (below alert threshold), first use of a personal Dropbox link in email (below threshold), and two external emails with Excel attachments in a category they have never previously used (below threshold). No individual behavior triggers an alert. What action is appropriate?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Take no action — no individual alert threshold was triggered</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Add the employee to the investigation queue for analyst review: examine what specific records were accessed and whether there is a business explanation, review the Dropbox link content if accessible, review the Excel attachments and their recipients, correlate with any HR events (performance review, resignation risk factors). Determine whether the pattern reflects a legitimate work reason or warrants escalation.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Immediately disable the employee's account and notify HR</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Send the employee a security awareness training reminder about data handling</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">An insurance agency determines on Tuesday morning that a ransomware attack over the weekend encrypted their servers and the attackers exfiltrated a file containing names, SSNs, and policy numbers for 3,400 customers before encrypting. When must they notify the NY DFS Superintendent?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Within 72 hours of the original attack (Friday or Saturday)</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Within 72 hours of Tuesday morning — when the determination was made that a material cybersecurity event (unauthorized acquisition of NPI) occurred. The DFS 500.17 clock runs from determination, not from the date of the attack.</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Within 30 days — breach notification has a 30-day standard timeline</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Within 10 business days — standard regulatory notification timeline</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">An insurance agency retains customer records for the NY-mandated minimum of 6 years. A cybersecurity advisor recommends beginning migration of long-term records to post-quantum encryption (ML-KEM) now, despite quantum computers not yet being capable of breaking classical encryption. What is the primary justification for this recommendation?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Post-quantum encryption is faster than classical encryption, so migration is a performance improvement</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Harvest now, decrypt later attacks mean adversaries may already be collecting encrypted data today with the intention of decrypting it once quantum computers are available. Records with a 6-year retention period — encrypted now with classical cryptography — may be decryptable before their retention period expires if quantum computing capability develops within the estimated 10-20 year window. Post-quantum migration now ensures these records remain protected throughout their retention period.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">NY DFS 500 already requires post-quantum encryption</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Post-quantum migration is reversible if it proves unnecessary — there is no cost to early adoption</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#9b7fe8","#4b8ef0","#f0a04a","#6db86d"],
+  'pg2':["#9b7fe8","#4b8ef0","#f0a04a","#6db86d"],
+  'pg3':["#9b7fe8","#4b8ef0","#f0a04a","#6db86d"],
+  'pg4':["#9b7fe8","#4b8ef0","#f0a04a","#6db86d"],
+  'pg5':["#9b7fe8","#4b8ef0","#f0a04a","#6db86d"],
+};
+
+const NARR={
+  'pg1':['Trainable classifier deployment is a project, not a configuration task. The quality of the training data — the specificity and representativeness of the seed samples — determines the classifier\'s accuracy more than any configuration parameter. An insurance agency building a classifier for submitted applications should use actual completed application forms across the range of products (personal lines, commercial, life) and carrier formats in their book of business, not just a single carrier\'s template. The negative samples should include the content that is most likely to be confused with submitted applications: blank templates, draft applications with placeholder data, policy issuance documents that reference application information, and underwriting worksheets. The validation set — held separate from training — must represent the actual production document population. A classifier that achieves 95% precision on the validation set but the validation set was drawn from the same document pool as the training samples will produce lower accuracy in production where the actual document variety is broader.','Exact data match fills a specific gap that pattern-based detection cannot address: the difference between a value that matches the format of a Social Security number and a value that is specifically one of your customers\' Social Security numbers. This distinction matters for two reasons. First, false positive reduction: many legitimate documents contain SSN-formatted values that are not customer SSNs — historical policy numbers in older systems used SSN-formatted numbering, test datasets contain generated SSN-format values, and research documents reference SSN examples. EDM eliminates these false positives by matching only against the actual customer SSN database. Second, regulatory precision: a breach notification assessment under NY SHIELD Act requires determining whether the specific customers\' SSNs were exposed — EDM provides the technical basis for this determination by identifying exactly which customers\' data appears in the detected content, rather than just confirming that SSN-formatted values are present.','Classification governance creates the accountability structure that prevents classification program decay. Without governance, classification programs launch with strong initial deployment and then degrade: classifiers are not retrained as document formats evolve, new data categories are not added to the classification model, and accuracy measurement lapses because it was not built into operational procedures. The governance mechanism that most effectively prevents decay is the classification accuracy measurement program — specifically, the requirement to report accuracy metrics to senior leadership quarterly. When executives see that the trainable classifier for insurance applications has degraded from 94% precision to 78% precision because claim form formats changed and the classifier was not retrained, the organizational priority for retraining becomes clear. Governance without measurement has no feedback loop; measurement without governance has no action mechanism. Both are required.','The four-stage maturity model provides an assessment framework that is more useful than binary compliance assessment — you either have encryption or you do not. In practice, data classification programs almost always have coverage that varies across maturity stages for different content categories: a highly regulated organization might be at Stage 4 maturity for structured NPI in production databases, Stage 3 for document classification in SharePoint, Stage 2 for cloud application data, and Stage 1 for legacy system archives. The maturity model allows the organization to articulate its current state accurately, identify the coverage gaps by content category and enforcement point, prioritize improvement investments based on the risk weighting of each gap, and demonstrate progress to regulators by showing advancement from one stage to the next across the content categories they audit.'],
+  'pg2':['Unified DLP policy management is architecturally significant for regulated organizations because regulatory examiners do not accept \'we have email DLP but not endpoint DLP\' as an adequate response to a data protection requirement. NY DFS 500 requires encryption and access controls for NPI wherever it resides and is transmitted — a policy that covers email but not USB transfers, or covers SharePoint but not Teams messages, leaves coverage gaps that are detectable in a regulatory examination through examination of the data movement map against the DLP policy coverage map. The unified policy framework is the technical implementation that allows the organization to demonstrate complete coverage to regulators: one policy, covering all enforcement points, with consistent condition definitions and a unified audit trail. The governance benefit — a single policy change propagating to all enforcement points — also means that when regulatory requirements change (and NY DFS 500 has been amended multiple times), the policy update is made once rather than independently in each channel\'s DLP system.','Adaptive DLP represents a maturity progression from binary enforcement — block or allow — to risk-calibrated enforcement that reflects how security operations actually work. A security analyst reviewing DLP alerts applies implicit risk scoring to every alert: this alert is from an HR manager sending benefits information to a benefits broker they work with daily — low risk, false positive, clear. This alert is from an agent who was just placed on a performance improvement plan sending customer record exports to a personal Gmail account at 11 PM — high risk, immediate investigation. Adaptive DLP automates the risk scoring that analysts apply manually, routing low-risk matches to a logged-and-approved disposition automatically and routing high-risk matches to immediate escalation. This automation allows the DLP program to scale to higher alert volumes without proportional growth in analyst headcount — a critical operational requirement as cloud adoption increases the data movement surface that DLP must cover.','Shadow IT governance is where CASB provides its most significant security value for insurance agencies, because the shadow IT discovery findings are almost always more extensive than anticipated and the compliance implications are immediate. An agent who uses a personal Dropbox to share policy documents with clients has created an uncontrolled NPI repository in a personal cloud account with no access logging, no encryption key control, no retention policy enforcement, and no DLP coverage. They are almost certainly not aware that this is a compliance violation — they are solving a practical problem of sharing large documents with clients in a convenient way. Shadow IT governance addresses this by: identifying the application being used, assessing the risk (what data is it likely to contain, what are the security controls), addressing the root cause (why are employees using this application — is there no authorized alternative that meets their workflow need?), and implementing a controlled alternative with appropriate DLP coverage. Blocking shadow IT without providing an alternative drives the behavior to an even less visible channel; providing a controlled alternative solves the security problem while supporting the business need.','DLP program governance metrics serve two audiences with different information needs. The security operations team needs operational metrics that drive daily work: alert volume by policy and enforcement point tells them where analyst capacity should be focused; false positive rate by policy tells them which policies need tuning; mean time to triage tells them whether the analyst team is keeping up with alert volume. Executive leadership needs risk reduction metrics that justify the investment: how many potential NPI transmission incidents were intercepted, what was the estimated regulatory and legal exposure of those incidents if they had occurred, and how does the current incident rate compare to the baseline before DLP was deployed. Translating operational metrics into risk reduction language requires making assumptions that should be documented and consistently applied — the assumption that each confirmed policy violation represents a potential breach notification obligation with an estimated regulatory penalty provides the basis for calculating DLP\'s risk reduction value.'],
+  'pg3':['Cryptographic inventory is the prerequisite that most organizations skip because it feels like administrative overhead rather than security work. The consequence is discovered during algorithm deprecations: when TLS 1.0 was deprecated and browsers began displaying security warnings, organizations that had not maintained a cryptographic inventory spent 6 to 18 months in emergency remediation, discovering TLS 1.0 dependencies in payment systems, legacy APIs, monitoring agents, and embedded device firmware that had never been considered in security assessments. A complete inventory would have allowed planned, sequenced remediation over a much shorter period. The inventory cost is primarily the initial discovery effort — automated cryptographic scanning tools can identify most TLS configurations and certificate deployments within days. The ongoing maintenance cost is the integration of inventory updates into the change management process: any new application deployment, infrastructure change, or certificate issuance should update the inventory as part of the change documentation.','Key lifecycle management failures occur most commonly at the rotation and destruction stages, not at generation. Organizations configure key generation correctly, deploy encryption, and then allow keys to remain active indefinitely because the rotation process was not defined or because re-encryption of the data protected by the old key is operationally complex. A key that was secure at generation becomes incrementally less secure as computing power available to adversaries increases — a 2048-bit RSA key that was computationally infeasible to break in 2010 faces a different threat environment in 2026 and a different environment still in 2030. Key rotation is the mechanism that limits this exposure: even if an old key is eventually brute-forced, the data it protected has been re-encrypted with a newer, stronger key before the brute-force attempt succeeds. Destruction failures are less common but more consequential: key material that is deleted rather than cryptographically destroyed may be recoverable from storage media, allowing an adversary with physical access to storage to recover key material and decrypt data that is assumed to be protected.','HSM operations require operational procedures that are often the least mature component of an organization\'s key management program. The technical HSM deployment is straightforward — hardware installation, network configuration, application integration through PKCS#11 or JCE interfaces. The operational procedures are where organizations struggle: split knowledge and dual control for HSM administrative access (requiring two authorized administrators to participate in high-privilege operations, so that no single person can access key material alone), physical access controls for on-premises HSMs (the HSM is a high-value target for physical attack; it must be in a physically secured area with access logging), HSM audit log review (the HSM generates a complete log of all key operations — generation, activation, use, rotation, deletion — that must be reviewed regularly for unauthorized operations), and disaster recovery procedures for HSM failure (the encrypted key backup must be accessible on a timeline that meets the recovery time objective for the applications dependent on the HSM). Cloud HSMs reduce the physical operational burden but do not eliminate the procedural requirements — cloud HSM administrative access controls and audit log review are equally important.','The cryptographic agility requirement creates a design principle for security architecture: cryptography should be a service consumed through an abstraction layer, not an algorithm implemented directly in application code. When an application implements AES-256 encryption using a specific library with hardcoded algorithm parameters, replacing AES-256 with a post-quantum algorithm requires modifying every application that has hardcoded the implementation. When all applications call a centralized cryptographic service that abstracts the algorithm selection behind an interface (\'encrypt this data with the current approved algorithm for this sensitivity level\'), algorithm replacement requires updating only the cryptographic service — applications are unaware of the change. This design principle is achievable for new development: the organization\'s secure development standard should require that all new applications use the centralized cryptographic service rather than direct algorithm implementation. For existing applications, the migration to the centralized service is a long-term remediation item prioritized by the algorithm deprecation timeline.'],
+  'pg4':['Data governance program failure modes are well-documented in regulated industries: ownership is assigned on paper without the authority or resources to fulfill the accountability, the data governance council meets quarterly but has no decision-making power and produces recommendations that are ignored, policies are written at a level of abstraction that provides no operational guidance (protect sensitive data according to its classification level — correct but not actionable), and accuracy measurement is never implemented because it requires resources that were not allocated. The common thread is that data governance is treated as a compliance documentation exercise rather than an operational management discipline. Effective data governance programs succeed when data owners have the organizational authority to enforce their classification and access control decisions — when the head of underwriting can require that the underwriting system\'s access control matrix is reviewed quarterly and updated to reflect current roles — and when the governance council has executive sponsorship that translates governance decisions into operational changes.','UEBA threat hunting requires a different analyst skill set than alert triage. Alert triage is reactive: an alert arrives, the analyst reviews the details, makes a disposition decision, and escalates or closes. Threat hunting is proactive: the analyst develops a hypothesis about attacker behavior — a departing employee planning data theft will increase their access volume in the weeks before resignation, access content outside their normal scope, and stage data in cloud storage — and then queries the UEBA platform to find users who match the hypothesis pattern. The hunting query does not produce alerts; it produces a list of users whose observed behavior matches the hypothesis pattern. The analyst then investigates each user on the list to determine whether the pattern reflects malicious intent or legitimate business activity. Hunting programs operate on a cadence — weekly or monthly — with documented hypotheses based on threat intelligence, insider threat indicators, and historical incident patterns. The hunting program should be tracked: how many hypotheses were tested, how many produced investigation leads, how many led to confirmed incidents. This tracking demonstrates the program\'s effectiveness and drives hypothesis refinement.','Multi-jurisdiction breach notification is where legal counsel and security operations must work in close coordination, because the technical facts of the incident (what data was accessed, in what volume, was it encrypted, how many individuals are affected) determine the legal notification obligations, and the legal obligations determine the operational timeline. The 72-hour DFS notification clock is the most aggressive timeline — it requires that the technical facts be established and a determination made within 72 hours of the determination, not within 72 hours of the breach itself. Organizations that do not have a pre-built notification decision workflow discover during incidents that assembling the facts, reaching legal counsel, completing the DFS notification form, and obtaining required approvals takes longer than 72 hours without a pre-defined process. The notification program investments that compress this timeline: pre-designated legal counsel with IR retainer agreement, pre-drafted DFS notification form with variable fields, decision criteria for materiality determination documented in advance, and executive authority to approve notification without requiring board approval for the initial 72-hour submission.','The harvest now, decrypt later threat should change how insurance agencies think about data retention. Data that is encrypted today using RSA-2048 or ECDSA P-256 and transmitted over the public internet may already be in an adversary\'s archive, waiting for quantum computers capable of breaking these algorithms. The conventional security response to this threat is \'migrate to post-quantum cryptography before quantum computers arrive.\' The problem is that the migration timeline for complex organizations is measured in years — 3 to 7 years for a complete cryptographic migration is a realistic estimate — and the timeline for cryptographically relevant quantum computers is uncertain, with estimates ranging from 10 years to earlier. The risk management response is to prioritize migration based on data sensitivity and retention period: data that must remain confidential for 20 years (long-term customer records, strategic plans) should be migrated first, because the risk period is longest. Data that has a 3-year retention window faces lower risk, because the encryption protecting it only needs to hold for 3 years, which is likely inside the safe window for classical cryptography.'],
+  'pg5':['ML trainable classifiers require curated seed and negative samples with precision and recall validation before deployment. Exact data match uses salted hashing to detect specific known customer values without transmitting unprotected sensitive data. Classification governance requires accuracy measurement, appeals process, and retraining triggers. Four-stage maturity model enables gap identification by content category and enforcement point: Ad Hoc through Optimizing.','Unified DLP policy propagates consistently across all enforcement points, eliminating coverage gaps. Adaptive enforcement applies risk scoring from recipient domain, volume, time, device status, and user risk score to calibrate blocking intensity. CASB API covers managed apps, reverse proxy covers BYOD without device enrollment, shadow IT governance discovers uncontrolled data channels. DLP metrics translate to executive risk reduction language.','Cryptographic inventory identifies algorithm misconfigurations, expiration risks, and coverage gaps through automated scanning. Key lifecycle governs all stages from generation through cryptographic destruction with full audit trail. HSM requires split-knowledge dual-control access procedures, audit log review, and disaster recovery procedures. Cryptographic agility via centralized service layer enables algorithm replacement without application-level changes.','Data governance assigns ownership, stewardship, and council accountability with authority to enforce decisions. UEBA threat hunting uses hypothesis-based behavioral queries to find sub-threshold anomaly combinations. Multi-jurisdiction notification program requires pre-drafted templates, jurisdiction matrix, and IR retainer to meet 72-hour DFS clock. Harvest-now-decrypt-later threat prioritizes post-quantum migration by data sensitivity and retention period using ML-KEM and ML-DSA.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,1,1,1,1,1];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["A classifier that achieves 95% precision in validation but 74% in production has been validated on a non-representative dataset. The training and validation samples must represent the actual production document variety, including all carrier formats, product lines, and document versions in the book of business. Additionally, document formats change over time — a classifier trained on 2023 application formats may lose precision when 2024 format updates introduce new form layouts. Monthly accuracy sampling against a held-out production sample set detects accuracy degradation early, and the retraining trigger (accuracy below threshold for two consecutive months) initiates corrective action before the degradation significantly impacts DLP effectiveness.","The risk score incorporates: recipient domain (personal Gmail — unknown, no business relationship, high risk), transmission volume (12 customer records — above the threshold for bulk NPI), transmission time (11 PM — significantly outside user's established pattern), device status (unmanaged — no endpoint DLP, no corporate controls), and UEBA user risk score (300% access volume increase in past week — high-confidence pre-exfiltration indicator). This combination of multiple high-risk factors produces the highest possible risk score and warrants immediate blocking and escalation to the security team. All other scenarios have one or more risk-reducing factors that lower the score: authorized carrier, business hours, managed device, established partner relationship.","Risk management for cryptographic deficiencies that cannot be immediately remediated requires a structured exception process: document the specific deficiency (TLS 1.0 on legacy claims API), assess the residual risk (interception of claims data in transit), implement compensating controls that reduce the risk without requiring the expensive remediation (network segmentation preventing external access to the legacy system, monitoring all connections for anomalies), obtain formal executive approval of the exception with a defined review date, and build the remediation investment into the capital plan with a regulatory compliance justification. Permanent risk acceptance without a remediation plan is not appropriate for a control required by NY DFS 500. Immediate removal may cause business continuity issues that are disproportionate to the risk.","Sub-threshold anomaly hunting exists precisely to catch the pre-exfiltration pattern that is designed to stay below individual alert thresholds. The correct response is investigation, not inaction and not immediate punitive action. The investigation should answer: what records were accessed (were they in the employee's normal scope or outside it?), what was in the Dropbox link (was it sent to a personal account or a client?), what were the Excel attachments (were they customer data or operational reports?), and are there HR risk factors (upcoming performance review, recent disciplinary action, resignation activity in their peer group)? The investigation may conclude that all three behaviors have innocent explanations — the employee is doing extra work on a project with a deadline. Or it may produce evidence of malicious intent that warrants HR and legal escalation. The hypothesis-based hunting identifies candidates for investigation; investigation determines the appropriate response.","NY DFS 500.17 requires notification within 72 hours of determination that a material cybersecurity event occurred. The determination in this case was made Tuesday morning when investigation confirmed exfiltration of NPI (names, SSNs, policy numbers — unambiguously Restricted/NPI). The 72-hour clock starts Tuesday morning and runs to Friday morning. The notification does not require investigation completion — it requires determination that the event occurred and meets the materiality threshold. A supplemental notification with additional details can be submitted as the investigation progresses. The NY SHIELD Act notification to affected individuals has a separate timeline and process. The organization should have a pre-drafted DFS notification form and IR legal retainer engaged before incidents to meet the 72-hour requirement.","The harvest now, decrypt later strategy is the reason post-quantum migration is a present-day concern rather than a future concern. An adversary collecting insurance agency data today — encrypted with RSA-2048 or ECDSA — is acquiring a dataset that may become decryptable within the 10 to 20 year estimated window for cryptographically relevant quantum computers. For data with a 6-year retention period, the encrypted data transmitted today will still be within its retention window when quantum computing capability reaches the breakpoint. Migrating to ML-KEM for key exchange eliminates this risk by using algorithms designed to be secure against quantum computers. The recommendation is justified by the intersection of the retention period and the quantum timeline, not by a requirement that quantum computers already exist."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

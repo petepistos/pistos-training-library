@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Study: CrowdStrike — The Update That Crashed the World — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#9b7fe8;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#9b7fe822;color:#9b7fe8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#9b7fe8;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#9b7fe8;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#9b7fe8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;min-width:0;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);overflow-wrap:break-word;word-break:break-word;}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#9b7fe8;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#9b7fe8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Case Study: CrowdStrike — The Update That Crashed the World</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Case Study</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Happened</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What Happened</span>
+  </div>
+  <div class="mc-desc">▶ July 19, 2024 — 8.5 million Windows machines blue-screened simultaneously</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">How It Happened</span>
+  </div>
+  <div class="mc-desc">▶ A chain of process failures from development to global deployment</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Root Cause</span>
+  </div>
+  <div class="mc-desc">▶ Architecture and process decisions that made a global outage possible</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">The Loss</span>
+  </div>
+  <div class="mc-desc">▶ The most expensive IT outage in history</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Lessons Learned</span>
+  </div>
+  <div class="mc-desc">▶ What CrowdStrike teaches about software supply chain risk</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Case Study: CrowdStrike — The Update That Crashed the World</div>
+  <div class="home-sub">Case Study — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What Happened</span>
+  </div>
+  <div class="mc-desc">▶ July 19, 2024 — 8.5 million Windows machines blue-screened simultaneously</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">How It Happened</span>
+  </div>
+  <div class="mc-desc">▶ A chain of process failures from development to global deployment</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Root Cause</span>
+  </div>
+  <div class="mc-desc">▶ Architecture and process decisions that made a global outage possible</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">The Loss</span>
+  </div>
+  <div class="mc-desc">▶ The most expensive IT outage in history</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Lessons Learned</span>
+  </div>
+  <div class="mc-desc">▶ What CrowdStrike teaches about software supply chain risk</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — What Happened</div>
+    <div class="ph-sub">July 19, 2024 — 8.5 million Windows machines blue-screened simultaneously</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">CrowdStrike — Incident Overview</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">July 19, 2024 · 8.5M Windows machines crashed</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Channel File 291 pushed automatically · Null pointer → BSOD</text>
+    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Not malware. Not an attacker. A software update.</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="58" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Airlines grounded · Hospitals reverted to paper</text>
+    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">911 systems down · Banks suspended transactions</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="58" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Recovery: manual console access on every machine</text>
+    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Boot to safe mode · Delete file · BitLocker key required</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="278" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">$10B+ estimated global loss · Delta: $500M + lawsuit</text>
+    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">CEO testified to Congress · No staged rollout existed</text>
+    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Largest IT outage in recorded history</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">The day the world's computers stopped</div>
+    <div class="blk-body">On July 19, 2024, a flawed content configuration update from CrowdStrike — a leading cybersecurity vendor — triggered a logic error in the Falcon sensor software running on approximately 8.5 million Windows machines worldwide. Each affected machine crashed with a blue screen of death (BSOD) and entered a boot loop, unable to restart normally. The failure hit simultaneously across every organization running the affected version of Falcon on Windows. Airlines grounded flights. Hospitals reverted to paper. Banks suspended transactions. Emergency services went offline. 911 systems failed. The crash was not caused by malware, by an attacker, or by a vulnerability — it was caused by a software update that was not adequately tested before deployment to millions of production systems.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Scale and scope of the failure</div>
+    <div class="blk-body">The 8.5 million machines that crashed represented a fraction of CrowdStrike's global installed base, but they were concentrated in the organizations most reliant on CrowdStrike's endpoint protection: airlines, financial institutions, healthcare systems, media companies, and critical infrastructure operators. Delta Air Lines canceled more than 7,000 flights over five days. Hospitals across the United States, United Kingdom, and Australia suspended non-emergency procedures. UK and Australian 911 systems experienced outages. Stock exchanges reported disruptions. The London Stock Exchange, US airports, UK hospitals, Australian banks, and media broadcasters were among the thousands of organizations affected. Recovery required manual intervention on each affected machine — booting into safe mode and deleting the faulty file — a process that for large organizations took days to weeks.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">What caused the crash</div>
+    <div class="blk-body">CrowdStrike's Falcon sensor includes a component that accepts content configuration updates — called Channel Files — that define threat detection patterns. These updates are pushed automatically to all sensors without requiring user action or administrator approval. On July 19, CrowdStrike pushed Channel File 291, which contained a flawed configuration that caused a null pointer dereference in the Falcon sensor kernel driver. Kernel drivers run with the highest level of operating system privilege; an unhandled error in a kernel driver causes the operating system to crash. The update was not caught by CrowdStrike's testing process because the test environment did not replicate the exact conditions under which the bug manifested on production systems.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Recovery: why it took so long</div>
+    <div class="blk-body">Recovery was slow because it required physical or virtual console access to each affected machine. The BSOD and boot loop meant that normal remote management tools — which depend on the machine successfully booting — were unavailable. For physical machines, a technician had to boot the machine into Windows Safe Mode, navigate to a specific directory, and delete a specific file. For virtual machines in cloud environments, the process involved mounting the virtual disk externally and deleting the file. Large organizations with tens of thousands of affected endpoints faced a recovery operation that stretched over days or weeks. BitLocker-encrypted machines added another layer of complexity: recovery required the BitLocker recovery key, which some organizations could not locate for all affected systems.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — How It Happened</div>
+    <div class="ph-sub">A chain of process failures from development to global deployment</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="20" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Failure Chain</text>
+  <rect x="20" y="32" width="480" height="42" rx="6" fill="#2a1e3a" stroke="#9b7fe8" stroke-width="1.5"/>
+  <text x="260" y="50" text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">Content validator bug passes malformed Channel File 291</text>
+  <text x="260" y="66" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Test environment didn't replicate production conditions</text>
+  <line x1="260" y1="74" x2="260" y2="90" stroke="#9b7fe8" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="90" width="480" height="36" rx="6" fill="#2a1e3a" stroke="#9b7fe8" stroke-width="1.5"/>
+  <text x="260" y="112" text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">Automatic deployment — no staged rollout — to all endpoints</text>
+  <line x1="260" y1="126" x2="260" y2="142" stroke="#e05252" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="142" width="480" height="42" rx="6" fill="#2a1e3a" stroke="#e05252" stroke-width="1.5"/>
+  <text x="260" y="160" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">Falcon sensor kernel driver hits null pointer dereference</text>
+  <text x="260" y="176" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Kernel error → BSOD → boot loop · Cannot boot normally</text>
+  <line x1="260" y1="184" x2="260" y2="200" stroke="#e05252" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="200" width="480" height="36" rx="6" fill="#2a1e3a" stroke="#f0a04a" stroke-width="1.5"/>
+  <text x="260" y="222" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">8.5M machines simultaneously offline · Remote mgmt unavailable</text>
+  <line x1="260" y1="236" x2="260" y2="252" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="252" width="480" height="36" rx="6" fill="#2a1e3a" stroke="#6db86d" stroke-width="1.5"/>
+  <text x="260" y="274" text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">Manual recovery: safe mode + file delete + BitLocker key</text>
+  <text x="260" y="315" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Root cause: process failure not technical attack</text>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">The content update architecture: automatic, silent, universal</div>
+    <div class="blk-body">CrowdStrike's Channel File update mechanism was designed for rapid threat response — the ability to update detection logic on all endpoints within minutes of identifying a new threat. This architecture served its purpose: it allowed CrowdStrike to respond to emerging threats faster than a manual update process would permit. But the same architecture that enabled rapid defensive response also enabled rapid catastrophic failure. Content configuration updates bypassed the slower testing and approval cycles required for full software updates. The implicit assumption was that content configuration changes were lower risk than software changes — an assumption that the July 19 failure disproved.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">The testing gap: what the test environment missed</div>
+    <div class="blk-body">CrowdStrike's internal testing did not catch the bug because the test environment differed from production conditions in a way that the specific bug required to manifest. The Channel File 291 template was validated by a content validator that had a bug of its own — the validator did not catch the malformed configuration that caused the null pointer dereference. The test environment was not running the exact combination of OS version, hardware configuration, and sensor state that caused the crash in production. This is the canonical software testing failure mode: tests that pass in the test environment because the test environment does not accurately replicate the diversity of production conditions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">The deployment architecture: no staged rollout</div>
+    <div class="blk-body">CrowdStrike's content update deployment did not implement a staged rollout — a process that releases updates to a small percentage of systems first, monitors for errors, and only proceeds to broader deployment if the small-scale deployment succeeds. Staged rollout is standard practice for software updates precisely because it converts a potential universal failure into a containable one. If Channel File 291 had been deployed to 1% of endpoints first and monitored for 30 minutes before broader rollout, the crash would have been detected and rollback initiated before the majority of endpoints were affected. The absence of staged rollout meant that a single flawed update reached all susceptible systems simultaneously.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">The kernel driver architecture: deep privilege, catastrophic failure</div>
+    <div class="blk-body">CrowdStrike's Falcon sensor runs as a kernel driver — the deepest level of operating system integration, with privileges that allow it to inspect and intercept system calls, memory access, and hardware interactions. Kernel-level integration provides the visibility and control that makes endpoint detection and response effective. But kernel-level code has a property that user-space code does not: an unhandled error crashes the entire operating system, not just the application. A bug in a user-space application causes that application to crash. A bug in a kernel driver causes a BSOD. The combination of kernel-level deployment and automatic content updates created a failure mode in which a single flawed update could simultaneously crash the operating system on every affected machine.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Root Cause</div>
+    <div class="ph-sub">Architecture and process decisions that made a global outage possible</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Root Causes</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">No staged rollout for content updates</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Canary + health check + auto-rollback would have contained it</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="108" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Content validator bug + insufficient test environment</text>
+    <text x="36" y="148" font-size="10" fill="#94a0b8" font-family="system-ui">Malformed config passed validation · Fuzz testing would catch it</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="182" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="206" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Single vendor concentration = global simultaneous failure</text>
+    <text x="36" y="222" font-size="10" fill="#94a0b8" font-family="system-ui">Vendor diversity mitigates · Manual update control required</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="68" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">No documented recovery procedure at scale</text>
+    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">BitLocker keys inaccessible · Process not tested</text>
+    <text x="36" y="312" font-size="10" fill="#56617a" font-family="system-ui">Organizations with tested procedures recovered fastest</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Automatic universal deployment without staged rollout</div>
+    <div class="blk-body">The most direct root cause of the scale of the CrowdStrike incident was the combination of automatic deployment and universal rollout. Security software that updates automatically provides faster protection — but without staged rollout and automated health monitoring, it also propagates failures faster. The fix: staged rollout with automated health monitoring and automatic rollback capability. Deploy to a canary group, monitor for errors, proceed or roll back based on health signals. This is standard practice for software deployment at scale; it should be standard practice for security content updates as well.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Insufficient testing for content configuration updates</div>
+    <div class="blk-body">Content configuration updates were treated as lower-risk than software updates and subjected to a less rigorous testing process. The content validator had a bug that allowed malformed configurations to pass validation. Test environments did not replicate the diversity of production conditions. The fix: content configuration updates should be tested with the same rigor as software updates, including validation of the validator itself and test environments that replicate the actual diversity of production hardware, OS versions, and sensor states. Fuzzing — automated generation of malformed inputs — should be applied to all content configurations that will be processed by kernel-level code.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Concentration risk: single vendor, global simultaneous deployment</div>
+    <div class="blk-body">The CrowdStrike incident revealed a systemic risk in the cybersecurity market: widespread adoption of a single vendor's endpoint security product across critical infrastructure creates a concentration risk in which a single vendor's failure becomes a global outage. Organizations that ran CrowdStrike Falcon on Windows had no redundant protection mechanism. Organizations that had deployed alternative endpoint security on even a subset of systems had partial resilience. The broader lesson is that reliance on a single vendor for a critical security function — particularly one that runs at kernel level and updates automatically — creates a concentration risk that should be assessed and mitigated through vendor diversity, manual update controls, and tested recovery procedures.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Recovery complexity: no plan for mass simultaneous failure</div>
+    <div class="blk-body">The recovery challenge — requiring manual or virtual console access to each affected machine — was well understood in advance. Kernel-mode software that causes a BSOD cannot be recovered remotely through standard management tools. Organizations that had documented and tested a recovery procedure for their CrowdStrike deployment recovered faster than those that improvised the recovery process under operational pressure. BitLocker key management — an operational requirement independent of the CrowdStrike incident — became an acute gap when affected machines required recovery key entry. The recovery revealed that organizations lacked documented procedures for a specific failure mode that was always possible with any kernel-mode security software.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — The Loss</div>
+    <div class="ph-sub">The most expensive IT outage in history</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Impact Summary</text>
+  <g id="pg4-hl0" class="svg-hl" transform="translate(140,104)">
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="20" fill="#9b7fe8" font-weight="700" font-family="system-ui">$10B+</text>
+    <text y="-16" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Global estimated loss</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Delta: $500M alone</text>
+    <text y="24" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Largest IT outage ever</text>
+    <text y="46" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">$10 gift card initial offer</text></g>
+  <g id="pg4-hl1" class="svg-hl" transform="translate(380,104)">
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="20" fill="#e05252" font-weight="700" font-family="system-ui">8.5M</text>
+    <text y="-16" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Machines crashed</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Airlines · Hospitals · Banks</text>
+    <text y="24" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Emergency services · Media</text>
+    <text y="46" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">7,000+ Delta flights canceled</text></g>
+  <g id="pg4-hl2" class="svg-hl" transform="translate(140,258)">
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Legal + Regulatory</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Delta lawsuit: $500M</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Congressional testimony</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Product liability questions</text></g>
+  <g id="pg4-hl3" class="svg-hl" transform="translate(380,258)">
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Industry Change</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Staged rollout commitment</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">MS Secure Kernel Interface</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Concentration risk rethought</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Financial impact: estimated $10 billion+</div>
+    <div class="blk-body">Insurance and financial analysts estimated the total economic loss from the CrowdStrike outage at between $10 billion and $15 billion globally. Delta Air Lines alone reported $500 million in losses and filed a lawsuit against CrowdStrike. The aviation sector's losses reflected not only the direct cost of canceled flights but the cascading operational disruption — stranded passengers, rescheduled crew, reset logistics — that took days to unwind. Financial services, healthcare, and retail sectors collectively suffered billions in losses from transaction failures, manual process costs, and operational disruption. CrowdStrike itself offered affected customers a $10 gift card as initial compensation — a gesture that became a symbol of the mismatch between the scale of the harm and the initial corporate response.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Operational disruption: critical infrastructure failure</div>
+    <div class="blk-body">The operational impact of the CrowdStrike outage was unusual in that it concentrated heavily in critical infrastructure sectors. Airlines — dependent on real-time scheduling, check-in, and boarding systems — were among the hardest hit. Hospitals that relied on Windows systems for patient management, imaging, and medication administration reverted to paper processes, increasing patient safety risk. Emergency services that ran Windows-based dispatch systems experienced disruptions that affected the ability to respond to life-threatening emergencies. The outage demonstrated that cybersecurity software — deployed to protect critical systems — had become critical infrastructure itself, and its failure could cascade through the systems it was protecting.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Legal and regulatory consequences</div>
+    <div class="blk-body">Delta Air Lines' lawsuit against CrowdStrike alleged that the company had been negligent in deploying an untested update and sought $500 million in damages. The lawsuit raised legal questions about the liability of software vendors for widespread harm caused by defective updates — questions that existing product liability law had not fully addressed for enterprise software. Regulatory bodies in multiple countries initiated investigations into the outage, examining whether CrowdStrike's update process met the standards of care expected for software deployed to critical infrastructure. The incident prompted calls for regulatory oversight of security software deployment practices, particularly for software running at kernel level on critical infrastructure systems.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">George Kurtz and the congressional testimony</div>
+    <div class="blk-body">CrowdStrike CEO George Kurtz testified before the U.S. House Homeland Security Committee in September 2024. The testimony covered CrowdStrike's update processes, the testing failures, and the company's remediation commitments. Kurtz committed to implementing staged rollouts, enhanced content validator testing, and giving customers more control over update timing. The congressional testimony reflected a broader political and regulatory recognition that software vendors whose products are embedded in critical infrastructure have responsibilities that extend beyond their commercial relationships with individual customers. The CrowdStrike incident demonstrated that a single vendor's development and deployment practices could simultaneously harm millions of organizations and billions of people worldwide.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Lessons Learned</div>
+    <div class="ph-sub">What CrowdStrike teaches about software supply chain risk</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Key Lessons — CrowdStrike</text>
+  <g id="pg5-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Automatic updates need staged rollout + health monitoring</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">1% canary → 30min monitor → proceed or rollback</text></g>
+  <g id="pg5-hl1" class="svg-hl"><rect x="20" y="108" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Kernel-level code = kernel-level testing rigor</text>
+    <text x="36" y="148" font-size="10" fill="#94a0b8" font-family="system-ui">Fuzz content configs · Replicate production diversity in tests</text></g>
+  <g id="pg5-hl2" class="svg-hl"><rect x="20" y="182" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="206" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Vendor concentration = infrastructure risk</text>
+    <text x="36" y="222" font-size="10" fill="#94a0b8" font-family="system-ui">Diversity mitigates · Manual update control for critical env</text></g>
+  <g id="pg5-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="62" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Document and test recovery for every kernel deployment</text>
+    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">BitLocker keys accessible · Procedure tested annually</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Software that updates automatically must deploy with staged rollout</div>
+    <div class="blk-body">Any update — content configuration or full software — deployed to millions of endpoints simultaneously is a single point of failure. Staged rollout with automated health monitoring and rollback converts a potential universal failure into a containable one. This is the single most important architectural change the CrowdStrike incident demands.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Kernel-level software requires kernel-level testing rigor</div>
+    <div class="blk-body">Code that runs with kernel privileges and causes BSOD on failure must be tested against the full diversity of production environments. Content configuration updates processed by kernel code must be tested with the same rigor as the kernel code itself. Fuzzing, adversarial input testing, and production-representative test environments are not optional for software at this privilege level.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Concentration risk in security vendors is infrastructure risk</div>
+    <div class="blk-body">A single endpoint security vendor deployed universally creates a single point of failure for the entire organization's fleet. Vendor diversity — even a minority deployment of an alternative solution — provides resilience. Manual update controls for kernel-level security software in critical environments reduce blast radius.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Document and test recovery procedures for every kernel-level deployment</div>
+    <div class="blk-body">The CrowdStrike recovery required manual console access and BitLocker key retrieval. Organizations that had documented and tested these procedures recovered faster. Every kernel-level security deployment should have a documented recovery procedure, tested annually, with BitLocker key management verified before an incident requires it.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Case Study: CrowdStrike — The Update That Crashed the World</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">What was the technical cause of the CrowdStrike BSOD on July 19, 2024?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">A malware infection spread through CrowdStrike's update servers</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">A null pointer dereference in the Falcon sensor kernel driver, triggered by a malformed content configuration in Channel File 291</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">A vulnerability in the Windows operating system that CrowdStrike's update exposed</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">A ransomware attack targeting CrowdStrike's infrastructure</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">Why did the failure affect 8.5 million machines simultaneously?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">CrowdStrike's update servers were compromised, allowing the attacker to push the malformed update</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">CrowdStrike deployed the content update automatically to all endpoints simultaneously, without a staged rollout that would have caught the failure before full deployment</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">The Windows operating system distributed the faulty update through Windows Update</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Organizations had not applied security patches that would have prevented the crash</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">Why was recovery from the CrowdStrike outage so slow and labor-intensive?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">CrowdStrike had not released a patch that could be applied remotely</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The BSOD and boot loop prevented normal startup, making remote management tools unavailable — each machine required manual or virtual console access to boot into safe mode and delete the faulty file</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Microsoft had not yet developed a recovery tool for the specific crash</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Organizations did not have the technical expertise to perform the recovery</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">What is the risk management concept demonstrated by the CrowdStrike incident, and how can organizations mitigate it?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Patch management risk — organizations should apply patches faster to reduce exposure windows</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Concentration risk — widespread reliance on a single vendor for a critical, automatically-updating kernel-level function creates a single point of failure for all dependent systems simultaneously; mitigation includes vendor diversity and manual update controls for critical environments</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Insider threat risk — CrowdStrike developers intentionally deployed the faulty update</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Configuration management risk — organizations should have tested the Channel File configuration before it was applied</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">What is a staged rollout (canary deployment), and how would it have changed the CrowdStrike incident?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">A staged rollout requires customers to test updates before CrowdStrike deploys them</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">A staged rollout deploys updates to a small percentage of endpoints first, monitors for errors, and proceeds to broader deployment only if the small-scale deployment succeeds — for CrowdStrike, this would have limited the crash to 1% of endpoints and triggered rollback before the remaining 99% were affected</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">A staged rollout is a legal process for releasing software updates in regulated industries</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">A staged rollout requires Microsoft to approve security software updates before deployment</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">The CrowdStrike incident caused greater economic damage than many nation-state cyberattacks. What does this imply for risk management?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Organizations should stop using commercial security software and build their own</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">The risk of harm from a trusted vendor's process failure may be comparable to the risk of harm from an adversary attack — supply chain risk and vendor deployment practices deserve assessment and controls comparable to those applied to external threat actors</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Organizations should require all security software to be open-source so they can audit it</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">The financial services sector should be exempt from cybersecurity software requirements</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#9b7fe8","#e05252","#f0a04a","#6db86d"],
+  'pg2':["#9b7fe8","#e05252","#f0a04a","#6db86d"],
+  'pg3':["#9b7fe8","#e05252","#f0a04a","#6db86d"],
+  'pg4':["#9b7fe8","#e05252","#f0a04a","#6db86d"],
+  'pg5':["#9b7fe8","#e05252","#f0a04a","#6db86d"],
+};
+
+const NARR={
+  'pg1':['The CrowdStrike incident is the largest IT outage in recorded history, and it was caused not by an adversary but by a software vendor — specifically, by the combination of an inadequately tested content configuration update and an automatic deployment architecture that propagated the failure to every affected endpoint simultaneously. The incident forces a fundamental question about the security industry\'s architecture: when cybersecurity software runs at the kernel level and updates automatically to every endpoint without human intervention, the software itself becomes a single point of failure for every organization that depends on it. The protection mechanism becomes the risk. This is not a criticism unique to CrowdStrike — it reflects a structural characteristic of endpoint security software that the industry has not adequately addressed.','The diversity of sectors affected by the CrowdStrike outage reflects both the breadth of CrowdStrike\'s market penetration and the specific sectors that have most aggressively adopted advanced endpoint security. Airlines, financial institutions, healthcare systems, and media companies were among the most visibly affected because they had made the correct security investment decision — deploying advanced endpoint detection and response — and that investment became their point of failure. The irony is precise: organizations that prioritized security by deploying CrowdStrike Falcon were more exposed to the CrowdStrike outage than organizations that had not deployed the software. Security investments create dependencies, and dependencies create new risks.','The technical cause of the crash — a null pointer dereference in a kernel driver triggered by a malformed content configuration — is a category of bug that is well understood in software engineering and preventable with appropriate testing practices. Null pointer dereferences occur when code attempts to access memory through a pointer that has not been properly initialized. In user-space code, this causes an application crash. In kernel code, it causes a system crash. The fact that a malformed configuration file could cause a null pointer dereference in a kernel driver suggests that the interface between the content configuration system and the kernel driver did not include sufficient defensive programming — validation that would detect and reject malformed input before attempting to process it.','The recovery complexity was a predictable consequence of the kernel-level architecture. This is not hindsight — any organization running kernel-mode security software that required manual intervention for recovery would face the same challenge. The CrowdStrike incident revealed that many organizations had not documented or tested the recovery procedure for their endpoint security deployment, and that BitLocker key management — which is the organization\'s responsibility, not the vendor\'s — was an operational gap that became critical during the recovery. The organizations that recovered fastest were those that had the recovery procedure documented, the BitLocker keys accessible, and the personnel to execute the procedure at scale.'],
+  'pg2':['The Channel File update architecture reflects a real operational requirement: the ability to update threat detection patterns faster than a full software release cycle permits. Cybersecurity effectiveness depends on currency — detection patterns that are a week old may not catch threats that emerged in the last 48 hours. The rapid update capability that allowed CrowdStrike to respond to emerging threats in near-real time is genuinely valuable. The design failure was not in the decision to enable rapid content updates but in the failure to require that those updates go through a staged deployment process with automated health monitoring. Speed and safety are not mutually exclusive: a staged rollout to 1% of endpoints with a 30-minute health check adds 30 minutes to the deployment timeline while converting a potential universal outage into a contained failure affecting a fraction of a percent of endpoints.','The testing failure that allowed Channel File 291 to pass validation and reach production represents a category of failure that is systematically more likely when tests are run in environments that differ from production. Production environments are diverse: different hardware generations, different OS patch levels, different software configurations, different loads. Test environments are typically a small, controlled sample of this diversity. The bug in Channel File 291 manifested only under specific conditions that the test environment did not replicate. This is not a failure that can be completely eliminated — it is a fundamental property of software that complexity creates interaction effects that testing cannot exhaustively cover. But it can be substantially mitigated by ensuring that test environments replicate production diversity and by using fuzzing to systematically explore the input space for malformed configurations.','The absence of staged rollout is the process failure that most directly caused the scale of the incident. Staged rollout — or canary deployment — is a standard practice in software engineering precisely because it provides an early warning signal before a faulty update reaches the full deployment. The practice is well understood, widely implemented in web service deployment, and explicitly recommended in software engineering guidance from major technology vendors. Its absence from CrowdStrike\'s content update deployment process suggests that content configuration updates were categorized differently from software updates in CrowdStrike\'s deployment architecture — treated as lower risk and therefore not requiring the same staged rollout safeguards. The July 19 incident disproved that categorization definitively.','The kernel driver architecture of CrowdStrike\'s Falcon sensor reflects a real technical requirement. Kernel-level integration provides visibility and control capabilities that user-space security software cannot achieve — the ability to inspect and intercept system calls before they execute, to monitor memory access patterns in real time, and to prevent malicious actions before they complete. These capabilities are what makes EDR software effective against sophisticated attackers. The cost of this capability is the failure mode demonstrated on July 19: kernel-level bugs cause complete system crashes rather than application crashes. The Windows kernel architecture provides limited isolation between kernel components — a bug in any kernel driver can bring down the entire system. Microsoft\'s proposed Secure Kernel Interface — announced in response to the CrowdStrike incident — represents an attempt to provide EDR vendors with similar capabilities through a more isolated interface that reduces the blast radius of kernel code failures.'],
+  'pg3':['Staged rollout is the single most impactful process change that the CrowdStrike incident demands, and it is technically straightforward to implement. The deployment pipeline already knows which endpoints have received an update. Adding a health check — monitoring error rates, crash rates, and system health indicators on the canary group for a defined period before proceeding — requires monitoring infrastructure that security vendors already maintain for their own telemetry. The challenge is organizational: staged rollout requires defining success criteria for the canary deployment, defining the rollback trigger, and having the process run automatically and reliably under all conditions including partial failures. CrowdStrike committed to implementing staged rollout following the incident. The broader lesson for all software vendors is that automatic deployment to millions of endpoints is a responsibility that requires deployment engineering investment proportional to the potential blast radius.','The testing rigor gap for content configuration updates reflects a category of organizational risk that is common in mature software organizations: the risk that security controls applied rigorously to software development are not applied with equal rigor to configuration changes, content updates, and operational changes that interact with the same software. Database configuration changes that are not subjected to change management cause production outages. Content updates that are not subjected to the same validation as the software that processes them cause kernel crashes. The principle is consistent: the required testing rigor for any change is determined by the potential impact of the change, not by the category of change. A content configuration processed by a kernel driver should be validated with kernel-level testing rigor.','Concentration risk in vendor selection is a risk management concept that predates the CrowdStrike incident — it is a standard consideration in financial institution stress testing, supply chain management, and infrastructure design. The CrowdStrike incident extended this concept into cybersecurity vendor selection. If an organization\'s entire endpoint fleet runs a single EDR product at kernel level with automatic updates, a failure in that product is a failure in the entire fleet simultaneously. Risk management approaches: require vendor diversity for critical security functions (even if a minority of endpoints run a different product), require the ability to pause or delay automatic updates for kernel-level software in critical environments, and maintain tested recovery procedures that do not depend on the endpoint security software being functional.','The BitLocker key management gap revealed by the CrowdStrike recovery is a pre-existing operational vulnerability that the incident exposed rather than created. Organizations that encrypt their endpoints with BitLocker have always needed to ensure that recovery keys are stored in an accessible location — typically Active Directory or Azure AD — and that the process for retrieving and using recovery keys is documented and tested. The CrowdStrike incident required that recovery procedure for a large number of endpoints simultaneously, under operational pressure, with recovery personnel who may not have previously executed the procedure. Organizations that had tested the BitLocker recovery process recovered faster. The lesson is not specific to CrowdStrike: any kernel-mode software can fail in a way that requires BitLocker recovery, and every organization should verify that they can execute that process at the scale of their deployment.'],
+  'pg4':['The $10 billion+ loss estimate for the CrowdStrike incident makes it the most expensive IT outage in recorded history — exceeding the estimated losses from NotPetya, the 2017 ransomware attack that destroyed systems at Maersk and other global companies. The comparison is instructive: NotPetya was a deliberate cyberattack by a nation-state. The CrowdStrike outage was a software vendor\'s deployment process failure. Both events produced losses of comparable magnitude. This equivalence should inform how organizations assess the risk of their vendor relationships: the risk of harm from a trusted vendor\'s failure may be comparable to the risk of harm from an adversary attack, and the supply chain risk deserves corresponding attention in risk management frameworks.','The concentration of impact in aviation illustrates the operational dependencies that make certain sectors particularly vulnerable to simultaneous, large-scale IT failures. Modern airline operations depend on dozens of interconnected software systems — reservation, check-in, boarding, crew scheduling, flight operations, ground handling — many of which run on Windows. When a significant fraction of those systems crashed simultaneously, the interdependencies that normally enable efficient operation became cascading failure modes. Delta\'s five-day recovery — during which it canceled over 7,000 flights — reflected the difficulty of recovering coordinated operations across a highly interconnected system when the baseline coordination tools are unavailable. The aviation sector\'s vulnerability to simultaneous IT failures is not a new insight; the CrowdStrike incident provided a large-scale demonstration of what aviation authorities had assessed in theory.','The legal questions raised by Delta\'s lawsuit against CrowdStrike reflect genuine uncertainty in product liability law as applied to enterprise software. Traditional product liability concepts — a manufacturer is liable for defects in products that cause harm — have not been straightforwardly applied to enterprise software, which is typically licensed with extensive liability limitations in the terms of service. Delta\'s lawsuit argued that CrowdStrike\'s deployment of an inadequately tested update was negligent and that the liability limitations in CrowdStrike\'s contract should not apply to harm caused by that negligence. The outcome of this litigation — and the regulatory frameworks that may be developed in response to the incident — will help define the liability landscape for enterprise software vendors whose products are embedded in critical infrastructure.','George Kurtz\'s congressional testimony was significant for several reasons beyond its content. It represented the first time the CEO of a major cybersecurity vendor had been required to testify before Congress about the consequences of their software\'s failure. The testimony placed CrowdStrike\'s development and deployment practices under congressional scrutiny and public accountability in a way that commercial contractual relationships do not. Kurtz\'s commitments — staged rollout, enhanced testing, customer control over updates — were specific and public, creating accountability for their implementation. The congressional attention reflected a broader political recognition that cybersecurity software vendors are not merely commercial participants in the technology market but stewards of infrastructure that affects public safety, and that their practices warrant regulatory attention proportional to that responsibility.'],
+  'pg5':['Channel File 291 reached 8.5 million endpoints simultaneously because there was no staged deployment with health monitoring. Deploy 1% → monitor 30 minutes → proceed or roll back. This converts a potential global outage into a contained failure. CrowdStrike committed to implementing this after the fact. Every vendor deploying automatic updates to kernel-level software should implement it before an incident forces them to.','A malformed content configuration caused a null pointer dereference in a kernel driver because the content validator had a bug and the test environment did not replicate production conditions. Test all inputs processed by kernel-level code with kernel-level rigor. Fuzz content configurations. Replicate production hardware and OS diversity in test environments. Validate the validator.','Every organization that ran CrowdStrike Falcon on Windows crashed simultaneously. A minority deployment of an alternative EDR on even a fraction of the fleet would have provided partial resilience. Assess concentration risk in all security vendor relationships. Require manual update approval controls for kernel-level software in critical environments.','Machines that needed recovery required BitLocker keys and manual console access — tools that many organizations had not tested at the scale required. Document the recovery procedure for every kernel-level security deployment. Test it annually. Verify BitLocker key accessibility for every encrypted endpoint before an incident makes it urgent.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,1,1,1,1,1];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["Channel File 291 contained a malformed content configuration that caused a null pointer dereference in the Falcon sensor kernel driver. Kernel drivers run with the highest operating system privilege; an unhandled error causes the entire OS to crash with a BSOD. The bug was not caught by CrowdStrike's testing because the content validator had its own bug and the test environment did not replicate the specific production conditions under which the crash manifested.","CrowdStrike's content update deployment mechanism pushed Channel File 291 automatically to all susceptible endpoints simultaneously. There was no staged rollout — no canary deployment to a small percentage of endpoints with a health check period before broader rollout. Staged rollout would have caught the failure at 1% of endpoints and allowed rollback before the remaining 99% were affected. The absence of staged rollout converted a containable failure into a global simultaneous outage.","The CrowdStrike crash caused a BSOD and boot loop — the machine crashed before the operating system fully loaded, which meant that normal remote management tools (which depend on the OS running) were unavailable. Recovery required booting into Windows Safe Mode (which loads only essential drivers, avoiding the CrowdStrike driver), navigating to the CrowdStrike directory, and deleting the faulty file. For large organizations with tens of thousands of affected endpoints, this process required technicians to physically or virtually access each machine individually.","The CrowdStrike incident is a case study in concentration risk: when millions of organizations rely on a single vendor for a critical, automatically-updating, kernel-level function, that vendor's failure becomes a global simultaneous failure. Mitigation approaches include deploying alternative endpoint security on a minority of endpoints to provide resilience, requiring manual approval for automatic updates from kernel-level security software in critical environments, and maintaining tested recovery procedures that do not depend on the endpoint security software being functional.","Staged rollout (canary deployment) releases updates to a small percentage of systems first — typically 1% — monitors health indicators (crash rates, error rates, system health) for a defined period, and only proceeds to broader deployment if the canary group remains healthy. If Channel File 291 had been deployed to 1% of endpoints and monitored for 30 minutes, the crashes would have been detected, a rollback initiated, and the remaining 99% protected from the faulty update. CrowdStrike committed to implementing staged rollout following the incident.","The CrowdStrike outage produced estimated losses of $10B+ — comparable to or exceeding the losses from major nation-state cyberattacks like NotPetya. This equivalence demonstrates that the risk of harm from a trusted vendor's failure can be as significant as the risk of harm from an adversary. Risk management frameworks that focus exclusively on external threats while treating vendor relationships as trusted miss a significant source of systemic risk. Supply chain risk assessments, vendor deployment practice evaluations, and resilience planning for vendor failures deserve the same rigor as threat modeling for external attackers."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

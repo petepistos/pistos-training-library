@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introduction to Quantum Computing and Cybersecurity — Introductory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#9b7fe8;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#9b7fe822;color:#9b7fe8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#9b7fe8;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#9b7fe8;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#9b7fe8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#9b7fe8;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#9b7fe8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Introduction to Quantum Computing and Cybersecurity</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Introductory</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Is Quantum Computing</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How Quantum Threatens Encryption</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Post-Quantum Cryptography</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">What This Means for Your Organization</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What Is Quantum Computing</span>
+  </div>
+  <div class="mc-desc">▶ How it differs from the computers we use today</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">How Quantum Threatens Encryption</span>
+  </div>
+  <div class="mc-desc">▶ Why the math that secures the internet is at risk</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Post-Quantum Cryptography</span>
+  </div>
+  <div class="mc-desc">▶ The new encryption standards designed to resist quantum attacks</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What This Means for Your Organization</span>
+  </div>
+  <div class="mc-desc">▶ Practical awareness and the steps being taken now</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ What you have learned in this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Introduction to Quantum Computing and Cybersecurity</div>
+  <div class="home-sub">Introductory — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What Is Quantum Computing</span>
+  </div>
+  <div class="mc-desc">▶ How it differs from the computers we use today</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">How Quantum Threatens Encryption</span>
+  </div>
+  <div class="mc-desc">▶ Why the math that secures the internet is at risk</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Post-Quantum Cryptography</span>
+  </div>
+  <div class="mc-desc">▶ The new encryption standards designed to resist quantum attacks</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">What This Means for Your Organization</span>
+  </div>
+  <div class="mc-desc">▶ Practical awareness and the steps being taken now</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#9b7fe8;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ What you have learned in this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — What Is Quantum Computing</div>
+    <div class="ph-sub">How it differs from the computers we use today</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <!-- Classical side -->
+  <g id="pg1-hl0" class="svg-hl" transform="translate(125,170)">
+    <rect x="-100" y="-110" width="200" height="220" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text y="-82" text-anchor="middle" font-size="12" fill="#9b7fe8" font-weight="700" font-family="system-ui">CLASSICAL BIT</text>
+    <text y="-58" text-anchor="middle" font-size="42" font-family="system-ui" fill="#94a0b8">01</text>
+    <text y="-28" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Must be 0 OR 1</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Sequential processing</text>
+    <rect x="-80" y="10" width="160" height="60" rx="6" fill="#12162a"/>
+    <text y="35" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Process one state at a time</text>
+    <text y="55" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">All current computers</text>
+  </g>
+  <!-- Quantum side -->
+  <g id="pg1-hl1" class="svg-hl" transform="translate(390,170)">
+    <rect x="-100" y="-110" width="200" height="220" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text y="-82" text-anchor="middle" font-size="12" fill="#4b8ef0" font-weight="700" font-family="system-ui">QUBIT</text>
+    <text y="-52" text-anchor="middle" font-size="32" fill="#94a0b8" font-family="system-ui">0 + 1</text>
+    <text y="-28" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Superposition: 0 AND 1</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Parallel evaluation</text>
+    <rect x="-80" y="10" width="160" height="60" rx="6" fill="#12162a"/>
+    <text y="35" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Evaluate many states at once</text>
+    <text y="55" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">For specific math problems</text>
+  </g>
+  <!-- vs label -->
+  <text x="258" y="178" text-anchor="middle" font-size="16" fill="#56617a" font-weight="700" font-family="system-ui">VS</text>
+  <text x="260" y="316" text-anchor="middle" font-size="11" fill="#56617a" font-family="system-ui">Quantum computers excel only at specific mathematical problems</text>
+</svg>
+</div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Classical computers process information as binary bits: 0 or 1</div>
+    <div class="blk-body">Every computer in use today — laptops, servers, smartphones, cloud infrastructure — processes information using bits. A bit is the smallest unit of data and can represent exactly one of two states: 0 or 1. All computation, regardless of complexity, is built from operations on these binary values. The processors in modern computers can perform billions of these operations per second, making them extraordinarily capable for most tasks. However, for certain types of mathematical problems — particularly those involving searching through enormous numbers of possible solutions — the binary approach imposes fundamental limits on how fast the calculation can be completed.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Quantum computers use qubits that can represent 0, 1, or both simultaneously</div>
+    <div class="blk-body">Quantum computers use units called qubits, which exploit quantum mechanical properties to behave differently from classical bits. While a classical bit must be either 0 or 1, a qubit can exist in a state called superposition — representing 0 and 1 at the same time until it is measured. A quantum computer with multiple qubits in superposition can evaluate many possible solutions simultaneously rather than sequentially. For the specific types of mathematical problems that underpin modern encryption, this capability represents a potential computational shortcut of enormous magnitude — the difference between a task taking millions of years and a task taking hours.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Quantum computing is specialized, not a general-purpose replacement for classical computers</div>
+    <div class="blk-body">Quantum computers are not better at everything. They are specifically powerful for a narrow category of mathematical problems: prime number factoring, discrete logarithm calculation, and searching unsorted datasets. For most computing tasks — browsing the web, running business applications, processing transactions — quantum computers offer no meaningful advantage and are far more difficult to build and maintain than classical systems. The cybersecurity relevance of quantum computing is almost entirely in that narrow category of problems, because those specific problems are the mathematical foundation of most encryption systems in use today.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Practical quantum computers at scale remain a future challenge, but the timeline is shortening</div>
+    <div class="blk-body">Building a quantum computer capable of breaking modern encryption requires not just qubits but high-quality, error-corrected qubits operating at scale — numbers ranging from hundreds of thousands to millions of logical qubits, depending on the algorithm and key size. Current quantum hardware operates with hundreds or a few thousand physical qubits with significant error rates. The gap between current capability and the threshold needed to threaten encryption is real, but researchers and national intelligence agencies treat it as a matter of when, not if. Preparation for quantum-resistant cryptography is already underway across governments and large enterprises.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — How Quantum Threatens Encryption</div>
+    <div class="ph-sub">Why the math that secures the internet is at risk</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="28" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Encryption Threats from Quantum Algorithms</text>
+  <!-- RSA / Shor -->
+  <g id="pg2-hl0" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="45" width="480" height="80" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text x="40" y="78" font-size="12" fill="#9b7fe8" font-weight="700" font-family="system-ui">Shor's Algorithm</text>
+    <text x="40" y="96" font-size="10" fill="#94a0b8" font-family="system-ui">Factors large prime numbers exponentially faster — breaks RSA, Diffie-Hellman, elliptic curve</text>
+    <text x="40" y="112" font-size="10" fill="#e05252" font-family="system-ui">HIGH RISK — most internet encryption vulnerable</text>
+  </g>
+  <!-- Symmetric / Grover -->
+  <g id="pg2-hl1" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="145" width="480" height="80" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="40" y="178" font-size="12" fill="#4b8ef0" font-weight="700" font-family="system-ui">Grover's Algorithm</text>
+    <text x="40" y="196" font-size="10" fill="#94a0b8" font-family="system-ui">Halves effective symmetric key length — 128-bit key → 64-bit effective security</text>
+    <text x="40" y="212" font-size="10" fill="#6db86d" font-family="system-ui">MANAGEABLE — use 256-bit keys as mitigation</text>
+  </g>
+  <!-- Harvest now -->
+  <g id="pg2-hl2" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="245" width="480" height="72" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="40" y="276" font-size="12" fill="#f0a04a" font-weight="700" font-family="system-ui">Harvest Now, Decrypt Later</text>
+    <text x="40" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">Encrypted data collected today → decrypted when quantum hardware matures</text>
+    <text x="40" y="308" font-size="10" fill="#f0a04a" font-family="system-ui">Long-lived sensitive data at risk NOW</text>
+  </g>
+</svg>
+</div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Modern encryption relies on mathematical problems that are easy in one direction and hard in the other</div>
+    <div class="blk-body">The encryption systems that protect internet communications, financial transactions, and stored data are built on mathematical relationships that are computationally asymmetric. Multiplying two large prime numbers is easy — even for classical computers. But given only the product, finding the two original primes is extraordinarily difficult. This asymmetry underpins RSA encryption, the algorithm protecting much of today's web traffic. The difficulty of factoring large numbers is what makes the private key effectively unguessable, even when the public key is openly shared. The entire security model depends on that factoring problem remaining computationally hard.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Shor's algorithm allows a quantum computer to factor large numbers exponentially faster</div>
+    <div class="blk-body">In 1994, mathematician Peter Shor demonstrated that a quantum computer could factor large numbers exponentially faster than any known classical algorithm — reducing a calculation that would take classical computers millions of years to one that could be completed in hours or days on a sufficiently capable quantum machine. This directly threatens RSA and similar public-key encryption schemes. A quantum computer running Shor's algorithm with sufficient qubit quality and quantity could derive the private key from the public key, breaking the encryption protecting that communication or stored data. The algorithm is proven; only the hardware required to run it at scale is the remaining barrier.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Grover's algorithm weakens symmetric encryption by effectively halving the key length</div>
+    <div class="blk-body">A second quantum algorithm, Grover's algorithm, applies to symmetric encryption systems — the type used to protect stored data and secure connections after the initial key exchange. Rather than breaking symmetric encryption outright, Grover's algorithm speeds up the brute-force search for a key by providing a quadratic speedup. In practical terms, this effectively halves the security of a symmetric key: a 128-bit key would provide only 64 bits of effective security against a quantum attacker. The mitigation is straightforward — use 256-bit symmetric keys instead of 128-bit keys — which is why this threat, while real, is considered more manageable than the threat to public-key cryptography.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Harvest now, decrypt later: the threat exists even before quantum computers are built</div>
+    <div class="blk-body">A particularly serious risk is the harvest now, decrypt later attack. Adversaries — state actors in particular — are recording encrypted communications and data today, with the intent to decrypt them once capable quantum computers become available. This means that data encrypted using today's vulnerable algorithms is already at risk of future exposure, even though the quantum computers needed to decrypt it do not yet exist. Sensitive information that must remain confidential for ten, twenty, or thirty years is at risk today, not in some distant future. This is why migration to quantum-resistant cryptography is a current priority for governments and regulated industries.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Post-Quantum Cryptography</div>
+    <div class="ph-sub">The new encryption standards designed to resist quantum attacks</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="28" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Post-Quantum Migration Path</text>
+  <!-- Step 1 -->
+  <g id="pg3-hl0" class="svg-hl" transform="translate(90,120)">
+    <circle r="42" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">NIST</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">STANDARDS</text>
+    <text y="20"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Published 2024</text>
+    <text x="0" y="65" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">01</text>
+  </g>
+  <line x1="134" y1="120" x2="178" y2="120" stroke="#9b7fe8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Step 2 -->
+  <g id="pg3-hl1" class="svg-hl" transform="translate(220,120)">
+    <circle r="42" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">CRYPTO</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">INVENTORY</text>
+    <text y="20"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Find all certs/keys</text>
+    <text x="0" y="65" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">02</text>
+  </g>
+  <line x1="264" y1="120" x2="308" y2="120" stroke="#4b8ef0" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Step 3 -->
+  <g id="pg3-hl2" class="svg-hl" transform="translate(350,120)">
+    <circle r="42" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">MIGRATE</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">BY RISK</text>
+    <text y="20"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Prioritize sensitive data</text>
+    <text x="0" y="65" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">03</text>
+  </g>
+  <line x1="394" y1="120" x2="432" y2="120" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Step 4 -->
+  <g id="pg3-hl3" class="svg-hl" transform="translate(468,120)">
+    <circle r="40" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">CRYPTO</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">AGILITY</text>
+    <text y="20"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Design to adapt</text>
+    <text x="0" y="64" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">04</text>
+  </g>
+  <!-- NIST algorithms box -->
+  <g id="pg3-hl0" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="220" width="480" height="90" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="260" y="248" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">NIST Post-Quantum Standards (2024)</text>
+    <text x="260" y="268" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CRYSTALS-Kyber — Key encapsulation (replaces RSA/DH key exchange)</text>
+    <text x="260" y="286" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CRYSTALS-Dilithium — Digital signatures</text>
+    <text x="260" y="304" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Both based on lattice problems — run on classical hardware</text>
+  </g>
+</svg>
+</div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Post-quantum cryptography uses mathematical problems that quantum computers cannot solve efficiently</div>
+    <div class="blk-body">Post-quantum cryptography (PQC) refers to encryption algorithms based on mathematical problems that are believed to be resistant to quantum computer attacks — not just classical computers. These problems are drawn from areas of mathematics where no known efficient quantum algorithm exists: lattice problems, hash-based structures, error-correcting codes, and multivariate equations. The goal is to replace or supplement current encryption algorithms with options that remain secure against both classical and quantum adversaries. Importantly, post-quantum algorithms are designed to run on classical computers — the transition does not require any quantum hardware.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">NIST has standardized the first post-quantum cryptographic algorithms</div>
+    <div class="blk-body">The U.S. National Institute of Standards and Technology ran a multi-year competition to evaluate and standardize post-quantum cryptographic algorithms. In 2024, NIST published the first finalized post-quantum standards: CRYSTALS-Kyber for key encapsulation and CRYSTALS-Dilithium for digital signatures. These algorithms are based on the hardness of lattice problems, which are believed to be resistant to both classical and quantum attacks. Technology vendors and standards bodies are now incorporating these algorithms into protocols, and migration guidance has been issued for federal systems and will progressively reach commercial sectors.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Migration to post-quantum cryptography is a complex, multi-year organizational effort</div>
+    <div class="blk-body">Transitioning an organization's cryptographic infrastructure to post-quantum algorithms is not a simple software update. It requires identifying all places where cryptography is in use — encrypted communications, digital certificates, stored data, API authentication, VPN tunnels — and developing a plan for migrating each to quantum-resistant alternatives. Many of these systems are embedded in hardware, vendor products, and long-lived certificates that cannot be updated overnight. Organizations that begin this inventory and planning now will be better positioned to meet regulatory requirements and protect sensitive data as quantum threats mature.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Crypto agility: the ability to change encryption algorithms quickly is a strategic capability</div>
+    <div class="blk-body">One of the lessons of the quantum threat is the importance of crypto agility — building systems in a way that allows the encryption algorithms they use to be changed without requiring a complete system rebuild. Organizations that hard-coded specific algorithms into infrastructure, applications, and hardware are in the most difficult position when those algorithms need to be replaced. Designing for crypto agility — using algorithm-independent interfaces, keeping encryption components modular, and maintaining a cryptographic inventory — is a forward-looking security practice that applies to quantum migration and any future cryptographic evolution.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — What This Means for Your Organization</div>
+    <div class="ph-sub">Practical awareness and the steps being taken now</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <!-- Readiness quadrant -->
+  <text x="260" y="28" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Organizational Readiness Areas</text>
+  <g id="pg4-hl0" class="svg-hl" transform="translate(130,120)">
+    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">TIMELINE AWARENESS</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Harvest now = risk today</text>
+    <text y="8"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Long-lived data at risk</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Begin planning now</text>
+  </g>
+  <g id="pg4-hl1" class="svg-hl" transform="translate(390,120)">
+    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CERTIFICATE INVENTORY</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Know algorithm + key size</text>
+    <text y="8"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Track expiration dates</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Foundation of migration plan</text>
+  </g>
+  <g id="pg4-hl2" class="svg-hl" transform="translate(130,265)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">VENDOR RISK</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Ask about PQC plans</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Include in assessments</text>
+    <text y="32"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Supply chain crypto risk</text>
+  </g>
+  <g id="pg4-hl3" class="svg-hl" transform="translate(390,265)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">OPPORTUNITY SIDE</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">QKD · Better RNG</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Drug discovery · Finance</text>
+    <text y="32"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Dual-use technology</text>
+  </g>
+</svg>
+</div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">The quantum threat is real and the preparation timeline is shorter than it appears</div>
+    <div class="blk-body">Cryptographically relevant quantum computers — capable of breaking the encryption protecting today's sensitive data — may be years or decades away. But the harvest now, decrypt later threat means that data being encrypted today with vulnerable algorithms is already at risk of future exposure. For data that must remain confidential for a decade or more — medical records, financial data, intellectual property, government communications — the exposure window may already be open. Regulatory and compliance frameworks are beginning to require quantum-readiness planning, and organizations that treat this as a distant future problem may find themselves unprepared when requirements arrive.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Awareness of certificate and key lifespans is an important starting point</div>
+    <div class="blk-body">Every digital certificate and cryptographic key has an algorithm, a key size, and an expiration date. Certificates using RSA with key sizes below 2048 bits are already considered weak by current standards — quantum threats aside. Certificates with long validity periods issued today using currently vulnerable algorithms may still be active when quantum threats materialize. Knowing what cryptography your organization uses, where it is used, and when certificates expire is the first step toward a transition plan. Security and IT teams are typically responsible for this inventory, but awareness of the issue across the organization supports better decision-making.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Vendor and supply chain cryptographic dependencies create additional complexity</div>
+    <div class="blk-body">Most organizations rely on software, hardware, and services from vendors whose cryptographic implementations they do not directly control. A cloud service provider, a payment processor, a network appliance vendor — each uses encryption that will need to be updated as post-quantum standards are adopted. Organizations should ask their vendors about their post-quantum migration plans and timelines, include cryptographic currency in vendor risk assessments, and prefer vendors who demonstrate awareness of and planning for quantum-related cryptographic migration. Supply chain cryptographic risk is an area where awareness translates directly into better procurement and risk management decisions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Quantum computing also enables new capabilities that benefit security and other fields</div>
+    <div class="blk-body">Quantum computing is not only a threat to be managed — it also enables new capabilities. Quantum key distribution (QKD) uses quantum mechanical properties to distribute cryptographic keys in a way that is theoretically impossible to intercept without detection. Quantum computing also offers significant potential in drug discovery, materials science, financial optimization, and machine learning. For cybersecurity specifically, quantum-enhanced random number generation and quantum-accelerated pattern recognition are being researched as tools for improving defenses. The technology is dual-use, and organizations that understand both its threats and its opportunities are better positioned to navigate its development.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">What you have learned in this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)">
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">QUBITS &amp; SUPERPOSITION</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">0 and 1 simultaneously</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Parallel evaluation</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Specific math problems only</text>
+  </g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)">
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">TWO KEY ALGORITHMS</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Shor → breaks RSA/public-key</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Grover → halves symmetric keys</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Use 256-bit keys for Grover</text>
+  </g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)">
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">NIST PQC STANDARDS</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CRYSTALS-Kyber + Dilithium</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Lattice-based · 2024</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Run on classical hardware</text>
+  </g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)">
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">HARVEST NOW RISK</text>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Data collected today</text>
+    <text y="10"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Decrypted when QC matures</text>
+    <text y="30"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Long-lived data at risk now</text>
+  </g>
+</svg>
+</div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Quantum computers use qubits in superposition to evaluate many solutions simultaneously</div>
+    <div class="blk-body">Classical computers process bits as 0 or 1 sequentially. Quantum computers use qubits that can be in superposition, enabling parallel evaluation of solutions for specific mathematical problems. This capability threatens the mathematical foundations of most current encryption.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Shor's algorithm breaks public-key encryption; Grover's algorithm weakens symmetric encryption</div>
+    <div class="blk-body">Shor's algorithm can factor large numbers exponentially faster, threatening RSA and similar systems. Grover's algorithm halves the effective length of symmetric keys. The mitigation for Grover's threat is using 256-bit keys; Shor's threat requires new algorithms.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Post-quantum cryptographic algorithms standardized by NIST are designed to resist both threats</div>
+    <div class="blk-body">NIST has published post-quantum standards based on lattice problems. These run on classical computers and are being incorporated into protocols and systems. Transitioning requires a cryptographic inventory and multi-year migration planning.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Harvest now, decrypt later means the threat to long-lived sensitive data is present today</div>
+    <div class="blk-body">State actors are collecting encrypted data today to decrypt when quantum computers become available. Data that must remain confidential for a decade or more may already be at risk. Quantum-readiness planning is a current organizational priority, not a future one.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Introduction to Quantum Computing and Cybersecurity</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">What is the key difference between a classical bit and a qubit?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">A qubit processes data ten times faster than a classical bit</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">A classical bit can be 0 or 1, while a qubit can be in superposition — representing 0 and 1 simultaneously</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">A qubit requires less power than a classical bit</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">A classical bit is physical hardware while a qubit is software-based</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">Which encryption system is most directly threatened by Shor's algorithm?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">AES-256 symmetric encryption</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">RSA public-key encryption</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Backup encryption using tape drives</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Password hashing algorithms</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">What is the recommended mitigation for the threat Grover's algorithm poses to symmetric encryption?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Replace all symmetric encryption with RSA immediately</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Use 256-bit symmetric keys instead of 128-bit keys</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Avoid using symmetric encryption for sensitive data</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Implement quantum key distribution for all communications</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">What is a 'harvest now, decrypt later' attack?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">An attack that collects passwords and uses them later after password policies have changed</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Collecting and storing encrypted data today with the intent to decrypt it when capable quantum computers become available</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">An attack that waits for a system to be unpatched before exploiting it</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Collecting backup tapes and decrypting them offline at a later time</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">Which organization published the first finalized post-quantum cryptographic standards in 2024?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">The National Security Agency (NSA)</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">The European Union Agency for Cybersecurity (ENISA)</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The National Institute of Standards and Technology (NIST)</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The Internet Engineering Task Force (IETF)</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">What does 'crypto agility' mean in the context of post-quantum migration?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">The ability to encrypt data faster using quantum computers</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Using multiple encryption algorithms simultaneously to maximize security</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Designing systems so that cryptographic algorithms can be updated or replaced without rebuilding the entire system</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Automatically switching between RSA and ECC depending on key size requirements</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+  'pg2':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+  'pg3':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+  'pg4':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+  'pg5':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+};
+
+const NARR={
+  'pg1':['Every computer in use today processes information using binary digits — bits — each of which represents exactly one of two states: zero or one. All computation, regardless of sophistication, is built on operations that transform these values. Modern processors perform billions of bit operations per second, which is why classical computers are enormously capable at most tasks. However, for certain categories of mathematical problems — particularly those involving searching through vast numbers of possible solutions — the sequential, binary approach imposes real limits. Some problems that are theoretically solvable remain practically impossible for classical computers because the time required would exceed the age of the universe.','Quantum computers exploit the properties of quantum mechanics to behave differently. The fundamental unit of a quantum computer is a qubit, which can exist in a state called superposition — representing zero and one simultaneously until it is observed or measured. A system of multiple qubits in superposition can explore many possible states in parallel rather than evaluating them one at a time. For the specific mathematical problems that underpin modern encryption, this represents a potential shortcut of extraordinary magnitude. Problems that would require classical computers millions or billions of years to solve could become tractable for a sufficiently capable quantum machine in hours or days.','It is important to be precise about what quantum computers do and do not do. They are not general-purpose replacements for classical computers — they will not browse the web, run spreadsheets, or process transactions more efficiently. Quantum computers excel only at a specific and narrow category of mathematical problems: prime number factoring, discrete logarithm computation, and certain search problems. For everything else, classical computers remain superior. The cybersecurity relevance of quantum computing is concentrated almost entirely in that narrow problem category, because those problems happen to be the mathematical foundations on which most encryption systems protecting the internet are built.','Practical quantum computers capable of threatening current encryption require not just qubits but high-quality, error-corrected logical qubits operating at scale. The hardware challenges are significant — qubits must be maintained at temperatures near absolute zero, and error rates in current quantum hardware remain high. Current systems operate with hundreds to a few thousand physical qubits. The threshold for breaking strong encryption requires hundreds of thousands to millions of logical qubits. The gap between today\'s hardware and that capability is real, but the trajectory of progress has led every major intelligence agency and cryptographic standards body to treat the question as when, not if. Preparation is already underway.'],
+  'pg2':['The security of most internet encryption is grounded in a mathematical asymmetry. Multiplying two large prime numbers together is a fast operation — even classical computers can do it instantly. But given only the result of that multiplication, finding the original two primes is exponentially harder. There is no known efficient classical algorithm for this — the problem scales in difficulty so rapidly that a sufficiently large key makes factoring computationally infeasible for any classical computer given any realistic amount of time. This asymmetry is what makes RSA encryption work: the public key can be freely shared because deriving the private key from it requires solving the factoring problem.','In 1994, mathematician Peter Shor published an algorithm demonstrating that a quantum computer could factor large numbers exponentially faster than any known classical approach. On a classical computer, factoring the large numbers used in strong RSA encryption would take longer than the age of the universe. On a sufficiently capable quantum computer running Shor\'s algorithm, the same calculation might take hours. This directly threatens RSA and the related Diffie-Hellman and elliptic curve cryptography systems — which together protect the vast majority of encrypted web traffic, email, VPNs, and digital certificates in use today. The algorithm is mathematically proven; the hardware to run it at scale is the remaining gap.','Grover\'s algorithm applies to a different class of encryption. Symmetric encryption — used to protect stored data and secure connections after the initial key exchange — does not rely on the factoring problem. Grover\'s algorithm does not break symmetric encryption but rather speeds up the search for the correct key by providing what is called a quadratic speedup. In practical terms, this halves the effective security of a symmetric key: a 128-bit key provides only 64 bits of effective security against a quantum adversary. The recommended mitigation is to use 256-bit symmetric keys, which would still provide 128 bits of effective security. This makes the symmetric encryption threat manageable with a straightforward key length upgrade.','Perhaps the most immediately significant quantum threat is the harvest now, decrypt later attack strategy. Nation-state intelligence agencies and other advanced adversaries are likely collecting and storing encrypted communications and data today — with no ability to read them currently — but with the intent to decrypt them once capable quantum computers are available. Data protected by current encryption that is collected today may be exposed years from now when the necessary hardware exists. For information that must remain confidential for a decade or more — national security information, long-term strategic plans, medical records, financial records — this represents a threat that begins at the moment of collection, not at the moment quantum computers become capable.'],
+  'pg3':['Post-quantum cryptography refers to encryption algorithms whose security does not depend on the mathematical problems that quantum computers can solve efficiently. These algorithms are built on problems drawn from lattice mathematics, error-correcting codes, hash functions, and multivariate polynomial equations — areas where no efficient quantum algorithm is currently known to exist. The goal of post-quantum cryptography is to provide encryption that is secure against both classical and quantum adversaries. Critically, post-quantum algorithms run on ordinary classical computers — implementing them does not require any quantum hardware. The transition is a software and protocol update challenge, not a hardware replacement challenge.','After a multi-year competition and evaluation process, the U.S. National Institute of Standards and Technology published the first finalized post-quantum cryptographic standards in 2024. The primary algorithms standardized are CRYSTALS-Kyber, for key encapsulation — the process of securely sharing encryption keys — and CRYSTALS-Dilithium, for digital signatures. Both are based on the hardness of mathematical lattice problems. Technology vendors, protocol designers, and standards bodies are incorporating these algorithms into products and specifications. Federal systems in the United States are expected to transition to these standards on regulatory timelines, with commercial requirements following.','Transitioning from current cryptographic standards to post-quantum algorithms is a complex undertaking that takes years and requires careful planning. The first step is a cryptographic inventory — identifying all locations where cryptography is in use: TLS certificates on web servers, encryption in applications and databases, keys used for code signing and authentication, keys embedded in hardware devices. Each of these needs to be migrated on a schedule informed by its exposure to quantum risk. Some elements, like web certificates with short validity periods, can be updated relatively quickly. Others, embedded in hardware devices or long-lived infrastructure, require more significant planning and lead time.','Crypto agility is the organizational capability to update or replace cryptographic algorithms without rebuilding entire systems from scratch. Organizations that designed systems with crypto agility in mind — using algorithm-independent interfaces and keeping cryptographic components modular — will be able to migrate to post-quantum algorithms much more efficiently than those that hard-coded specific algorithms deep into applications and hardware. Building crypto agility into new system designs is a forward-looking security practice. It applies not only to the quantum migration but to any future cryptographic evolution driven by newly discovered vulnerabilities or advancing computational capability.'],
+  'pg4':['The quantum threat to current encryption is sometimes perceived as a distant future problem. That perception underestimates the harvest now, decrypt later risk. Data being encrypted today using algorithms like RSA-2048 may be collected by sophisticated adversaries and stored for future decryption. If that data contains information that must remain confidential for ten or twenty years — which describes a significant portion of medical, financial, legal, and government information — the exposure window is already open. Regulatory requirements for quantum-readiness planning are being developed now, and organizations that wait for those requirements to mature before beginning their inventories and assessments will find themselves with compressed timelines.','A practical first step for any organization is developing awareness of what cryptography is in use and where. Every digital certificate used for website security, email signing, code signing, or VPN authentication uses a specific algorithm and key size, and has an expiration date. Certificates using RSA keys below 2048 bits are already considered inadequate by current standards — separate from any quantum consideration. Certificates currently issued with longer validity periods using today\'s algorithms may still be active when quantum threats materialize. The inventory of certificates and cryptographic keys, combined with an assessment of which systems have the highest sensitivity and longest required confidentiality periods, forms the foundation of any migration plan.','Most organizations do not implement their own cryptography — they rely on products and services from vendors who implement it on their behalf. A cloud platform, a payment gateway, a network device, an email service — each uses cryptographic algorithms that will need to be updated. Organizations should incorporate post-quantum migration readiness into vendor risk assessments and due diligence processes. Asking vendors to document their post-quantum migration plans and timelines is a reasonable and increasingly common expectation. Vendors who cannot demonstrate awareness of the issue or a credible roadmap should be considered as higher risk in cryptographic due diligence.','Quantum computing is a technology with both threats and opportunities. On the threat side, the risk to current encryption is the primary concern for cybersecurity. On the opportunity side, quantum computing offers significant potential in areas including drug discovery, materials science, financial optimization, machine learning acceleration, and climate modeling. For security specifically, quantum key distribution uses quantum mechanical properties to enable key exchange that is theoretically impossible to intercept without detection. Quantum-enhanced random number generation may improve the quality of cryptographic keys. Understanding both dimensions of the technology supports more balanced and effective decision-making as the field develops.'],
+  'pg5':['Quantum computers use qubits that can exist in superposition — representing zero and one simultaneously — allowing them to evaluate many possible solutions in parallel for specific mathematical problems. This capability is not general-purpose; it is concentrated in the narrow problem categories that underpin current encryption.','Shor\'s algorithm allows quantum computers to factor large numbers exponentially faster than classical computers, directly threatening RSA and public-key cryptography broadly. Grover\'s algorithm halves the effective key length of symmetric encryption, which is mitigated by using 256-bit keys rather than 128-bit keys.','NIST published post-quantum cryptographic standards in 2024, including CRYSTALS-Kyber and CRYSTALS-Dilithium. These algorithms run on classical hardware and are being incorporated into protocols and systems. Transitioning requires a cryptographic inventory and phased migration plan.','The harvest now, decrypt later threat means data encrypted today with vulnerable algorithms may be exposed when quantum computers become capable. Long-lived sensitive data is at risk now. Quantum-readiness planning is an active priority for governments and regulated industries.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,1,1,1,2,2];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["A classical bit must be exactly 0 or 1. A qubit can exist in superposition — representing both 0 and 1 simultaneously until measured. This property allows quantum computers to evaluate many possible solutions in parallel for specific types of problems.","Shor's algorithm can factor large prime numbers exponentially faster than classical computers. RSA public-key encryption depends on the difficulty of prime factoring. This makes RSA — and similar public-key systems like Diffie-Hellman and elliptic curve — directly vulnerable to Shor's algorithm.","Grover's algorithm effectively halves the security of a symmetric key — making 128-bit keys provide only 64 bits of effective security. Using 256-bit keys instead means the effective security after Grover's speedup remains 128 bits, which is considered adequate.","In harvest now, decrypt later attacks, adversaries collect encrypted communications or data today — even though they cannot yet decrypt them — and store them for future decryption when capable quantum computers are available. This makes the threat present for long-lived sensitive data even before quantum computers mature.","NIST published the first finalized post-quantum cryptographic standards in 2024, including CRYSTALS-Kyber for key encapsulation and CRYSTALS-Dilithium for digital signatures. These are based on lattice mathematical problems and run on classical hardware.","Crypto agility is the organizational capability to update or replace cryptographic algorithms without rebuilding systems from scratch. Organizations with crypto agility — using algorithm-independent interfaces and modular cryptographic components — can migrate to post-quantum algorithms more efficiently."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

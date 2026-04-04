@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Email Security — Intermediate — Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#4b8ef0;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#4b8ef022;color:#4b8ef0;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#4b8ef0;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#4b8ef0;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#4b8ef0;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#4b8ef0;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#4b8ef0;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Email Security — Intermediate</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Intermediate</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Email Authentication Protocols</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Email Evasion and Advanced Threats</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Email Security Gateway Configuration</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Incident Response for Email Threats</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Authentication Protocols</span>
+  </div>
+  <div class="mc-desc">▶ SPF, DKIM, and DMARC mechanics and limitations</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Evasion and Advanced Threats</span>
+  </div>
+  <div class="mc-desc">▶ How attackers bypass email security controls</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Security Gateway Configuration</span>
+  </div>
+  <div class="mc-desc">▶ Deploying and tuning enterprise email security</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Incident Response for Email Threats</span>
+  </div>
+  <div class="mc-desc">▶ Responding to phishing campaigns and account compromise</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Email Security — Intermediate</div>
+  <div class="home-sub">Intermediate — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Authentication Protocols</span>
+  </div>
+  <div class="mc-desc">▶ SPF, DKIM, and DMARC mechanics and limitations</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Evasion and Advanced Threats</span>
+  </div>
+  <div class="mc-desc">▶ How attackers bypass email security controls</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Email Security Gateway Configuration</span>
+  </div>
+  <div class="mc-desc">▶ Deploying and tuning enterprise email security</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Incident Response for Email Threats</span>
+  </div>
+  <div class="mc-desc">▶ Responding to phishing campaigns and account compromise</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Email Authentication Protocols</div>
+    <div class="ph-sub">SPF, DKIM, and DMARC mechanics and limitations</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Authentication Stack</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">SPF — IP Allowlist in DNS</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Checks envelope sender IP · Breaks on forwarding · 10-lookup limit</text>
+    <text x="36" y="96" font-size="10" fill="#56617a" font-family="system-ui">Stops simple domain spoofing only — must combine with DKIM and DMARC</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="68" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="144" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">DKIM — Cryptographic Content Signature</text>
+    <text x="36" y="162" font-size="10" fill="#94a0b8" font-family="system-ui">Survives forwarding · 2048-bit key required · Rotate keys periodically · Replay attack limitation</text>
+    <text x="36" y="180" font-size="10" fill="#56617a" font-family="system-ui">d= domain must match From header for DMARC alignment</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="226" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">DMARC — Alignment + Enforcement Policy</text>
+    <text x="36" y="244" font-size="10" fill="#94a0b8" font-family="system-ui">p=none (monitor only) · p=quarantine (spam folder) · p=reject (block delivery)</text>
+    <text x="36" y="262" font-size="10" fill="#56617a" font-family="system-ui">Only p=reject prevents spoofed delivery · Aggregate reports guide safe migration</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="284" width="480" height="42" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="307" font-size="10" fill="#e05252" font-family="system-ui">Compromised account indicator: Set-InboxRule event in UAL correlated with unusual authentication → mail forwarding established</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">SPF: authorizing sending sources and its limitations</div>
+    <div class="blk-body">Sender Policy Framework (SPF) authorizes which mail servers are permitted to send email on behalf of a domain. A DNS TXT record for the domain lists authorized IP addresses and ranges. When a receiving mail server accepts an inbound email, it queries the sending domain's SPF record and checks whether the sending server's IP is listed. SPF passes or fails based on the envelope sender — the address used in the SMTP MAIL FROM command, which is distinct from the displayed From address. SPF has significant limitations in practice. Forwarding breaks SPF: when a mail server forwards a message, it does so from its own IP, which may not be in the original sender's SPF record. The 10-lookup limit means complex SPF records that include many third-party sending services (marketing tools, helpdesk systems, payroll) frequently exceed the limit, causing failures for legitimate mail. SPF alone stops simple direct domain spoofing but does not prevent display name spoofing or lookalike domains.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">DKIM: cryptographic message signing and its security model</div>
+    <div class="blk-body">DomainKeys Identified Mail (DKIM) uses asymmetric cryptography to provide a verifiable signature over email content. The sending server signs a defined set of email headers and the message body with a private key; the corresponding public key is published in DNS under a selector record at the domain. Receiving servers retrieve the public key and verify the signature. A valid DKIM signature proves that the signed portion of the message was created by a server holding the private key and has not been modified in transit. DKIM survives forwarding because it is tied to the original message content, not to the sending IP. DKIM vulnerabilities include: key length (1024-bit keys can be factored; 2048-bit is recommended), replay attacks (a valid DKIM-signed email can be re-sent by anyone who receives it), and the fact that DKIM signing of the From address domain is what matters for anti-spoofing — signing only passes if the d= domain in the DKIM signature matches the From header domain under DMARC alignment rules.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">DMARC: alignment requirement and enforcement policy</div>
+    <div class="blk-body">DMARC (Domain-based Message Authentication, Reporting, and Conformance) sits above SPF and DKIM and adds two critical properties: alignment and policy. Alignment requires that the authenticated domain (SPF envelope sender or DKIM d= value) matches the From header domain that the user actually sees. This closes the gap where a message could pass SPF for a completely different domain while displaying a spoofed From address. DMARC policy specifies what to do with messages that fail alignment: p=none (report but deliver), p=quarantine (send to spam), or p=reject (refuse delivery). A domain with p=none has no protection against spoofing in practice — attackers can spoof the domain and messages will be delivered. p=reject is the only configuration that prevents spoofed email from reaching recipients. DMARC also provides aggregate reporting: receiving servers send daily reports of authentication results, allowing senders to identify legitimate mail failing authentication before moving to enforcement.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Email account compromise: inbox rules and UAL forensics</div>
+    <div class="blk-body">When an attacker compromises an email account, their first actions are typically to establish persistence and gather intelligence. Inbox rules — automatic filters that move, delete, forward, or mark email — are the primary persistence mechanism: an attacker creates a rule that forwards all incoming email to an external address and moves or deletes messages to avoid detection. In Microsoft 365, inbox rule creation is logged in the Unified Audit Log (UAL) as Set-InboxRule events. UAL forensics for compromised account investigations examine: the timeline of rule creation relative to authentication events from unusual locations, the content of any forwarding rules, message deletion patterns that might indicate the attacker removing evidence, and access to specific sensitive mailboxes or mail items. UAL must be enabled proactively — it is not on by default in all licensing tiers and must be configured before a compromise occurs to be useful in investigation.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Email Evasion and Advanced Threats</div>
+    <div class="ph-sub">How attackers bypass email security controls</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Evasion Techniques</text>
+  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">HTML Evasion (Content Scanning Defeat)</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Zero-width characters · Image-based text · HTML entity encoding · CSS hidden content · Punycode URLs</text></g>
+  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Redirect Chains + Time-of-Click Analysis</text>
+    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Trusted redirect → phishing page · Late-stage weaponization after delivery · Safe Links evaluates at click time</text></g>
+  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Attachment Evasion</text>
+    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Password-protected ZIP (unscannble) · ISO bypass MOTW · HTML smuggling reconstructs payload locally · LNK files</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Macro Evolution (blocked → OneNote → MSIX → LNK)</text>
+    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Each control improvement displaces to adjacent technique · Behavioral sandbox execution required for detection</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">HTML evasion techniques that defeat content scanning</div>
+    <div class="blk-body">Email content scanning inspects message content for malicious indicators. Attackers counter with HTML evasion techniques that render correctly in email clients while defeating automated analysis. Zero-width characters inserted between words in URLs or trigger phrases prevent exact string matching while being invisible to human readers. Image-based emails replace text with a screenshot of text, defeating text extraction and keyword scanning. HTML entity encoding replaces characters with their entity equivalents (m&#97;lware.com renders as malware.com in the browser but may not match signatures looking for the literal string). CSS display property manipulation hides scanner-visible content inside elements that are not rendered in email clients. Punycode in URLs displays as legitimate domain characters in some contexts while the underlying URL goes to a different destination. Each technique requires specific countermeasures, which is why layered email security platforms address multiple evasion methods simultaneously.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Redirect chains and time-of-click URL analysis</div>
+    <div class="blk-body">Attackers frequently deploy multi-hop redirect chains to evade URL reputation scanning. The URL in the email body points to a trusted intermediate service — a legitimate document sharing platform, a URL shortener, a QR code generator — which then redirects to the actual phishing page. At delivery time, the email gateway scans the URL and finds a trusted service. By the time the user clicks, the redirect chain leads to the phishing page, which may not have existed at delivery time (a technique called late-stage weaponization). Time-of-click URL analysis — rewriting all URLs in delivered email to route through a proxy that re-evaluates the destination at the moment of click — addresses this by analyzing the final destination when the user actually attempts to visit it. Microsoft Defender's Safe Links and equivalent features in other platforms implement this control; it is one of the highest-value email security investments for organizations facing sophisticated phishing.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Attachment evasion: password-protected archives, ISO files, and HTML smuggling</div>
+    <div class="blk-body">Email attachment scanning faces inherent limitations when attackers design payloads to resist analysis. Password-protected ZIP or RAR archives cannot be scanned without the password; attackers include the password in the email body, which automated tools typically cannot correlate. ISO and IMG disk image files mount as drives in Windows without requiring extraction, bypassing many archive scanning controls. LNK (Windows shortcut) files execute arbitrary commands when opened. HTML smuggling embeds a payload inside a specially crafted HTML file: when opened in a browser, JavaScript in the HTML file reconstructs the malicious payload from encoded data and triggers a download. The downloaded file appears to originate from the user's local machine rather than the internet, bypassing mark-of-the-web restrictions that would trigger security warnings for files downloaded from the web. Each of these techniques requires sandbox execution to detect rather than static content scanning.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Email-based malware delivery: macro documents and living-off-the-land</div>
+    <div class="blk-body">Microsoft Office macro-based malware has been a primary delivery vehicle for decades. Macros execute VBA code when the document is opened with content enabled. Modern security defaults in Microsoft 365 block macros from internet-sourced files by default. Attackers have adapted to use alternative execution mechanisms: Excel 4.0 (XLM) macros stored in a hidden format that some security tools do not inspect, XLL add-in files that execute code on load, OneNote attachments that can contain embedded scripts, and MSIX installer packages. Living-off-the-land techniques in email payloads use document content to trigger legitimate Windows tools: a macro that launches PowerShell, certutil downloading a payload, regsvr32 registering a malicious COM object. These techniques use the same executables that administrators use for legitimate work, making them difficult to block without impacting legitimate operations.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Email Security Gateway Configuration</div>
+    <div class="ph-sub">Deploying and tuning enterprise email security</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Security Architecture (M365)</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Defender for O365: Safe Links · Safe Attachments · Impersonation ML</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Configure Standard or Strict preset (not Default) · Safe Links = time-of-click · Safe Attach = sandbox detonation</text>
+    <text x="36" y="98" font-size="10" fill="#56617a" font-family="system-ui">Impersonation protection uses ML trained on org communication patterns</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="148" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Email DLP: Outbound NPI Protection</text>
+    <text x="36" y="166" font-size="10" fill="#94a0b8" font-family="system-ui">Pattern matching + doc fingerprinting + sensitivity labels · Block/encrypt on NPI to unauthorized recipients</text>
+    <text x="36" y="180" font-size="10" fill="#56617a" font-family="system-ui">Tune false positive thresholds — overly aggressive policies create shadow IT workarounds</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="226" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Archiving + eDiscovery: Configure Before Disputes</text>
+    <text x="36" y="244" font-size="10" fill="#94a0b8" font-family="system-ui">Litigation hold preserves all content including deleted items · NY DFS requires 3-year audit trail retention</text>
+    <text x="36" y="260" font-size="10" fill="#56617a" font-family="system-ui">Test eDiscovery export annually — untested archiving is often found broken during regulatory exam</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="303" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Header Forensics: Received chain (bottom=first) · Auth-Results · X-Originating-IP · Timestamp gaps</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Microsoft 365 Defender: Safe Links, Safe Attachments, and impersonation protection</div>
+    <div class="blk-body">Microsoft 365 Defender's Advanced Threat Protection provides the primary email security layer for M365 tenants. Safe Links rewrites all URLs in delivered email to route through Microsoft's analysis proxy; when clicked, the proxy evaluates the destination in real time and blocks access to malicious sites. Safe Attachments detonates attachments in a sandbox environment before delivery, delivering a clean copy if the sandbox analysis completes without malicious indicators, or blocking delivery if malicious behavior is observed. Impersonation protection uses machine learning models trained on the organization's communication patterns to identify emails that impersonate executives or known contacts. Anti-phishing policies should be configured in Standard or Strict preset modes rather than default settings; the default configuration leaves significant protection capabilities disabled. Defender for Office 365 Plan 2 adds attack simulation training, threat explorer, and automated investigation and response capabilities.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Email DLP: detecting sensitive data in outbound mail</div>
+    <div class="blk-body">Email data loss prevention scans outbound messages for sensitive data patterns and applies policy-defined actions: block, quarantine, encrypt, or notify. DLP pattern libraries include: regular expression matching for structured data formats (credit card numbers, Social Security numbers, account numbers), document fingerprinting that creates signatures from template documents and detects derivatives, and sensitivity label integration that applies DLP rules based on the classification label applied to document attachments. For insurance agencies subject to NY DFS 500, email DLP policy should at minimum scan for NPI patterns in outbound email to unauthorized recipients, requiring encryption when NPI is detected and blocking transmission to personal email addresses. Tuning DLP policies requires balancing false positive rates against data protection objectives — overly aggressive policies that block legitimate business communications create operational disruption that leads to policy exceptions and shadow IT workarounds.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Email archiving and eDiscovery: compliance configuration</div>
+    <div class="blk-body">Email archiving preserves email records for regulatory compliance, litigation holds, and historical investigation. In Microsoft 365, archiving is configured through Exchange Online archive mailboxes and retention policies. Litigation hold preserves all mailbox content — even deleted items — for a defined period, preventing any modification or deletion of records subject to legal discovery. The critical configuration principle is that archiving and litigation hold must be configured before a dispute arises — retroactive configuration cannot preserve records that have already been deleted. Retention policy configuration determines how long email is retained and what happens when the retention period expires: automatic deletion or move to an archive mailbox. eDiscovery search capabilities allow security and legal teams to search preserved mail content across multiple mailboxes simultaneously, which is essential for BEC investigation, regulatory inquiry response, and insider threat investigation.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Email header forensics: reading the delivery chain</div>
+    <div class="blk-body">Email headers document the path a message traveled from sender to recipient and contain authentication results, routing decisions, and timing information. Reading headers requires understanding that they are added bottom-to-top: the first server to handle the message adds the bottommost Received header; subsequent hops add headers above. The Received-SPF, DKIM-Signature, and Authentication-Results headers show the outcome of email authentication. The X-Originating-IP or similar vendor-specific headers may expose the actual originating IP even when the visible sender is spoofed. Anomalies that indicate potentially suspicious mail: authentication failures or mismatches, excessive numbers of relay hops, timestamps that are inconsistent with the claimed origin, and IP addresses that geolocate to unexpected regions. Email header forensics is a skill required for phishing triage, BEC investigation, and account compromise timeline reconstruction.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Incident Response for Email Threats</div>
+    <div class="ph-sub">Responding to phishing campaigns and account compromise</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Incident Response Playbook</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">1. SCOPE — Threat Explorer search (URL / sender / hash)</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">How many received? Opened? Clicked? → Isolated message vs active campaign determines response urgency</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">2. RETRACT + BLOCK — Soft/hard delete · URL + domain block</text>
+    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">Post-delivery removal from all mailboxes · Tenant Allow/Block List · Verify Plan 2 licensing before incident</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="210" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">3. CREDENTIAL ASSESSMENT</text>
+    <text x="36" y="228" font-size="10" fill="#94a0b8" font-family="system-ui">Auth logs from click timestamp · New login location? MFA bypassed? · Inbox rules created? Forwarding? File access?</text>
+    <text x="36" y="246" font-size="10" fill="#56617a" font-family="system-ui">Speed critical — attacker may have had active access for minutes before detection</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="268" width="480" height="58" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="292" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">4. COMMUNICATE — Timely · Specific · Actionable · No blame</text>
+    <text x="36" y="310" font-size="10" fill="#94a0b8" font-family="system-ui">Send while campaign is active · Describe exact indicators · Tell employees what to do · Maximize reporting</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Identifying and scoping active phishing campaigns</div>
+    <div class="blk-body">When a phishing email is reported, the first priority is determining whether it is an isolated message or an active campaign targeting multiple employees. Microsoft 365 Threat Explorer and equivalent platform tools allow searching for all delivered instances of a message — matching on sender address, subject, URL, or attachment hash — across all mailboxes simultaneously. This search determines how many employees received the message, how many have opened it, and how many have clicked any embedded URLs. The scope assessment drives the response urgency: an isolated message warrants investigation and blocking; a campaign that reached hundreds of employees with multiple clicks requires immediate organization-wide communication, URL blocking, and credential assessment for accounts that clicked. Campaign timing correlation — when were messages delivered, when were clicks recorded — determines how long users may have had active sessions from attacker-established access.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Post-delivery mail retraction and URL blocking</div>
+    <div class="blk-body">After identifying a phishing campaign, security teams can take post-delivery action to remove messages that have already been delivered. In Microsoft 365, this is done through Threat Explorer's soft delete or hard delete actions, which remove messages from recipient mailboxes centrally without requiring user action. URL blocking through the Tenant Allow/Block List prevents future delivery of messages containing the identified URL and blocks access through Safe Links when users who received earlier messages attempt to click. Domain blocking prevents delivery of future messages from the identified sending domain. These actions are taken simultaneously with user notification when possible — removing a message from a mailbox before notifying the user prevents the notification from triggering curiosity about the removed message. Post-delivery remediation capability depends on having the right Defender licensing tier; organizations should verify this capability before an incident requires it.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Credential assessment after phishing link clicks</div>
+    <div class="blk-body">When a user clicks a phishing link, the investigation must determine whether credential compromise occurred. The analysis examines: the destination URL (was it a credential harvesting page, a malware download, or a reconnaissance link?), whether the user submitted credentials (authentication logs showing successful login from a new location after the click time indicate likely credential submission), whether any MFA was bypassed (successful authentication without an MFA event indicates MFA was not configured or was bypassed), and what actions were taken in the account afterward (inbox rule creation, mail forwarding, sensitive data access, OAuth application consent). The investigation timeline is critical: if the phishing click was two hours ago and the account shows new inbox rules and mail forwarding established ninety minutes ago, the attacker has had ninety minutes of undetected access to the mailbox contents.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Campaign response and organization-wide communication</div>
+    <div class="blk-body">Active phishing campaigns targeting the organization require organization-wide communication that enables remaining at-risk employees to recognize and avoid the threat. The communication should be timely (sent while the campaign is still in progress, not after it has concluded), specific (describe exactly what the malicious email looks like — sender, subject, attachment name, or URL pattern), actionable (tell employees what to do if they received or clicked — report immediately, do not submit credentials, contact the helpdesk), and non-blaming (frame the message as a security team alert, not a notification that employees have failed). For regulated organizations under NY DFS 500, the incident response timeline includes regulatory notification requirements if the campaign resulted in material data access or system compromise. Post-campaign analysis should assess whether the technical controls that should have blocked the campaign were properly configured and whether policy or configuration gaps need to be addressed.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">AUTH PROTOCOLS</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">SPF + DKIM + DMARC</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">p=reject only protection</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">UAL inbox rules = indicator</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">EVASION</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">HTML · Redirects · Attachments</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Time-of-click defeats late staging</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Sandbox required for attachments</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">GATEWAY CONFIG</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Standard/Strict preset · DLP</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Archive before disputes</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Header forensics skill</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Scope → Retract → Block</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Credential assess → Notify</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Speed limits damage</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">SPF authorizes sending IPs; DKIM signs content; DMARC adds alignment and enforcement policy</div>
+    <div class="blk-body">SPF breaks on forwarding and has a 10-lookup limit. DKIM survives forwarding but 1024-bit keys are weak; 2048-bit required. DMARC p=reject is the only configuration that prevents spoofed email delivery. Aggregate DMARC reports enable visibility before enforcement. Inbox rule creation in UAL is the key persistence indicator for compromised accounts.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">HTML evasion, redirect chains, and attachment techniques defeat static scanning</div>
+    <div class="blk-body">Zero-width characters, image-based content, and HTML entities evade keyword scanning. Time-of-click URL analysis (Safe Links) catches late-stage weaponization. Password-protected archives, ISO files, and HTML smuggling defeat attachment scanning. Sandbox execution is required to detect these evasion methods.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">M365 Defender provides Safe Links, Safe Attachments, and impersonation ML — configure to Standard or Strict</div>
+    <div class="blk-body">DLP scans outbound mail for NPI and other sensitive patterns with configurable enforcement actions. Email archiving and litigation hold must be configured before disputes arise — retroactive preservation is not possible. Email header forensics reconstructs delivery path, authentication results, and originating IP.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Phishing response: scope → retract → block URL → assess credentials → communicate organization-wide</div>
+    <div class="blk-body">Threat Explorer identifies all delivered instances of a campaign message. Post-delivery soft/hard delete removes messages from mailboxes. Credential assessment examines authentication logs for post-click compromise indicators. Organization-wide communication must be timely, specific, and actionable without blame.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Email Security — Intermediate</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">A DMARC policy is configured with p=none on a domain. An attacker sends a phishing email with that domain in the From header. What happens?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">The email is blocked — DMARC validation fails</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">The email is quarantined to the spam folder</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">The email is delivered — p=none only generates reports, it does not affect delivery</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">DKIM validation rejects the message</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">Your email security gateway scans all URLs in inbound email at delivery time and finds them clean. A user clicks a link three hours later and lands on a phishing page. What email security control would have prevented this?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">DMARC enforcement with p=reject</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">SPF hard fail configuration</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Time-of-click URL analysis (Safe Links) that evaluates the destination when the user clicks</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">DKIM signature verification with 2048-bit keys</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">An attacker sends a phishing email that passes all email authentication checks (SPF, DKIM, DMARC). Investigation reveals the email originated from a compromised vendor email account. What type of threat is this, and what control would detect it?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Domain spoofing; mitigated by DMARC p=reject</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Account takeover BEC; detected through behavioral monitoring of the vendor's email account activity (unusual login location, new inbox rules, anomalous sending patterns)</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Phishing with homoglyph domain; detected by DNS monitoring</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">HTML smuggling; detected by sandbox attachment analysis</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">An attacker sends a phishing email with a password-protected ZIP attachment containing malware. The password is included in the email body: 'Use password 1234 to open the attached document.' Why does this evade most email security gateway attachment scanning?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">ZIP files are exempt from attachment scanning by default</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">The gateway cannot scan the ZIP content without the password, and automated correlation of the password from the email body to the attachment is not commonly implemented</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">The malware signature is not yet in threat intelligence databases</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The email passes DKIM validation so attachments are trusted</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">During a phishing incident investigation, you find that a user clicked a malicious link at 2:14 PM. Authentication logs show a successful M365 login at 2:16 PM from an IP geolocating to Eastern Europe — the user is based in New York. A Set-InboxRule event appears in the UAL at 2:19 PM creating a rule that forwards all incoming email to an external Gmail address. What is the immediate priority action?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Send the user an email asking them to confirm whether they clicked the link</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Reset the user's password — this will remove the attacker's access</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Disable all active sessions for the compromised account, remove the forwarding rule, and assess what email the attacker received during the 5-minute window</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Block the Eastern European IP address at the firewall</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">NY DFS 23 NYCRR 500 requires covered entities to maintain an audit trail of cybersecurity events. For email systems, what is the minimum retention period and what must be captured?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">One year; only failed authentication events</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Two years; all sent and received messages</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Three years; cybersecurity events including authentication activity, access events, and configuration changes</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Five years; all email content for eDiscovery purposes</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#4b8ef0","#6db86d","#f0a04a","#e05252"],
+  'pg2':["#4b8ef0","#6db86d","#f0a04a","#e05252"],
+  'pg3':["#4b8ef0","#6db86d","#f0a04a","#e05252"],
+  'pg4':["#4b8ef0","#6db86d","#f0a04a","#e05252"],
+  'pg5':["#4b8ef0","#6db86d","#f0a04a","#e05252"],
+};
+
+const NARR={
+  'pg1':['SPF is best understood as an IP address allowlist published in DNS. The receiving mail server checks whether the server that handed off the message is authorized by the domain\'s SPF record to send on its behalf. The envelope sender — the SMTP-level MAIL FROM address used during the connection handshake — is what SPF evaluates, not the From address that the recipient sees. This is the fundamental limitation: an attacker can spoof the From header while using an authorized sending IP for a completely different domain, passing SPF while presenting a fraudulent From address. The forwarding breakage problem is endemic in corporate environments: mail forwarding for distribution lists, out-of-office auto-forwards, and third-party archiving services all cause SPF failures for legitimate mail. The practical result is that SPF alone provides limited protection and must be combined with DKIM and DMARC to achieve meaningful anti-spoofing coverage.','DKIM\'s cryptographic approach makes it substantially more robust than SPF for anti-spoofing purposes, because the signature is attached to the message content rather than being a property of the delivery path. A DKIM signature created by the originating server\'s private key can be verified by any receiving server that retrieves the corresponding public key from DNS, regardless of how many relay hops the message has taken. This property makes DKIM valuable in complex mail routing environments where SPF would fail due to forwarding. The security of DKIM depends on the security of the private signing key. Organizations using 1024-bit RSA signing keys should migrate to 2048-bit; the computational barrier to factoring 1024-bit RSA has decreased significantly over the past decade. Key rotation — generating new DKIM key pairs periodically and retiring old ones — limits the exposure window if a private key is compromised or brute-forced.','DMARC\'s alignment requirement is the mechanism that closes the gap between SPF/DKIM technical passes and actual anti-spoofing protection. Without DMARC, a message could pass SPF because it was sent from a server authorized for a different domain, while displaying any From address the attacker wants. DMARC requires that the authenticated domain matches the From header domain — the domain alignment check ensures that the technical authentication and the user-visible sender are consistent. The policy hierarchy (none → quarantine → reject) provides a migration path: organizations can monitor with p=none to identify legitimate mail failing authentication, move to p=quarantine to send suspicious mail to spam without risk of losing legitimate email, and then move to p=reject when confident that all legitimate sending sources are properly authenticated. The aggregate reports that receiving servers send provide the data needed to make this progression safely.','Inbox rule creation after an unusual login is the signature of a compromised account being prepared for BEC or intelligence gathering. The attacker\'s objectives are to: maintain silent access to incoming mail (forwarding to an external address), hide their activity from the account owner (deleting or moving security notifications), and gather intelligence about financial workflows and relationships. Microsoft 365 logs inbox rule creation as Set-InboxRule events in the Unified Audit Log, including the rule conditions and actions. The investigation correlates the rule creation timestamp with authentication events: a Set-InboxRule event that follows a login from a new country by five minutes is a strong indicator of compromise. The UAL must be enabled and its retention period configured before an incident occurs — default retention may be insufficient for investigations into incidents discovered weeks after the initial compromise.'],
+  'pg2':['HTML evasion represents an ongoing arms race where each new evasion technique prompts a countermeasure from email security vendors, which prompts the development of the next technique. Zero-width characters exploit the fact that email clients render these characters as invisible while automated scanners may not handle them correctly — inserting a zero-width non-joiner (U+200C) between characters in a URL breaks string matching against the full URL while the link still functions when clicked. Image-based phishing emails present a complete picture of the phishing content as an image file, bypassing all text extraction and keyword analysis. The attacker sacrifices some deliverability (images may be blocked by default in some clients) for significant evasion of text-based detection. These techniques require that email security platforms perform multiple types of analysis simultaneously — text extraction, OCR for image content, HTML rendering analysis, and link extraction — to achieve comprehensive coverage.','Time-of-click URL analysis addresses a fundamental timing problem in email security: the URL must be analyzed when the user is about to visit it, not when the email arrives. Late-stage weaponization exploits the window between delivery (when the URL is clean) and click (when the attacker activates the phishing page). Attackers may park a benign or empty page at the URL for hours after email delivery, activating the phishing content only after delivery scans are complete. Safe Links and equivalent controls insert a proxy hop: the URL in the email is replaced with a redirect through Microsoft\'s analysis infrastructure, which evaluates the final destination in real time at click time. The user experiences a brief redirect delay; if the destination is blocked, they see a warning page instead of the phishing site. Organizations that have not enabled Safe Links are vulnerable to late-stage weaponization even if their email gateway performs URL reputation checks at delivery.','The evolution of attachment evasion reflects the ongoing adaptation of attackers to security control improvements. When macro execution was common and uncontrolled, macro-laden Office documents were the dominant delivery mechanism. When Microsoft began blocking macros from internet-sourced files, attackers shifted to ISO files (which bypass mark-of-the-web because disk images mount as drives rather than being extracted as downloaded files) and HTML smuggling (which reconstructs the payload after delivery, making it appear to originate locally). HTML smuggling is particularly effective because the HTML file itself contains no payload — only encoded JavaScript that constructs the payload in the browser\'s memory and triggers a download. The constructed payload originates from the local browser rather than the internet, bypassing SmartScreen and other controls that evaluate file origin. Sandboxing that executes attachments in a controlled environment to observe their behavior is the primary defense, because behavioral analysis catches what static scanning cannot.','Microsoft\'s decision to block internet-sourced macros by default in Office applications (implemented in 2022) was a significant security improvement that disrupted the most common email malware delivery mechanism at scale. Threat actors responded quickly: OneNote files were a major evasion vehicle in 2023 because they can contain embedded executable scripts that run when a user clicks an apparently innocuous element within the notebook. MSIX packages — the Windows Store installer format — can be distributed outside the Store and execute code on installation without triggering the same security warnings as traditional executables. The pattern reflects how security control improvements displace threat actors toward adjacent techniques rather than eliminating the threat. Defense requires monitoring for adoption of new delivery mechanisms as they emerge, not just protecting against historically common techniques.'],
+  'pg3':['Microsoft 365 Defender\'s preset security policies represent Microsoft\'s opinionated view of what the security settings should be for most organizations. The Standard preset enables controls and thresholds that provide strong protection while minimizing false positives for typical business email. The Strict preset enables additional controls with more aggressive thresholds at the cost of potentially higher false positive rates. Both presets significantly improve over the Default protection configuration, which leaves many protective features at their minimum settings. Organizations that have not moved to at least the Standard preset are leaving substantial protection capability disabled. Configuration drift — manual changes to individual settings that override the preset — should be monitored; the preset configurations are designed as coherent systems, and disabling individual components affects the overall protection posture in ways that may not be immediately apparent.','Email DLP configuration requires careful policy design to balance data protection with operational efficiency. A policy that blocks all outbound email containing any string that matches a credit card regex will generate enormous false positive rates — legitimate business communications frequently contain account numbers, reference numbers, and other digit patterns. Effective DLP policy design combines multiple conditions: the content must match a sensitive pattern, the recipient must be outside a defined set of authorized domains, and the confidence threshold for pattern matching must be set appropriately. Document fingerprinting adds another detection layer for situations where sensitive documents are sent as attachments — the fingerprint of the original sensitive document is used to identify derivative versions even if the content has been partially modified. Sensitivity label integration allows DLP policy to trigger based on how a document has been classified, enabling consistent treatment of labeled content regardless of specific content patterns.','Email archiving configuration is one of the compliance controls most commonly found to be inadequate during regulatory examinations. The common failure modes are: archiving was not enabled at all, archiving was enabled but with insufficient retention periods, litigation hold was not applied before potentially relevant evidence was deleted, or the archive is configured but the search and export capabilities needed for eDiscovery have not been tested and are not known to work. NY DFS 500.06 requires covered entities to maintain an audit trail of cybersecurity events for a minimum of three years. For email systems, this means all email activity that could constitute a cybersecurity event — authentication activity, forwarding rule creation, mail access from unusual locations — must be retained and searchable. Archiving configuration reviews should be conducted annually, with a test eDiscovery export to verify that the search and export workflow functions as expected.','Email header forensics is a skill that becomes critical during incident response and is rarely practiced until needed. The headers of a suspicious email tell a complete story of its delivery: which server originated the message, which servers relayed it, what the authentication results were at each hop, and what delay occurred between hops. Inconsistencies between the claimed origin and the observed delivery path are indicators of spoofing or relay. A message claiming to come from a specific company\'s mail server that actually originated from a residential IP range is suspicious regardless of the displayed From address. The Authentication-Results header added by the final receiving server provides the SPF and DKIM evaluation results in a single location. DMARC alignment failures show in this header as well — a message that passes SPF but fails DMARC alignment is spoofing the From domain using a different authenticated domain.'],
+  'pg4':['Phishing campaign scoping uses the reported message as a starting point for a systematic search across all organizational mailboxes. In Microsoft 365, Threat Explorer supports searching by URL, attachment hash, sender address, and subject line. A search on the identified phishing URL or sender domain returns all instances delivered to any mailbox in the tenant, including how many were opened and how many had URL clicks recorded. This scope assessment fundamentally changes the response: discovering that 400 employees received the same phishing email with 47 URL clicks changes the response from a single-user investigation to an incident requiring immediate organization-wide action. The click timeline is particularly important — the difference between a click two hours ago and a click five minutes ago determines how much time the attacker has had to act on any credentials captured.','Post-delivery mail retraction is one of the most powerful incident response capabilities in Microsoft 365, and one of the least commonly used until needed. Threat Explorer\'s action menu allows security administrators to soft-delete (move to recoverable deleted items) or hard-delete (remove from recoverable deleted items) messages across all recipient mailboxes from a single interface. This removes the phishing message before additional employees who have not yet opened it encounter it, while preserving the email in the audit log for investigation purposes. Tenant Allow/Block List entries for the identified URL and sender domain prevent future delivery of messages containing those indicators. The combination of retroactive message removal and prospective blocking closes both the current and future exposure windows. Organizations should verify these capabilities are available in their licensing tier before an incident — some retraction and blocking capabilities require Defender for Office 365 Plan 2.','Credential assessment after a phishing link click is a time-sensitive investigation because the window between click and credential use is often measured in minutes. The investigation sequence: identify the click timestamp from Threat Explorer URL click records, pull the authentication logs for the affected user account starting from the click time, look for successful authentication events from locations or devices inconsistent with the user\'s normal patterns, check whether MFA was challenged and satisfied for those events, and examine what the account did after authentication. Inbox rules created within minutes of the authentication, mail forwarding enabled, sensitive file access, or OAuth application consent events are all indicators of attacker activity in the session. Speed matters: an attacker who established a forwarding rule thirty minutes ago has already received thirty minutes of incoming email to the external address, regardless of what actions the security team takes now.','Organization-wide phishing notification is an incident communication task with specific characteristics that distinguish it from normal security newsletters. Timing is the most critical property: a notification sent two hours after the campaign has concluded serves mainly as a retrospective; a notification sent while the campaign is still delivering serves as active protection. Specificity is the second critical property: \'we are investigating a phishing email\' helps no one; \'we are investigating an email with subject line X from sender Y claiming your password expires, with a link to a site ending in .xyz\' gives employees exactly what they need to recognize and delete the message if they received it. The call to action must be concrete: report to security@company.com, call the helpdesk, do not click, do not submit credentials. The tone must avoid blame — the goal is maximum cooperation, not compliance enforcement, and blame-based messaging suppresses the reporting behavior that is needed most.'],
+  'pg5':['SPF authorizes sending IP addresses for a domain but breaks on forwarding and has a 10-lookup limit. DKIM provides cryptographic signatures that survive forwarding but require 2048-bit keys and periodic rotation. DMARC adds alignment — requiring that authenticated domains match the From header — and enforcement policy. Only p=reject actually prevents spoofed mail delivery. Aggregate DMARC reports enable safe migration from p=none through p=quarantine to p=reject. Inbox rule creation correlated with unusual authentication events in UAL is the primary indicator of email account compromise.','HTML evasion techniques — zero-width characters, image-based content, HTML entity encoding — defeat static text analysis and require multi-method scanning. Time-of-click URL analysis through Safe Links addresses late-stage weaponization by evaluating URL destinations at click time rather than delivery time. Sandbox execution of attachments is the only effective defense against password-protected archives, ISO files, HTML smuggling, and LNK files, which all defeat static scanning.','M365 Defender should be configured at Standard or Strict preset levels, not default settings. Email DLP combines pattern matching, document fingerprinting, and sensitivity label integration to protect outbound NPI and sensitive data. Email archiving and litigation hold must be enabled before incidents occur — retroactive preservation is not possible. Email header forensics reconstructs the delivery chain, authentication results, and origin information needed for phishing triage and account compromise investigation.','Phishing campaign response begins with scoping all delivered instances using Threat Explorer search. Post-delivery soft/hard delete removes messages from recipient mailboxes; URL and domain blocking prevents future delivery. Credential assessment examines authentication logs starting from the click timestamp for post-compromise indicators. Organization-wide notification must be timely, specific about the campaign indicators, and actionable — and must avoid blame to maximize reporting cooperation.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[2,2,1,1,2,2];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["DMARC p=none is a monitoring-only configuration. It generates aggregate reports sent to the configured reporting address but takes no enforcement action on failing messages. The phishing email with the spoofed From header is delivered normally. Only p=quarantine and p=reject take action on failing messages; only p=reject actually prevents delivery.","This is late-stage weaponization: the URL was clean at delivery time but the attacker activated the phishing page after delivery scanning completed. Time-of-click URL analysis (Safe Links) addresses this by re-evaluating the URL destination at the moment the user clicks, not at delivery time. The other controls address authentication and spoofing, not destination evaluation timing.","Account takeover BEC sends from the actual legitimate account — all authentication passes because the email is genuinely from the authorized domain. This attack evades all email authentication controls. Detection requires behavioral monitoring of the sending account: unusual login geography, inbox rules created to forward or hide email, and sending patterns inconsistent with the account's historical behavior. The receiving organization's controls cannot prevent it — the sending organization's account security determines the risk.","Email security gateways cannot scan inside password-protected archives without the password. Automatically extracting the password from the email body and applying it to the archive requires explicit implementation that many gateways do not perform. The attacker exploits this gap by including the password in the message — a human can easily use it, but automated scanning cannot. Behavioral sandbox execution of the archive after extracting it with the password is the detection mechanism that catches this technique.","Session revocation is the immediate priority because password reset does not invalidate existing sessions — the attacker's session established at 2:16 PM may remain active even after a password reset. Disabling all active sessions terminates the attacker's access immediately. The forwarding rule must be removed to stop ongoing mail exfiltration. The 5-minute window assessment determines what incoming email the attacker received. Resetting only the password without session revocation leaves the attacker's active session intact.","NY DFS 500.06 requires a minimum three-year audit trail for cybersecurity events. For email systems, this means authentication events, access events from unusual locations, inbox rule creation, permission changes, and other events that constitute cybersecurity activity must be retained and searchable. This is distinct from general email archiving requirements — the cybersecurity audit trail focuses on events relevant to security investigation, not necessarily all email content. Archiving must be configured and tested before incidents occur."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

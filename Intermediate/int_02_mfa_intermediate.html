@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Multifactor Authentication — Intermediate — Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#4b8ef0;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#4b8ef022;color:#4b8ef0;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#4b8ef0;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#4b8ef0;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#4b8ef0;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#4b8ef0;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#4b8ef0;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Multifactor Authentication — Intermediate</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Intermediate</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">How MFA Is Defeated</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">FIDO2 and WebAuthn in Depth</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">MFA Deployment and Policy</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Recognizing and Responding to MFA Attacks</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">How MFA Is Defeated</span>
+  </div>
+  <div class="mc-desc">▶ Attack techniques that bypass multifactor authentication</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">FIDO2 and WebAuthn in Depth</span>
+  </div>
+  <div class="mc-desc">▶ How phishing-resistant authentication works at the protocol level</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">MFA Deployment and Policy</span>
+  </div>
+  <div class="mc-desc">▶ Organizational considerations for effective MFA implementation</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Recognizing and Responding to MFA Attacks</span>
+  </div>
+  <div class="mc-desc">▶ Operational awareness for users and security teams</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Multifactor Authentication — Intermediate</div>
+  <div class="home-sub">Intermediate — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">How MFA Is Defeated</span>
+  </div>
+  <div class="mc-desc">▶ Attack techniques that bypass multifactor authentication</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">FIDO2 and WebAuthn in Depth</span>
+  </div>
+  <div class="mc-desc">▶ How phishing-resistant authentication works at the protocol level</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">MFA Deployment and Policy</span>
+  </div>
+  <div class="mc-desc">▶ Organizational considerations for effective MFA implementation</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Recognizing and Responding to MFA Attacks</span>
+  </div>
+  <div class="mc-desc">▶ Operational awareness for users and security teams</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#4b8ef0;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — How MFA Is Defeated</div>
+    <div class="ph-sub">Attack techniques that bypass multifactor authentication</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">MFA Bypass Techniques vs. Defenses</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="64" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Phishing Proxy (Evilginx2)</text>
+    <text x="36" y="82" font-size="10" fill="#94a0b8" font-family="system-ui">Defeats SMS / TOTP / Push · Session cookie stolen in real time</text>
+    <rect x="360" y="52" width="128" height="22" rx="5" fill="#6db86d" opacity="0.25"/>
+    <text x="424" y="67" text-anchor="middle" font-size="9" fill="#6db86d" font-family="system-ui">Immune: FIDO2 only</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">SIM Swap / SS7 Interception</text>
+    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Defeats SMS only · Carrier social engineering / protocol flaw</text>
+    <rect x="330" y="128" width="158" height="22" rx="5" fill="#f0a04a" opacity="0.25"/>
+    <text x="409" y="143" text-anchor="middle" font-size="9" fill="#f0a04a" font-family="system-ui">Fix: Move to app / hardware</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">MFA Fatigue / Prompt Bombing</text>
+    <text x="36" y="234" font-size="10" fill="#94a0b8" font-family="system-ui">Defeats push without number match · Repeated prompts until approved</text>
+    <rect x="310" y="204" width="178" height="22" rx="5" fill="#9b7fe8" opacity="0.25"/>
+    <text x="399" y="219" text-anchor="middle" font-size="9" fill="#9b7fe8" font-family="system-ui">Fix: Enable number matching</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="56" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="36" y="290" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">FIDO2/WebAuthn — Phishing-Proof</text>
+    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Origin binding · Asymmetric keys · Private key never transmitted · Immune to all proxy attacks</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Real-time phishing proxies relay credentials and OTP codes simultaneously</div>
+    <div class="blk-body">Adversary-in-the-middle phishing frameworks — Evilginx2, Modlishka, Muraena — operate as transparent proxies between the victim and the legitimate service. The victim sees a pixel-perfect clone of the real login page served through the attacker's domain. When the victim enters their username, password, and one-time code, the proxy relays those credentials to the real site in real time, completes authentication, and captures the resulting session cookie. The attacker then uses that session cookie to access the account — the OTP has already been consumed and is worthless for replay, but the authenticated session persists. This attack defeats SMS codes, authenticator app TOTP, and push notifications equally. Only FIDO2/WebAuthn hardware keys are immune because the authentication is cryptographically bound to the legitimate domain.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">SIM swapping transfers a victim's phone number to an attacker-controlled SIM</div>
+    <div class="blk-body">SIM swapping exploits the mobile carrier's account recovery and number porting processes. An attacker calls the carrier posing as the account holder, typically armed with personal information gathered from data breaches or social media. They convince the carrier representative to transfer the target's phone number to a SIM card the attacker controls. Once the swap completes — which can take minutes — all SMS messages and calls to that number route to the attacker's device. Any account using SMS-based MFA can then be compromised: the attacker triggers a password reset or MFA challenge, receives the code on the now-controlled number, and completes authentication. High-profile SIM swap attacks have targeted cryptocurrency holders, journalists, and executives with access to sensitive accounts.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">MFA fatigue exploits push notification approval to bypass authentication</div>
+    <div class="blk-body">MFA fatigue, also called prompt bombing, exploits the push notification mechanism in authenticator apps like Microsoft Authenticator and Duo. An attacker with valid credentials repeatedly triggers login attempts, generating a continuous stream of push notifications on the victim's device. The attack relies on the victim eventually approving a prompt — through confusion about whether they initiated a login, irritation at the repeated interruptions, or the mistaken belief that approving will stop the notifications. Several high-profile breaches have been attributed to this technique, including incidents at major technology companies. Number matching — requiring the user to enter a number displayed on the login screen into the push prompt — is the primary technical countermeasure, because it prevents accidental or careless approvals.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">SS7 protocol vulnerabilities allow interception of SMS at the network level</div>
+    <div class="blk-body">The Signaling System 7 protocol is the decades-old telecommunications signaling framework used to route calls and messages between carriers worldwide. SS7 contains fundamental design flaws — it was designed for a closed network of trusted carriers and has no authentication requirements between nodes. Attackers with access to SS7 infrastructure (obtainable through rogue carriers or criminal services) can intercept SMS messages and redirect calls intended for any phone number without the carrier's knowledge and without any interaction from the victim. This capability is used by intelligence agencies for surveillance and by criminals for targeted account takeovers. Unlike SIM swapping, SS7 attacks leave no trace on the victim's device and require no interaction with the carrier. SMS MFA is fundamentally vulnerable to this attack class.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — FIDO2 and WebAuthn in Depth</div>
+    <div class="ph-sub">How phishing-resistant authentication works at the protocol level</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">FIDO2 Authentication Flow</text>
+  <defs><marker id="arr2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#4b8ef0" opacity="0.7"/></marker></defs>
+  <!-- Registration -->
+  <g id="pg2-hl0" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="60" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">REGISTRATION</text>
+    <text x="36" y="76" font-size="10" fill="#94a0b8" font-family="system-ui">Authenticator generates key pair for bank.com · Private key stays in hardware · Public key sent to service</text>
+    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Different key pair for every domain — bank.com ≠ email.com</text>
+  </g>
+  <!-- Authentication -->
+  <g id="pg2-hl1" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="116" width="480" height="80" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="2"/>
+    <text x="36" y="138" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">AUTHENTICATION</text>
+    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">Service sends: challenge + origin (bank.com)</text>
+    <text x="36" y="170" font-size="10" fill="#94a0b8" font-family="system-ui">Authenticator checks: does origin match registered relying party?</text>
+    <text x="36" y="186" font-size="10" fill="#6db86d" font-family="system-ui">If YES → signs challenge · Service verifies signature with public key → access granted</text>
+  </g>
+  <!-- Phishing scenario -->
+  <g id="pg2-hl2" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="212" width="480" height="68" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text x="36" y="234" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">PHISHING ATTEMPT (evil-bank.com proxy)</text>
+    <text x="36" y="250" font-size="10" fill="#94a0b8" font-family="system-ui">Browser origin: evil-bank.com · Registered relying party: bank.com</text>
+    <text x="36" y="266" font-size="10" fill="#e05252" font-family="system-ui">Origins do not match → Authenticator REFUSES → Attacker receives nothing</text>
+  </g>
+  <!-- Origin binding label -->
+  <g id="pg2-hl3" class="svg-hl" transform="translate(0,0)">
+    <rect x="20" y="295" width="480" height="34" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="260" y="316" text-anchor="middle" font-size="10" fill="#9b7fe8" font-family="system-ui">Origin binding is enforced by hardware — no user judgment required, no proxy workaround possible</text>
+  </g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">FIDO2 uses asymmetric cryptography with domain-bound key pairs</div>
+    <div class="blk-body">When a FIDO2 credential is registered with a service, the authenticator — a hardware key or platform authenticator — generates an asymmetric key pair: a private key stored securely in the authenticator and a public key registered with the service. The critical security property is that the key pair is generated per-relying-party: the private key for bank.com is mathematically distinct from the private key for email.com, even on the same authenticator. During authentication, the service sends a cryptographic challenge. The authenticator signs that challenge with the private key, and the service verifies the signature using the registered public key. The private key never leaves the authenticator hardware, and no shared secret is ever transmitted that could be phished or stolen from the server.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Origin binding makes FIDO2 immune to phishing and relay attacks</div>
+    <div class="blk-body">The relying party identifier — the domain of the service being authenticated to — is embedded in the cryptographic challenge sent during authentication. The authenticator will only sign a challenge if the domain in the challenge matches the domain the credential was registered for. If an attacker operates a phishing proxy at evil-bank.com that relays all traffic to bank.com, the challenge the proxy forwards will contain the legitimate bank.com origin. But the request the user's browser sends to the authenticator will specify evil-bank.com as the origin — and the authenticator will refuse to sign because evil-bank.com does not match the registered relying party. This origin binding is enforced at the cryptographic layer and cannot be worked around by the phishing proxy, regardless of how convincing the fake site appears.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Platform authenticators extend FIDO2 to built-in device biometrics</div>
+    <div class="blk-body">FIDO2 is not limited to external hardware security keys. Platform authenticators use secure hardware built into modern devices — the Trusted Platform Module in Windows PCs, the Secure Enclave in Apple devices, the Trusted Execution Environment in Android devices — to generate and store FIDO2 credentials. Authentication is completed with the device's biometric sensor (fingerprint or face recognition) or PIN. Windows Hello, Apple Face ID/Touch ID for web authentication, and Android's biometric authentication all implement platform authenticators that provide FIDO2/WebAuthn security. Platform authenticators provide the same origin-binding and domain-bound key pair security as external hardware keys but use the biometric bound to the specific device as the user verification method.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Passkeys are FIDO2 credentials designed for consumer-friendly deployment</div>
+    <div class="blk-body">Passkeys are FIDO2 credentials that address usability friction by enabling synchronization across a user's devices through the platform vendor's cloud infrastructure — iCloud Keychain for Apple devices, Google Password Manager for Android and Chrome, and Windows for Microsoft accounts. A passkey created on one iPhone is available on all of the user's Apple devices, eliminating the 'what if I lose my hardware key' concern. Passkeys provide the same phishing-resistant, domain-bound authentication as hardware FIDO2 keys. They are increasingly being deployed by major consumer services — Google, Apple, Microsoft, GitHub — as a replacement for password-plus-MFA authentication. For enterprise deployment, passkeys introduce questions about device management, credential portability across platforms, and integration with existing identity infrastructure.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — MFA Deployment and Policy</div>
+    <div class="ph-sub">Organizational considerations for effective MFA implementation</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">MFA Deployment Architecture</text>
+  <g id="pg3-hl0" class="svg-hl" transform="translate(130,108)">
+    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CONDITIONAL ACCESS</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Risk signals evaluated per login</text>
+    <text y="4"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Device · Location · Resource</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Behavior · Time of day</text>
+    <text y="44" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">MFA proportionate to risk</text></g>
+  <g id="pg3-hl1" class="svg-hl" transform="translate(390,108)">
+    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="2"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">PRIVILEGED ACCESS</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">PAW — dedicated device</text>
+    <text y="4"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Hardware FIDO2 required</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Step-up per action</text>
+    <text y="44" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Highest controls for highest risk</text></g>
+  <g id="pg3-hl2" class="svg-hl" transform="translate(130,258)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text y="-30" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">EXCEPTIONS</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Document · Justify · Compensate</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Time-limit · Review regularly</text>
+    <text y="32" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Every gap must be tracked</text></g>
+  <g id="pg3-hl3" class="svg-hl" transform="translate(390,258)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
+    <text y="-30" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">ENROLLMENT SECURITY</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Verify identity before enroll</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Alert on new factor added</text>
+    <text y="32" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Monitor enrollment events</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Conditional access policies apply MFA requirements based on risk signals</div>
+    <div class="blk-body">Modern identity platforms — Microsoft Entra ID, Okta, Ping Identity — support conditional access policies that evaluate risk signals at the time of authentication and apply MFA requirements accordingly. Risk signals include: the device's compliance status (managed and patched versus unmanaged), the user's location (on-premises versus remote, familiar country versus unfamiliar country), the sensitivity of the resource being accessed (low-sensitivity application versus administrator console), and behavioral signals (typical login time and pattern versus anomalous). A compliant managed device on the corporate network accessing a low-sensitivity application may not require MFA step-up. The same user accessing an administrator console from an unfamiliar country at 3 AM will require strong MFA regardless of prior authentication. This risk-based approach balances security with usability.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Privileged access workstations and step-up authentication for administrative tasks</div>
+    <div class="blk-body">Privileged access — the ability to modify system configurations, access sensitive databases, or manage user accounts — represents the highest-risk authentication scenario and warrants the strongest controls. Privileged access workstations (PAWs) are dedicated, hardened devices used exclusively for administrative tasks. They are not used for email, web browsing, or any other activity that could introduce malware. Access to privileged resources from PAWs requires strong MFA — hardware FIDO2 keys are the appropriate standard. Step-up authentication requires re-authentication with a second factor immediately before a privileged action, even if the user is already authenticated to the system. This limits the window during which a compromised session can be used to perform high-impact operations.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">MFA exceptions and break-glass accounts require careful controls</div>
+    <div class="blk-body">Operational reality means that MFA exceptions are sometimes requested: a service account that cannot interactively authenticate, a system that predates MFA support, an emergency break-glass account for use when the primary administrator is unavailable. Each exception represents a security gap that must be compensated. Service accounts should use certificate-based authentication rather than password-plus-MFA where possible. Legacy systems that cannot support MFA should be network-isolated and subject to enhanced monitoring. Break-glass accounts should be stored in a physical safe, have their passwords rotated after every use, generate alerts on any login, and be audited regularly. Every MFA exception should be documented, justified, time-limited where possible, and reviewed periodically.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">MFA enrollment security: protecting the registration process</div>
+    <div class="blk-body">The security of MFA is only as strong as the security of the enrollment process. If an attacker can enroll their own authenticator device on a victim's account, they have effectively added a backdoor that bypasses MFA. Attackers compromise accounts during the MFA enrollment window — before the user has completed setup — or use account takeover to add a second authenticator device. Enrollment security requires: strong identity verification before enrollment is permitted, requiring re-authentication at the time of enrolling a new factor, monitoring for newly enrolled authenticators as a security event, limiting enrollment to managed organizational processes rather than self-service, and immediate notification to the account owner when a new factor is registered. Enrollment events should appear in security logs and generate alerts for review.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Recognizing and Responding to MFA Attacks</div>
+    <div class="ph-sub">Operational awareness for users and security teams</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">MFA Incident Response</text>
+  <g id="pg4-hl0" class="svg-hl" transform="translate(0,0)"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
+    <text x="36" y="60" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Detect Phishing Proxy</text>
+    <text x="36" y="76" font-size="10" fill="#94a0b8" font-family="system-ui">Wrong domain in address bar · Password manager won't autofill · FIDO2 key refuses</text>
+    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">→ Stop immediately. Do not enter credentials.</text></g>
+  <g id="pg4-hl1" class="svg-hl" transform="translate(0,0)"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Unexpected MFA Prompt</text>
+    <text x="36" y="152" font-size="10" fill="#94a0b8" font-family="system-ui">DENY explicitly · Document time · Report to security · Change password from clean device</text>
+    <text x="36" y="168" font-size="10" fill="#56617a" font-family="system-ui">→ Review account activity for unauthorized actions before the prompt appeared</text></g>
+  <g id="pg4-hl2" class="svg-hl" transform="translate(0,0)"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="212" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Suspected SIM Swap</text>
+    <text x="36" y="228" font-size="10" fill="#94a0b8" font-family="system-ui">Sudden loss of service · Call carrier from alternate phone · Request port freeze immediately</text>
+    <text x="36" y="244" font-size="10" fill="#56617a" font-family="system-ui">→ Check accounts on Wi-Fi · Force password reset · Remove SMS MFA</text></g>
+  <g id="pg4-hl3" class="svg-hl" transform="translate(0,0)"><rect x="20" y="266" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="36" y="288" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Confirmed MFA Bypass (Org Response)</text>
+    <text x="36" y="304" font-size="10" fill="#94a0b8" font-family="system-ui">Revoke all sessions · Re-enroll all factors · Audit activity window · Assess lateral movement</text>
+    <text x="36" y="318" font-size="10" fill="#56617a" font-family="system-ui">→ Regulatory assessment · Warn broader user population if campaign detected</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Identifying a real-time phishing proxy attack in progress</div>
+    <div class="blk-body">Several observable signals distinguish a real-time phishing proxy attack from legitimate authentication. The URL in the browser address bar contains the phishing domain rather than the legitimate service — the single most reliable indicator. Password managers that store credentials by domain will not offer to autofill, because they do not recognize the domain. The certificate presented may be for a domain similar to the legitimate service but not identical. Some phishing proxy frameworks introduce subtle visual artifacts or timing differences in page load behavior. The most reliable defense remains the single habit of checking the exact domain in the address bar before entering credentials — automated defenses such as password managers and FIDO2 authenticators enforce this check at the technical layer, making it independent of user observation.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">What to do when you receive unexpected MFA prompts</div>
+    <div class="blk-body">An MFA push notification, SMS code request, or TOTP challenge that you did not initiate is a clear signal that someone with your password is attempting to log in. The correct immediate actions are: deny the prompt (never approve), document the time and nature of the prompt, report immediately to the security team, change the account password from a clean device (not the one that may be affected), and review recent account activity for unauthorized access that may have occurred before the MFA prompt appeared. If prompts are repeated in quick succession, this is an active MFA fatigue attack — deny each one explicitly using the available decline option rather than dismissing the notification, as explicit denial sends a signal to some systems that triggers additional security review.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Detecting SIM swap and SS7 attacks on SMS-based MFA</div>
+    <div class="blk-body">SIM swap attacks produce specific observable signals. The victim's phone suddenly loses service — calls fail, messages do not deliver — while the attacker's device receives them. Some carriers send a text message to the original SIM immediately before the swap, though this protection is inconsistently implemented. Account activity notifications from services using SMS MFA may appear for activity the victim did not initiate. If your phone unexpectedly loses service, contact your carrier immediately using an alternate phone to verify whether a number transfer has occurred. Organizations that depend on SMS MFA should monitor for authentication events that occur after extended periods of no activity on a specific phone number, which may indicate the number has been transferred. Migration to app-based or hardware key MFA eliminates the SIM swap attack surface entirely.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Responding to MFA bypass incidents at the organizational level</div>
+    <div class="blk-body">When an MFA bypass is suspected or confirmed — a session cookie stolen via phishing proxy, an account compromised through SIM swap, a push notification approved during a fatigue attack — the organizational response requires several parallel actions. Revoke all active sessions for the compromised account immediately. Force re-enrollment of all MFA factors to ensure the attacker has not registered their own device. Audit account activity since the compromise window to identify data accessed or actions taken. Assess whether the compromised account had access that would enable lateral movement to other accounts or systems. Review whether the attack technique affects other users in the organization — a phishing proxy campaign is likely targeting multiple users, and a warning to the broader user population may be warranted. Document the incident for post-incident review and regulatory assessment.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">BYPASS TECHNIQUES</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Proxy · SIM swap · Fatigue · SS7</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Each defeats specific MFA type</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">FIDO2 immune to proxy only</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">FIDO2 MECHANICS</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Asymmetric · Domain-bound</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Private key never leaves hardware</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Origin check is cryptographic</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">DEPLOYMENT</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Conditional access · PAW</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Exception tracking · Enrollment sec</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Policy + technology together</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Deny · Report · Rotate · Audit</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Revoke sessions · Re-enroll</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Speed limits damage</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">MFA bypass attacks — proxy phishing, SIM swap, fatigue, SS7 — each defeat specific MFA implementations</div>
+    <div class="blk-body">Real-time phishing proxies defeat OTP-based MFA. SIM swap and SS7 attacks defeat SMS MFA. Fatigue attacks exploit push notifications. Only FIDO2/WebAuthn with origin binding is immune to proxy phishing. Understanding which attacks defeat which MFA types determines the appropriate deployment for each risk level.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">FIDO2/WebAuthn uses domain-bound asymmetric key pairs — private keys never leave the authenticator</div>
+    <div class="blk-body">The origin binding in FIDO2 makes phishing proxy attacks cryptographically impossible: the authenticator refuses to sign a challenge for a domain that does not match the registered relying party. Platform authenticators extend this security to built-in device biometrics. Passkeys bring FIDO2 to consumer deployment with cross-device synchronization.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Deployment requires conditional access policies, privileged access controls, and exception management</div>
+    <div class="blk-body">Risk-based conditional access balances security with usability. Privileged accounts warrant hardware FIDO2 keys and step-up authentication. Every MFA exception must be documented, compensated, and reviewed. Enrollment security is as important as authentication security.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Unexpected MFA prompts are active attacks — deny, document, report, rotate credentials</div>
+    <div class="blk-body">Never approve an uninitiated MFA prompt. Repeated prompts are a fatigue attack in progress. SIM swap produces sudden loss of mobile service. Organizational response to MFA bypass requires session revocation, factor re-enrollment, activity audit, and lateral movement assessment.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Multifactor Authentication — Intermediate</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">A real-time phishing proxy (such as Evilginx2) captures your TOTP code and uses it to log in on your behalf. Which MFA method would have prevented this attack entirely?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">SMS one-time codes</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Authenticator app TOTP codes</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">A FIDO2/WebAuthn hardware security key</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">A push notification with number matching</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">Your phone suddenly shows 'No Service' and you cannot make calls or receive texts. You then receive a security email saying your bank account had a password reset. What most likely happened?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Your phone battery is low and affecting signal</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">You are in a dead zone and someone coincidentally tried to reset your account</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">You are likely the victim of a SIM swap attack — your phone number was transferred to an attacker's SIM</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Your carrier is doing maintenance and the reset attempt is unrelated</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">What does 'origin binding' mean in the context of FIDO2/WebAuthn authentication?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">The authentication is only valid when originating from the corporate network</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The authenticator generates a key pair that is mathematically bound to the specific domain it was registered for, and will only authenticate requests from that exact domain</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">The hardware key is physically bound to the user's identity card</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">The authentication session is bound to the originating IP address</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">An employee receives 15 push notification MFA prompts in 10 minutes that they did not initiate. They approve one to make them stop. What attack just succeeded, and what should happen next?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">A technical glitch caused duplicate prompts; no action needed</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">An MFA fatigue attack succeeded — immediately report to security, revoke all sessions, re-enroll MFA factors, and audit account activity</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">The employee correctly approved a delayed notification from earlier in the day</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The notifications were a security test that the employee passed by approving</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">What is the primary security risk of allowing MFA enrollment through self-service without strong identity verification?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Users may choose weak PINs for their authenticator apps</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Attackers who have already compromised an account can enroll their own authenticator device, creating persistent authenticated access that survives password resets</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Self-service enrollment is slower than IT-managed enrollment</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Users may enroll multiple devices, making session tracking difficult</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">A conditional access policy is configured to require hardware FIDO2 MFA when accessing the administrator console from outside the corporate network. A user with administrative privileges logs in from an airport using a personal laptop. What should happen?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Access should be granted because the user has valid credentials</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Access should be denied entirely — administrative access from personal devices should never be permitted</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">The user should be prompted for FIDO2 hardware key authentication before accessing the admin console</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">The system should send a push notification to the user's phone as sufficient verification</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#4b8ef0","#6db86d","#f0a04a","#9b7fe8"],
+  'pg2':["#4b8ef0","#6db86d","#f0a04a","#9b7fe8"],
+  'pg3':["#4b8ef0","#6db86d","#f0a04a","#9b7fe8"],
+  'pg4':["#4b8ef0","#6db86d","#f0a04a","#9b7fe8"],
+  'pg5':["#4b8ef0","#6db86d","#f0a04a","#9b7fe8"],
+};
+
+const NARR={
+  'pg1':['The security value of MFA depends entirely on which specific MFA implementation is deployed and which attack techniques the attacker uses. Real-time phishing proxy frameworks represent one of the most significant advances in credential theft because they defeat the OTP-based MFA that most organizations have deployed. These frameworks — openly available on GitHub — operate as transparent proxies: the victim browses to what appears to be the legitimate login page, enters credentials and a one-time code, and the proxy relays everything to the real service simultaneously. Authentication completes, the session cookie is captured, and the attacker uses that cookie to access the account. The OTP code has been used and cannot be replayed, but the session it established persists. TOTP codes, SMS codes, and push approvals are all equally defeated. The only technical defense is FIDO2/WebAuthn, whose origin binding makes proxy relay cryptographically impossible.','SIM swapping exploits the weakest link in SMS-based MFA: the human processes at mobile carriers that handle number transfers. An attacker armed with personal information — name, address, last four digits of a Social Security number, account PIN — calls the carrier\'s customer service and requests a number port or SIM replacement. Carrier representatives who fail to apply rigorous verification procedures complete the transfer, and within minutes all SMS messages and calls to that number reach the attacker\'s device. The victim\'s phone typically shows \'No Service\' or loses signal, which may go unnoticed for hours. Targeted SIM swap attacks have enabled cryptocurrency theft in the millions and access to high-profile social media and email accounts. Carrier-level protections such as number transfer PINs and port-out freezes add friction but have been defeated through social engineering of additional carrier staff.','MFA fatigue attacks are precisely calibrated to exploit the gap between security technology and human behavior. The attack is technically simple — repeatedly call the authentication API with valid credentials to trigger a stream of push notifications — but psychologically sophisticated. The attacker times the prompts to arrive during off-hours when the victim is tired, during business hours when the victim is busy and may approve reflexively, or in clusters that create pressure to act. Several major organizations have suffered significant breaches through this technique. Microsoft\'s response was to require number matching — the login page displays a two-digit number, and the push notification requires the user to enter that number, making accidental or reflexive approval impossible. Organizations still using push-without-number-matching are significantly more vulnerable to this technique.','SS7 vulnerabilities represent a systemic weakness in global telecommunications infrastructure that cannot be patched without replacing the entire protocol. SS7 was designed in 1975 for a network of trusted operators; it has no authentication between nodes and assumes all participants are legitimate carriers. Actors with access to SS7 nodes — through rogue carrier agreements, compromised carrier equipment, or criminal services that sell SS7 access — can send SS7 messages that redirect SMS traffic from any phone number worldwide. The attack is passive from the victim\'s perspective: the phone may show full signal and appear operational while messages are being intercepted. Intelligence agencies have used SS7 interception for surveillance for decades. Criminal actors have used it for targeted account takeovers against high-value targets. Any account protected only by SMS MFA is vulnerable to this technique, which leaves no trace on the victim\'s device.'],
+  'pg2':['FIDO2 authentication works through a challenge-response mechanism built on asymmetric cryptography. During registration, the authenticator generates a key pair specific to the relying party — the service being registered with. The private key is stored in the authenticator\'s secure hardware and never leaves it. The public key is sent to the service and stored for future authentication. During login, the service sends a cryptographic challenge along with the relying party identifier — the exact domain of the service. The authenticator checks that the relying party identifier matches the domain for which the key pair was created. If it matches, the authenticator signs the challenge with the private key. The service verifies the signature using the stored public key. The entire exchange proves that the person authenticating controls the device that holds the registered private key, without ever transmitting the private key or any shared secret.','Origin binding is the property that makes FIDO2 categorically different from OTP-based MFA for phishing resistance. When a user\'s browser sends an authentication request to a FIDO2 authenticator, it includes the origin — the exact domain the browser is on. The authenticator checks whether that origin matches the relying party identifier stored for the credential. If an attacker operates a proxy at evil-login.com that forwards traffic to bank.com, the browser is on evil-login.com and includes evil-login.com as the origin in the authentication request. The authenticator holds a credential registered for bank.com. The origins do not match. The authenticator declines to authenticate. The attacker receives nothing usable — there is no OTP to relay, no session to steal from this exchange. This check is enforced by the authenticator hardware and browser WebAuthn implementation, not by user judgment.','Platform authenticators built into modern operating systems and devices implement the full FIDO2 security model using hardware-backed key storage. The Trusted Platform Module in Windows machines, Apple\'s Secure Enclave in iPhones and Macs, and the Trusted Execution Environment in Android devices generate and store FIDO2 private keys in hardware that is designed to resist extraction even with physical access to the device. User verification — proving that the correct user is present — is accomplished through the device\'s biometric sensor or PIN. The resulting authentication is origin-bound in the same way as external hardware keys. Windows Hello for Business, Apple passkeys, and Android FIDO2 authentication all provide enterprise-grade phishing resistance through mechanisms already built into the devices employees use daily, without requiring deployment of additional hardware.','Passkeys represent the practical evolution of FIDO2 for broad deployment. The historical barrier to FIDO2 adoption was the hardware key: a physical device that could be lost, forgot at home, or unavailable on a new device. Passkeys solve this by synchronizing the FIDO2 credential through the platform vendor\'s encrypted cloud service — the private key material is protected with hardware-backed encryption before it leaves the device and is only decryptable on another device enrolled in the same account. This synchronization provides recovery (losing a device does not lose the credential) and convenience (credentials are available on all enrolled devices) while maintaining phishing resistance. For enterprise environments, the synchronization through consumer platform clouds introduces considerations about credential governance, device management, and cross-platform interoperability that must be addressed in deployment planning.'],
+  'pg3':['Conditional access policies transform MFA from a binary on-or-off control into a risk-proportionate mechanism. Rather than requiring the same authentication every time regardless of context, conditional access evaluates signals at each authentication event and applies requirements matched to the assessed risk. A fully managed, patched corporate device connecting from the office network at a typical work hour accessing a standard business application presents low contextual risk and may complete authentication without MFA step-up. The same user account connecting from an unrecognized country, on an unmanaged personal device, at 3 AM, requesting access to an administrative console, presents high contextual risk and should require strong MFA regardless of prior session state. This architecture requires a capable identity platform and careful policy design, but produces security outcomes that are both stronger and less disruptive to legitimate users than blanket MFA requirements applied uniformly.','Privileged access represents the highest-consequence authentication scenario in any organization. Administrator accounts that can modify security configurations, create new accounts, access sensitive databases, or deploy software affect the entire organization if compromised. The authentication controls for privileged access should be correspondingly stronger than for standard user accounts. Privileged access workstations are dedicated, hardened devices used exclusively for administrative tasks — no email, no web browsing, no productivity applications that could introduce malware or browser-based attacks. Access to privileged resources from PAWs should require hardware FIDO2 authentication. Step-up authentication — re-authenticating at the moment of a privileged action, even if already authenticated to the system — limits the window of exposure if a session is somehow compromised. These controls are proportionate to the blast radius of a privileged account compromise.','MFA exceptions are operationally necessary but each represents a deliberate reduction in security that must be tracked and justified. Service accounts that call APIs and cannot present an interactive MFA prompt are a common exception; the appropriate mitigation is certificate-based authentication, mutual TLS, or managed identity credentials rather than password-based authentication. Legacy systems that predate MFA support must be network-isolated so they can only be reached from managed, MFA-protected endpoints. Break-glass administrator accounts — intended for emergency use when primary MFA infrastructure is unavailable — must be stored in a physically secured location, have their credentials rotated after every use, and generate immediate security alerts on any authentication event. Every exception should be in a registry with a documented justification, a named owner, and a review date. Unreviewed exceptions accumulate risk silently.','The enrollment process is the attack surface for a specific class of MFA bypass: registering an attacker-controlled authenticator on a victim\'s account. If an attacker can complete enrollment — either by compromising the account before MFA is set up, by exploiting account recovery processes, or by using a temporary credential to access enrollment before the legitimate user does — they can establish persistent MFA-authenticated access that survives password resets. Enrollment security requires several controls: identity verification before enrollment is permitted (ensuring the person enrolling is the account owner), requiring existing MFA to add a new factor (preventing new enrollment from being used as account takeover), immediate notification to the account owner when a new factor is registered, and monitoring of enrollment events as security signals. Enrollment events should appear in identity logs and be reviewed, particularly for privileged accounts.'],
+  'pg4':['Recognizing a real-time phishing proxy attack at the moment it is occurring requires checking the single most reliable indicator: the exact domain in the browser\'s address bar. Phishing proxy frameworks generate domains that resemble the legitimate service — microsoft-auth.com, login-google-secure.net, account-update-apple.com — but cannot be the actual legitimate domain. Password managers that store credentials by domain will not offer autofill on a domain they do not have credentials for, providing an automated secondary check. FIDO2 authenticators will refuse to authenticate entirely. The absence of an autofill offer from a password manager on a page that looks like a known service should prompt immediate investigation. Some enterprise browser security tools inspect TLS certificate transparency logs and flag newly registered domains that resemble organizational domains, providing earlier warning that a phishing infrastructure targeting the organization has been deployed.','An unexpected MFA prompt is unambiguous evidence that someone with your credentials is attempting to use them. The response must be immediate and specific. Deny the push notification using the explicit decline button — not by simply dismissing the notification, because explicit denial sends a signal to some identity platforms that triggers additional security review. If prompts arrive repeatedly, deny each one explicitly rather than becoming desensitized. Immediately report the event to the security team with the time, account, and nature of the prompt. Change the account password from a clean device — not the one that may have already been used to access the phishing page. Review recent account activity for unauthorized actions that may have been taken before the MFA was triggered, particularly looking for data access, email rule changes, or new device registrations. Do not wait to see if the prompts stop before acting.','SIM swap attacks are identifiable by a specific and unmistakable signal: sudden, complete loss of mobile service on a device that was working normally, without any physical or environmental explanation. When this happens, the correct response is to contact the carrier immediately using a different phone — not the affected device — to ask whether a SIM change or number port has been initiated. Request an immediate freeze on any further transfers. Simultaneously, access accounts that used SMS MFA from a device on Wi-Fi (not cellular) to check for unauthorized activity, force a password reset, and remove SMS as an MFA method in favor of an authenticator app or hardware key. Organizations that have detected SIM swap attacks against employees typically identify them through authentication logs showing MFA events for accounts at times when the employee was known to be unreachable by phone — the combination of lost connectivity and authentication events is a strong indicator.','An organizational response to a confirmed MFA bypass must move on multiple fronts simultaneously to limit the damage from an already-authenticated attacker. Session revocation is the first action: invalidating all active sessions for the compromised account removes any access the attacker has established, forcing re-authentication. MFA re-enrollment comes next: all registered authenticators should be removed and the user required to re-enroll through a verified process, ensuring the attacker has not registered their own device. A complete audit of account activity during the compromise window — every authentication event, every data access, every configuration change, every message sent — provides the scope assessment needed for incident response decisions and regulatory reporting. The compromised account\'s access rights should be evaluated for lateral movement potential: did the account have permissions that could have been used to compromise other accounts or systems during the window of unauthorized access?'],
+  'pg5':['MFA bypass attacks are technique-specific. Real-time phishing proxies defeat all OTP-based MFA by relaying credentials and codes in real time. SIM swapping and SS7 attacks specifically defeat SMS MFA by taking control of the phone number. MFA fatigue exploits push notifications without number matching. Understanding which techniques defeat which MFA implementations is the basis for selecting the right MFA for each risk level — and FIDO2/WebAuthn is the only implementation that is technically immune to proxy phishing.','FIDO2/WebAuthn achieves phishing resistance through asymmetric cryptography with origin-bound key pairs. Private keys are generated per relying party, stored in secure hardware, and never transmitted. During authentication, the authenticator verifies that the request origin matches the registered domain before signing. This check is enforced at the cryptographic layer — no user judgment is required, and no phishing proxy can work around it. Platform authenticators and passkeys extend this protection to built-in device hardware and cross-device synchronization.','Effective MFA deployment requires more than technical implementation. Conditional access policies apply risk-proportionate requirements. Privileged accounts require hardware FIDO2 and step-up authentication. Exceptions must be documented, compensated, and reviewed. Enrollment security prevents authenticator-registration-based account takeover. Each element addresses a specific gap that would otherwise make a technically deployed MFA program practically exploitable.','Every unexpected MFA prompt is an active attack event requiring immediate action: deny, document, report, rotate credentials, and review account activity. Organizational response to MFA bypass requires session revocation, factor re-enrollment, activity auditing, and lateral movement assessment. The speed and completeness of this response directly determines how much additional damage occurs after the initial compromise.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[2,2,1,1,1,2];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["FIDO2/WebAuthn hardware keys use origin-bound cryptography. During authentication, the authenticator verifies that the requesting origin matches the registered domain. A phishing proxy on a different domain cannot receive a valid FIDO2 authentication — the key refuses to sign for the wrong domain. TOTP, SMS, and push are all vulnerable to relay by a real-time proxy.","Sudden complete loss of mobile service combined with authentication activity (like a password reset that requires SMS delivery) is the classic SIM swap signature. An attacker convinced your carrier to transfer your number to their SIM. Contact the carrier immediately from an alternate phone to freeze the account.","Origin binding means the FIDO2 key pair is created per relying party (domain). The authenticator checks that the domain in the authentication request matches the domain the credential was registered for. It will refuse to authenticate for any other domain — making phishing proxy attacks impossible, since the proxy cannot present the correct domain.","MFA fatigue (prompt bombing) uses repeated push notifications to wear down the user until they approve. Approving any prompt during this attack authenticates the attacker. The correct response: report immediately, revoke all active sessions for the account, force MFA re-enrollment to remove any attacker-registered devices, and audit all account activity during the attack window.","If enrollment requires only knowledge of the current password (which may be compromised), an attacker can enroll their own authenticator on the victim's account. From that point, they have MFA-authenticated access that persists even if the victim changes their password. Enrollment should require existing MFA, identity verification, and generate immediate notifications to the account owner.","Conditional access applies controls proportionate to assessed risk. An administrator connecting from outside the corporate network on an unmanaged personal device represents high risk for a privileged resource. The policy requiring FIDO2 hardware key authentication for this scenario is appropriate. If the user does not have a hardware key available, they should not be able to complete the privileged access until they can meet the authentication requirement."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

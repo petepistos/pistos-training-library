@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Engineering and Phishing — Intermediate — Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#f0a04a;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Social Engineering and Phishing — Intermediate</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Intermediate</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Phishing Infrastructure and Techniques</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Business Email Compromise</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Vishing, Smishing, and Physical Techniques</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Detection, Response, and Security Culture</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Phishing Infrastructure and Techniques</span>
+  </div>
+  <div class="mc-desc">▶ How modern phishing campaigns are built and operated</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Business Email Compromise</span>
+  </div>
+  <div class="mc-desc">▶ Financially targeted social engineering attacks</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Vishing, Smishing, and Physical Techniques</span>
+  </div>
+  <div class="mc-desc">▶ Social engineering beyond email</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Detection, Response, and Security Culture</span>
+  </div>
+  <div class="mc-desc">▶ Organizational defenses against social engineering</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Social Engineering and Phishing — Intermediate</div>
+  <div class="home-sub">Intermediate — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Phishing Infrastructure and Techniques</span>
+  </div>
+  <div class="mc-desc">▶ How modern phishing campaigns are built and operated</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Business Email Compromise</span>
+  </div>
+  <div class="mc-desc">▶ Financially targeted social engineering attacks</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Vishing, Smishing, and Physical Techniques</span>
+  </div>
+  <div class="mc-desc">▶ Social engineering beyond email</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Detection, Response, and Security Culture</span>
+  </div>
+  <div class="mc-desc">▶ Organizational defenses against social engineering</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Phishing Infrastructure and Techniques</div>
+    <div class="ph-sub">How modern phishing campaigns are built and operated</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Phishing Attack Architecture</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Proxy Framework (Evilginx2 / Modlishka)</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Victim connects through attacker proxy to real service · Session cookie captured · OTP MFA defeated</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Domain Spoofing</text>
+    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Typosquatting · Homoglyphs (Cyrillic a vs Latin a) · Subdomain abuse · Monitor CT logs for early detection</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="36" y="218" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">OSINT Targeting (LinkedIn · GitHub · Job Postings)</text>
+    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Org chart · Email format · Technology stack · Project names → Convincing spear phishing pretext</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="296" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Only Defense Against Proxy Phishing: FIDO2/WebAuthn</text>
+    <text x="36" y="314" font-size="10" fill="#94a0b8" font-family="system-ui">Origin binding makes proxy relay cryptographically impossible — authenticator refuses wrong domain</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Phishing kits and adversary-in-the-middle proxy frameworks</div>
+    <div class="blk-body">Modern phishing campaigns use phishing kits — pre-packaged toolkits that automate credential-harvesting site creation. Advanced kits use adversary-in-the-middle proxy frameworks such as Evilginx2, Modlishka, and Muraena, which operate as transparent proxies between the victim and the legitimate service. The victim receives a pixel-perfect clone because they are genuinely interacting with the real service through the proxy. Credentials and session cookies are harvested as they pass through, defeating OTP-based MFA entirely. The resulting session cookie provides authenticated access without credentials or MFA, because the victim already completed authentication. These frameworks are openly available and used in mass campaigns targeting Microsoft 365 and Google Workspace at scale.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Domain spoofing: typosquatting, homoglyphs, and lookalike domains</div>
+    <div class="blk-body">Phishing infrastructure requires domains that look convincing under casual scrutiny. Typosquatting registers domains with common typing errors: rn365.com uses 'rn' which resembles 'm'. Homoglyph attacks substitute visually identical Unicode characters — the Cyrillic letter a (U+0430) is pixel-identical to the Latin a in most fonts, enabling domains that appear identical to the legitimate brand. Subdomain abuse places the legitimate-appearing string as a subdomain of an attacker-controlled domain: microsoft.com.evil.net looks plausible in a hyperlink. Newly registered lookalike domains are a reliable threat intelligence signal — attackers register campaign infrastructure immediately before deployment, and monitoring certificate transparency logs for these domains can surface phishing infrastructure before campaigns launch.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">OSINT for spear phishing: building targeted attack profiles</div>
+    <div class="blk-body">Spear phishing campaigns begin with open source intelligence. LinkedIn provides organizational hierarchy, job titles, reporting relationships, and email address format conventions. GitHub repositories may expose internal tool names, infrastructure details, and employee usernames. Job postings reveal technology stacks — a posting for a Palo Alto Networks Engineer confirms the firewall vendor; a Salesforce Administrator role confirms the CRM. Corporate press releases announce mergers and executive appointments. Email header analysis from previously leaked messages confirms the organization's email format. The combination enables attackers to construct emails referencing real internal projects, real colleague names, and real business contexts — dramatically increasing victim engagement probability.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Spear phishing construction: anatomy of a high-quality attack email</div>
+    <div class="blk-body">A sophisticated spear phishing email is built to pass both automated and human scrutiny. The sender display name matches a real colleague or vendor; the sending domain is a convincing recent lookalike. The subject line references a real current project or imminent deadline extracted from OSINT. The body uses correct internal terminology, references shared context, and creates calibrated urgency — pressing but not panicked. The call to action is specific and time-pressured. The link passes visual inspection using a legitimate redirect service or a convincing lookalike domain. Attachments, if used, are file types the target regularly processes. Every element is chosen to minimize friction between the email arriving and the target taking the desired action.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Business Email Compromise</div>
+    <div class="ph-sub">Financially targeted social engineering attacks</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">BEC Attack Variants and Controls</text>
+  <g id="pg2-hl0" class="svg-hl" transform="translate(130,110)">
+    <rect x="-100" y="-68" width="200" height="136" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text y="-44" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">CEO FRAUD</text>
+    <text y="-24" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Executive impersonation</text>
+    <text y="-8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Urgency + confidentiality</text>
+    <text y="8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Wire transfer request</text>
+    <text y="30" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Fix: Out-of-band verify</text></g>
+  <g id="pg2-hl1" class="svg-hl" transform="translate(390,110)">
+    <rect x="-100" y="-68" width="200" height="136" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text y="-44" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">VENDOR IMPERSONATION</text>
+    <text y="-24" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Banking change request</text>
+    <text y="-8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Lookalike vendor domain</text>
+    <text y="8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Timed to real payment</text>
+    <text y="30" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Fix: Callback on file number</text></g>
+  <g id="pg2-hl2" class="svg-hl" transform="translate(130,264)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">ACCOUNT TAKEOVER</text>
+    <text y="-14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Real account — passes all auth</text>
+    <text y="2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Observes then inserts</text>
+    <text y="18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">No spoofed domain</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Fix: Behavioral monitoring</text></g>
+  <g id="pg2-hl3" class="svg-hl" transform="translate(390,264)">
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CONTROLS</text>
+    <text y="-14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Out-of-band verify</text>
+    <text y="2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Dual authorization</text>
+    <text y="18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Pre-verified callback</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Procedural — not technical</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">CEO fraud: impersonating executives to authorize fraudulent transfers</div>
+    <div class="blk-body">CEO fraud impersonates a senior executive to contact a financial employee with wire transfer authority. The pretext involves urgency and secrecy: a confidential acquisition requiring an immediate wire, a legal matter that cannot be discussed through normal channels, a tax obligation due today. The impersonation uses a lookalike domain or display name spoof. The attack exploits the authority gradient — employees with wire transfer authority are conditioned to comply with executive requests, particularly when confidentiality is emphasized to prevent verification through colleagues. FBI reporting indicates CEO fraud generates billions in losses annually, making it one of the highest-impact social engineering attack categories.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Vendor impersonation: intercepting payment workflows</div>
+    <div class="blk-body">Vendor impersonation targets accounts payable by convincing an organization to redirect a legitimate payment to an attacker-controlled account. The attacker identifies active vendor relationships and pending invoices through a compromised internal mailbox or publicly available business information. They contact accounts payable posing as the vendor, claim banking information has changed, and provide new wire transfer details. Unlike CEO fraud, vendor impersonation poses as an external party whose identity is harder to verify through internal channels. The attack is most effective when timed to coincide with an anticipated payment, making the banking change request contextually plausible. Organizations processing multiple vendor invoices weekly are high-volume targets.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Payroll diversion and account takeover variants</div>
+    <div class="blk-body">Payroll diversion targets HR and payroll systems by impersonating employees requesting direct deposit changes. The attacker emails HR posing as an employee, claims banking information changed, and provides a new account. The fraud is typically not discovered until the employee reports a missing paycheck. Account takeover BEC — where the attacker has actually compromised a legitimate email account — is the most sophisticated variant because emails originate from the real account. All authentication checks (SPF, DKIM, DMARC) validate correctly. The attacker monitors the compromised mailbox for financial communications, inserts into ongoing payment conversations, and redirects payments without the victim ever seeing a spoofed domain. Behavioral monitoring of account activity is the only effective detection mechanism.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Financial controls that defeat BEC</div>
+    <div class="blk-body">BEC attacks exploit gaps in financial process controls more than technical security gaps. Out-of-band verification requires confirming any payment instruction change through a separate communication channel: a phone call to a number from a prior verified communication — not a number provided in the email being verified. This single control defeats the majority of CEO fraud and vendor impersonation attacks. Dual authorization requires two separate authorized individuals to approve wire transfers above a defined threshold, preventing single-point manipulation. Callback verification for vendor banking changes requires calling a pre-verified number, not the number supplied in the change request. These procedural disciplines must be maintained consistently — a single exception for an 'urgent situation' is exactly what attackers engineer for.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Vishing, Smishing, and Physical Techniques</div>
+    <div class="ph-sub">Social engineering beyond email</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Multi-Channel Social Engineering</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Vishing + AI Voice Cloning</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Caller ID spoofed · Short audio sample → cloned voice · Recognized voice disarms analytical skepticism</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Smishing + QR Code Attacks</text>
+    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Truncated URLs · Package / bank pretexts · QR stickers bypass URL inspection entirely</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="36" y="218" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Physical: Tailgating · USB Baiting · Impersonation</text>
+    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Bypasses all network controls · Exploits courtesy norms · Curiosity delivers malware payload</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="36" y="295" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Multi-Channel Escalation Pattern</text>
+    <text x="36" y="313" font-size="10" fill="#94a0b8" font-family="system-ui">Preliminary contact establishes context → Call arrives expected → Rapport built → High-stakes request</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Vishing and AI voice cloning: telephone-based social engineering</div>
+    <div class="blk-body">Voice phishing exploits the trust that telephone communication carries and the difficulty of verifying caller identity in real time. Traditional vishing uses caller ID spoofing to display a trusted number while the caller poses as IT support, a bank's fraud line, or a government agency. Modern vishing increasingly uses AI voice cloning: a short audio sample of a known individual — from a conference presentation, a YouTube video, or a voicemail — generates convincing real-time voice synthesis. A cloned voice might impersonate a CFO authorizing an urgent payment, a technical support representative requesting credentials, or a familiar colleague making a sensitive request. The psychological authority of a recognized voice dramatically increases compliance rates compared to text-based attacks, because the trust mechanism that voice recognition triggers bypasses analytical skepticism.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Smishing and mobile-specific attack surfaces</div>
+    <div class="blk-body">SMS phishing exploits the lower security skepticism users apply to text messages and the limited screen space that makes URL inspection difficult. Mobile browsers display truncated URLs that hide the actual domain; link previews may show a legitimate service name while the actual destination is elsewhere. Smishing campaigns commonly impersonate package delivery services and financial institutions with messages claiming urgent action is required. Malicious QR codes present a distinct mobile attack surface: users cannot read a QR code before scanning it, and a sticker placed over a legitimate QR code in a physical environment redirects users to credential harvesting sites without any visual warning. The combination of smaller screens, abbreviated interfaces, and habituated quick interactions makes mobile users more vulnerable to phishing actions than desktop users in the same scenario.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Physical social engineering techniques</div>
+    <div class="blk-body">Physical social engineering bypasses technical controls by targeting human behavior in physical spaces. Tailgating exploits social norms against confrontation: an attacker approaching a secured door carrying boxes or dressed as a delivery person is typically admitted by employees who hold the door rather than challenge an apparently legitimate person. Shoulder surfing captures credentials entered in public spaces. USB baiting places malware-loaded drives in parking lots or break rooms, relying on curiosity to deliver a payload when an employee plugs the device into a workstation. Impersonation of IT support, building maintenance, or vendor representatives provides physical access to server rooms and network closets. Physical techniques are often most effective against organizations with strong network security controls, because they route around those controls entirely.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Hybrid multi-channel attacks and escalation chains</div>
+    <div class="blk-body">Sophisticated social engineering combines multiple channels to build credibility and overcome skepticism. A common pattern: a preliminary email establishes context ('I will be calling you shortly regarding your account'), then the call arrives — the expected contact removes the cold-approach skepticism barrier. Another pattern uses a smishing message claiming account compromise, directs the victim to call a provided number, and connects them to an attacker posing as support staff. Multi-stage attacks invest in early low-stakes interactions that build rapport before the high-stakes request arrives. Recognizing this pattern — preliminary contact establishing authority in preparation for a later sensitive request — is the key defensive awareness skill. Legitimate counterparties generally do not need to coordinate multiple channels specifically to overcome a target's skepticism.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Detection, Response, and Security Culture</div>
+    <div class="ph-sub">Organizational defenses against social engineering</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Defense Layers Against Social Engineering</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Technical: DMARC · Gateway · Safe Links · Browser Isolation</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Reduces phishing volume · Cannot stop account takeover BEC or no-link social engineering</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Simulation: Varied pretexts · Instant training · Track reporting rate</text>
+    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Learning tool not punishment · High reporting rate is the success metric · Match real campaign quality</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text x="36" y="218" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Reporting Culture: No blame · Visible response · Recognition</text>
+    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Every report = threat intelligence · Fast reports protect the organization · Suppress blame not reporting</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="295" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Metrics: Reporting rate · Time to report · Incident rate trends</text>
+    <text x="36" y="313" font-size="10" fill="#94a0b8" font-family="system-ui">Click rate alone is insufficient · Reporting rate + incident reduction = actual resilience</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Technical controls: email security layers and phishing detection</div>
+    <div class="blk-body">Technical email security provides the first line of defense. DMARC with p=reject prevents domain spoofing by verifying that emails claiming to come from your domain were authorized by your mail infrastructure. Without DMARC enforcement, anyone can send email appearing to come from your domain. Email security gateways scan inbound messages against threat intelligence and sandbox suspicious attachments. Advanced threat protection re-evaluates links at click time rather than delivery time, catching URLs weaponized after delivery. These controls can reduce phishing reaching inboxes by 90% or more. They cannot achieve 100% because novel infrastructure, social engineering without links (CEO fraud requesting a wire by reply), and account takeover BEC all evade content-based filtering.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Phishing simulation programs: building detection skills</div>
+    <div class="blk-body">Phishing simulation programs send controlled realistic phishing emails to employees to measure susceptibility and build recognition skills. Effective programs vary simulation scenarios across different pretexts — executive urgency, IT notification, HR announcement, vendor payment request — because real campaigns use all of these. Simulations should reflect current real-world campaign quality, not obviously low-quality samples that train employees to look for poor execution rather than sophisticated attacks. Training delivered immediately at the moment of a click failure is more effective than batch reporting. Tracking reporting rates alongside click rates provides a more complete picture: an employee who clicked and then immediately reported has demonstrated the critical response behavior, even though they initially engaged.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Reporting culture: the most valuable organizational defense</div>
+    <div class="blk-body">The most valuable organizational defense against social engineering is a population of employees who report suspicious activity quickly, without fear of judgment for having engaged with an attack. Every reported phishing email — whether the employee clicked or not — generates threat intelligence that security teams use to identify active campaigns, block infrastructure, and warn other potential targets. Organizations where employees fear reporting because they expect blame suppress this intelligence stream entirely. Security awareness programs must explicitly and repeatedly communicate that reporting is always the right action and that no one is blamed for reporting something that turns out to be legitimate. Recognition of employees who report reinforces reporting as a valued contribution, not a confession of failure.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Measuring program effectiveness beyond click rates</div>
+    <div class="blk-body">Phishing simulation click rates are the most commonly tracked metric but are a limited measure of actual security posture. Outcome metrics that better reflect resilience include: time between phishing delivery and first report (shorter is better), percentage of recipients who report rather than click or ignore, reduction in phishing-related security incidents over time, and qualitative engagement indicators such as employees proactively asking security questions or reporting suspicious physical access attempts. A program that reduces click rates from 30% to 5% through punitive consequences but produces zero reporters may have worse security outcomes than a program with a 15% click rate and a 40% reporting rate with active employee engagement — because the reporting organization is generating the intelligence stream that protects it.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">PHISHING INFRA</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Proxy kits · Domain spoofing</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">OSINT-driven targeting</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Only FIDO2 is immune</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">BEC</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CEO fraud · Vendor impersonation</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Account takeover BEC</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Procedural controls defeat</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">MULTI-CHANNEL</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Vishing + AI cloning</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Smishing · Physical · QR</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Constructed legitimacy</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">DEFENSE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Technical reduces volume</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Reporting culture = key</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Reporting rate &gt; click rate</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Phishing infrastructure uses proxy frameworks, lookalike domains, and OSINT-driven targeting</div>
+    <div class="blk-body">Adversary-in-the-middle frameworks defeat OTP MFA by relaying sessions in real time. Domain spoofing uses typosquatting, homoglyphs, and subdomain abuse. Spear phishing uses LinkedIn, GitHub, and job postings to build convincing pretexts. Only FIDO2/WebAuthn defeats proxy-based credential theft.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">BEC exploits financial workflows; defenses are procedural, not technical</div>
+    <div class="blk-body">CEO fraud, vendor impersonation, and payroll diversion target payment authorization. Account takeover BEC passes all authentication checks because it uses a real compromised account. Out-of-band verification, dual authorization, and callback procedures on pre-verified numbers defeat these attacks.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Vishing, smishing, and physical techniques bypass email security entirely</div>
+    <div class="blk-body">AI voice cloning enables impersonation of known individuals from short audio samples. Mobile phishing exploits truncated URLs and habituated interactions. Physical techniques route around network controls. Multi-channel attacks build constructed credibility across interactions to lower skepticism.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Technical controls reduce volume; reporting culture is the most valuable organizational defense</div>
+    <div class="blk-body">Email authentication, sandboxing, and time-of-click link evaluation reduce phishing volume but cannot stop all attacks. Phishing simulations build recognition skills when used as learning tools. Reporting rate is a better metric than click rate. Fast reporting generates threat intelligence that protects the whole organization.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Social Engineering and Phishing — Intermediate</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">An adversary-in-the-middle phishing proxy captures a victim's Microsoft 365 credentials and TOTP code in real time and uses them to authenticate. Which MFA implementation would have prevented this attack?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">SMS one-time codes</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Push notification with number matching</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">FIDO2/WebAuthn hardware security key</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Authenticator app TOTP</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">Your accounts payable team receives an email from accounts@vendornarne.com (using 'rn' instead of 'm') requesting a banking change before next payment. What is the correct verification response?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Process the change — the correct invoice number proves legitimacy</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Reply to confirm the request details</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Call the vendor using a number from a prior verified communication — never use contact information from the suspicious email</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Ask the vendor to resubmit from their correct domain</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">An attacker compromises a vendor's email account, reads payment threads for two weeks, then replies to an in-progress invoice discussion redirecting payment to a new account. Why do standard email security controls fail to detect this?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">The email is encrypted end-to-end and cannot be scanned</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The email originates from the legitimate compromised account — SPF, DKIM, and DMARC all validate correctly, and the sender is a known trusted contact</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">The attacker disables the victim's spam filters before sending</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Account takeover BEC only works against organizations without email gateways</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">Your organization's security awareness program shows click rates dropped from 25% to 4% over two years, but the security team also notices that phishing report submissions dropped from 200 per month to 12. What does this pattern most likely indicate?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">The program is highly successful — low click rates and low reports both indicate fewer phishing attempts reaching employees</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Employees learned not to click but stopped reporting — possibly due to fear of consequences, which eliminates the threat intelligence the security team needs to respond to real attacks</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">The email gateway is now catching most phishing, so there is less to report</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The phishing simulation program can now be discontinued</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">An attacker calls an executive saying 'I sent you an email about this a few minutes ago — did you get it?' The executive confirms receiving an email, and the attacker proceeds with a sensitive request. What social engineering technique does this demonstrate?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Urgency exploitation — creating time pressure to prevent verification</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Constructed legitimacy — using the email's existence to establish the caller's identity without actual verification</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Authority escalation — impersonating a higher-ranking individual</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Pretexting — creating a false scenario to justify the request</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">A finance employee receives a voicemail from what sounds exactly like the CFO's voice, asking them to call back urgently regarding a wire transfer. The CFO is known to be traveling internationally. What is the most appropriate response?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Call the number left in the voicemail immediately — the CFO urgently needs this handled</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Process the request — the recognized voice is sufficient verification</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Contact the CFO through a pre-verified channel (company directory number, known mobile number) to confirm the request before taking any financial action</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Ignore the voicemail — the CFO would use email for financial requests</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg2':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg3':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg4':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg5':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+};
+
+const NARR={
+  'pg1':['The commoditization of phishing infrastructure has dramatically lowered the barrier to sophisticated campaigns. A would-be attacker with no development skills can download a complete phishing kit from underground forums, configure it against a target service, and begin collecting credentials immediately. The most capable kits implement adversary-in-the-middle functionality that makes the attack transparent to the victim: the victim is genuinely interacting with their real Microsoft 365 account through the attacker\'s proxy, which is why everything looks correct and the MFA prompt succeeds. The session cookie that results from successful authentication is the attacker\'s prize — it provides access without credentials or MFA because authentication was already completed by the victim. This technique is used in mass campaigns targeting hundreds of thousands of mailboxes simultaneously.','Domain registration for phishing infrastructure is a high-volume industrial operation. Attackers register hundreds of domains in advance of campaigns using automated registration through low-cost resellers. The domains are designed for plausible deniability at quick glance. Homoglyph attacks are particularly insidious because the human visual system genuinely cannot distinguish a Cyrillic a from a Latin a — the domain looks correct to the eye but resolves to an entirely different server. The newly registered domain indicator is one of the most reliable threat intelligence signals available to defenders: organizations that monitor certificate transparency logs and domain registration feeds for lookalike domains targeting their brand can detect phishing infrastructure before campaigns launch and proactively block it.','Open source intelligence gathering for spear phishing has become systematic and efficient. LinkedIn company pages show the organizational hierarchy; employee profiles reveal job titles, reporting relationships, technology experience, and sometimes project names. The standard email format is determinable from a small number of confirmed addresses. GitHub repositories from employees may reveal internal system names, infrastructure details, and API endpoints. Job postings function as an unintentional technology disclosure mechanism: a posting for a Palo Alto Networks Firewall Engineer confirms the firewall vendor; a Veeva Vault Administrator position confirms the document management system. The combination produces a targeting package containing everything needed to construct a pretext email that references real context.','The anatomy of a sophisticated spear phishing email reflects careful intelligence preparation. The from address exploits visual similarity to the sender\'s real domain. The subject line references a real project extracted from OSINT. The salutation uses the target\'s name, not a generic greeting. The body references shared context — a meeting that occurred, a colleague\'s name, a real deadline. Urgency is calibrated: pressing but not panicked, because sophisticated attackers know that excessive urgency triggers suspicion. The link is embedded in natural-sounding anchor text rather than a naked URL. Every element has been chosen to minimize the friction between the email landing in the inbox and the target taking the desired action, and to maximize the probability that the email passes both automated scanning and human scrutiny.'],
+  'pg2':['CEO fraud works because it exploits two features of organizational culture simultaneously: deference to authority and compliance with requests for confidentiality. Financial employees with wire transfer authority process time-sensitive requests as part of their normal function and are conditioned not to question executive requests, particularly when the executive emphasizes confidentiality — which prevents verification through colleagues. The attack\'s sophistication lies not in technical capability but in psychological precision: the attacker understands the hierarchy, knows when the real executive is traveling or in meetings (making it plausible they are unreachable by phone), and times the request to coincide with legitimate business activity. The attack works best against organizations where questioning an executive\'s request is culturally discouraged and where wire transfer processes lack procedural safeguards.','Vendor impersonation succeeds because accounts payable departments process high volumes of invoices under time pressure and do not have deep personal relationships with all the vendors they pay. The attacker\'s preparation involves identifying active vendor relationships and pending invoices — through a compromised internal mailbox, through publicly available contract information, or through invoice data obtained from data breach sources. The banking change request arrives from a domain that resembles the vendor\'s real domain, references correct invoice numbers, and comes from a name matching a real vendor contact. Without a strict callback procedure using pre-verified contact information, the change is genuinely difficult to distinguish from a legitimate update — which is precisely what makes this attack so effective at scale.','Account takeover BEC is the variant that defeats technical email security controls because the attacker uses the legitimate compromised account. SPF validates because the email was sent through the organization\'s or vendor\'s authorized mail infrastructure. DKIM validates because the real account sent it. DMARC validates because the domain matches. Content filters see email from a known trusted sender. The attacker\'s observation period — reading historical emails to understand business relationships, identifying pending payments, mapping financial workflows — is what makes the subsequent insertion into payment conversations convincing. The target sees the correct sender, the correct reply history, and no authentication warnings. Detection requires behavioral monitoring of account activity: unusual login geography, new inbox rules created to forward email, anomalous sending patterns.','Financial controls against BEC are procedural disciplines that must be applied without exception — because attackers specifically engineer \'exceptional circumstances\' that employees are psychologically prepared to accommodate. Out-of-band verification using a pre-verified contact number is the foundational control that defeats CEO fraud and vendor impersonation: the attacker cannot intercept a phone call to a number they did not provide. Dual authorization creates two independent social engineering targets that must both be compromised simultaneously to complete a fraudulent transfer. The combination of out-of-band verification and dual authorization makes the attack dramatically more difficult. Organizations that maintain these controls consistently — even when an executive is demanding urgency and confidentiality — are the ones that do not appear in fraud reports.'],
+  'pg3':['AI voice cloning represents a qualitative shift in vishing capability. Previously, effective impersonation required natural vocal similarity to the target, limiting attack scope. Voice cloning technology trained on even small audio samples generates synthetic speech that is indistinguishable from the target\'s voice to casual listeners, and the technology is commercially available and increasingly accessible. A cloned voice attack might use AI-generated audio in a voicemail asking for a callback to a fraudulent number, or in a real-time conversation where the attacker controls the script. The psychological trust response to a recognized voice is strong — people apply far less analytical skepticism when they believe they are talking to someone they know. This is what makes voice cloning a qualitative advancement over text-based social engineering: it exploits a trust mechanism that is harder to consciously override.','Mobile devices present a distinct phishing attack surface because users interact with them differently than with desktop computers. The screen is smaller, the URL display is abbreviated, and interactions are habituated to be fast and low-friction. SMS carries implicit legitimacy for many users who have less experience with SMS fraud than with email fraud. Package delivery smishing exploits near-universal relevance — in an era of frequent online shopping, a message claiming a delivery issue is plausible for virtually any recipient at any time. Malicious QR codes present a unique challenge: there is no equivalent of hovering over a link to preview its destination. A physical sticker placed over a legitimate QR code — in a restaurant, parking kiosk, or conference display — redirects users to credential harvesting sites with no visual warning and no way to inspect the destination before committing.','Physical social engineering is often the most effective technique against organizations with strong technical security controls, precisely because it routes around those controls entirely. Network segmentation, endpoint detection, and email filtering have no effect on a person who walks through the front door and sits at an unlocked workstation. Tailgating works because creating social awkwardness by challenging an apparently legitimate person feels more costly than holding the door. USB baiting works because curiosity about a found object combined with the perception that plugging in a drive is a low-risk action leads to a malware payload. The effective defense requires creating and consistently enforcing explicit behavioral norms: verify all visitors through reception, challenge anyone in a secured space without a visible badge, report found USB drives to IT rather than plugging them in — and make it socially acceptable to do these things.','Multi-channel attack patterns are designed to overcome the one defense that stops most single-channel social engineering: pausing before taking action. When an email establishes that a call will follow, the call loses its cold-approach skepticism barrier because it was expected. When multiple channels confirm the same story independently, the story appears more legitimate. When early low-stakes interactions establish familiarity, the target\'s defenses are lower when the high-stakes request arrives. The key defensive awareness principle is recognizing that legitimacy is being constructed rather than demonstrated. Genuine business counterparties do not typically need to coordinate multiple communication channels specifically to build credibility before making a sensitive request. When an interaction pattern feels like it is systematically preparing you to comply with something, that design is itself the warning signal.'],
+  'pg4':['Email security layers work in concert and each addresses a distinct attack category. DMARC with p=reject is the foundational control against domain spoofing: without it, anyone can send email appearing to come from your domain. Email security gateways filter based on threat intelligence, behavioral signatures, and sandboxed attachment execution. Time-of-click link evaluation catches URLs weaponized after delivery — a technique attackers use because links are clean at delivery time when the gateway scans them. These combined controls can reduce phishing reaching inboxes by 90% or more. They cannot achieve 100% coverage because account takeover BEC sends from legitimate accounts, CEO fraud requesting wire transfers by reply contains no malicious links, and novel infrastructure not yet on threat intelligence feeds passes gateway scanning. Technical controls reduce the problem; they do not eliminate it.','Phishing simulation program design determines whether the program produces security value or false confidence. Programs that use the same simulation type repeatedly — always an IT password reset request, always an executive wire transfer — train employees to recognize that specific pattern while remaining vulnerable to all others. Programs that use obviously low-quality simulations with visible spelling errors and suspicious generic domains teach employees to look for poor execution, which sophisticated real attacks do not exhibit. Training at the moment of failure is more effective than aggregate reporting because it connects the lesson directly to the specific judgment error that was made. The goal of simulation is to build a mental pattern-recognition skill that applies to real attacks — which requires exposure to the variety and quality of real attack techniques.','Reporting culture is built through explicit communication and demonstrated consequence — meaning that when employees report, something visibly happens. When an employee reports a phishing email and receives a response from the security team acknowledging the report and explaining what the campaign was doing, reporting generates a positive feedback cycle. When reports result in visible organizational action — a warning sent to the organization, a site blocked, a credential reset initiated — reporters see that their action had effect. Security teams that treat reported phishing as queue items to be closed without employee-visible response are suppressing the reporting behavior they need. The program communication must be explicit and repeated: reporting is always right, no judgment for having clicked, reporters are the security team\'s partners in protecting the organization.','The limitation of click rate as a primary metric is that it can be driven down through methods that actually make the security posture worse. Punitive consequences for clicking reliably reduce click rates — and also reliably reduce reporting rates, because employees who fear punishment for failing a simulation also fear reporting real phishing that they interacted with. An organization with a 3% click rate and a 0.5% reporting rate may be in a worse security posture than one with a 12% click rate and an 18% reporting rate — because the first organization\'s employees are hiding their mistakes while the second\'s are generating threat intelligence. Mean time to report, reporting rate, and actual incident rate trends measure security outcomes. Click rate measures program outcomes, which only correlate with security outcomes when the program design is sound.'],
+  'pg5':['Phishing infrastructure has been industrialized through phishing kits and adversary-in-the-middle proxy frameworks that defeat OTP-based MFA by capturing session cookies rather than just credentials. Domain spoofing uses typosquatting, Unicode homoglyphs, and subdomain abuse. Spear phishing campaigns begin with systematic OSINT — LinkedIn, GitHub, job postings — to build targeting packages that make attack emails indistinguishable from legitimate communications. FIDO2/WebAuthn is the only MFA implementation that defeats proxy-based credential theft through origin binding.','Business email compromise attacks exploit financial workflow controls rather than technical vulnerabilities. CEO fraud exploits executive authority and confidentiality requests. Vendor impersonation exploits banking change workflows. Account takeover BEC sends from legitimate compromised accounts and passes all authentication checks. Out-of-band verification using pre-verified contact numbers, dual authorization for wire transfers, and callback procedures on banking changes are the procedural controls that defeat these attacks where technical controls cannot.','Vishing with AI voice cloning enables impersonation of specific known individuals from publicly available audio. Smishing exploits mobile device limitations and habituated quick interactions. Physical social engineering routes around network controls through tailgating, USB baiting, and impersonation. Multi-channel attacks build constructed credibility through preliminary interactions that establish the attacker\'s legitimacy before the high-stakes request arrives.','Email authentication, sandboxing, and time-of-click link evaluation reduce phishing volume reaching inboxes but cannot stop account takeover BEC or social engineering without malicious links. Phishing simulations build recognition skills when designed as learning tools using varied, realistic pretexts rather than punitive measurement. Reporting rate and mean time to report are more meaningful security metrics than click rate. A fast-reporting culture generates the threat intelligence that protects the organization at scale.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[2,2,1,1,1,2];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["FIDO2/WebAuthn uses origin-bound cryptographic key pairs. The authenticator checks that the requesting domain matches the registered relying party. Since the phishing proxy operates on a different domain, it refuses to authenticate. TOTP, SMS, and push notifications are all captured and relayed in real time by proxy frameworks — only FIDO2 origin binding defeats this attack at the cryptographic layer.","This is vendor impersonation using a typosquatted domain. Out-of-band verification using pre-verified contact information is the correct control. Calling a number provided in the suspicious email reaches the attacker. Asking for resubmission still leaves the attacker in control of the communication. The banking change must not be processed until verified through an independent channel you already trusted.","Account takeover BEC sends from the real compromised account. All authentication mechanisms validate correctly because the email is genuinely from the authorized account and domain. Content filters recognize the sender as trusted. Detection requires behavioral monitoring of account activity — unusual login geography, new inbox rules, anomalous sending patterns — not email content or authentication analysis.","Low click rates combined with dramatically reduced reporting is a warning sign. Employees who fear punishment for failing simulations also suppress reporting of real phishing they interact with. High click rates are bad, but zero reports is also bad — every report is threat intelligence that enables incident response. This pattern suggests the program has inadvertently suppressed the reporting behavior that protects the organization from real attacks.","This is constructed legitimacy through multi-channel coordination. The email established the expectation of a call; when the call arrives it appears legitimate because it was expected. The executive's confirmation of the email does not verify the caller's identity — it only confirms an email exists. The caller's identity is assumed, not verified. Legitimate business contacts do not typically need to pre-stage communications to establish their identity.","AI voice cloning can produce voicemails indistinguishable from a real person's voice using a short audio sample from publicly available recordings. The CFO's travel status makes the scenario contextually plausible — attackers monitor executive travel announcements for this reason. The correct response is to verify through a pre-verified channel, not the number in the voicemail. The recognized voice is not sufficient verification when AI cloning makes voice synthesis accessible."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

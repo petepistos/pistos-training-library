@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Incident Reporting and Response — Intermediate — Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#e05252;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#e0525222;color:#e05252;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#e05252;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#e05252;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#e05252;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#e05252;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#e05252;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Incident Reporting and Response — Intermediate</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Intermediate</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Incident Classification and Triage</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Containment and Eradication</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Regulatory Notification Requirements</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Post-Incident Activities</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Incident Classification and Triage</span>
+  </div>
+  <div class="mc-desc">▶ Determining severity and response priority for security events</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Containment and Eradication</span>
+  </div>
+  <div class="mc-desc">▶ Stopping active threats and removing attacker presence</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Regulatory Notification Requirements</span>
+  </div>
+  <div class="mc-desc">▶ NY DFS and other regulatory obligations during incidents</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Post-Incident Activities</span>
+  </div>
+  <div class="mc-desc">▶ Learning from incidents to improve security posture</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Incident Reporting and Response — Intermediate</div>
+  <div class="home-sub">Intermediate — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Incident Classification and Triage</span>
+  </div>
+  <div class="mc-desc">▶ Determining severity and response priority for security events</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Containment and Eradication</span>
+  </div>
+  <div class="mc-desc">▶ Stopping active threats and removing attacker presence</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Regulatory Notification Requirements</span>
+  </div>
+  <div class="mc-desc">▶ NY DFS and other regulatory obligations during incidents</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Post-Incident Activities</span>
+  </div>
+  <div class="mc-desc">▶ Learning from incidents to improve security posture</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#e05252;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Incident Classification and Triage</div>
+    <div class="ph-sub">Determining severity and response priority for security events</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Incident Triage Framework</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Event → Incident Threshold</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Event: detected, low risk, no coordination needed · Incident: confirmed/probable breach requiring response</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="80" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Severity Tiers</text>
+    <text x="36" y="156" font-size="10" fill="#e05252" font-family="system-ui">P1 Critical: active ransomware/breach → immediate all-hands (minutes)</text>
+    <text x="36" y="172" font-size="10" fill="#f0a04a" font-family="system-ui">P2 High: confirmed access/suspected exfil → escalate within 1 hour</text>
+    <text x="36" y="186" font-size="10" fill="#94a0b8" font-family="system-ui">P3/P4: suspected or low-impact → investigate within 4 hours / 1 business day</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="208" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="232" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">First 30 Minutes: Confirm · Scope · Active? · Contain? · Escalate</text>
+    <text x="36" y="250" font-size="10" fill="#94a0b8" font-family="system-ui">Speed over completeness · Enough information for containment decisions · Parallel action not sequential</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="286" width="480" height="40" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="310" font-size="10" fill="#94a0b8" font-family="system-ui">EDR tool use = high confidence · Auth + inbox rules = account compromise · Encrypted files = lagging → damage limitation</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Event vs. incident: establishing the threshold for response</div>
+    <div class="blk-body">Security operations centers process enormous volumes of alerts — millions of log events and thousands of security tool alerts per day in large organizations. The vast majority are false positives or low-risk events that require no escalation. Effective triage requires distinguishing between events (security-relevant observations that do not by themselves require incident response) and incidents (confirmed or highly probable security breaches requiring coordinated response). An event might be: a failed authentication from an unusual location (suspicious but explainable), an antivirus quarantine of a known malware sample (detected and contained), or a firewall block of a port scan (expected and handled automatically). An incident might be: confirmed unauthorized access to a system, evidence of active data exfiltration, or detection of ransomware activity. The incident threshold should be defined in the incident response plan — ambiguity about when to escalate creates both under-response (missing real incidents) and over-response (escalating every alert).</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Incident severity classification and response SLAs</div>
+    <div class="blk-body">Incident severity classification determines the urgency of response and the level of organizational attention the incident receives. A common four-tier classification framework: Critical (P1) — active ransomware, confirmed data breach of sensitive records, complete system unavailability affecting core business functions — requires immediate escalation to senior leadership, all-hands response, and actions within minutes. High (P2) — confirmed unauthorized access, suspected data exfiltration, significant system compromise — requires escalation within one hour and senior security team involvement. Medium (P3) — suspected compromise without confirmation, policy violations affecting a small number of systems — requires investigation within four hours during business hours. Low (P4) — policy violations with no immediate security impact, suspicious but unexplained activity — requires investigation within one business day. Each severity level should have defined response SLAs, required response team members, communication requirements, and escalation triggers if the incident severity increases.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Initial triage: the first 30 minutes</div>
+    <div class="blk-body">The first thirty minutes of incident response are the highest-impact period for limiting damage. The initial triage analyst must accomplish: confirming that a real security event has occurred (distinguishing true positive from false positive), determining the immediate scope (how many systems and users are affected), assessing whether the threat is still active (is encryption still occurring, is the attacker still present, is exfiltration ongoing), identifying the highest-risk immediate actions (does anything need to be isolated right now to prevent spread), and escalating with sufficient information for the incident commander to make resource allocation decisions. The initial triage does not require complete understanding of what happened — it requires enough understanding to make containment and escalation decisions. Analysis depth grows through the investigation phase; the triage phase prioritizes speed of assessment over completeness.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Evidence of compromise: what initial indicators suggest</div>
+    <div class="blk-body">Initial indicators that trigger incident triage carry differential diagnostic value. EDR alerts for process injection or LSASS access are high-confidence indicators of attacker tool use. Authentication from a new country followed by inbox rule creation is a high-confidence indicator of account compromise. Large outbound data transfers to cloud storage services are high-confidence indicators of potential exfiltration. Antivirus alerts on common commodity malware may indicate a low-sophistication infection contained by the AV, or may be the first-stage loader for a more sophisticated attack. User reports of encrypted files are a lagging indicator — if ransomware is visible, the dwell period has likely concluded and the response is now damage limitation rather than early detection. Each indicator type suggests a different investigation priority and a different set of initial containment actions based on what threat behavior the indicator represents.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Containment and Eradication</div>
+    <div class="ph-sub">Stopping active threats and removing attacker presence</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Containment and Eradication</text>
+  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Containment: Security vs. Operations Tradeoff</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Aggressive = max security, max disruption · Targeted = less disruption, risk of incomplete containment · Document rationale</text></g>
+  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Containment Tools: EDR Isolation · Network Quarantine · Credential Revocation</text>
+    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">EDR: cuts network but keeps management channel · VLAN/FW: segments · Credential reset: blocks auth without isolating host</text></g>
+  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="68" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Eradication: All Persistence — Not Just the First Found</text>
+    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Registry · Tasks · Services · WMI · Browser extensions · Backdoor accounts · All harvested credentials</text>
+    <text x="36" y="250" font-size="10" fill="#e05252" font-family="system-ui">Reimaging is more reliable than manual removal — guarantees elimination of unknown persistence</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="296" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Recovery Sequence: Eradicate → Restore Pre-compromise Backup → Patch → Enhanced Monitoring</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Containment strategy: balancing security against operational disruption</div>
+    <div class="blk-body">Containment decisions involve a fundamental tension between security objectives (stop the threat as completely as possible) and operational objectives (maintain business continuity and minimize service disruption). Aggressive containment — taking systems offline, blocking entire network segments — most effectively stops the threat but may disrupt operations significantly. Targeted containment — isolating specific compromised systems while leaving adjacent systems operational — maintains more business function but may be insufficient if the attacker has broader access than initially known. The containment decision should consider: how confident is the team in the scope assessment (is it safe to isolate only the identified systems, or might the compromise be broader than detected), how critical are the affected systems to business operations, and what is the speed of the threat (active ransomware encrypting files requires immediate aggressive containment; a persistent backdoor that has been present for weeks allows more considered response). Containment decisions should be documented with the rationale, not just the action.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Network isolation and endpoint containment techniques</div>
+    <div class="blk-body">Multiple containment mechanisms are available with different tradeoffs between completeness and operational impact. EDR-based host isolation cuts an endpoint's network access while maintaining the EDR management channel — the security team retains the ability to run investigation commands, collect additional forensic artifacts, and monitor activity on the isolated host. Network-level isolation through VLAN reconfiguration or firewall rules quarantines a network segment, affecting all systems in that segment regardless of whether each is known to be compromised. Cloud environment isolation revokes IAM credentials or applies restrictive security group rules to prevent compromised cloud workloads from making further API calls or network connections. Credential-based containment resets or revokes credentials for compromised accounts to prevent the attacker from authenticating, even if they retain access to a compromised host. The combination of host isolation, network isolation, and credential revocation provides defense in depth for containment.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Eradication: removing the attacker from the environment</div>
+    <div class="blk-body">Eradication is the process of completely removing the attacker's presence and access from the environment — all malware, all backdoors, all persistence mechanisms, all compromised accounts, and all access paths the attacker established. Incomplete eradication is the primary cause of re-compromise: if any single persistence mechanism, backdoor account, or compromised credential is missed, the attacker can reestablish access after recovery. Eradication requires: identifying all systems that were compromised (not just the initially detected system), mapping all persistence mechanisms established on each compromised system, removing malware and persistence through either targeted remediation or system reimaging (reimaging is more reliable for eliminating unknown persistence), resetting all credentials that were exposed or may have been harvested, and revoking all sessions and access tokens. For sophisticated attackers with extended dwell periods, completeness of eradication is more important than speed — recovering prematurely and being re-compromised within days is worse than taking additional time for thorough eradication.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">System recovery and integrity verification</div>
+    <div class="blk-body">Recovery restores affected systems to known-good operational states while maintaining security controls to detect re-compromise. Recovery sequence matters: restoring from backup without first completing eradication may reintroduce compromised components. The recommended sequence is: complete eradication of all known attacker presence, restore systems from pre-compromise backups (with verification that the backup timestamp predates the attacker's initial access), apply all security patches that existed at the time of compromise and any released since, restore data from backup, and bring systems back online with enhanced monitoring. Recovery validation confirms that restored systems are operating correctly and that security controls are functioning as expected. Post-recovery monitoring at elevated sensitivity — lower alert thresholds, more frequent log review — detects any signs of re-compromise during the period when the attacker may attempt to regain access.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Regulatory Notification Requirements</div>
+    <div class="ph-sub">NY DFS and other regulatory obligations during incidents</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">NY DFS Notification Timeline</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="80" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">500.17: 72 Hours from DETERMINATION (not detection)</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">NPI accessed · System availability affected · Other regulator notification triggered</text>
+    <text x="36" y="98" font-size="10" fill="#56617a" font-family="system-ui">Investigation need not be complete — notify when materiality is determined, update as facts develop</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="132" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="156" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Annual Certification: April 15 · Covers prior calendar year</text>
+    <text x="36" y="174" font-size="10" fill="#94a0b8" font-family="system-ui">Incidents that revealed compliance gaps must be remediated and documented before certification · Coordinate security + compliance throughout year</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="210" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="234" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Materiality Factors: Pre-define thresholds before incidents</text>
+    <text x="36" y="252" font-size="10" fill="#94a0b8" font-family="system-ui">Volume of NPI records accessed · Duration of system unavailability · Involve legal counsel in determination</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="288" width="480" height="38" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="310" font-size="10" fill="#94a0b8" font-family="system-ui">Documentation: Timeline · Decision rationale · Actions/who/when · Communications · Forensic evidence chain of custody</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">NY DFS 500.17: cybersecurity incident notification requirements</div>
+    <div class="blk-body">NY DFS 23 NYCRR 500.17 imposes specific notification obligations on covered entities experiencing cybersecurity events. The regulation requires notification to the Superintendent of Financial Services within 72 hours of determining that a cybersecurity event has occurred that: affects the availability, confidentiality, or integrity of information systems or nonpublic information, requires the covered entity to notify any government body or self-regulatory organization, or meets the covered entity's internal materiality threshold. The 72-hour clock begins at the time of determination that the event is material — not at the time of first detection. This distinction matters: an organization may detect anomalous activity on Day 1, investigate through Day 3, and determine on Day 4 that a material breach occurred — the 72 hours begins on Day 4. The notification must include the date, a description of the event, and the covered entity's response. The regulation does not require that the investigation be complete before notification.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Annual certification and the intersection with incident response</div>
+    <div class="blk-body">NY DFS 500.17(b) requires covered entities to submit an annual certification of material compliance to the Superintendent by April 15 of each year. This certification covers the prior calendar year's compliance with all sections of the regulation. A cybersecurity incident during the covered period does not automatically prevent certification — what matters is whether the covered entity addressed the incident appropriately, implemented required controls, and has a documented compliance program. An incident that reveals a compliance gap (for example, an intrusion that exploited a vulnerability that should have been patched under a required vulnerability management program) represents a compliance finding that must be addressed, but the certification can acknowledge the gap and describe remediation actions. Organizations should coordinate their incident response documentation with their compliance team to ensure incident response timelines, remediation actions, and control implementations are documented in a form that supports annual certification.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Notifiable event determination: what triggers the obligation</div>
+    <div class="blk-body">Determining whether an event triggers the 72-hour notification obligation requires applying the materiality threshold to the facts known at the time of determination. Key factors in materiality assessment: was nonpublic information (NPI) accessed or exfiltrated by an unauthorized party, did the event affect the availability of information systems material to the covered entity's operations, was the event caused by a failure of required security controls (indicating a compliance gap as well as a security incident), and does the event require notification to any other regulatory body or law enforcement agency. Common incident types and their typical notification implications: successful ransomware that encrypts systems (likely notifiable — affects availability and potentially NPI), phishing credential compromise with mailbox access (notifiable if NPI was in the accessed mailbox), failed intrusion attempt that was detected and blocked (typically not notifiable if no access to systems or NPI was achieved), accidental data exposure by an employee (notifiable if NPI was exposed to unauthorized parties).</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Documentation requirements during incident response</div>
+    <div class="blk-body">Documentation during incident response serves multiple purposes: it creates the record needed for regulatory notification, supports potential litigation and law enforcement cooperation, enables post-incident review and process improvement, and demonstrates due diligence in the event of regulatory examination. Incident documentation should capture: timeline of events (when was each event first observed, when was each containment or investigative action taken, when were notifications made), decision rationale (why specific containment decisions were made, what information was available at each decision point), actions taken by whom and when, forensic evidence collected and chain of custody, communications with leadership, regulators, law enforcement, and counsel, and ongoing status updates as understanding develops. Documentation created during incident response is potentially discoverable in litigation — security teams should coordinate with legal counsel on documentation practices, particularly for events that may result in regulatory action or civil claims.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Post-Incident Activities</div>
+    <div class="ph-sub">Learning from incidents to improve security posture</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Post-Incident Review Process</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Blameless Retrospective</text>
+    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Focus on systemic failures, not individual errors · What controls failed, why detection was slow, how containment could improve</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Root Cause Analysis: Address Conditions, Not Symptoms</text>
+    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Five whys reveals process failures behind individual events · Policy-practice gaps · Missing or misconfigured controls</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="218" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Metrics: MTTD · MTTR · False Positive Rate · Alert-to-Incident Rate</text>
+    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Consistent methodology required for meaningful trends · Quarterly tracking shows program improvement over time</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="296" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Tabletop Exercises: Required by NY DFS 500 · Test regulatory notification</text>
+    <text x="36" y="314" font-size="10" fill="#94a0b8" font-family="system-ui">Test 72-hr notification decision, certification implications, role clarity · Track observations to completion</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Post-incident review: blameless retrospective analysis</div>
+    <div class="blk-body">The post-incident review (also called post-mortem or lessons learned) is a structured analysis of the incident conducted after the immediate response is complete. Effective post-incident reviews are blameless — they focus on systemic failures in processes, technologies, and controls rather than individual mistakes. This is not a process of accountability avoidance; it is the recognition that security incidents are almost always the result of multiple contributing factors, and identifying only the individual who made the final error misses the systemic improvements that would prevent recurrence. The review examines: what happened and when (timeline reconstruction), what controls should have detected or prevented the incident and why they did not, what the initial detection method was and how detection time could have been reduced, what containment actions were taken and whether faster or more complete containment was possible, and what systemic changes would reduce the likelihood or impact of a similar incident.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Root cause analysis and systemic improvement</div>
+    <div class="blk-body">Root cause analysis goes beyond the immediate cause of an incident to identify the underlying systemic factors that created the conditions for the incident. The five whys technique — repeatedly asking 'why' until the underlying cause is identified — reveals that incidents labeled as 'human error' often have systemic causes: the human error occurred because a process was unclear, a tool generated false positives that trained operators to ignore alerts, or a security control that should have prevented the action was not implemented. Root cause findings drive systemic improvements that address the underlying conditions rather than just the immediate causes. Common root cause categories in security incidents: missing or misconfigured security controls, unpatched vulnerabilities in systems that should have been in scope for patch management, inadequate detection capability that allowed the attacker to operate undetected during the dwell period, and process failures in access management that allowed an attacker to use accumulated excessive permissions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Metrics and key performance indicators for incident response</div>
+    <div class="blk-body">Measuring incident response effectiveness requires defined metrics that capture the dimensions of performance that matter. Mean time to detect (MTTD) measures the average time between when an incident begins and when it is first identified by the security team — shorter is better. Mean time to respond (MTTR) measures the average time between detection and containment — the window during which the attacker is operating detected but uncontained. Mean time to recover (MTTRec) measures the time from incident detection to full operational recovery. False positive rate measures the fraction of security alerts that do not represent real incidents — high false positive rates reduce analyst effectiveness by creating alert fatigue. Alert-to-incident escalation rate measures what fraction of alerts are escalated to incident response — too high indicates poor alert tuning; too low may indicate missed incidents. These metrics should be tracked over time and reviewed in post-incident reviews as indicators of program health.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Tabletop exercises and incident response testing</div>
+    <div class="blk-body">Tabletop exercises simulate incident response without actual system impact, walking participants through a realistic incident scenario to test decision-making, communication, notification processes, and role clarity. A well-designed tabletop presents a realistic attack scenario — ransomware detected in the environment, a BEC attempt that may have compromised financial systems, a data breach affecting customer records — and injects injects new information at intervals to test how the team adapts as the situation evolves. Tabletops reveal: gaps in the incident response plan (situations the plan does not address), uncertainty about notification obligations and their timelines, communication gaps between security, legal, compliance, and business leadership, and role ambiguity about who makes what decisions under what circumstances. For insurance agencies subject to NY DFS 500, tabletop exercises are a required element of the incident response program. Annual tabletops covering different scenario types build organizational muscle memory for incident response.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">TRIAGE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Event vs incident threshold</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Severity tiers + SLAs</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">First 30 min: parallel action</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">CONTAIN + ERADICATE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Layered containment tools</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">All persistence removed</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Eradicate before recovery</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">REGULATORY</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">72 hrs from determination</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">April 15 certification</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Document throughout year</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">POST-INCIDENT</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Blameless · Root cause</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">MTTD / MTTR metrics</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Tabletop tests notification</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Triage distinguishes events from incidents; severity classification drives response SLAs and resource allocation</div>
+    <div class="blk-body">The first 30 minutes prioritize scope assessment and immediate containment over complete analysis. Indicator type determines investigation priority: EDR alerts for attacker tools, auth anomalies, and exfiltration patterns are high-confidence; user-reported encrypted files are lagging indicators requiring damage limitation response.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Containment balances security completeness against operational disruption; eradication must be thorough before recovery</div>
+    <div class="blk-body">EDR isolation, network quarantine, and credential revocation provide layered containment. Incomplete eradication causes re-compromise — all persistence mechanisms must be identified and removed. Recovery sequence: eradicate first, then restore from pre-compromise backups with security patches applied, then bring online with enhanced monitoring.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">NY DFS 500.17 requires 72-hour notification after determination of a material cybersecurity event</div>
+    <div class="blk-body">The clock starts at determination, not detection. NPI access, system availability impact, and notification to other regulators are materiality factors. Documentation during response must support regulatory notification, litigation, and post-incident review. Coordinate with legal counsel on documentation practices.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Post-incident reviews are blameless, focus on systemic root causes, and drive measurable improvement</div>
+    <div class="blk-body">Root cause analysis identifies the systemic conditions that allowed the incident, not just the immediate trigger. MTTD, MTTR, and false positive rate measure program health over time. Annual tabletop exercises required under NY DFS 500 build decision-making muscle memory and reveal plan gaps before real incidents require them.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Incident Reporting and Response — Intermediate</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">A security analyst receives an EDR alert showing LSASS memory access by a non-system process, followed by a new scheduled task created 3 minutes later. What does this indicate, and what is the appropriate initial response classification?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Low-priority event — LSASS access is common and scheduled tasks are created frequently</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">P1/Critical incident — LSASS memory access by a non-system process is a near-certain indicator of credential harvesting (Mimikatz-style attack) combined with persistence establishment; escalate immediately and prepare for host isolation</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">P3/Medium — investigate within 4 hours to determine if this is a false positive</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Informational — wait for additional indicators before classifying</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">During a ransomware incident, the security team identifies three compromised workstations. They manually remove the ransomware executable and the scheduled task used for persistence from each system. The systems are returned to service. Five days later, ransomware activity is detected again. What most likely caused the re-compromise?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">The ransomware was reintroduced through a new phishing email</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Manual persistence removal is unreliable — additional persistence mechanisms (registry run keys, WMI subscriptions, services) were likely missed. The attacker retained access through surviving persistence and redeployed when the window was clear.</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">The patch applied after recovery was insufficient</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">The backup used for recovery was already compromised</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">An insurance agency subject to NY DFS 500 detects anomalous network traffic on Day 1. Investigation through Day 4 determines that an attacker accessed a file server containing customer NPI. When does the 72-hour notification clock to DFS begin?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Day 1 — when anomalous activity was first detected</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Day 4 — when the determination was made that a material cybersecurity event involving NPI access occurred</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Day 7 — when the investigation is fully complete and all facts are confirmed</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Notification is only required after law enforcement investigation is complete</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">A post-incident review concludes that 'the analyst should have escalated sooner — they saw the initial indicator at 2 PM but didn't escalate until 4 PM, giving the attacker 2 extra hours.' What is the primary problem with this conclusion?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">The conclusion is correct — individual accountability is the most effective incident response improvement</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">This is a blame-based conclusion that identifies the individual as the cause without examining systemic factors: was the escalation threshold clearly defined, did the indicator generate a clear alert, did the analyst have the information needed to recognize the severity, and were escalation procedures clear? Addressing these systemic factors would improve response regardless of which analyst is on duty.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Post-incident reviews should not assign any responsibility for incidents</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The 2-hour delay is within acceptable response SLAs and requires no corrective action</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">What is the correct recovery sequence after a ransomware incident to minimize the risk of re-compromise?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Restore from backup immediately to minimize downtime, then investigate whether eradication is needed</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Complete eradication of all attacker persistence from all compromised systems, then restore from a backup that predates the initial access, apply all current security patches, restore operational data, and bring online with enhanced monitoring sensitivity</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Restore from backup simultaneously with eradication to save time</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Pay the ransom to obtain decryption keys before beginning eradication</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">NY DFS 500 requires annual tabletop exercises for covered entities. What specific scenario elements should a tabletop exercise for an insurance agency include to adequately test regulatory compliance?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Technical scenarios only — how the security team detects and contains threats</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">The 72-hour DFS notification decision point (when is materiality determined, who makes the notification, what does the notification contain), the annual certification implications of the incident, documentation requirements, and the roles of legal, compliance, and business leadership — not just technical detection and response procedures</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">General cybersecurity awareness scenarios for all employees</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Vendor assessment scenarios to test third-party risk management</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg2':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg3':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg4':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg5':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+};
+
+const NARR={
+  'pg1':['The event-to-incident threshold is one of the most consequential definitions in a security operations program, because it determines what gets the attention of skilled analysts who are the scarcest resource in security operations. Setting the threshold too low — treating every suspicious event as an incident — produces alert fatigue and wastes analyst time on low-value investigations at the cost of depth on high-value ones. Setting the threshold too high — only escalating after clear confirmation of breach — allows attackers more time to achieve their objectives before a coordinated response begins. The right threshold reflects the organization\'s risk tolerance, detection capability, and response capacity. A mature organization with high detection confidence can set a higher threshold than one with less reliable detections. The threshold should be explicit, documented, and reviewed regularly as detection capabilities evolve. When in doubt between event and incident, the safer error is to escalate — a false alarm costs analyst time; a missed incident costs the organization.','Severity classification systems work best when they translate directly into concrete operational differences in response. A P1/Critical classification should automatically: page the incident commander, notify CISO and legal counsel, activate the full incident response team regardless of time of day, initiate predefined crisis communication protocols, and trigger immediate escalation to business leadership. These actions should happen through automated notification workflows, not through manual escalation decisions made under pressure during an active incident. Organizations that have well-defined severity tiers but do not have the notification automation to implement them reliably will find that the classification system is inconsistently applied. Response SLAs should also be realistic — a 15-minute response SLA for P1 incidents is meaningful only if the organization has 24/7 on-call coverage and the escalation process can actually reach responders in 15 minutes.','The first thirty minutes of incident response require parallel action rather than sequential investigation. While one analyst is confirming the incident and assessing initial scope, another should be preparing to execute containment actions if the situation warrants immediate response. The incident commander — whoever is coordinating the response — needs enough information to answer: is this real, how big is it, is it still active, and what needs to happen in the next hour? These questions do not require complete forensic analysis; they require enough evidence to make sound operational decisions. The common failure mode in incident response is over-investing in investigation before containment — analysts spending hours performing deep forensic analysis on the first compromised system while the attacker continues operating across additional systems that have not yet been identified or isolated.','The diagnostic value of initial indicators shapes the investigation strategy for the first hours of incident response. An EDR alert showing LSASS memory access by a non-system process, combined with a new scheduled task created in the same time window, is a near-certain indicator of attacker credential harvesting and persistence establishment — the investigation priority is to understand what credentials were harvested (to drive credential reset scope) and what other systems may have been reached with those credentials. A user report of encrypted files with a ransom note changes the response entirely — this is a damage limitation response, not an early detection opportunity. The investigation priorities shift to scope assessment (what systems are affected), backup integrity (can we recover), and regulatory assessment (what data was affected). Understanding what each indicator type implies about attacker progress allows investigators to prioritize the most valuable next investigative steps.'],
+  'pg2':['The containment decision under pressure is one of the most difficult judgment calls in incident response because it involves accepting certain costs (operational disruption) to prevent uncertain future costs (additional compromise or data loss). The information available at decision time is always incomplete — the scope assessment during the first hours of an incident is necessarily preliminary, and the decision to isolate based on that assessment may turn out to have been broader than necessary (if the compromise was actually more limited) or insufficient (if the compromise was more extensive). Documenting the rationale for containment decisions — what was known, what was uncertain, what the options were, and why the chosen option was selected — serves multiple purposes: it enables later review of whether the decision was sound given the information available, it demonstrates that response was thoughtful and proportionate, and it provides learning material for future incident response training.','EDR-based host isolation is the most targeted containment tool available for endpoint compromise. It cuts the network connection precisely at the host level while maintaining the management channel, allowing security analysts to continue investigating the isolated host remotely. This is significantly superior to physically removing a network cable or disabling a network interface in terms of preserving investigative access. The EDR console\'s ability to run investigation commands, pull additional forensic artifacts, and monitor process and file system activity on an isolated host provides investigation capability that would otherwise require a forensic analyst to be physically present at the machine. Cloud workload isolation through IAM credential revocation has a similar precision property: revoking the compromised service account\'s credentials prevents API calls without taking the underlying host offline, preserving investigative access to cloud API logs and activity records.','Eradication completeness is the property that most determines whether recovery is durable or whether the incident recurs within days or weeks. The most common source of eradication incompleteness is stopping after finding the first persistence mechanism and assuming it was the only one. Sophisticated attackers install multiple redundant persistence mechanisms specifically to survive partial eradication — if one is found and removed, others remain and allow reestablishment of access after the organization considers the incident resolved. Thorough eradication requires examining every compromised system for every known persistence mechanism type: registry run keys, scheduled tasks, services, WMI subscriptions, startup folder entries, browser extensions, installed software that should not be present, and any other mechanism the attacker\'s toolset is known to use. System reimaging — reinstalling from a known-good base image — is more reliable than manual persistence removal because it guarantees elimination of all persistence regardless of what was missed in manual examination.','Recovery sequence discipline prevents the failure mode where an organization recovers from backup only to find the system is re-compromised within hours or days. This happens when: eradication was incomplete and the attacker retained access that allowed re-compromise after recovery, the backup used for recovery predates the initial attack but the vulnerability exploited for initial access was not patched before recovery (allowing the same attack path to be reused), or the recovery restored compromised configuration files that contained attacker-installed backdoors. The recovery sequence that prevents these failure modes: complete eradication verification first, select a backup that predates the initial access with confidence, apply all current security patches to the recovered system before connecting it to the network, restore operational data from backup, and bring online with monitoring set to maximum sensitivity. This sequence adds time to recovery but dramatically reduces re-compromise risk.'],
+  'pg3':['NY DFS 500.17\'s 72-hour notification requirement is operationally demanding because it requires organizations to determine materiality quickly during the period when investigation is still ongoing and the full facts are not yet known. The regulation recognizes this reality by not requiring the investigation to be complete before notification — it requires notification within 72 hours of determination that the event meets the materiality threshold, with updated information to follow as investigation develops. This means that regulatory notification should not wait for investigation completion; it should occur as soon as the available evidence reasonably supports a conclusion that a material event has occurred. Organizations that wait until investigation is complete before making the notification determination frequently exceed the 72-hour window. The practice of designating a team member to continuously reassess whether the materiality threshold has been met as new information becomes available — rather than waiting for a final investigation conclusion — enables timely notification.','The annual certification timeline and incident documentation have an often-overlooked operational connection. The certification period is the preceding calendar year; the April 15 deadline requires that all incidents from January through December have been appropriately documented, addressed, and reflected in the certification. An incident that occurred in November requires documentation and remediation in time to be reflected in the April certification. For incidents that reveal compliance gaps — the attacker exploited a vulnerability that should have been patched under a required vulnerability management program — the remediation of that gap must be completed and documented before certification. The practical implication is that incident response documentation should be maintained with the dual purpose of supporting immediate response and annual certification. Security teams and compliance teams should coordinate regularly throughout the year, not only in the weeks before the April deadline.','Materiality determination is not a binary judgment — it requires applying defined criteria to the facts known at the time of assessment and making a documented decision. The criteria in NY DFS 500.17 are specific: notification to government bodies or self-regulatory organizations is itself a trigger for notification to DFS, eliminating discretion in that category. The availability, confidentiality, and integrity criteria require judgment about whether the impact on information systems or NPI is material. Organizations should define internal materiality thresholds in advance — what volume of NPI records accessed constitutes a material breach, what duration of system unavailability is material — so that determination during an incident applies predefined criteria rather than improvising under pressure. Legal counsel should be involved in materiality determination for any incident that might plausibly meet the threshold, both to ensure consistent application of criteria and to maintain attorney-client privilege over communications that might be discoverable in subsequent litigation.','Documentation during incident response is not just a regulatory obligation — it is operationally valuable for the response itself. A written timeline that is updated as events develop helps the incident response team maintain situational awareness when team members are rotating through shifts, entering the response after it has started, or managing multiple parallel workstreams. Decision logs prevent second-guessing and help responders understand what information each decision was based on. Communication logs prevent duplicate notifications and ensure that required stakeholders have received required information. The documentation also serves as the foundation for the post-incident review — a well-maintained incident log makes the retrospective significantly more efficient because the timeline and key decisions are already recorded. The tension between documenting thoroughly and maintaining response speed can be resolved by designating a dedicated documentation role on larger incidents, freeing operational responders to focus on containment and investigation.'],
+  'pg4':['The blameless post-incident review is grounded in the empirical observation that security incidents are almost never caused by a single individual making a single mistake. They result from the interaction of multiple contributing factors: an attacker with sophisticated techniques, detection capabilities that were not configured to catch the specific attack pattern, response procedures that were ambiguous about escalation thresholds, and human decision-making under pressure with incomplete information. If the post-incident review\'s conclusion is \'the analyst should have caught this sooner,\' no systemic improvement results — the same conditions will produce similar outcomes the next time. If the conclusion is \'our detection rules did not alert on this attack pattern because they were not tuned for this behavior, and we need to add specific detection rules for this technique,\' the systemic improvement prevents recurrence regardless of which individual analyst is on duty. The analyst who was on duty during the incident is not the causal factor; the missing detection rule is.','Root cause analysis reveals the distance between what security controls organizations have documented and what those controls are actually doing. An organization that has a patching policy requiring all critical vulnerabilities to be remediated within 30 days but whose actual patch compliance rate is 60% has a meaningful gap between policy and practice. An incident where the initial access was through a vulnerability that was 90 days past its remediation deadline reveals that gap explicitly. The root cause of the incident is not that the vulnerability existed — it is that the vulnerability management process failed to remediate it within the defined timeline. The corrective action must address the process failure (why are patches not being applied on schedule, what changes are needed to achieve reliable compliance) rather than just the symptom (patch this specific vulnerability). Root cause analysis that stops at the symptom prevents recurrence of the specific incident but leaves the underlying condition that will produce the next incident.','Incident response metrics provide the data needed to answer the question: is the security program improving over time? Without metrics, the annual question \'is our security program better than last year?\' can only be answered with subjective impressions. With MTTD and MTTR tracked quarterly, the answer is data-driven: MTTD decreased from an average of 14 days to 6 days, indicating that detection improvements implemented during the year produced measurable results. False positive rate decreased from 92% to 78% after alert tuning, indicating that analysts are spending less time on non-incidents. Alert volume increased while escalation rate decreased, indicating that alert triage improved without missing real incidents. These metrics require consistent measurement methodology — the same definition of MTTD applied across all incidents, with timestamps recorded at defined points — to be comparable over time. Metrics that are inconsistently collected produce trends that reflect measurement changes rather than security changes.','Tabletop exercises for insurance agencies under NY DFS 500 should be designed to test the specific regulatory obligations that the regulation imposes, not just generic incident response procedures. A tabletop scenario that does not include the 72-hour notification decision point, the annual certification implications, the third-party notification obligations, or the documentation requirements for a cybersecurity event is not adequately testing the regulatory compliance dimension of the incident response program. Tabletops are most effective when they include realistic injects that mirror the ambiguities of real incidents: partial information, evolving facts, conflicting indicators, and the pressure to make decisions before investigation is complete. The \'what would we do\' discussion that tabletops generate often surfaces assumptions and gaps in the plan that are not apparent from reading the plan document. Tabletop observations should be documented and tracked to completion as improvement items, not filed and forgotten.'],
+  'pg5':['Effective triage distinguishes events from incidents using defined thresholds, classifies incidents by severity using a tiered framework with specific response SLAs, and prioritizes actions in the first 30 minutes based on scope assessment and immediate containment need. Indicator type determines investigation priority: EDR tool indicators suggest credential harvesting scope assessment; user-reported encrypted files indicate damage limitation response mode.','Containment decisions balance security completeness against operational disruption — the decision and its rationale must be documented. EDR isolation, network quarantine, and credential revocation provide layered containment options. Eradication must identify and remove all persistence mechanisms, not just the first one found. Recovery sequence: complete eradication first, restore from pre-compromise backup, apply patches, bring online with enhanced monitoring.','NY DFS 500.17 requires 72-hour notification after determination — not after complete investigation. The clock starts at the moment of materiality determination, not detection. NPI access and system availability impact are primary materiality factors. Annual certification requires incident documentation throughout the year. Coordinate with legal counsel on documentation practices and materiality determination.','Post-incident reviews are blameless and identify systemic root causes rather than individual errors. Root cause analysis drives corrective actions that address conditions, not symptoms. MTTD, MTTR, and false positive rate measure program improvement over time. Annual tabletop exercises required under NY DFS 500 should test regulatory notification decision points and documentation requirements, not just technical response procedures.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,1,1,1,1,1];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["LSASS memory access by a non-system process is a high-confidence indicator of credential harvesting tools (Mimikatz, similar). The new scheduled task immediately after indicates persistence establishment. Combined, these indicators strongly suggest an active attacker who has obtained local admin privileges, is extracting credentials, and is establishing persistence. This is a P1/Critical incident requiring immediate escalation, scope assessment, and preparation for host isolation. Waiting for additional indicators extends the attacker's access window.","Sophisticated ransomware deployments install multiple redundant persistence mechanisms specifically to survive partial eradication. Removing only the scheduled task leaves registry run keys, services, WMI subscriptions, or other mechanisms intact. The attacker retained access through surviving persistence and redeployed when they detected the initial response. Thorough eradication requires examining all persistence mechanism types on every compromised system, or reimaging from known-good baselines which eliminates unknown persistence entirely.","NY DFS 500.17 requires notification within 72 hours of determination that a material cybersecurity event occurred — not at first detection. Detection on Day 1 triggered investigation. The material determination — that an attacker accessed NPI — was made on Day 4. The 72-hour clock begins on Day 4. The organization must notify DFS within 72 hours of Day 4 even though the investigation is ongoing. The notification does not require investigation completion; it requires a reasonable determination that the materiality threshold has been met.","Identifying the individual who 'should have acted sooner' as the root cause produces no systemic improvement — the same conditions will produce the same outcome with any analyst. The blameless post-incident review asks: why didn't escalation happen sooner? Was the threshold clearly defined? Did the alert provide enough context to assess severity? Was the escalation process clear? Answering these questions identifies systemic improvements (clearer thresholds, better alert context, clearer procedures) that improve outcomes regardless of which individual is on duty.","Restoring from backup before completing eradication risks re-compromise if: attacker persistence survives in the environment and reestablishes access to the restored system, the backup itself was compromised if the backup timestamp is after initial access, or the vulnerability used for initial access was not patched before recovery. The correct sequence ensures eradication is complete, the backup predates compromise, patches are applied before network connection, and monitoring is heightened post-recovery. This sequence takes longer but produces durable recovery.","NY DFS-specific tabletops must test the regulatory compliance dimensions of incident response, not just technical procedures. A tabletop that only tests how the security team detects and contains a threat misses the questions that create regulatory exposure: at what point is the event determined to be material, who makes that determination, who sends the notification to DFS and what does it contain, what are the annual certification implications, and how does legal counsel coordinate on documentation. These questions have specific right answers under the regulation that must be known before an incident requires them."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

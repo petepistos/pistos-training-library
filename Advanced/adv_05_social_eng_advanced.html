@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Engineering and Phishing — Advanced — Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#f0a04a;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;min-width:0;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);overflow-wrap:break-word;word-break:break-word;}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Social Engineering and Phishing — Advanced</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Advanced</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Advanced Phishing Infrastructure</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Advanced BEC and Executive Fraud</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Organizational Resilience Programs</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Technical Defenses at Advanced Level</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Advanced Phishing Infrastructure</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated phishing platform construction and evasion</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Advanced BEC and Executive Fraud</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated financial manipulation and identity fraud</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Organizational Resilience Programs</span>
+  </div>
+  <div class="mc-desc">▶ Building sustainable anti-social-engineering capability</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Technical Defenses at Advanced Level</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated technical controls against advanced social engineering</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Social Engineering and Phishing — Advanced</div>
+  <div class="home-sub">Advanced — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Advanced Phishing Infrastructure</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated phishing platform construction and evasion</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Advanced BEC and Executive Fraud</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated financial manipulation and identity fraud</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Organizational Resilience Programs</span>
+  </div>
+  <div class="mc-desc">▶ Building sustainable anti-social-engineering capability</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Technical Defenses at Advanced Level</span>
+  </div>
+  <div class="mc-desc">▶ Sophisticated technical controls against advanced social engineering</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Summary</span>
+  </div>
+  <div class="mc-desc">▶ Key concepts from this module</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Advanced Phishing Infrastructure</div>
+    <div class="ph-sub">Sophisticated phishing platform construction and evasion</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Advanced Phishing Infrastructure</text>
+      <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+        <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">PhaaS: Commercial AiTM Platforms with Dashboard + Support</text>
+        <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Commodity-priced AiTM · Credential-as-a-service resale · Same capability as nation-state for low cost</text></g>
+      <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+        <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">CDN Abuse / Domain Fronting: Traffic Hides Behind Trusted Providers</text>
+        <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">CT log monitoring detects new lookalike certs before campaign launches · Proactive block opportunity</text></g>
+      <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+        <text x="36" y="214" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Executive Targeting via Personal Channels</text>
+        <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Personal email/mobile lack corporate controls · Executive personal security hygiene program needed</text></g>
+      <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+        <text x="36" y="290" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">QR Quishing: URL Encoded in Image Bypasses Gateway Scanning</text>
+        <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Gateway QR rendering + time-of-click on mobile + user training for QR skepticism</text></g>
+    </svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Phishing-as-a-Service and commercial attack infrastructure</div>
+    <div class="blk-body">The industrialization of phishing has produced commercial Phishing-as-a-Service (PhaaS) platforms that lower the barrier to conducting sophisticated campaigns to near zero. GoPhish (open source), Evilginx2 Pro, and commercial dark-web PhaaS offerings provide pre-built phishing kits, C2 infrastructure, result tracking dashboards, and technical support — the attacker needs only to configure the target and manage the campaign. These platforms include adversary-in-the-middle proxy capabilities that defeat OTP-based MFA by default. The PhaaS market also includes credential-as-a-service offerings that monetize successfully phished credentials through immediate sale on dark web markets, enabling economic models where the phishing operator is different from the party who uses the credentials. Understanding that attackers are using commercial infrastructure with customer support and feature roadmaps changes the defensive calculus: defending against PhaaS campaigns requires the same technical rigor as defending against well-resourced nation-state operators.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">DNS-based evasion: CDN abuse and domain fronting</div>
+    <div class="blk-body">Advanced phishing campaigns use CDN (Content Delivery Network) infrastructure to make phishing pages appear to originate from trusted providers and to resist takedown. Domain fronting routes phishing traffic through a legitimate CDN's IP addresses — the DNS lookup for the phishing domain resolves to a CDN edge IP, and the actual content is served from the attacker's server through the CDN's infrastructure. From the victim's perspective and from network monitoring, the connection appears to go to the CDN provider's infrastructure (Amazon CloudFront, Cloudflare) rather than to the phishing server. Takedown is complicated because the CDN provider must investigate and remove the fronted content, not just the hosting provider. Many major CDNs have implemented technical controls to prevent domain fronting, but the technique continues to evolve. Certificate transparency monitoring that tracks newly issued TLS certificates for domains resembling the organization's legitimate domains provides early warning of phishing infrastructure deployment.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Spear phishing at CEO level: targeting executives and boards</div>
+    <div class="blk-body">Executive-targeted spear phishing campaigns are qualitatively different from broad-population phishing in their research depth and pretext sophistication. Attackers targeting a CEO or board member spend weeks gathering intelligence: SEC filings revealing the organization's financial situation and strategic priorities, LinkedIn identifying advisors and key relationships, conference speaking engagement topics revealing current strategic focus, press releases announcing partnerships and acquisitions. The resulting phishing email references the CEO's current strategic initiatives, quotes from their recent public statements, and purports to come from a known trusted relationship (law firm counsel, financial advisor, board member). These campaigns frequently target the executive's personal email accounts — which may have weaker security than corporate accounts — to establish initial access that can then pivot to corporate systems. Personal email security hygiene for executives is a distinct risk management challenge from corporate email security.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">QR code phishing and quishing: bypassing email security</div>
+    <div class="blk-body">QR code phishing — nicknamed quishing — replaces URL-based phishing links with QR codes that encode the phishing URL. Email security gateways that scan and analyze URLs in email body text typically do not render QR codes and extract the URL encoded within them, creating a detection gap. The victim scans the QR code with their mobile device, which resolves the encoded URL and navigates to the phishing page — the mobile device bypasses the corporate email gateway's URL scanning. QR codes can be embedded in email bodies, in PDF attachments, or in image files — each embedding approach adds another layer of difficulty for automated detection. Detection approaches: gateway-side QR code rendering and URL extraction (some advanced email security products now do this), time-of-click scanning for QR-embedded URLs (if the user scans with a managed mobile device that routes traffic through corporate web filtering), and user training specifically targeting QR code phishing scenarios.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Advanced BEC and Executive Fraud</div>
+    <div class="ph-sub">Sophisticated financial manipulation and identity fraud</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">BEC Attack Sophistication</text>
+      <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+        <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Long-Con BEC: Weeks of Relationship Building Before the Ask</text>
+        <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Familiarity ≠ identity verification · Be especially skeptical of familiar frequent requestors</text></g>
+      <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+        <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">M&amp;A Transaction Fraud: Legitimate Expectations Exploited</text>
+        <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Establish verification protocol at transaction kick-off — before any payment instructions are communicated</text></g>
+      <g id="pg2-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+        <text x="36" y="214" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Deep-Fake Video: Real-Time Executive Impersonation on Calls</text>
+        <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Pre-establish code word · Dual approval · Procedural controls beat detection technology</text></g>
+      <g id="pg2-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+        <text x="36" y="290" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Hybrid Insider-External: Recruit Access, Inject Transaction</text>
+        <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Correlate external comms + internal behavioral anomalies · UEBA spanning both dimensions</text></g>
+    </svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Long-con BEC: multi-month relationship building before the ask</div>
+    <div class="blk-body">Sophisticated BEC campaigns invest weeks or months in relationship building before making the fraudulent financial request. The attacker establishes a convincing alternative identity — a legitimate-seeming consultant, attorney, or vendor — and builds a communication history with the target through multiple low-stakes legitimate-seeming interactions before the high-stakes fraudulent request. The target has received multiple emails from this contact, may have had phone calls, and has developed trust through consistent, appropriate interactions. When the fraudulent request arrives, it comes from a seemingly trusted known contact rather than an unexpected stranger, dramatically increasing the likelihood of compliance. These campaigns require significant attacker resources and are typically targeted at high-value targets — organizations processing large M&A transactions, large commercial insurance policies, or significant real estate transactions — where the potential return justifies the investment.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Business email compromise in M&A transactions</div>
+    <div class="blk-body">Mergers, acquisitions, and commercial real estate transactions are high-value BEC targets because they involve large wire transfers to unfamiliar counterparties, creating the confusion that BEC exploits. The attack pattern: the attacker monitors public M&A announcements or filings, identifies the parties involved, compromises one party's email system, and intercepts communications about the transaction. At the appropriate moment — when the target is expecting payment instructions — the attacker sends spoofed or compromised-account emails providing modified bank account details. The legitimacy of the request is difficult to challenge because both parties are genuinely involved in a real transaction with real payment expectations. Controls that defeat this attack: always verify wire transfer instructions through a pre-established out-of-band channel (a phone call to a number from a prior verified communication, not the one provided in the email), and establish in the transaction kick-off communication what the verification protocol will be for any banking changes.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Deep-fake and AI video for executive impersonation</div>
+    <div class="blk-body">The evolution from AI voice cloning to AI video generation has extended executive impersonation capabilities to video calls. Deepfake video technology can now generate real-time video of a person — using training images from social media, conference presentations, and press photos — convincing enough to pass initial scrutiny in a video call. Documented incidents include fraudulent video calls where an attacker presented as a CFO or other executive to financial employees, convincing them to process wire transfers. The countermeasure for high-stakes financial approvals involving video calls: establish a code word or challenge question protocol (a specific question whose answer was established out-of-band), require dual approval from two separate participants who can independently verify the identity, and be aware that video call deepfakes can exhibit specific artifacts (unnatural eye movement, subtle synchronization between audio and lip movement, lighting inconsistencies at face boundaries) that can be detected with awareness.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Insider threat-social engineering hybrid attacks</div>
+    <div class="blk-body">Some of the most damaging financial fraud involves combinations of external social engineering and insider threat — a recruited or compromised insider who facilitates the external attack. Recruitment attacks target employees with access to financial systems, offering payment for performing seemingly minor actions: changing a bank account number in the vendor payment system, approving a transaction that appears in the queue, or providing authentication credentials for system access. The external social engineer has the target account and the fraudulent payment instructions; the recruited insider provides the system access or approval authority that the external attacker cannot obtain directly. Detecting hybrid attacks requires monitoring for both external social engineering indicators (unusual vendor communication patterns, banking change requests from new domains) and insider behavioral anomalies (access to payment systems outside normal hours, changes to vendor records not correlated with a legitimate procurement process, communications with unknown external parties about internal financial processes).</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Organizational Resilience Programs</div>
+    <div class="ph-sub">Building sustainable anti-social-engineering capability</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Resilience Program Architecture</text>
+      <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+        <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Culture Metrics: Reporting Rate · Consultation Behavior · Discovery Source</text>
+        <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">50%+ have reported in 12mo = engaged population · Visible response to every report builds culture</text></g>
+      <g id="pg3-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+        <text x="36" y="144" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Adversarial Simulation: Vishing · Physical · QR</text>
+        <text x="36" y="162" font-size="10" fill="#94a0b8" font-family="system-ui">Each type surfaces behavioral gaps email simulations cannot measure · Role-specific scenarios</text></g>
+      <g id="pg3-hl2" class="svg-hl"><rect x="20" y="196" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+        <text x="36" y="220" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Security Champions: Peer Credibility + Local Intelligence</text>
+        <text x="36" y="238" font-size="10" fill="#94a0b8" font-family="system-ui">Volunteers with genuine interest · Agency principal visibility · Actioned feedback = retention</text></g>
+      <g id="pg3-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+        <text x="36" y="296" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">ROI: Pre-Program Baseline Required for 24-Month Outcome Comparison</text>
+        <text x="36" y="314" font-size="10" fill="#94a0b8" font-family="system-ui">BEC losses · Incident discovery source · Time-to-report · Regulatory examination outcomes</text></g>
+    </svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Security culture measurement: beyond click rates</div>
+    <div class="blk-body">Security culture measurement requires going beyond phishing simulation click rates to assess the organization's actual behavioral resilience to social engineering. Advanced metrics: the reporting culture score (what fraction of employees have ever reported a suspicious communication to the security team, measured over a rolling 12 months, indicating whether the reporting norm is established), security consultation behavior (are employees consulting security before taking actions they are uncertain about, or are they acting first and asking later), incident discovery source distribution (what fraction of security incidents are discovered by employee reports versus automated tools — a high employee-discovery rate indicates a security-aware population), and false positive reporting rate (are employees reporting benign communications as suspicious — this indicates appropriate skepticism even if imperfect calibration). These metrics require active data collection from the security team and cannot be measured through simulation platforms alone.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Adversarial simulation programs: beyond generic phishing</div>
+    <div class="blk-body">Advanced security awareness programs use adversarial simulation that goes beyond generic phishing emails to test the full range of social engineering techniques employees might encounter. Vishing simulation programs conduct scripted phone calls to employees using scenarios relevant to their roles: a caller posing as IT helpdesk requesting a password reset authorization, a caller posing as a vendor representative requesting access to internal systems, a caller posing as a regulatory examiner requesting immediate document access. Physical security simulations test whether employees challenge unfamiliar visitors, follow secure document disposal procedures, and report tailgating incidents. QR code phishing simulations test whether employees scan QR codes from unexpected sources. Each simulation type measures different behavioral competencies and identifies training gaps that phishing email simulations alone cannot surface.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Security champion programs: distributed security ownership</div>
+    <div class="blk-body">Security champion programs embed security-aware employees in each business unit or department who act as the first line of security awareness, escalation, and advocacy for their team. Champions receive additional security training beyond the standard organizational program, maintain a direct communication channel with the security team, serve as the local point of contact for security questions before the security team is engaged, promote security behaviors within their team, and report concerning patterns they observe. For insurance agencies, security champions in specific roles — agency principal, office manager, lead producer — can address the security concerns specific to those functions and build credibility with colleagues through peer relationships rather than corporate security communications. The champion program requires investment in champion training and recognition, and works best when champions have visible backing from the agency principal and genuine access to the security team.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Measuring social engineering program ROI</div>
+    <div class="blk-body">Security awareness program ROI requires connecting program activities to security outcomes that have measurable business value. The measurement framework: reduction in successful phishing incidents (comparing pre-program and post-program phishing success rates from actual security incident data, not just simulation data), reduction in time-to-report for phishing incidents (faster reporting reduces damage from successful attacks), reduction in BEC-related financial losses (comparing the frequency and value of successfully executed BEC fraud before and after implementing specific financial controls), and regulatory examination outcomes (improved examination results that can be attributed to awareness program effectiveness). These measurements require multi-year program commitment and baseline data from before the program began. Organizations that cannot show measurable outcome improvement after 24 months of program investment should evaluate whether program design, measurement methodology, or organizational commitment is the constraining factor.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Technical Defenses at Advanced Level</div>
+    <div class="ph-sub">Sophisticated technical controls against advanced social engineering</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Advanced Technical Defense Stack</text>
+      <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+        <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">DMARC Enforcement: Audit All Legitimate Senders First</text>
+        <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Header analysis reveals unknown senders · SPF/DKIM for each · p=none → p=quarantine → p=reject</text></g>
+      <g id="pg4-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+        <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Remote Browser Isolation: Risk-Tiered · New Domains → Isolated</text>
+        <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Malicious content executes in cloud VM, not on device · Approved apps direct · New domains isolated</text></g>
+      <g id="pg4-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+        <text x="36" y="214" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Financial API: Webhook Signature Verification + Anomaly Detection</text>
+        <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">HMAC/asymmetric sig required on API payment requests · New payee + unusual amount = out-of-band verify</text></g>
+      <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+        <text x="36" y="290" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Deception Technology: Honeytokens = True-Positive-Only Detection</text>
+        <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Canary email · Honeytoken AD account · Fake API keys · Any alert is real — no triage burden</text></g>
+    </svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Email authentication completeness: DMARC enforcement and third-party sending</div>
+    <div class="blk-body">DMARC p=reject is the policy that prevents spoofing of the organization's primary domain, but achieving true DMARC enforcement requires addressing every legitimate email sending path. Third-party senders — marketing platforms, HR systems, helpdesk tools, financial applications — that send email from the organization's domain must be authenticated through SPF and DKIM before DMARC enforcement can be enabled without blocking legitimate mail. The migration process: audit all systems that send email using the organization's domain (email headers in the archive reveal sending IP addresses), add all legitimate sending sources to SPF records, confirm DKIM signing for each third-party sending platform, verify DMARC alignment for each source in p=none monitoring mode, resolve any alignment failures, and then advance to p=quarantine and p=reject. The audit of third-party sending sources typically reveals unexpected sending systems — marketing automation platforms configured years ago, vendor-operated customer communication systems, and legacy applications — that must be remediated before enforcement.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Browser isolation and zero-trust web access</div>
+    <div class="blk-body">Browser isolation creates a security boundary between the user's device and web content by executing all web browsing in an isolated remote environment — a cloud-hosted virtual browser — and streaming only the rendered visual output to the user's device. Malicious web content (drive-by downloads, exploit kit code, web skimmers) executes in the isolated environment rather than on the user's device, where it cannot access local file systems, credentials, or other resources. Remote Browser Isolation (RBI) implementations — available from Cloudflare, Zscaler, Menlo Security, and others — provide this isolation transparently to the user. For phishing specifically, RBI prevents credential submission to phishing pages when combined with URL categorization that routes uncategorized or newly registered domains through isolated browsing mode, while allowing direct browsing to established trusted sites. Browser isolation does not prevent all phishing — credentials submitted by a user in an isolated session are still captured — but it significantly reduces the attack surface for drive-by compromise and malicious script execution.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">API-level protection for financial workflows</div>
+    <div class="blk-body">Financial workflow automation — ACH payments, wire transfers, vendor payment processing — increasingly occurs through APIs that connect agency management systems, accounting platforms, and banking systems. These API connections are potential targets for BEC-style attacks that target the API layer rather than human decision makers. API-level protection for financial workflows: webhook authentication verification (financial APIs should verify that incoming webhook payloads are signed by the expected source using HMAC or asymmetric signature verification, preventing attackers from submitting fraudulent payment instructions through the API), transaction amount anomaly detection (flagging API-initiated transactions that deviate significantly from the historical distribution of transactions for the same payee), and out-of-band confirmation for new payees (API transactions to new vendor accounts should trigger an out-of-band verification workflow before processing). These controls address the attack scenario where an attacker who has compromised an integrated vendor system can inject fraudulent payment instructions through the API rather than through email.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Deception technology: honeytokens and canary accounts</div>
+    <div class="blk-body">Deception technology places synthetic, realistic-looking credentials and data throughout the environment — honeytoken accounts, canary email addresses, fake sensitive documents — that have no legitimate business use. Any interaction with a honeytoken is an indicator of compromise: a credential that only exists in a specific password file should never have an authentication attempt; a canary email address that is only in a specific contact list should never receive phishing email. Honeytoken accounts in Active Directory that have no assigned users generate high-fidelity alerts when credential stuffing attacks attempt to authenticate against them. Canary documents placed in file shares detect when an attacker with file access is reading documents looking for sensitive information. Fake API keys embedded in code repositories alert when a repository is exfiltrated and the keys are attempted. Deception technology provides detection without requiring the attacker to make a mistake against a real control — they trigger by engaging with what appears to be a real asset but is actually a trap.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Summary</div>
+    <div class="ph-sub">Key concepts from this module</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
+        <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">ADVANCED PHISHING</text>
+        <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">PhaaS · CDN fronting</text>
+        <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Executive personal · QR quishing</text>
+        <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">CT log monitoring for early warning</text></g>
+      <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+        <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">ADVANCED BEC</text>
+        <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Long-con · M&amp;A · Deep-fake</text>
+        <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Hybrid insider-external</text>
+        <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Procedural controls beat tech detection</text></g>
+      <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
+        <text y="-28" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">CULTURE PROGRAM</text>
+        <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Reporting score · Adversarial sim</text>
+        <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Champions · 24mo ROI baseline</text>
+        <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Outcomes not activity metrics</text></g>
+      <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+        <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">TECHNICAL DEFENSE</text>
+        <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">DMARC enforcement · RBI</text>
+        <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">API signature · Honeytokens</text>
+        <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">True-positive-only deception</text></g>
+    </svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">PhaaS with AiTM capability, CDN/domain fronting evasion, executive deep-fake video, and QR quishing bypass email gateways</div>
+    <div class="blk-body">Commercial PhaaS platforms provide AiTM capability defeating OTP MFA. Domain fronting hides phishing infrastructure behind CDN providers. Deep-fake video extends voice cloning to real-time video calls. QR quishing bypasses URL-scanning gateways by encoding URLs in QR images.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Long-con BEC, M&A transaction fraud, and hybrid insider-external attacks require procedural controls</div>
+    <div class="blk-body">Multi-month relationship building defeats standard verification skepticism. M&A transaction wire fraud exploits legitimate expectations of payment instructions. Hybrid attacks recruit insiders for system access. Controls: out-of-band verification on pre-established channels, code word protocols for video calls, dual approval for large transactions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#9b7fe8;">Security culture metrics beyond click rates; adversarial simulation includes vishing, physical, and QR; champion programs</div>
+    <div class="blk-body">Reporting culture score, consultation behavior, and incident discovery source distribution measure actual resilience. Vishing and physical simulations surface behavioral competency gaps email simulations cannot. Champion programs embed security advocacy in each business unit. ROI measurement requires 24-month baseline comparison of actual incident outcomes.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">DMARC enforcement requires third-party sending audit; RBI isolates web content; API protection and honeytokens provide advanced defense layers</div>
+    <div class="blk-body">DMARC p=reject requires SPF/DKIM alignment for all legitimate senders before enforcement. RBI executes web content in isolated cloud browsers. Financial API protection requires webhook signature verification and anomaly detection. Honeytokens and canary accounts provide high-fidelity detection through any engagement with synthetic lure assets.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Social Engineering and Phishing — Advanced</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">An organization discovers through certificate transparency log monitoring that a domain 'pistos-ip-client-login.com' received a TLS certificate 48 hours ago. The organization's legitimate domain is 'pistosip.com'. No phishing emails have yet been received. What action is appropriate?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Wait for the phishing campaign to launch before taking action — the domain may be registered for a legitimate purpose</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Block the domain in web filtering and email security controls immediately, alert employees about the likely upcoming phishing campaign targeting the organization, notify the registrar and certificate authority of the suspicious domain, and monitor for phishing emails originating from or linking to this domain. CT monitoring provides a pre-campaign window for proactive defense.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Report the domain to law enforcement and take no further action</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">The certificate could be coincidental — investigate further before taking any defensive action</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">A CFO receives a video call from what appears to be the CEO, requesting an urgent $2.4M wire transfer for a confidential acquisition. The CFO has received three emails from the CEO about this acquisition over the past two weeks and believes the relationship is established. The video caller shows the CEO's face and speaks in his voice. What is the correct response?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Process the wire transfer — the established relationship and video confirmation provide sufficient verification</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Decline to process the wire transfer during the video call. Use the pre-established code word protocol if one was set up, or disconnect and call the CEO's known phone number to verify the request. Any financial request made through an unexpected communication channel — including video — requires out-of-band verification through a pre-established channel. Deep-fake video technology can generate convincing real-time impersonation.</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Ask the caller to verify their identity by answering a personal question</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Process the wire transfer to a temporary holding account while verification is conducted</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">A security awareness program reports that phishing simulation click rates have decreased from 22% to 6% over two years. However, the security team has not seen any increase in employee phishing reports, and three BEC incidents have occurred in the same period that were discovered through financial audits rather than employee reports. How should this program be evaluated?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">The program is highly successful — 6% click rate is an excellent outcome</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The program has improved one metric (click rate) while the outcomes that matter most have not improved: employee reporting has not increased, and BEC incidents are being discovered through financial audits rather than through employee reporting. The program may have trained employees to avoid obvious simulations without building the reporting culture and skepticism that would detect real attacks. Redesign should focus on vishing simulation, BEC-specific training, and building reporting infrastructure.</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">The BEC incidents are unrelated to the awareness program — no awareness program prevents all incidents</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">The 6% click rate indicates the program has achieved its maximum possible impact</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">An organization's DMARC record is set to p=reject, but they continue to receive reports of spoofed emails appearing to come from their domain successfully reaching recipients at partner organizations. Investigation reveals that a marketing automation platform sends emails from the domain using an IP address not in the SPF record. What is happening and what is the fix?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">DMARC p=reject is not effective against all spoofing techniques — a different control is needed</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">The marketing platform's sending IP is not included in the SPF record, causing emails from this platform to fail SPF authentication. Because DMARC requires alignment of either SPF or DKIM with the From header domain, these emails fail DMARC and should be rejected by receiving servers with DMARC enforcement. However, if the receiving partners have DMARC set to p=none, they still deliver these emails. Add the marketing platform's sending IPs to the SPF record or configure DKIM signing in the marketing platform to allow legitimate emails to pass DMARC alignment.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">The SPF record has too many DNS lookups (over 10) causing SPF evaluation failures, which allows all email to pass</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Partners should enable DMARC enforcement on their domains to reject spoofed emails</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">An organization places a honeytoken Microsoft 365 account 'svc-backup-legacy@company.com' in their Active Directory with no assigned user and no legitimate business use. The account has never been used for any actual authentication. Three months after deployment, the account appears in authentication logs with a successful login from an IP address in Eastern Europe. What does this indicate?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">The account was accidentally used by a legitimate user — investigate and reset the credentials</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">A high-confidence compromise indicator: an account with no legitimate users, placed specifically as a trap, has been authenticated against from an external IP. The attacker likely obtained the credential from a compromised password file, Active Directory export, or credential harvest. Immediately treat this as an active breach: investigate what the attacker accessed after authentication, search for other evidence of attacker activity in the environment, and begin incident response procedures.</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The authentication is likely a routine security scanner and requires no action</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The Eastern European IP indicates a nation-state attack — only notify law enforcement</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">A remote browser isolation (RBI) deployment blocks all uncategorized and newly registered domains through isolated browsing. An employee attempts to access a legitimate new vendor's web portal that was deployed two weeks ago and is therefore uncategorized. The RBI system routes the access through isolated browsing, adding latency. The employee complains. What is the correct response?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Disable RBI for this employee — the security control is too disruptive</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Explain that the domain is being accessed through isolated browsing because it is newly registered — a category that disproportionately includes phishing infrastructure. Offer the employee two options: submit the vendor domain for categorization review (which will whitelist it for direct access after verification), or access the vendor portal through the isolated browser (which provides full functionality with added latency). The employee's experience illustrates both the security value (new domains are high-risk) and the operational consideration (legitimate new domains need a categorization pathway).</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Immediately whitelist the domain without verification — employee productivity takes priority</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Add all vendor domains to the SPF whitelist to bypass RBI for vendor-related browsing</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const HL_COLOR={
+  'pg1':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg2':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg3':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg4':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+  'pg5':["#f0a04a","#e05252","#9b7fe8","#4b8ef0"],
+};
+
+const NARR={
+  'pg1':['PhaaS market maturity changes the defensive framing from \'defending against sophisticated nation-state attacks\' to \'defending against sophisticated commodity attacks.\' When the technical capability to deploy AiTM proxy phishing with MFA bypass is available as a commercial service for a few hundred dollars per campaign, the barrier to sophisticated phishing is the same as the barrier to any commercial service: budget and motivation. Insurance agencies are commercially valuable targets — they hold NPI, process premium payments, and have relationships with carriers and reinsurers — which means the motivation to purchase PhaaS against them exists at the criminal organization level, not just the nation-state level. The defensive implication: the controls that were previously justified only for high-value targets (FIDO2 MFA, browser isolation, DMARC enforcement) are now necessary for any organization that represents a commercially valuable target for credential theft.','Domain fronting and CDN abuse represent the maturation of phishing infrastructure operational security — the same techniques that nation-state actors use to hide their C2 infrastructure are now applied to phishing campaigns to complicate takedown and bypass network-layer defenses. Certificate transparency monitoring has emerged as the most reliable early warning mechanism: every TLS certificate issued for any domain is logged in public certificate transparency logs, and organizations that monitor these logs for newly issued certificates containing their domain name or common variations (typosquatting, homoglyphs, subdomains of lookalike domains) can identify phishing infrastructure before campaigns launch. Automated CT log monitoring services (Cert Spotter, SSLMate, Facebook CT monitoring API) provide near-real-time alerts. When a lookalike domain certificate is discovered, organizations can proactively block the domain in web filtering, notify their email security provider, and alert employees before the campaign deploys.','Executive targeting through personal channels — LinkedIn messages, personal email accounts, personal mobile phones — reflects the attacker\'s recognition that corporate security controls are stronger than personal security controls, and that executives whose professional communications are well-protected may have personal communications that are not. The personal email account of a CEO who uses it for board communications, advisor relationships, and strategic planning discussions is a high-value target. Personal email accounts typically lack corporate email gateway filtering, DLP, and DMARC enforcement. Security programs for executive protection must address personal digital security: personal email account security (strong MFA, recovery code management), personal mobile device security, and social media privacy settings that limit OSINT accessibility. Executive protection programs that provide dedicated security support for personal digital hygiene are becoming standard for organizations that recognize the personal channel risk.','QR quishing represents an adaptation by phishing operators to specific defensive improvements in email security — when gateways improved URL extraction and scanning, attackers shifted to encoding URLs in images (including QR codes) that extract gateways cannot easily process. This pattern of attacker adaptation to defensive improvements is consistent across phishing infrastructure evolution: as each defensive measure matures, attackers shift to an adjacent technique that the defense does not cover. The appropriate defensive response to quishing is not simply adding QR code URL extraction to the email gateway — though that is valuable — but also deploying time-of-click scanning for QR-sourced URLs on managed mobile devices, and training users specifically on the quishing pattern so they apply URL inspection habits to QR-sourced links rather than treating QR codes as inherently trustworthy.'],
+  'pg2':['Long-con BEC campaigns reveal the fundamental weakness of verification processes that rely on familiarity and trust rather than identity verification. A target who has exchanged six emails, two phone calls, and one meeting with an apparent attorney over four weeks has developed familiarity that feels like trust — but familiarity is not the same as verified identity. The attacker who invested four weeks building the relationship is exploiting the human psychological tendency to equate familiarity with trustworthiness. The procedural defense — out-of-band verification for any financial transaction regardless of how familiar the requester seems — explicitly breaks this psychological exploitation by requiring identity verification through a channel established before the current communication. The counter-intuitive security practice: be especially skeptical of requests from people you have been communicating with frequently, because long-con attackers invest specifically in building familiarity before making the fraudulent ask.','M&A transaction security requires security controls embedded in the transaction process itself, not just in the technical infrastructure. The most effective control is establishing a communication security protocol at the transaction kick-off meeting — before any payment instructions are communicated — that specifies: all payment instructions will be delivered through a specific secure portal or verified by a specific phone number, any change to payment instructions requires re-verification through the established channel regardless of urgency, and any request that bypasses the established protocol should be treated as a potential fraud attempt. When this protocol is established in writing at the beginning of the transaction, employees who receive a subsequent email claiming an \'urgent\' payment instruction change have a documented procedure to follow that explicitly requires verification — the urgency framing loses its effectiveness because the protocol was designed specifically to resist it.','Deep-fake video attacks on video calls represent an attack surface that most organizations have not yet incorporated into their security awareness and procedural frameworks. The practical countermeasure is not sophisticated deep-fake detection technology — which is in an arms race with generation technology — but rather procedural controls that do not depend on detecting the fake: establishing code word protocols for high-stakes video calls before the call occurs (a specific word or phrase known to both parties that cannot be guessed from public information), requiring dual approval from two independent participants who can verify the identity independently, and treating any video call that requests immediate financial action without allowing time for verification as a procedural violation regardless of who appears to be on the call. These procedural controls work regardless of how convincing the deep-fake video becomes.','The insider-external hybrid attack exploits the separation between external security monitoring (focused on external threats) and insider threat monitoring (focused on internal anomalies) by having the external attacker provide the intent and the insider provide the access. Detection requires monitoring that spans both dimensions: external communication patterns of employees with payment system access (is this employee receiving unusual external communications about internal financial processes?), behavioral anomalies in financial systems (vendor record changes not correlated with procurement activity, transactions outside normal parameters initiated by specific users), and correlation between external social engineering indicators and internal system anomalies. UEBA platforms that correlate both external communication metadata and internal system access patterns are better positioned to detect these hybrid attacks than security tools that operate in only one domain.'],
+  'pg3':['Security culture measurement is the hardest dimension of security awareness programs to get right because most of the metrics that are easy to collect (simulation click rates, training completion rates) do not reliably predict actual security behavior during real attacks. The reporting culture score is perhaps the most predictive single metric: an organization where more than 50% of employees have reported a suspicious communication in the past 12 months has a population that is actively engaged with security rather than passively aware of it. Building reporting culture requires explicit investment: visible response to every report (even false positives receive acknowledgment and context), no punitive consequences for reporting or for having initially fallen for a simulation, recognition programs that celebrate reporters, and regular communication about what happened as a result of employee reports. These investments require organizational commitment that goes beyond security team effort — they require visible leadership support and HR alignment.','Adversarial simulation beyond phishing email provides coverage for the attack surface that phishing simulations leave unmeasured. Vishing simulations are particularly valuable for insurance agencies because phone-based social engineering — impersonating helpdesk, vendor representatives, or regulators — is specifically relevant to the financial services sector\'s regulatory environment. Employees who know to be skeptical of unexpected emails may not apply the same skepticism to phone calls, especially from callers with specific knowledge of the organization\'s systems and vendors. Physical security simulations reveal whether visitor management procedures are actually followed or whether security theater exists at the front desk while the actual procedure is to hold the door for anyone who looks like they belong. Each simulation type surfaces behavioral gaps that are invisible in email-only programs and enables targeted remediation of the specific behaviors that represent the most likely real-world attack paths.','Security champion programs work best when champions are volunteers with genuine interest in security rather than assigned responsibilities that are added to unwilling employees. The champion\'s effectiveness comes from peer credibility — colleagues are more likely to adopt security behaviors that they see modeled by peers they respect than to comply with security policies from a distant IT organization. The champion\'s value to the security team comes from intelligence: a champion in the accounting department who knows that a vendor just requested an unusual banking change and routes that intelligence to the security team before the payment is processed is providing detection capability that no technical tool can replicate. The program investment — additional training, regular meetings with the security team, recognition for champion contributions — must be proportionate to the intelligence and culture-building value the champions provide. Champions who feel their contributions are recognized and their feedback is incorporated become advocates; those who feel their role is purely ceremonial disengage quickly.','Security awareness program ROI measurement requires a discipline that most programs avoid: measuring outcomes before the program begins, not just tracking program activities. An organization that wants to show that their awareness program reduced BEC fraud must have pre-program baseline data on BEC incident frequency and financial losses. An organization that wants to show that their program improved phishing reporting rates must have pre-program data on actual phishing incident discovery methods. Without baseline measurement, programs can only show that employees completed training and clicked less on simulations — metrics that correlate imperfectly with actual security outcomes. The measurement investment is justified by the governance value: program sponsors who can demonstrate measurable security outcome improvement (not just activity completion) have a defensible case for continued investment, while those who can only show activity metrics face recurring budget challenges.'],
+  'pg4':['DMARC enforcement audits consistently reveal the same categories of missing sending sources: cloud-based marketing platforms that were configured to send from the corporate domain for brand consistency, HR information systems that send onboarding and benefits communications using the corporate domain, helpdesk platforms that send notification emails from the domain, financial systems that send invoice and payment confirmation emails, and vendor-operated customer communication systems configured years ago by vendor implementation teams. Each of these systems typically requires: adding the sending IP ranges to the SPF record, configuring DKIM signing in the sending platform, and verifying that the DKIM signing domain matches the From header domain for DMARC alignment. The audit process — examining email headers in the archive to identify all sending IPs for the domain — takes one to two weeks for most organizations and consistently finds sources that email administrators did not know existed. This audit is the prerequisite for DMARC enforcement.','Browser isolation\'s most significant deployment consideration is the user experience impact on productivity applications. Organizations that isolate all web browsing — including web-based productivity applications that employees use constantly — generate friction that drives workarounds rather than security. The effective deployment model uses risk-based isolation: web applications on the corporate approved list are accessed directly without isolation, while uncategorized websites, newly registered domains, and sites in high-risk categories are accessed through isolated browsing. This risk-tiered model provides the security benefit for the highest-risk browsing scenarios while minimizing friction for productive web application use. The category of \'newly registered domains\' is particularly valuable for isolation: a significant fraction of phishing infrastructure is deployed on domains registered within the past 30 days, and isolating access to new domains catches phishing campaigns at the moment of deployment before threat intelligence has identified the specific domains.','Financial API security is an emerging area where most organizations have not applied the same rigor as they have to human-facing financial controls. The attack scenario: an attacker who compromises an integrated accounting software vendor can inject fraudulent payment records through the API connection between the accounting software and the organization\'s banking portal, bypassing the email-based BEC controls that focused on protecting human authorization. Webhook signature verification — where the banking API requires that incoming payment requests include a cryptographic signature from the authorized accounting software — prevents injection of unauthorized payment instructions through the API channel. Transaction anomaly detection that flags payments to new payees, payments outside historical amount distributions for specific payees, and payments outside normal business hours provides a behavioral layer that catches injections that have valid signatures but unusual transaction characteristics. Financial API security should be part of the vendor security assessment for any software integrated with payment systems.','Deception technology\'s value proposition is uniquely compelling: every alert is a true positive. A honeytoken credential that is only stored in a specific backup system will only generate an authentication alert if something read that backup system and used what it found. There is no legitimate reason to authenticate using that credential; therefore any alert is real. This high-fidelity detection characteristic — in contrast to behavioral analytics that generate false positives — makes deception technology worth considering even for organizations with limited analyst capacity. Honeytokens require minimal ongoing maintenance once deployed and generate alerts that require investigation rather than triage. For insurance agencies, practical honeytokens include: dedicated email addresses in the agency management system contact list that only exist for canary purposes, synthetic API keys in code repositories (that generate alerts when used), and honeytoken credentials in backup configurations (that generate alerts when authentication is attempted). Each provides detection for specific attack paths with no false positive noise.'],
+  'pg5':['Commercial PhaaS platforms make AiTM capability commodity-priced. CT log monitoring detects phishing infrastructure at registration before campaigns launch. Executive personal email and mobile are attack vectors that corporate security controls do not cover. QR quishing bypasses URL-scanning gateways. Each requires specific countermeasures beyond standard email security.','Multi-month long-con BEC defeats familiarity-based verification. M&A transaction security requires establishing verification protocols at transaction kick-off. Deep-fake video requires code word and dual-approval procedural controls. Hybrid insider-external attacks require correlation across both external communication and internal behavioral monitoring.','Reporting culture score (fraction who have ever reported) is more predictive than click rate. Vishing and physical simulation surface behavioral gaps email-only programs miss. Security champion programs provide peer credibility and local intelligence. 24-month baseline comparison is required to demonstrate outcome-level ROI.','DMARC enforcement requires audit of all legitimate sending sources before p=reject. RBI uses risk-tiered isolation with new/uncategorized domains through isolated browsing. Financial API requires webhook signature verification and transaction anomaly detection. Honeytokens provide true-positive-only detection for specific attack path indicators.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,1,1,1,1,1];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["CT log monitoring provides advance warning of phishing infrastructure before campaigns launch. A domain combining the organization's name with login-related terms, registered 48 hours ago, is almost certainly phishing infrastructure. The correct response is immediate defensive action: block in web filtering and email security to protect against the anticipated campaign, alert employees so they recognize and report emails from this domain, and notify the registrar to initiate potential takedown. CT monitoring's value is precisely this proactive window — acting after the first phishing email is received eliminates the advance-warning benefit.","Deep-fake video technology can generate convincing real-time impersonation of known individuals. Video confirmation is not sufficient verification for large financial transactions. The correct response uses procedural controls that do not depend on detecting the fake: verify through a pre-established channel (call the CEO's known phone number, not a number provided in the call) or use a pre-established code word. The fact that a relationship exists through prior emails is part of the long-con setup, not evidence of legitimacy. All large financial requests require out-of-band verification regardless of how the requester is presenting.","Security awareness program evaluation must look beyond activity metrics to security outcomes. A 6% click rate with no increase in reporting and BEC incidents discovered through financial audits rather than employee reports indicates that the program has trained employees to avoid obvious phishing simulations but has not built the reporting culture or BEC-specific behavioral awareness needed to address the actual threat profile. BEC discovered through financial audits means employees were not recognizing or reporting the attacks as they occurred — a fundamental security behavior gap that the current program is not addressing. Redesign should target the specific failure modes: reporting culture building, BEC-specific scenario training, and vishing simulation.","DMARC enforcement depends on the receiving server enforcing DMARC policy — if a partner organization has their DMARC checking disabled or set to p=none, they will deliver emails that fail DMARC authentication regardless of the sending organization's p=reject policy. The immediate fix for the marketing platform issue is to add its IPs to the SPF record or configure DKIM signing so the platform's emails pass DMARC alignment, allowing them to be delivered normally. Separately, the organization cannot control partner DMARC enforcement — they can share their DMARC policy in partner communications but cannot force recipients to enforce it.","Honeytoken accounts provide true-positive detection: any authentication event against an account that has no legitimate users is a compromise indicator by definition. The attacker obtained the honeytoken credential through some compromise path (credential harvest from memory, export of Active Directory data, or breach of a backup file containing credentials) and attempted to use it. The successful authentication from an external IP confirms the account was tested. Immediate incident response is required: investigate the breach path, assess what the attacker accessed after authentication, scope the compromise, and contain.","RBI's risk-tiered design routes newly registered domains through isolation precisely because this category has high phishing infrastructure density. The employee's experience with a legitimate new vendor portal is the expected false positive of this approach — new legitimate domains are treated the same as new malicious domains until categorized. The correct response acknowledges both the security rationale and the operational impact, and provides a clear pathway (categorization request) that resolves the issue for legitimate sites. The categorization pathway is a necessary component of any RBI deployment — without it, every new legitimate domain generates support tickets and workaround pressure."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
+  if(panel)panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz(){
+  answers_given=new Array(N_QUIZ).fill(null);
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});
+  document.querySelectorAll('.q-exp').forEach(e=>{e.classList.remove('show');e.textContent='';});
+  document.querySelectorAll('.q-card').forEach(c=>c.style.borderLeftColor='transparent');
+  document.getElementById('scorePanel').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

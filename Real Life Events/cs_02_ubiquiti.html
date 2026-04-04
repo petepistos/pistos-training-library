@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Study: Ubiquiti — $46 Million Lost to a Fake Email — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
+  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
+  --primary:#f0a04a;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
+/* TOPBAR */
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-logo{display:flex;align-items:center;gap:12px;}
+.topbar-logo img{height:38px;width:auto;}
+.topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
+.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
+.modules-btn:hover{background:var(--surface2);}
+/* NAV */
+.nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
+.nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
+.nav-pill:hover{background:var(--surface2);color:var(--text);}
+.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
+/* MENU */
+.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
+.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
+.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
+.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
+.menu-card:hover{transform:translateX(-2px);}
+.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
+.mc-title{font-size:13px;font-weight:600;color:var(--text);}
+.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
+/* PAGE HEADER */
+.page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-sub{font-size:12px;color:var(--muted);flex:1;}
+.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn:hover{opacity:.88;}
+/* NARRATION BAR */
+.narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
+.narr-bar.active{display:flex;}
+.narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
+.narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+/* TWO-COLUMN */
+.page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
+.col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
+.svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.svg-pad svg{max-width:100%;max-height:100%;}
+.col-content{flex:1;min-width:0;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+/* BLOCKS */
+.hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
+.hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
+.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-bar{width:4px;flex-shrink:0;}
+.hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
+.blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
+.blk-body{font-size:13px;line-height:1.65;color:var(--muted);overflow-wrap:break-word;word-break:break-word;}
+/* SVG highlight */
+.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
+.svg-hl.lit .hl-rect{opacity:1;}
+/* QUIZ */
+#quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
+.quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
+.q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
+.q-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
+.q-opt:hover{background:var(--surface2);border-color:var(--primary);}
+.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
+.q-exp.show{display:block;}
+/* SCORE */
+.score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
+.score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
+.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
+/* HOME */
+#home{padding:40px 28px;}
+.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
+.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+/* MOBILE */
+@media(max-width:700px){
+  .page-cols{flex-direction:column;height:auto;}
+  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <div>
+      <div class="topbar-title">Case Study: Ubiquiti — $46 Million Lost to a Fake Email</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-level">Case Study</span>
+    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar">
+  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
+  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Happened</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+</div>
+
+<div class="narr-bar" id="narrBar">
+  <div class="narr-text" id="narrText">Narration playing…</div>
+  <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="menu-panel" id="menuPanel">
+  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
+  <div class="menu-heading">MODULE CONTENTS</div>
+  
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">What Happened</span>
+  </div>
+  <div class="mc-desc">▶ 2015 — a finance employee wired $46.7M to criminal accounts</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">How It Happened</span>
+  </div>
+  <div class="mc-desc">▶ Impersonation, urgency, and a wire transfer without verification</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Root Cause</span>
+  </div>
+  <div class="mc-desc">▶ No verification process for large wire transfers</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">The Loss</span>
+  </div>
+  <div class="mc-desc">▶ $46.7 million wired, $38.6 million never recovered</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Lessons Learned</span>
+  </div>
+  <div class="mc-desc">▶ What Ubiquiti teaches about social engineering and financial controls</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div>
+</div>
+
+<div id="home">
+  <div class="home-title">Case Study: Ubiquiti — $46 Million Lost to a Fake Email</div>
+  <div class="home-sub">Case Study — Select a section below to begin</div>
+  <div class="home-grid">
+<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">What Happened</span>
+  </div>
+  <div class="mc-desc">▶ 2015 — a finance employee wired $46.7M to criminal accounts</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">How It Happened</span>
+  </div>
+  <div class="mc-desc">▶ Impersonation, urgency, and a wire transfer without verification</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Root Cause</span>
+  </div>
+  <div class="mc-desc">▶ No verification process for large wire transfers</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">The Loss</span>
+  </div>
+  <div class="mc-desc">▶ $46.7 million wired, $38.6 million never recovered</div>
+</div>
+<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#f0a04a;"></span>
+    <span class="mc-title">Lessons Learned</span>
+  </div>
+  <div class="mc-desc">▶ What Ubiquiti teaches about social engineering and financial controls</div>
+</div>
+<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
+  <div class="mc-top">
+    <span class="mc-num" style="color:#2a9d8f;">Q</span>
+    <span class="mc-title">Knowledge Check</span>
+  </div>
+  <div class="mc-desc">▶ 6 questions — test your understanding</div>
+</div></div>
+</div>
+
+
+<div class="page" id="pg1" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — What Happened</div>
+    <div class="ph-sub">2015 — a finance employee wired $46.7M to criminal accounts</div>
+    <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Ubiquiti BEC — Incident Overview</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">2015 · $46.7M wired to criminal accounts</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Impersonated CEO + outside counsel · No verification made</text>
+    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Hong Kong · Russia · Hungary · China · Poland</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="58" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">$8.1M recovered · $38.6M permanently lost</text>
+    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">Disclosed in SEC filings · Stock price declined</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="58" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">No malware · No hacking · Just a convincing email</text>
+    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Authority + urgency + secrecy = BEC formula</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="278" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">FBI IC3: $50B+ in BEC losses since 2013</text>
+    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">Highest dollar cybercrime category — every year</text>
+    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Exceeds ransomware + data breach losses combined</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg1">
+      
+<div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">The wire transfer that should not have happened</div>
+    <div class="blk-body">In 2015, Ubiquiti Networks — a networking equipment manufacturer — lost $46.7 million in a business email compromise (BEC) attack. A Ubiquiti finance employee received emails appearing to come from a company executive and from Ubiquiti's outside legal counsel, instructing the employee to initiate wire transfers to bank accounts as part of a confidential acquisition transaction. The employee complied, initiating multiple wire transfers totaling $46.7 million to accounts in Hong Kong, Russia, Hungary, China, and Poland. The transfers went unquestioned. The accounts were controlled by criminals. Ubiquiti discovered the fraud only after the fact.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">What BEC is and why it works</div>
+    <div class="blk-body">Business email compromise is fraud conducted through email impersonation. The attacker does not need to hack anything — they need to be convincing. In the Ubiquiti attack, the attackers impersonated senior executives and legal counsel with sufficient credibility to cause a finance employee to initiate tens of millions of dollars in wire transfers. The psychology that makes BEC work: authority (the request appears to come from the CEO or senior management), urgency (the transaction is time-sensitive), secrecy (the employee is asked to keep the transaction confidential, preventing consultation with colleagues), and legitimacy (the context — an acquisition — is a plausible reason for unusual wire transfers).</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Ubiquiti was not uniquely vulnerable</div>
+    <div class="blk-body">The Ubiquiti BEC attack was not the result of any unusual technical vulnerability or organizational dysfunction. Finance employees who process wire transfers are the targets of BEC attacks at companies of every size, every industry, and every level of security sophistication. BEC is the most costly cybercrime category tracked by the FBI — the FBI's Internet Crime Complaint Center (IC3) has reported annual BEC losses exceeding $2 billion every year since 2020. Ubiquiti is among the most prominent cases because of the magnitude of the loss and the company's subsequent disclosure, but the attack pattern — fake executive email, wire transfer instruction, bank account in foreign jurisdiction — has been repeated thousands of times against organizations worldwide.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">How much was recovered</div>
+    <div class="blk-body">Ubiquiti worked with law enforcement and financial regulators to attempt to recover the transferred funds. Of the $46.7 million transferred, approximately $8.1 million was recovered through freezing of accounts and international law enforcement coordination. The remaining $38.6 million was unrecovered — transferred through a chain of accounts in multiple jurisdictions, converted to other assets, or simply moved beyond the reach of the recovery effort. The $38.6 million permanent loss was disclosed in Ubiquiti's SEC filings, making it one of the largest publicly disclosed BEC losses on record at the time.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg2" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — How It Happened</div>
+    <div class="ph-sub">Impersonation, urgency, and a wire transfer without verification</div>
+    <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="20" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">BEC Attack Chain</text>
+  <rect x="20" y="32" width="480" height="42" rx="6" fill="#2a2010" stroke="#f0a04a" stroke-width="1.5"/>
+  <text x="260" y="50" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">Research: LinkedIn + website + SEC filings</text>
+  <text x="260" y="64" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Identify finance staff + executive identities + legal counsel</text>
+  <line x1="260" y1="74" x2="260" y2="90" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="90" width="480" height="48" rx="6" fill="#2a2010" stroke="#f0a04a" stroke-width="1.5"/>
+  <text x="260" y="108" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">Email 1: "CEO" — confidential acquisition, wire $X</text>
+  <text x="260" y="122" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Authority · Urgency · Keep this confidential</text>
+  <text x="260" y="134" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Confidentiality blocks employee from verifying</text>
+  <line x1="260" y1="138" x2="260" y2="154" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="154" width="480" height="36" rx="6" fill="#2a2010" stroke="#e05252" stroke-width="1.5"/>
+  <text x="260" y="172" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">Email 2: "Legal counsel" — bank details + reinforcement</text>
+  <text x="260" y="186" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Two authority figures = harder to question</text>
+  <line x1="260" y1="190" x2="260" y2="206" stroke="#e05252" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="206" width="480" height="48" rx="6" fill="#2a2010" stroke="#e05252" stroke-width="1.5"/>
+  <text x="260" y="224" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">Multiple wire transfers: $46.7M to foreign accounts</text>
+  <text x="260" y="238" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">No verification call · No dual control · Funds gone</text>
+  <text x="260" y="312" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Total attacker investment: a few hours of research + email</text>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg2">
+      
+<div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Step 1: Research and impersonation setup</div>
+    <div class="blk-body">Before sending a single email, the attackers researched Ubiquiti. They identified the company's finance personnel — the people authorized to initiate wire transfers. They identified senior executives whose authority would be sufficient to authorize large transfers. They identified outside legal counsel whose involvement would add legitimacy to an unusual transaction. This research is conducted through LinkedIn, corporate websites, press releases, and public filings — all publicly available information. The attackers then established email addresses that convincingly impersonated these identities, either by registering look-alike domains (ubiquti.com instead of ubnt.com) or by spoofing email headers to display legitimate-looking sender information.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Step 2: The initial email — authority + urgency + secrecy</div>
+    <div class="blk-body">The finance employee received an email appearing to come from a senior executive, describing a confidential acquisition and requesting wire transfers to specific bank accounts. The email included several social engineering elements: the instruction came from apparent authority (the CEO or CFO), the transaction was described as time-sensitive, the employee was instructed to keep the transaction confidential — which prevented them from verifying with colleagues, and the context (acquisition) was plausible for a technology company and explained why the accounts were in foreign jurisdictions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Step 3: Emails from 'legal counsel' provided reinforcement</div>
+    <div class="blk-body">The attackers followed up with emails appearing to come from outside legal counsel, providing bank account details and additional instructions. The involvement of a second authority figure — legal counsel — provided reinforcement that the transaction was legitimate and properly authorized. The multi-actor impersonation is a BEC sophistication technique: it is harder to dismiss a request that appears to have been authorized by multiple senior people than one that appears to come from a single source. The finance employee, presented with consistent instructions from apparent executive authority and legal counsel, initiated the transfers.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Step 4: Multiple transfers before discovery</div>
+    <div class="blk-body">The fraud was not discovered after the first transfer — multiple transfers were made before anyone identified the pattern as fraudulent. Wire transfers, once executed, are extremely difficult to reverse: the funds move almost immediately to the recipient bank, and recovery depends on the recipient bank freezing the account before the funds are withdrawn or transferred again. Each successful transfer emboldened the attackers to request additional transfers. By the time the fraud was identified, $46.7 million had been wired across multiple jurisdictions, making recovery exponentially more difficult.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg3" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Root Cause</div>
+    <div class="ph-sub">No verification process for large wire transfers</div>
+    <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Control Failures</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">No out-of-band verification for large transfers</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">A 2-minute phone call to real exec would have stopped it</text>
+    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Threshold + call known number + document confirmation</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="58" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">No dual-control requirement</text>
+    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">Single employee authorized $46.7M in transfers alone</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="58" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Confidentiality instruction blocked all verification paths</text>
+    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Train: no legitimate exec asks you to hide a transaction</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="68" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="278" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">DMARC not enforced · Look-alike domain not caught</text>
+    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">p=reject prevents domain spoofing · Train visual inspection</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg3">
+      
+<div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Failure 1: No out-of-band verification for large transfers</div>
+    <div class="blk-body">The single most impactful missing control was a verification process: for any wire transfer above a defined threshold, the finance employee must verbally confirm the instruction with the apparent requestor by calling a known phone number — not a number provided in the request email. A simple phone call to the CFO using the number on file would have immediately revealed that the CFO had not sent the email. Out-of-band verification is called 'out-of-band' because it uses a different communication channel than the one that may be compromised: if the email is fraudulent, a phone call to a known number provides independent verification that the email channel cannot undermine.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Failure 2: No dual-control requirement for large transfers</div>
+    <div class="blk-body">Best practice for large wire transfers requires dual control — two authorized individuals must approve the transaction before it is executed. If the Ubiquiti finance employee was the only person required to authorize the transfers, a single point of social engineering pressure was sufficient to execute $46.7 million in fraudulent transfers. A dual-control requirement means the attacker must simultaneously deceive two independent employees — significantly harder than deceiving one. Most banking relationships support dual-control requirements for wire transfers above defined thresholds; organizations must specifically configure and enforce this control.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Failure 3: Confidentiality instruction prevented verification</div>
+    <div class="blk-body">The 'keep this confidential' instruction in the fraudulent email was a deliberate social engineering technique to prevent the target from consulting with colleagues. A finance employee who discusses an unusual wire transfer request with a manager, a compliance officer, or the actual executive being impersonated has multiple opportunities to identify the fraud before executing it. Organizations should establish explicitly that no financial transaction — regardless of who appears to be requesting it — should be kept secret from the employee's manager or from the finance team's normal approval process. Confidentiality instructions in wire transfer requests are a BEC red flag.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">Failure 4: Email authentication did not prevent impersonation</div>
+    <div class="blk-body">The attackers were able to send emails that appeared to come from Ubiquiti executives either because Ubiquiti's email authentication (SPF, DKIM, DMARC) was not fully configured, or because the attackers used look-alike domains that were close enough to be convincing. DMARC configured to reject policy prevents spoofing of the organization's own domain — an attacker cannot send an email that appears to come from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9dfef8f2ddfef2f0edfcf3e4b3fef2f0">[email&#160;protected]</a> if DMARC p=reject is configured. Look-alike domain attacks (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167573795675267b6677786f3875797b">[email&#160;protected]</a>) are harder to prevent technically and require training employees to check email addresses carefully.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg4" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — The Loss</div>
+    <div class="ph-sub">$46.7 million wired, $38.6 million never recovered</div>
+    <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Impact Summary</text>
+  <g id="pg4-hl0" class="svg-hl" transform="translate(140,104)">
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text y="-36" text-anchor="middle" font-size="20" fill="#f0a04a" font-weight="700" font-family="system-ui">$46.7M</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Transferred to criminals</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">$8.1M recovered (17%)</text>
+    <text y="22" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">$38.6M permanent loss</text>
+    <text y="46" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">SEC material event disclosure</text></g>
+  <g id="pg4-hl1" class="svg-hl" transform="translate(380,104)">
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <text y="-36" text-anchor="middle" font-size="16" fill="#e05252" font-weight="700" font-family="system-ui">Stock Drop</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Market reaction to</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">missing internal controls</text>
+    <text y="26" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Not just the loss —</text>
+    <text y="44" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">what it revealed</text></g>
+  <g id="pg4-hl2" class="svg-hl" transform="translate(140,258)">
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="13" fill="#4b8ef0" font-weight="700" font-family="system-ui">17% Recovery</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Speed matters — funds move fast</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">FBI IC3 + FinCEN coordination</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Pre-establish bank fraud contact</text></g>
+  <g id="pg4-hl3" class="svg-hl" transform="translate(380,258)">
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="13" fill="#6db86d" font-weight="700" font-family="system-ui">$50B+ BEC Total</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">FBI IC3 since 2013</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">#1 cybercrime loss category</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">No malware required</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg4">
+      
+<div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">The financial loss: $38.6 million permanent</div>
+    <div class="blk-body">Of the $46.7 million transferred, only $8.1 million was recovered through law enforcement and international account freezing. The remaining $38.6 million was permanently lost — an amount that was significant relative to Ubiquiti's size as a company. The loss was disclosed in Ubiquiti's SEC filings as a material adverse event. The SEC disclosure requirement for material losses reflects the regulatory principle that investors have a right to know about events that materially affect a public company's financial position. The disclosure made the Ubiquiti BEC one of the most prominent cases in the FBI's BEC case catalog.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Reputational impact: investor and market response</div>
+    <div class="blk-body">The SEC disclosure of a $46.7 million wire fraud loss caused Ubiquiti's stock price to decline significantly. Investors' reaction reflected concerns about the company's internal financial controls, specifically that a single finance employee could authorize nearly $47 million in wire transfers based on email instructions alone, without verification or dual-control approval. The reputational impact extended beyond the immediate stock price decline: the case became a widely cited example of BEC risk, and Ubiquiti's name has appeared in security awareness training materials ever since as a cautionary case study.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">The recovery effort: law enforcement and international coordination</div>
+    <div class="blk-body">The recovery of $8.1 million was achieved through rapid reporting to law enforcement and coordination with foreign banking regulators to freeze accounts before funds were fully dispersed. The recovery rate — approximately 17% of the total — reflects both the speed of the recovery effort and the structural challenge of recovering wire transfers from accounts in multiple foreign jurisdictions. Wire transfers are designed to be irreversible; the financial system's recovery mechanisms depend on speed (freezing accounts before funds move again) and international legal cooperation (getting foreign banks and regulators to cooperate). Both become harder with time and with geographic spread across multiple jurisdictions.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">BEC as the leading cybercrime loss category</div>
+    <div class="blk-body">Ubiquiti's $46.7 million loss is notable but not exceptional in the context of the overall BEC problem. The FBI's IC3 has tracked BEC losses totaling over $50 billion since 2013. Single BEC incidents in excess of $100 million have been reported. The manufacturing, real estate, and financial services sectors are the most targeted. BEC attacks require no malware, no technical expertise, and no network access — they require only research, convincing impersonation, and a target who lacks the verification controls to identify fraudulent instructions. The FBI consistently identifies BEC as the highest-dollar cybercrime category, exceeding ransomware losses by a wide margin.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg5" style="display:none;">
+  <div class="page-header">
+    <div class="ph-section"> — Lessons Learned</div>
+    <div class="ph-sub">What Ubiquiti teaches about social engineering and financial controls</div>
+    <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
+  </div>
+  <div class="page-cols">
+    <div class="col-diagram">
+      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Key Lessons — Ubiquiti / BEC</text>
+  <g id="pg5-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Out-of-band verification defeats BEC</text>
+    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Call known number · Any transfer above threshold · Always</text></g>
+  <g id="pg5-hl1" class="svg-hl"><rect x="20" y="108" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Dual control: two approvals, separate channels</text>
+    <text x="36" y="148" font-size="10" fill="#94a0b8" font-family="system-ui">No single employee authorizes large transfers alone</text></g>
+  <g id="pg5-hl2" class="svg-hl"><rect x="20" y="182" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
+    <text x="36" y="206" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Confidentiality in wire request = BEC red flag</text>
+    <text x="36" y="222" font-size="10" fill="#94a0b8" font-family="system-ui">Escalate immediately · Legit execs don't ask you to hide it</text></g>
+  <g id="pg5-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="62" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">DMARC p=reject + train visual inspection</text>
+    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">Prevent domain spoofing · Catch look-alike domains</text></g>
+</svg></div>
+    </div>
+    <div class="col-content" id="cc-pg5">
+      
+<div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
+  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#f0a04a;">Out-of-band verbal verification is mandatory for large wire transfers</div>
+    <div class="blk-body">Any wire transfer above a defined threshold must be verbally confirmed by calling the apparent requestor at a known phone number — not a number provided in the request. This single control defeats BEC. The call takes two minutes. The $46.7 million loss would not have happened.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
+  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#e05252;">Dual control: two independent approvals for every large transfer</div>
+    <div class="blk-body">No single employee should be able to authorize a large wire transfer alone. Two independent approvals — using separate communication channels — make simultaneous deception of both approvers exponentially harder. Configure dual-control requirements with your bank.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
+  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#4b8ef0;">Confidentiality instructions in financial requests are a red flag</div>
+    <div class="blk-body">No legitimate executive will instruct you to keep a financial transaction secret from your manager or the normal approval process. Train this as an explicit BEC indicator. Any confidentiality instruction in a wire transfer request should trigger immediate escalation.</div>
+  </div>
+</div>
+<div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
+  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-inner">
+    <div class="blk-title" style="color:#6db86d;">DMARC p=reject prevents your domain from being spoofed</div>
+    <div class="blk-body">Configure DMARC at p=reject so attackers cannot send email appearing to come from your domain. Train employees to check the full email address of any wire transfer instruction. Look-alike domains (ubiquti.com) require visual inspection to catch.</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-heading">Knowledge Check — Case Study: Ubiquiti — $46 Million Lost to a Fake Email</div>
+  
+<div class="q-card" id="qc0">
+  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-text">What is Business Email Compromise (BEC) and what makes it effective?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">BEC is a malware attack delivered through email that encrypts files for ransom</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">BEC is fraud conducted through email impersonation — the attacker impersonates authority figures (executives, legal counsel) and uses urgency, secrecy, and plausible business context to cause targets to transfer money without verification</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">BEC requires the attacker to hack the email server to send emails from legitimate addresses</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">BEC only works against employees who have not received security awareness training</button></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+</div>
+<div class="q-card" id="qc1">
+  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-text">What is the single most effective control against BEC wire fraud?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Installing anti-malware software on all finance department computers</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Configuring DMARC at p=reject to prevent email spoofing</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Out-of-band verbal verification — calling the apparent requestor at a known phone number before executing any wire transfer above a defined threshold</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Requiring finance employees to use two-factor authentication on email accounts</button></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+</div>
+<div class="q-card" id="qc2">
+  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-text">Why did the attackers instruct the Ubiquiti finance employee to keep the wire transfer confidential?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Confidentiality was required by securities law before the acquisition announcement</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The confidentiality instruction was a social engineering technique specifically designed to prevent the employee from consulting colleagues or managers who might identify the fraud</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">The attackers were concerned that Ubiquiti's legal counsel would interfere with the transfer</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">The transfers needed to remain secret until the funds cleared foreign banking systems</button></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+</div>
+<div class="q-card" id="qc3">
+  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-text">Why was only about 17% of Ubiquiti's $46.7 million loss recovered?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Law enforcement was not notified promptly enough to recover any funds</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Recovery from wire fraud requires the funds to be frozen before they are moved or converted — the attackers had already dispersed the funds through accounts in multiple foreign jurisdictions before freezing orders could be executed</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">The foreign banks refused to cooperate with US law enforcement</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Ubiquiti did not have cyber insurance that would cover the loss</button></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+</div>
+<div class="q-card" id="qc4">
+  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-text">How does DMARC at p=reject protect against BEC, and what does it not protect against?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">DMARC prevents all email impersonation attacks including look-alike domains</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">DMARC at p=reject prevents attackers from sending email that appears to come from the organization's own domain (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7a4a2a887a4a8aab7a6a9bee9a4a8aa">[email&#160;protected]</a>), but does not prevent look-alike domain attacks (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a2a4ae81a2f1acb1a0afb8efa2aeac">[email&#160;protected]</a>) which require employee training and domain monitoring to detect</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">DMARC is only effective against phishing attacks, not BEC</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">DMARC requires implementation by the receiving organization, not the sending organization</button></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+</div>
+<div class="q-card" id="qc5">
+  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-text">The FBI IC3 reports that BEC consistently produces more annual losses than any other cybercrime category. What does this imply for security investment decisions?</div>
+  <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Organizations should stop investing in technical security controls and focus entirely on BEC</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Technical security controls (firewalls, EDR, SIEM) address technical attack vectors; BEC is a process and behavioral control problem — organizations need to invest proportionally in out-of-band verification procedures, dual control requirements, finance team BEC training, and BEC simulation exercises</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">BEC losses are primarily concentrated in financial services and do not affect technology companies</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Organizations should avoid electronic wire transfers and use only paper checks</button></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+</div>
+  <div class="score-panel" id="scorePanel">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const HL_COLOR={
+  'pg1':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+  'pg2':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+  'pg3':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+  'pg4':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+  'pg5':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+};
+
+const NARR={
+  'pg1':['BEC is the highest-dollar cybercrime category in the FBI\'s annual Internet Crime report — it consistently generates more annual losses than ransomware, data breaches, and every other cybercrime category combined. The reason BEC produces such large losses is structural: it targets the financial processes of organizations rather than their data, and the financial system is designed to move money efficiently and irreversibly. A ransomware attack encrypts data; recovery may be possible. A BEC attack transfers money; recovery requires legal process in foreign jurisdictions and is rarely complete. Ubiquiti\'s $46.7 million loss demonstrates the scale that BEC achieves when an organization lacks the verification controls that would interrupt the attack before execution.','The psychology of BEC is worth understanding carefully because it explains why technically sophisticated employees fall for it. The attack exploits legitimate organizational dynamics: executives do authorize unusual transactions. Legal counsel does provide wire transfer instructions. Confidentiality is legitimately required for pre-announcement acquisition activity. The BEC email is designed to fit perfectly into a plausible organizational context — it is not an obvious scam asking the victim to send gift cards, but a sophisticated impersonation of a credible business scenario. The employee who received the Ubiquiti emails was not naive or careless; they were responding to what appeared to be legitimate instructions from legitimate authority, in a context that made those instructions seem reasonable.','The recovery rate of approximately 17% reflects the fundamental challenge of recovering wire transfers from accounts in multiple foreign jurisdictions. Once funds leave a US bank account, recovery depends on the receiving bank\'s willingness to freeze the account and on international law enforcement coordination. Both are time-sensitive: funds that have been transferred again, converted to cryptocurrency, or withdrawn in cash are effectively unrecoverable. The $8.1 million that Ubiquiti recovered was money that law enforcement was able to freeze before it moved out of reach. The $38.6 million that was not recovered had already been dispersed through accounts in Hong Kong, Russia, Hungary, China, and Poland — a deliberate structuring designed to maximize recovery difficulty.','The SEC disclosure of a $38.6 million material loss reflects the regulatory principle that public companies must disclose material events to investors. The disclosure made Ubiquiti\'s BEC loss public record and, paradoxically, made the company useful to the broader security community: a named, publicly documented BEC case with specific financial figures is far more effective in security awareness training than an anonymous illustrative scenario. The Ubiquiti case appears in FBI guidance, security awareness training programs, and financial institution risk bulletins precisely because the SEC disclosure provided a factual, verifiable, public record of what happened.'],
+  'pg2':['The research phase of a BEC attack — identifying the right targets, the right impersonation identities, and the right context — requires no special tools or access. LinkedIn alone provides the organizational structure of most companies: who reports to whom, who handles finance, who is the CFO or CEO. Corporate websites provide executive names and contact information. SEC filings for public companies provide detailed information about the company\'s business, recent transactions, and organizational structure. Press releases announce partnerships, acquisitions, and legal relationships. The attacker who researched Ubiquiti before the BEC attack was not doing anything that any journalist, analyst, or recruiter does daily — the same publicly available information that enables legitimate research enables attack planning.','The \'confidentiality\' instruction deserves particular attention as a BEC technique because it serves a dual purpose: it provides a plausible reason for the unusual transaction (acquisitions are confidential before announcement) and it directly prevents the target from performing the verification that would reveal the fraud. An employee who is told to keep the transaction confidential from colleagues, from their manager, and from the normal approval process has been systematically isolated from every verification mechanism available to them. The attacker has engineered a situation in which the normal safety net — consult with someone else — has been removed through social pressure. Training employees to recognize this pattern and to understand that no legitimate executive will instruct them to bypass normal financial controls is the behavioral defense.','The multi-actor impersonation — emails from both a senior executive and from outside legal counsel — reflects a sophisticated understanding of organizational decision-making. A request from one authority can be questioned. A request that appears to have been authorized by two independent authorities is harder to dismiss. The attacker was simulating the organizational consensus that would legitimately precede a large, unusual financial transaction. For the finance employee, the convergence of executive instruction and legal counsel confirmation created a picture that closely resembled what a legitimate acquisition-related transaction would look like. Breaking the impersonation required only a phone call — but the impersonation was designed to make that phone call seem unnecessary.','The multi-transfer pattern reveals the attackers\' confidence and the target\'s compliance. After the first transfer succeeded without triggering any verification, the attackers requested additional transfers. A finance employee who processes a first transfer and then receives a request for a second, a third, and a fourth — across multiple days and to accounts in multiple jurisdictions — is accumulating evidence that something unusual is happening. But the framing provided by the initial email — confidential acquisition, complex international transaction — provides a narrative that makes each successive transfer seem like the next expected step. The escalation pattern is a deliberate technique: each successful transfer makes subsequent transfers easier to request and harder to question.'],
+  'pg3':['Out-of-band verification is the most valuable control available against BEC and it costs almost nothing to implement. The process: define a threshold (transfers above $X require verbal confirmation), define the verification method (call the apparent requestor at the phone number on file in the company directory — not any number provided in the email), document the confirmation (note the time, the person, and the confirmation in the transaction record). This process defeats every BEC variant: if the email is fraudulent, the phone call to the real executive will immediately identify the fraud. If the email is legitimate, the executive will confirm and the transaction proceeds. The process adds two minutes to a wire transfer workflow and provides near-complete protection against BEC.','Dual control is a standard internal control in financial services and should be standard in any organization that processes large wire transfers. The principle: no single person has the authority and ability to initiate and approve a large transaction alone. Implementation: one employee initiates the wire transfer, a second employee at a separate workstation reviews and approves it, both employees use separate authentication to access the wire transfer system. Dual control means the attacker must simultaneously deceive two independent employees who are both expected to perform verification — an exponentially harder challenge than deceiving one. The Ubiquiti loss was initiated by a single employee without independent review.','DMARC (Domain-based Message Authentication, Reporting, and Conformance) is an email authentication protocol that, when configured at p=reject, prevents anyone outside the organization from sending email that appears to come from the organization\'s domain. A DMARC p=reject policy for ubnt.com would prevent an attacker from sending an email with the From address ceo@ubnt.com. DMARC does not prevent look-alike domain attacks (ubiquti.com), which require a different defense: employee training to visually inspect email addresses, automated detection of look-alike domain registrations, and banner warnings in email clients for external senders. Both defenses — DMARC and training — are necessary because attackers use both techniques.','The training failure at Ubiquiti is not that the finance employee failed to recognize that BEC attacks exist — it is that the controls and training did not translate the abstract knowledge of BEC risk into the specific behavioral response for the specific scenario the employee encountered. Security awareness training that teaches \'watch out for BEC\' is less effective than training that teaches specific behavioral scripts: \'If I receive a wire transfer request by email, I call the requestor at their number on file before acting.\' The behavioral script is actionable and can be practiced; the abstract awareness is not. Organizations should conduct BEC simulation exercises that specifically test whether finance employees execute the out-of-band verification step when presented with a realistic BEC email.'],
+  'pg4':['The $38.6 million permanent loss represents a permanent reduction in Ubiquiti\'s capital — money that was spent on nothing, that produced no return, and that cannot be recovered. For a company of Ubiquiti\'s size, this is a material event. For smaller companies, a similar proportional loss could be existential. BEC attacks are not distributed equally across organizations — they target the companies and individuals most likely to process large wire transfers without the controls that would prevent the fraud. Finance departments, real estate transaction coordinators, legal professionals processing settlement payments, and executives at companies undergoing acquisitions are disproportionately targeted. The attack surface for BEC is everywhere that large dollar amounts move through electronic financial channels.','The stock price decline following Ubiquiti\'s disclosure reflects investor analysis of what the loss reveals about the company\'s internal controls. A $46.7 million fraudulent wire transfer that proceeded without triggering any verification or dual-control checkpoint suggests that the company\'s financial controls for large transactions were insufficient. Investors in public companies reasonably expect that material financial transactions include internal controls that prevent a single employee from transferring tens of millions of dollars based on email instructions. The market\'s reaction was not just about the $38.6 million lost — it was about what that loss implied about the controls that were missing.','The recovery coordination that enabled the $8.1 million recovery demonstrates the importance of rapid response in financial fraud cases. The moment a BEC loss is identified, the clock starts: every minute of delay allows funds to move further through the layering process and further from recovery. Organizations should have a pre-established relationship with their bank\'s fraud department, pre-established procedures for emergency wire recall requests, and a relationship with FBI financial crime units. The FBI\'s IC3 and the Financial Crimes Enforcement Network (FinCEN) both have procedures for emergency BEC recovery coordination. Organizations that engage these resources within hours of identifying a BEC loss recover significantly more than organizations that first spend days on internal investigation.','The $50 billion in cumulative BEC losses tracked by the FBI\'s IC3 since 2013 dwarfs any other cybercrime category and dwarfs the losses attributable to ransomware, data breaches, and all forms of malware combined. This financial reality has not been matched by corresponding organizational investment in BEC-specific controls. Most organizations invest heavily in technical security controls — firewalls, endpoint protection, SIEM — and invest relatively little in the process controls that specifically defeat BEC: out-of-band verification, dual control, wire transfer approval authority matrices, and BEC simulation exercises for finance personnel. The Ubiquiti loss represents the cost of that misallocation.'],
+  'pg5':['The phone call that would have cost two minutes would have recovered $46.7 million. Call the requestor at the number on file — not in the email. This single process control defeats every BEC variant. Define the threshold, train the process, test it with simulations, enforce it without exceptions including for the CEO.','No single person should authorize a large wire transfer alone. Two independent approvers using separate channels — one initiates, one reviews and approves at a separate workstation. The attacker must deceive both simultaneously. Configure dual control with your bank. Define the dollar threshold. Test the process quarterly.','No legitimate executive instructs you to bypass the normal approval process. No legitimate transaction requires secrecy from your manager. Any confidentiality instruction in a financial request is a BEC indicator. Train this explicitly. Make it a bright line: confidentiality instruction = escalate immediately.','DMARC p=reject prevents spoofing of your domain. Configure it. Then train employees to inspect the full email address — ubiquti.com is not ubnt.com. Look-alike domains require visual detection. Banner warnings for external senders in email clients help. Both are needed.'],
+};
+
+const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
+
+const ANSWERS=[1,2,1,1,1,1];
+const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
+const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const GRADE_LABELS=["—","—","—","C","B","A","A+"];
+const N_QUIZ=6;
+
+let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
+
+function gotoPage(pid){
+  document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
+  const el=document.getElementById(pid);
+  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  curPage=pid;
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const np=document.getElementById('nav-'+pid);
+  if(np)np.classList.add('active');
+  stopNarr();
+  if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
+  const menuOverlay=document.getElementById('menuOverlay');
+  const menuPanel=document.getElementById('menuPanel');
+  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
+}
+
+function toggleMenu(){
+  const ov=document.getElementById('menuOverlay');
+  const mp=document.getElementById('menuPanel');
+  const open=ov.style.display==='block';
+  ov.style.display=open?'none':'block';
+  mp.style.display=open?'none':'block';
+}
+
+function togglePlay(pid){
+  if(narrRunning&&narrPid===pid){stopNarr();return;}
+  stopNarr();
+  narrPid=pid; narrIdx=0; narrRunning=true;
+  clearBlockStates(pid);
+  playBlock(pid,0);
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.add('active');
+}
+
+function playBlock(pid,idx){
+  const scripts=NARR[pid]||[];
+  if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
+  if(idx>0)markBlockDone(pid,idx-1);
+  highlightBlock(pid,idx);
+  const text=scripts[idx];
+  updateNarrBar(text.substring(0,80)+(text.length>80?'…':''));
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=0.95; utter.pitch=1; utter.volume=1;
+  utter.onend=function(){if(narrRunning)playBlock(pid,idx+1);};
+  narr=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function stopNarr(){
+  window.speechSynthesis.cancel();
+  narrRunning=false; narr=null;
+  const nb=document.getElementById('narrBar');
+  if(nb)nb.classList.remove('active');
+  const btn=narrPid?document.getElementById('play-'+narrPid):null;
+  if(btn)btn.innerHTML='&#9654; Play Narration';
+}
+
+function updateNarrBar(txt){
+  const el=document.getElementById('narrText');
+  if(el)el.textContent=txt;
+}
+
+function highlightBlock(pid,idx){
+  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
+  pid_blocks.forEach((b,i)=>{
+    b.classList.remove('lit');
+    if(i===idx)b.classList.add('lit');
+  });
+  const colors=HL_COLOR[pid]||[];
+  const col=colors[idx]||'#4b8ef0';
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
+    if(i===idx)b.style.setProperty('--primary-lit',col);
+  });
+  // SVG highlight
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
+    g.classList.remove('lit');
+    if(i===idx)g.classList.add('lit');
+  });
+  // scroll block into view in col-content
+  const block=document.getElementById(pid+'-b'+idx);
+  const col_cont=document.getElementById('cc-'+pid);
+  if(block&&col_cont){
+    const bTop=block.offsetTop-col_cont.offsetTop;
+    col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
+  }
+}
+
+function markBlockDone(pid,idx){
+  const b=document.getElementById(pid+'-b'+idx);
+  if(b){b.classList.remove('lit');b.classList.add('done');}
+}
+
+function clearBlockStates(pid){
+  document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
+  document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
+}
+
+function jumpToBlock(pid,idx){
+  if(narrRunning&&narrPid===pid){
+    window.speechSynthesis.cancel();
+    narrIdx=idx;
+    playBlock(pid,idx);
+  }
+}
+
+// QUIZ
+let answers_given=new Array(N_QUIZ).fill(null);
+let quiz_done=false;
+
+function answerQ(qi,oi){
+  if(answers_given[qi]!==null)return;
+  answers_given[qi]=oi;
+  const correct=ANSWERS[qi];
+  const card=document.getElementById('qc'+qi);
+  card.querySelectorAll('.q-opt').forEach((o,i)=>{
+    o.style.cursor='default';
+    if(i===correct)o.classList.add('correct');
+    else if(i===oi&&oi!==correct)o.classList.add('wrong');
+  });
+  const exp=document.getElementById('qe'+qi);
+  if(exp){exp.textContent="{}" ; /* filled per question */ }
+  // fill explanation
+  const exps=["BEC is fraud conducted through email impersonation requiring no malware, no hacking, and no technical access. The attacker impersonates authority figures — executives, legal counsel, vendors — and constructs a plausible business context (acquisition, legal settlement, vendor payment) that makes the transfer request seem legitimate. The key social engineering elements are authority (request from a senior person), urgency (time-sensitive), secrecy (confidentiality instruction that prevents verification), and context (a plausible business reason for the unusual transfer).","Out-of-band verification — calling the requestor at the number on file in the company directory, not any number provided in the email — defeats every BEC variant. If the email is fraudulent, the phone call to the real executive will immediately reveal the fraud. If the email is legitimate, the executive will confirm and the transfer proceeds. The control works because it uses a different communication channel than the one the attacker has compromised or impersonated. DMARC prevents domain spoofing but not look-alike domain attacks; MFA protects email accounts but not against impersonation of real accounts.","The confidentiality instruction was a deliberate social engineering technique. A finance employee who discusses an unusual wire transfer request with a manager, compliance officer, or the actual executive being impersonated has multiple opportunities to identify the fraud before executing. By instructing the employee to keep the transaction secret, the attackers systematically eliminated every verification mechanism available to the target. Organizations should train employees that no legitimate executive will instruct them to bypass normal financial controls or keep a transaction secret from their manager.","Wire transfer recovery depends on speed and international cooperation. Once funds leave a US account, they must be frozen at the receiving foreign bank before the criminals move them again. The Ubiquiti attackers dispersed the funds across accounts in Hong Kong, Russia, Hungary, China, and Poland — a deliberate structuring designed to maximize recovery difficulty. Law enforcement was able to freeze $8.1 million before it moved out of reach; the remaining $38.6 million had already been transferred beyond recovery. Organizations that identify BEC losses must engage law enforcement and their bank's fraud department within hours, not days.","DMARC at p=reject instructs receiving email servers to reject messages that claim to be from the organization's domain but fail authentication. This prevents an attacker from sending email with the From address ceo@ubnt.com without having control of the ubnt.com domain. However, DMARC does not prevent look-alike domain attacks: an attacker who registers ubiquti.com (missing a letter) and sends email from ceo@ubiquti.com is not spoofing the protected domain. Look-alike domain attacks require employee training to visually inspect sender addresses, automated monitoring for newly registered look-alike domains, and email client banners that flag external senders.","BEC losses exceed ransomware, data breach, and all other cybercrime categories combined because BEC exploits financial processes rather than technical vulnerabilities. Most organizations invest heavily in technical security controls that do not directly address BEC. The specific controls that defeat BEC — out-of-band verification, dual control, trained finance staff, BEC simulation exercises — are process and behavioral controls. Organizations whose security investment is entirely in technical controls have essentially no protection against the highest-dollar cybercrime category. Security investment should be proportional to the risk landscape, which includes BEC as the dominant financial threat."];
+  if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
+  card.style.borderLeftColor=QUIZ_COLORS[qi];
+  // check if all answered
+  if(answers_given.every(a=>a!==null))showScore();
+}
+
+function showScore(){
+  let correct=0;
+  answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
+  const panel=document.getElementById('scorePanel');
+  document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
+  document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
+  document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]
