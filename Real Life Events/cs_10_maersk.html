@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#e05252;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#1B2A4A;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#e0525222;color:#e05252;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#e05252;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#e05252;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#e05252;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#e05252;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#e05252;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Case Study: Maersk — NotPetya Wiped the World's Largest Shipper</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Case Study</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Happened</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ June 2017 — 45,000 PCs and 4,000 servers wiped in hours</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ From a software update to global destruction in hours</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Supply chain entry, flat network, and connected backups</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ $300 million and ten days without computers</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What NotPetya and Maersk teach about resilience</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Case Study: Maersk — NotPetya Wiped the World's Largest Shipper</div>
-  <div class="home-sub">Case Study — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ June 2017 — 45,000 PCs and 4,000 servers wiped in hours</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ From a software update to global destruction in hours</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Supply chain entry, flat network, and connected backups</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ $300 million and ten days without computers</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What NotPetya and Maersk teach about resilience</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Happened</div>
     <div class="ph-sub">June 2017 — 45,000 PCs and 4,000 servers wiped in hours</div>
@@ -232,50 +115,50 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Maersk NotPetya — Incident Overview</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">June 27, 2017 · 45K PCs + 4K servers wiped in hours</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">NotPetya: wiper disguised as ransomware · Nation-state weapon</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Entry: MEDoc Ukrainian accounting software update</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="58" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">10 days: no computers · Paper + WhatsApp + improvisation</text>
-    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">300,000 containers stranded · Ports worldwide disrupted</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="58" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Recovery: 1 offline domain controller in Ghana saved it</text>
-    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Flown to Copenhagen · Entire global IT rebuilt from scratch</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="278" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">$300M to Maersk · $10B+ globally · Most destructive ever</text>
-    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">FedEx $400M · Merck $870M · Saint-Gobain $384M</text>
-    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Attributed to Russia GRU · Ukraine was the target</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Maersk NotPetya — Incident Overview</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">June 27, 2017 · 45K PCs + 4K servers wiped in hours</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">NotPetya: wiper disguised as ransomware · Nation-state weapon</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">Entry: MEDoc Ukrainian accounting software update</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">10 days: no computers · Paper + WhatsApp + improvisation</text>
+    <text x="36" y="154" font-size="10" fill="#D6CCBC" font-family="system-ui">300,000 containers stranded · Ports worldwide disrupted</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Recovery: 1 offline domain controller in Ghana saved it</text>
+    <text x="36" y="224" font-size="10" fill="#D6CCBC" font-family="system-ui">Flown to Copenhagen · Entire global IT rebuilt from scratch</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="278" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">$300M to Maersk · $10B+ globally · Most destructive ever</text>
+    <text x="36" y="294" font-size="10" fill="#D6CCBC" font-family="system-ui">FedEx $400M · Merck $870M · Saint-Gobain $384M</text>
+    <text x="36" y="310" font-size="10" fill="#8A7D6B" font-family="system-ui">Attributed to Russia GRU · Ukraine was the target</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">The most destructive malware attack in history</div>
+    <div class="blk-title" style="color:#1B2A4A;">The most destructive malware attack in history</div>
     <div class="blk-body">On June 27, 2017, Maersk — the world's largest shipping company, handling roughly 20% of global seaborne trade — was hit by NotPetya, a cyberweapon disguised as ransomware. NotPetya did not encrypt files for ransom; it overwrote the master boot records of every system it reached, making them permanently unbootable. Within hours, 45,000 PCs, 4,000 servers, and 2,500 applications across Maersk's global operations were destroyed. Maersk's global terminal network — the computerized systems that track and direct the movement of shipping containers — went dark. Ports across the world could not operate. Ships could not load or unload. The supply chain that moves a significant fraction of global trade stopped.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">How it spread so fast</div>
+    <div class="blk-title" style="color:#A08860;">How it spread so fast</div>
     <div class="blk-body">NotPetya entered Maersk's network through MEDoc, Ukrainian accounting software that Maersk was required to use for Ukrainian tax compliance. MEDoc had been compromised by Russian intelligence; its automatic update mechanism was weaponized to deliver NotPetya to all MEDoc users simultaneously. Once inside a network, NotPetya used two propagation techniques: EternalBlue (an NSA exploit leaked by the Shadow Brokers) to spread through unpatched SMB vulnerabilities, and credential harvesting via Mimikatz to use stolen credentials for lateral movement to systems that were patched. NotPetya could infect any machine reachable from an infected machine — patching was necessary but not sufficient to stop it.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Operations: 10 days without computers</div>
+    <div class="blk-title" style="color:#C4AA88;">Operations: 10 days without computers</div>
     <div class="blk-body">Maersk operated its global shipping empire with no functioning IT systems for approximately 10 days. Terminals reverted to manual operations — pen and paper, walkie-talkies, and improvised spreadsheets shared on personal WhatsApp groups. Maersk employees flew to ports around the world to direct operations manually. The company could not issue new bills of lading, could not update container tracking systems, and could not process customs documentation electronically. An estimated 300,000 shipping containers were stranded globally. The port of Los Angeles operated at reduced capacity. Importers and exporters worldwide experienced delivery delays as a knock-on effect.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Recovery: reinstalling from a single domain controller</div>
+    <div class="blk-title" style="color:#A08860;">Recovery: reinstalling from a single domain controller</div>
     <div class="blk-body">Maersk's recovery required reinstalling the entire global IT infrastructure — every PC, server, and application — from scratch. This was possible because Maersk's backup systems, which were connected to the main network, had also been destroyed. Recovery depended on a single domain controller in Ghana that happened to be offline during the attack due to a power outage. That single machine, which retained the Active Directory database with the identities and configurations needed to rebuild the network, was physically flown to Maersk's headquarters in Copenhagen and used as the starting point for rebuilding the entire global IT infrastructure. Without that one offline machine, recovery would have been significantly more complex.</div>
   </div>
 </div>
@@ -291,52 +174,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="20" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Attack Chain</text>
-  <rect x="20" y="32" width="480" height="42" rx="6" fill="#2a1f1f" stroke="#e05252" stroke-width="1.5"/>
-  <text x="260" y="50" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">GRU compromises MEDoc update server</text>
-  <text x="260" y="64" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">NotPetya delivered as legitimate MEDoc software update</text>
-  <line x1="260" y1="74" x2="260" y2="90" stroke="#e05252" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <rect x="20" y="90" width="480" height="42" rx="6" fill="#2a1f1f" stroke="#e05252" stroke-width="1.5"/>
-  <text x="260" y="108" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">NotPetya executes on Maersk's Ukrainian systems</text>
-  <text x="260" y="122" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">EternalBlue spreads to unpatched SMB · Mimikatz harvests creds</text>
-  <line x1="260" y1="132" x2="260" y2="148" stroke="#e05252" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <rect x="20" y="148" width="480" height="36" rx="6" fill="#2a1f1f" stroke="#f0a04a" stroke-width="1.5"/>
-  <text x="260" y="166" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">Propagates globally across flat network in minutes</text>
-  <text x="260" y="180" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">No segmentation to contain spread</text>
-  <line x1="260" y1="184" x2="260" y2="200" stroke="#f0a04a" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <rect x="20" y="200" width="480" height="36" rx="6" fill="#2a1f1f" stroke="#f0a04a" stroke-width="1.5"/>
-  <text x="260" y="218" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">MBR overwritten · Machines permanently unbootable</text>
-  <text x="260" y="232" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">45,000 PCs + 4,000 servers destroyed · Backups included</text>
-  <text x="260" y="312" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Collateral damage: global shipping + $10B+ in losses</text>
+  <text x="260" y="20" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Attack Chain</text>
+  <rect x="20" y="32" width="480" height="42" rx="6" fill="#2a1f1f" stroke="#1B2A4A" stroke-width="1.5"/>
+  <text x="260" y="50" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">GRU compromises MEDoc update server</text>
+  <text x="260" y="64" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">NotPetya delivered as legitimate MEDoc software update</text>
+  <line x1="260" y1="74" x2="260" y2="90" stroke="#1B2A4A" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="90" width="480" height="42" rx="6" fill="#2a1f1f" stroke="#1B2A4A" stroke-width="1.5"/>
+  <text x="260" y="108" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">NotPetya executes on Maersk's Ukrainian systems</text>
+  <text x="260" y="122" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">EternalBlue spreads to unpatched SMB · Mimikatz harvests creds</text>
+  <line x1="260" y1="132" x2="260" y2="148" stroke="#1B2A4A" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="148" width="480" height="36" rx="6" fill="#2a1f1f" stroke="#A08860" stroke-width="1.5"/>
+  <text x="260" y="166" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">Propagates globally across flat network in minutes</text>
+  <text x="260" y="180" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">No segmentation to contain spread</text>
+  <line x1="260" y1="184" x2="260" y2="200" stroke="#A08860" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <rect x="20" y="200" width="480" height="36" rx="6" fill="#2a1f1f" stroke="#A08860" stroke-width="1.5"/>
+  <text x="260" y="218" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">MBR overwritten · Machines permanently unbootable</text>
+  <text x="260" y="232" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">45,000 PCs + 4,000 servers destroyed · Backups included</text>
+  <text x="260" y="312" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Collateral damage: global shipping + $10B+ in losses</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">NotPetya was a cyberweapon, not ransomware</div>
+    <div class="blk-title" style="color:#1B2A4A;">NotPetya was a cyberweapon, not ransomware</div>
     <div class="blk-body">NotPetya displayed a ransom message, but it was not designed to recover files. The encryption mechanism for the master boot record was intentionally implemented without a working decryption mechanism — there was no key, no recovery path, and no intent to provide one. The ransom message was cover. NotPetya was a cyberweapon deployed by Russia's GRU military intelligence unit to cause maximum damage to Ukrainian infrastructure during the ongoing conflict in Ukraine. Maersk and the other non-Ukrainian companies that were destroyed were collateral damage — victims of a nation-state weapon that escaped its intended geographic scope through the global connectivity of supply chains.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">EternalBlue: the NSA exploit that became a weapon</div>
+    <div class="blk-title" style="color:#A08860;">EternalBlue: the NSA exploit that became a weapon</div>
     <div class="blk-body">EternalBlue was an exploit developed by the NSA targeting a vulnerability in the Windows SMB protocol. The exploit was stolen from the NSA by a group calling itself the Shadow Brokers and published on the internet in April 2017 — approximately two months before NotPetya. Microsoft had released a patch (MS17-010) in March 2017, but organizations that had not applied the patch remained vulnerable. NotPetya used EternalBlue to spread through any SMB-accessible system that lacked the patch. Organizations that had patched all systems were not immune — NotPetya's Mimikatz component harvested administrative credentials from memory and used them to spread to patched systems through legitimate administrative protocols.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Why Maersk could not stop it</div>
+    <div class="blk-title" style="color:#C4AA88;">Why Maersk could not stop it</div>
     <div class="blk-body">NotPetya's dual propagation mechanism — EternalBlue for unpatched systems, Mimikatz for credential reuse on patched systems — meant that no single control could stop it. Network segmentation that would have prevented lateral movement was absent; Maersk's global network was interconnected in ways that allowed NotPetya to reach every system reachable from any infected system. Endpoint security did not detect NotPetya before it executed on many systems. The MEDoc supply chain entry point was outside Maersk's security perimeter — the attack arrived as a legitimate software update from a trusted vendor. Once NotPetya reached a system with domain admin credentials in memory, it could spread to any system in the domain.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">The backup failure: connected backups are not backups</div>
+    <div class="blk-title" style="color:#A08860;">The backup failure: connected backups are not backups</div>
     <div class="blk-body">Maersk's disaster recovery planning was based on the assumption that backups would survive an attack on the primary systems. NotPetya disproved that assumption. Backup systems that are connected to the network can be reached by malware that propagates through the network. Backups that are online and accessible are destroyed by wiper malware at the same time as primary systems. The backup failure meant that recovery required rebuilding from scratch rather than restoring from backup. The Ghana domain controller — offline by accident — demonstrated what offline backups would have provided by design: a recovery point that the malware could not reach.</div>
   </div>
 </div>
@@ -352,48 +235,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Control Failures</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Supply chain software trusted without segmentation</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">MEDoc required for compliance · Connected to global network</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="108" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="132" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Flat global network: no segmentation to limit spread</text>
-    <text x="36" y="148" font-size="10" fill="#94a0b8" font-family="system-ui">NotPetya reached every system from a single entry point</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="182" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="206" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Connected backups destroyed along with primary systems</text>
-    <text x="36" y="222" font-size="10" fill="#94a0b8" font-family="system-ui">Ghana DC offline by accident — only recovery point</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="68" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Unpatched SMB (EternalBlue) amplified initial propagation</text>
-    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">MS17-010 available 2 months earlier · Not applied universally</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Control Failures</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Supply chain software trusted without segmentation</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">MEDoc required for compliance · Connected to global network</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="108" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Flat global network: no segmentation to limit spread</text>
+    <text x="36" y="148" font-size="10" fill="#D6CCBC" font-family="system-ui">NotPetya reached every system from a single entry point</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="182" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="206" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Connected backups destroyed along with primary systems</text>
+    <text x="36" y="222" font-size="10" fill="#D6CCBC" font-family="system-ui">Ghana DC offline by accident — only recovery point</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Unpatched SMB (EternalBlue) amplified initial propagation</text>
+    <text x="36" y="296" font-size="10" fill="#D6CCBC" font-family="system-ui">MS17-010 available 2 months earlier · Not applied universally</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Failure 1: Supply chain software was trusted without verification</div>
+    <div class="blk-title" style="color:#1B2A4A;">Failure 1: Supply chain software was trusted without verification</div>
     <div class="blk-body">Maersk had no way to verify that the MEDoc update was clean — it arrived through MEDoc's normal update channel, signed as a legitimate update. Supply chain attacks through software updates are among the most difficult attacks to defend against because the attack arrives through a trusted channel. Mitigations: verify software integrity through independent channels where possible, monitor update behavior for anomalies, and segment systems that run jurisdiction-specific software from the broader network so that a compromised update cannot spread beyond the contained zone.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Failure 2: Network segmentation was absent</div>
+    <div class="blk-title" style="color:#A08860;">Failure 2: Network segmentation was absent</div>
     <div class="blk-body">NotPetya spread from Maersk's Ukrainian MEDoc systems to its global network because all systems were interconnected. A segmented network — where the Ukrainian accounting systems were in a separate zone with limited connectivity to the global network — would have contained NotPetya to that zone. The 45,000 machines destroyed could have been a much smaller number if the propagation path had been limited by architecture. Network segmentation is the control that limits what can be reached from any compromised system; without it, any compromise becomes a global compromise.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Failure 3: Connected backups provided no recovery point</div>
+    <div class="blk-title" style="color:#C4AA88;">Failure 3: Connected backups provided no recovery point</div>
     <div class="blk-body">Disaster recovery planning that assumes an attacker cannot reach backup systems is planning for a different attack than NotPetya represents. Wiper malware that propagates through a network will reach connected backup systems. The backup strategy for any organization must include offline backups — backups that are not connected to the network at the time of the attack. The Ghana domain controller demonstrated the principle: the one machine that was offline was the one machine that survived. Air-gapped or offline backups are not anachronistic; they are essential protection against wiper malware.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Failure 4: Unpatched systems provided the initial propagation vector</div>
+    <div class="blk-title" style="color:#A08860;">Failure 4: Unpatched systems provided the initial propagation vector</div>
     <div class="blk-body">EternalBlue exploited a Windows SMB vulnerability for which Microsoft had released a patch two months before NotPetya. Organizations that had applied MS17-010 to all systems were not immune — Mimikatz handled credential reuse on patched systems — but the unpatched systems amplified NotPetya's initial spread. Vulnerability management — systematic identification and remediation of known vulnerabilities within defined timelines — is a foundational control. The EternalBlue exploit was public knowledge for two months before NotPetya; organizations that applied the patch promptly limited their exposure to the initial propagation vector, even if not to the credential-based spread.</div>
   </div>
 </div>
@@ -409,62 +292,62 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Impact Summary</text>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Impact Summary</text>
   <g id="pg4-hl0" class="svg-hl" transform="translate(140,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="22" fill="#e05252" font-weight="700" font-family="system-ui">$300M</text>
-    <text y="-16" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Direct cost to Maersk</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">$10B+ global total</text>
-    <text y="24" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Most destructive attack ever</text>
-    <text y="46" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Exceeded insurance coverage</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="22" fill="#1B2A4A" font-weight="700" font-family="system-ui">$300M</text>
+    <text y="-16" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Direct cost to Maersk</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">$10B+ global total</text>
+    <text y="24" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Most destructive attack ever</text>
+    <text y="46" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Exceeded insurance coverage</text></g>
   <g id="pg4-hl1" class="svg-hl" transform="translate(380,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="22" fill="#f0a04a" font-weight="700" font-family="system-ui">10 Days</text>
-    <text y="-16" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Global ops without IT</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">20% of world shipping</text>
-    <text y="24" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">disrupted simultaneously</text>
-    <text y="46" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">300K containers stranded</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="22" fill="#A08860" font-weight="700" font-family="system-ui">10 Days</text>
+    <text y="-16" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Global ops without IT</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">20% of world shipping</text>
+    <text y="24" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">disrupted simultaneously</text>
+    <text y="46" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">300K containers stranded</text></g>
   <g id="pg4-hl2" class="svg-hl" transform="translate(140,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="13" fill="#4b8ef0" font-weight="700" font-family="system-ui">War Exclusion</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Merck insurer denied $870M</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Court ruled for Merck</text>
-    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Changed cyber insurance law</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="13" fill="#C4AA88" font-weight="700" font-family="system-ui">War Exclusion</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Merck insurer denied $870M</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Court ruled for Merck</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Changed cyber insurance law</text></g>
   <g id="pg4-hl3" class="svg-hl" transform="translate(380,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="13" fill="#6db86d" font-weight="700" font-family="system-ui">Recovery Story</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">1 offline DC in Ghana</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Flown to Copenhagen</text>
-    <text y="36" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Rebuilt global IT in 10 days</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="13" fill="#A08860" font-weight="700" font-family="system-ui">Recovery Story</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">1 offline DC in Ghana</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Flown to Copenhagen</text>
+    <text y="36" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Rebuilt global IT in 10 days</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Direct cost: $300 million to Maersk</div>
+    <div class="blk-title" style="color:#1B2A4A;">Direct cost: $300 million to Maersk</div>
     <div class="blk-body">Maersk reported a net impact of approximately $300 million from the NotPetya attack, covering the cost of rebuilding 45,000 PCs and 4,000 servers, reinstalling 2,500 applications, recovering operational data, and managing the 10-day operational disruption. The recovery required reinstalling the entire global IT infrastructure — a project that took approximately 10 days for the core systems and weeks for full restoration. Maersk's initial disclosure of the impact understated the severity; subsequent insurance claims and investor disclosures provided a fuller picture of the financial damage. Maersk's cyber insurance coverage provided partial recovery, but the magnitude of the loss substantially exceeded coverage limits.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Operational disruption: 20% of global shipping affected</div>
+    <div class="blk-title" style="color:#A08860;">Operational disruption: 20% of global shipping affected</div>
     <div class="blk-body">Maersk handles approximately 20% of global seaborne containerized trade through its terminal network. When those terminals went dark, approximately one-fifth of global container shipping capacity was disrupted simultaneously. The operational disruption affected every industry that relies on containerized shipping — which is to say, every industry that manufactures or trades physical goods. Importers and exporters worldwide experienced delays, missing deliveries, and supply chain disruptions as a cascade effect of Maersk's system failure. The port of New York and New Jersey reported significant disruption; ports in Los Angeles, Rotterdam, and Mumbai were similarly affected.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Global collateral damage: $10 billion+ across all victims</div>
+    <div class="blk-title" style="color:#C4AA88;">Global collateral damage: $10 billion+ across all victims</div>
     <div class="blk-body">NotPetya was not targeted at Maersk specifically. The same weapon destroyed systems at FedEx/TNT ($400M loss), pharmaceutical company Merck ($870M loss), construction firm Saint-Gobain ($384M loss), and hundreds of other organizations globally. The U.S. government attributed NotPetya to Russia's GRU and estimated total global damages at over $10 billion — making it the most destructive cyberattack in history. Merck's insurance claim for losses attributable to NotPetya was initially denied by its insurer on the grounds that NotPetya was an act of war; the resulting litigation established important precedents about cyber insurance coverage for nation-state attacks.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Recovery architecture: rebuilding from a single domain controller</div>
+    <div class="blk-title" style="color:#A08860;">Recovery architecture: rebuilding from a single domain controller</div>
     <div class="blk-body">The technical story of Maersk's recovery has become a case study in disaster recovery. The company had to reinstall 45,000 PCs and 4,000 servers. It did so by sourcing new hardware globally — purchasing every available laptop from retail stores in multiple countries — and rebuilding the Active Directory domain from the single offline domain controller in Ghana. Within 10 days, Maersk had restored core operations. The recovery demonstrated extraordinary organizational resilience under catastrophic conditions, but it also demonstrated that the outcome depended on a single point of luck: one offline machine in Ghana. A recovery plan that depends on luck is not a plan.</div>
   </div>
 </div>
@@ -480,48 +363,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Key Lessons — Maersk / NotPetya</text>
-  <g id="pg5-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="58" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Offline backups are the recovery plan</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Connected backups die with primary systems · Test restoration</text></g>
-  <g id="pg5-hl1" class="svg-hl"><rect x="20" y="104" width="480" height="58" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="128" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Segment networks — flat = total compromise</text>
-    <text x="36" y="144" font-size="10" fill="#94a0b8" font-family="system-ui">Segmentation limits what any compromise can reach</text></g>
-  <g id="pg5-hl2" class="svg-hl"><rect x="20" y="174" width="480" height="58" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="198" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Supply chain software is your attack surface</text>
-    <text x="36" y="214" font-size="10" fill="#94a0b8" font-family="system-ui">Segment it · Monitor updates · Compliance ≠ trust</text></g>
-  <g id="pg5-hl3" class="svg-hl"><rect x="20" y="244" width="480" height="58" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="268" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Patch critical vulnerabilities — especially with active exploits</text>
-    <text x="36" y="284" font-size="10" fill="#94a0b8" font-family="system-ui">EternalBlue was patchable. MS17-010 was available.</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Key Lessons — Maersk / NotPetya</text>
+  <g id="pg5-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Offline backups are the recovery plan</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Connected backups die with primary systems · Test restoration</text></g>
+  <g id="pg5-hl1" class="svg-hl"><rect x="20" y="104" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="128" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Segment networks — flat = total compromise</text>
+    <text x="36" y="144" font-size="10" fill="#D6CCBC" font-family="system-ui">Segmentation limits what any compromise can reach</text></g>
+  <g id="pg5-hl2" class="svg-hl"><rect x="20" y="174" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="198" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Supply chain software is your attack surface</text>
+    <text x="36" y="214" font-size="10" fill="#D6CCBC" font-family="system-ui">Segment it · Monitor updates · Compliance ≠ trust</text></g>
+  <g id="pg5-hl3" class="svg-hl"><rect x="20" y="244" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="268" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Patch critical vulnerabilities — especially with active exploits</text>
+    <text x="36" y="284" font-size="10" fill="#D6CCBC" font-family="system-ui">EternalBlue was patchable. MS17-010 was available.</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Offline backups are not optional — they are the recovery plan</div>
+    <div class="blk-title" style="color:#1B2A4A;">Offline backups are not optional — they are the recovery plan</div>
     <div class="blk-body">NotPetya destroyed connected backups along with primary systems. The Ghana domain controller — offline by accident — made recovery possible. Every organization needs offline or air-gapped backups that cannot be reached by malware that propagates through the network. Test restoration annually.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Network segmentation limits propagation to segments</div>
+    <div class="blk-title" style="color:#A08860;">Network segmentation limits propagation to segments</div>
     <div class="blk-body">Maersk's globally interconnected network allowed NotPetya to reach every system. Proper segmentation — particularly isolating jurisdiction-specific software like MEDoc in a contained zone — would have limited destruction to that zone. Flat networks mean any compromise becomes a total compromise.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Supply chain software is your attack surface</div>
+    <div class="blk-title" style="color:#C4AA88;">Supply chain software is your attack surface</div>
     <div class="blk-body">Maersk was required by Ukrainian law to run MEDoc. That compliance requirement became the weapon's delivery mechanism. Supply chain software — accounting systems, industry-specific tools, vendor portals — runs with trust that attackers exploit. Segment supply chain software. Monitor update behavior. Verify integrity.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Patch known vulnerabilities within defined timelines</div>
+    <div class="blk-title" style="color:#A08860;">Patch known vulnerabilities within defined timelines</div>
     <div class="blk-body">EternalBlue had a patch available two months before NotPetya. Unpatched systems amplified initial propagation. Mimikatz covered patched systems, but limiting EternalBlue's reach limited overall destruction. Vulnerability management with defined patch timelines is a foundational control — not optional.</div>
   </div>
 </div>
@@ -533,40 +416,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Case Study: Maersk — NotPetya Wiped the World's Largest Shipper</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">What is the key difference between NotPetya and ransomware?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">NotPetya was more expensive because it demanded a larger ransom</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">NotPetya was designed to destroy systems permanently with no working decryption mechanism — the ransom message was cover for a nation-state weapon. Ransomware is designed to extort payment and requires working decryption to incentivize payment.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">NotPetya only affected Windows XP systems</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">NotPetya was created by criminal groups while ransomware is always nation-state</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">How did NotPetya enter Maersk's network?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Through a phishing email sent to a Maersk executive</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Through a vulnerability in Maersk's public-facing web server</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Through MEDoc, Ukrainian accounting software required for tax compliance, whose update server had been compromised by Russian intelligence</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Through a former Maersk employee who retained network access</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">Why was the single domain controller in Ghana so important to Maersk's recovery?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">It contained backup copies of all of Maersk's financial data</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">It was the only machine in the global organization that was not infected because it happened to be offline during a power outage, and it retained the Active Directory database needed to rebuild the global identity infrastructure</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">It was running a different operating system that NotPetya could not infect</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">It was in a segmented network zone that NotPetya could not reach</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">What two propagation techniques did NotPetya use to spread through Maersk's network?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Phishing emails and drive-by downloads</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">EternalBlue (exploiting unpatched SMB vulnerabilities) and Mimikatz (harvesting credentials from memory to spread to patched systems via legitimate protocols)</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">SQL injection and cross-site scripting</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Bluetooth and Wi-Fi scanning</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">Why did Maersk's backup systems fail to enable recovery?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Maersk had not maintained backups for several months before the attack</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Maersk's backup systems were connected to the network and were destroyed by NotPetya along with the primary systems — only the Ghana domain controller, which was offline by accident, survived</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Maersk's backup software was incompatible with the systems that needed to be restored</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The backup encryption keys were stored on systems that were destroyed</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">What is the primary lesson about network architecture from the Maersk incident?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Large organizations should avoid using cloud services</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Network segmentation limits what any compromised system can reach — without segmentation, a single entry point can propagate malware to every system in the organization. Maersk's flat global network allowed NotPetya to spread from a Ukrainian accounting system to every machine in the company.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Organizations should disconnect all systems from the internet</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Encryption of all data is sufficient protection against ransomware and wiper attacks</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -578,11 +461,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg2':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg3':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg4':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg5':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg1':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg2':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg3':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg4':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg5':["#1B2A4A","#A08860","#C4AA88","#A08860"],
 };
 
 const NARR={
@@ -597,7 +480,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,2,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -613,19 +496,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -671,7 +542,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

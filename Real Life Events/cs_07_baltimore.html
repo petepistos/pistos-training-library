@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#f0a04a;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#A08860;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#A08860;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#A08860;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#A08860;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#A08860;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#A08860;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Case Study: Baltimore — Ransomware Shuts Down a City</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Case Study</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Happened</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ May 2019 — ransomware shut down the government of a major US city</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ Internet-exposed RDP and an unpatched Windows vulnerability</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Four control failures that paralyzed 600,000 residents</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ $18M to recover from a $76K ransom demand</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What Baltimore teaches about internet exposure, patching, and recovery</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Case Study: Baltimore — Ransomware Shuts Down a City</div>
-  <div class="home-sub">Case Study — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ May 2019 — ransomware shut down the government of a major US city</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ Internet-exposed RDP and an unpatched Windows vulnerability</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Four control failures that paralyzed 600,000 residents</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ $18M to recover from a $76K ransom demand</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What Baltimore teaches about internet exposure, patching, and recovery</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Happened</div>
     <div class="ph-sub">May 2019 — ransomware shut down the government of a major US city</div>
@@ -232,52 +115,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Incident Overview — City of Baltimore, May 2019</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Attack: RobbinHood ransomware via exposed RDP</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">EternalBlue exploit used to move laterally after entry</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">City of Baltimore, Maryland — May 7, 2019</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">13 of 18 city departments taken offline</text>
-    <text x="36" y="152" font-size="10" fill="#94a0b8" font-family="system-ui">Email, billing, property records, permitting all down</text>
-    <text x="36" y="166" font-size="10" fill="#56617a" font-family="system-ui">City employees resorted to pen and paper for weeks</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Ransom demanded: $76,000 in Bitcoin</text>
-    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Baltimore refused to pay — decision cost far more</text>
-    <text x="36" y="238" font-size="10" fill="#56617a" font-family="system-ui">Total recovery cost exceeded $18 million</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Weeks without city services for 600,000 residents</text>
-    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">Property sales halted, water bills delayed months</text>
-    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">911 dispatch on manual backup procedures</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Overview — City of Baltimore, May 2019</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Attack: RobbinHood ransomware via exposed RDP</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">EternalBlue exploit used to move laterally after entry</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">City of Baltimore, Maryland — May 7, 2019</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">13 of 18 city departments taken offline</text>
+    <text x="36" y="152" font-size="10" fill="#D6CCBC" font-family="system-ui">Email, billing, property records, permitting all down</text>
+    <text x="36" y="166" font-size="10" fill="#8A7D6B" font-family="system-ui">City employees resorted to pen and paper for weeks</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Ransom demanded: $76,000 in Bitcoin</text>
+    <text x="36" y="224" font-size="10" fill="#D6CCBC" font-family="system-ui">Baltimore refused to pay — decision cost far more</text>
+    <text x="36" y="238" font-size="10" fill="#8A7D6B" font-family="system-ui">Total recovery cost exceeded $18 million</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Weeks without city services for 600,000 residents</text>
+    <text x="36" y="296" font-size="10" fill="#D6CCBC" font-family="system-ui">Property sales halted, water bills delayed months</text>
+    <text x="36" y="310" font-size="10" fill="#8A7D6B" font-family="system-ui">911 dispatch on manual backup procedures</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">A city government brought to its knees</div>
+    <div class="blk-title" style="color:#A08860;">A city government brought to its knees</div>
     <div class="blk-body">On May 7, 2019, Baltimore's city government was hit by RobbinHood ransomware. Within hours, 13 of the city's 18 government departments were offline. Email was down. The city's online payment systems were inaccessible. Property records, water billing, parking tickets, and permit processing all stopped. City employees across departments reverted to pen and paper. Residents could not access city services. The attack affected approximately 600,000 people and paralyzed city operations for weeks. Attackers demanded approximately $76,000 in Bitcoin. Baltimore refused to pay.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">What systems were affected</div>
+    <div class="blk-title" style="color:#1B2A4A;">What systems were affected</div>
     <div class="blk-body">The ransomware spread rapidly across Baltimore's city network, encrypting systems across 13 departments. Among the most disruptive losses: the city's email system, which was down for weeks; the city's online payment portal, preventing residents from paying water bills and property taxes; the property records system, which halted real estate closings city-wide; the permitting system, blocking construction and business license applications; and the 911 dispatch support systems, which required manual backup procedures. The breadth of the outage reflected the flat, unsegmented nature of the city's network.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">How the attack happened</div>
+    <div class="blk-title" style="color:#C4AA88;">How the attack happened</div>
     <div class="blk-body">The attackers used a combination of two techniques. The initial entry point was Remote Desktop Protocol exposed directly to the internet — a management port that should never be accessible from the public internet without a VPN. From that entry point, attackers used EternalBlue, an exploit targeting the Windows SMB vulnerability known as MS17-010. Microsoft had released a critical patch for this vulnerability in March 2017. Baltimore's systems had not been patched in the more than two years since that patch was released.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Baltimore's response: refuse to pay</div>
+    <div class="blk-title" style="color:#A08860;">Baltimore's response: refuse to pay</div>
     <div class="blk-body">Baltimore's mayor, Bernard Young, and city council declined to pay the $76,000 ransom. The decision was consistent with guidance from the FBI and cybersecurity professionals — paying ransoms funds future attacks and does not guarantee recovery. But the decision was not without cost. Baltimore spent more than $18 million on recovery: IT contractors, replacement hardware, software licenses, and the staff time required to rebuild systems that had to be reconstructed largely from scratch due to inadequate backups. The $76,000 ransom demand was replaced by an $18 million recovery bill.</div>
   </div>
 </div>
@@ -293,53 +176,53 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="18" text-anchor="middle" font-size="12" fill="#94a0b8" font-weight="600" font-family="system-ui">Attack Chain</text>
-  <rect x="165" y="28" width="190" height="34" rx="6" fill="#f0a04a" opacity="0.15" stroke="#f0a04a" stroke-width="1.5"/>
-  <text x="260" y="49" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">1. Internet-exposed RDP port scanned</text>
-  <line x1="260" y1="62" x2="260" y2="78" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="155" y="78" width="210" height="34" rx="6" fill="#e05252" opacity="0.15" stroke="#e05252" stroke-width="1.5"/>
-  <text x="260" y="99" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">2. RDP accessed via exploit or brute force</text>
-  <line x1="260" y1="112" x2="260" y2="128" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="145" y="128" width="230" height="34" rx="6" fill="#f0a04a" opacity="0.15" stroke="#f0a04a" stroke-width="1.5"/>
-  <text x="260" y="149" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">3. EternalBlue used for lateral movement</text>
-  <line x1="260" y1="162" x2="260" y2="178" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="130" y="178" width="260" height="34" rx="6" fill="#e05252" opacity="0.15" stroke="#e05252" stroke-width="1.5"/>
-  <text x="260" y="199" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">4. Spread across unpatched city systems</text>
-  <line x1="260" y1="212" x2="260" y2="228" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="115" y="228" width="290" height="34" rx="6" fill="#e05252" opacity="0.15" stroke="#e05252" stroke-width="2"/>
-  <text x="260" y="249" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">5. RobbinHood deployed — 13 depts down</text>
-  <line x1="260" y1="262" x2="260" y2="278" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="100" y="278" width="320" height="34" rx="6" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-  <text x="260" y="299" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">6. City paralyzed for weeks, $18M recovery</text>
+  <text x="260" y="18" text-anchor="middle" font-size="12" fill="#D6CCBC" font-weight="600" font-family="system-ui">Attack Chain</text>
+  <rect x="165" y="28" width="190" height="34" rx="6" fill="#A08860" opacity="0.15" stroke="#A08860" stroke-width="1.5"/>
+  <text x="260" y="49" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">1. Internet-exposed RDP port scanned</text>
+  <line x1="260" y1="62" x2="260" y2="78" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="155" y="78" width="210" height="34" rx="6" fill="#1B2A4A" opacity="0.15" stroke="#1B2A4A" stroke-width="1.5"/>
+  <text x="260" y="99" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">2. RDP accessed via exploit or brute force</text>
+  <line x1="260" y1="112" x2="260" y2="128" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="145" y="128" width="230" height="34" rx="6" fill="#A08860" opacity="0.15" stroke="#A08860" stroke-width="1.5"/>
+  <text x="260" y="149" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">3. EternalBlue used for lateral movement</text>
+  <line x1="260" y1="162" x2="260" y2="178" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="130" y="178" width="260" height="34" rx="6" fill="#1B2A4A" opacity="0.15" stroke="#1B2A4A" stroke-width="1.5"/>
+  <text x="260" y="199" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">4. Spread across unpatched city systems</text>
+  <line x1="260" y1="212" x2="260" y2="228" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="115" y="228" width="290" height="34" rx="6" fill="#1B2A4A" opacity="0.15" stroke="#1B2A4A" stroke-width="2"/>
+  <text x="260" y="249" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">5. RobbinHood deployed — 13 depts down</text>
+  <line x1="260" y1="262" x2="260" y2="278" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="100" y="278" width="320" height="34" rx="6" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+  <text x="260" y="299" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">6. City paralyzed for weeks, $18M recovery</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Step 1: Internet-exposed RDP scanned and accessed</div>
+    <div class="blk-title" style="color:#A08860;">Step 1: Internet-exposed RDP scanned and accessed</div>
     <div class="blk-body">Remote Desktop Protocol is a Windows feature that allows remote administration of a computer. It is widely used by IT staff for remote management. When RDP is exposed directly to the internet — accessible from any IP address without requiring a VPN connection first — it becomes a target for automated scanning tools that attackers run continuously, looking for accessible RDP ports. Baltimore had RDP exposed on the public internet. The attackers identified it, gained access through exploitation or credential brute-forcing, and established their initial foothold.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Step 2: EternalBlue lateral movement</div>
+    <div class="blk-title" style="color:#1B2A4A;">Step 2: EternalBlue lateral movement</div>
     <div class="blk-body">From the initial RDP foothold, the attackers deployed EternalBlue to move laterally through Baltimore's network. EternalBlue exploits a vulnerability in the Windows Server Message Block protocol. It was originally developed by the NSA and released publicly by the Shadow Brokers hacking group in April 2017. Microsoft had released patch MS17-010 in March 2017 — before the public release. Baltimore's systems had not been patched. The vulnerability allowed the ransomware to spread from machine to machine across Baltimore's network without requiring any user interaction.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Step 3: Spreading across the unpatched city network</div>
+    <div class="blk-title" style="color:#C4AA88;">Step 3: Spreading across the unpatched city network</div>
     <div class="blk-body">EternalBlue spread the ransomware across Baltimore's flat, unsegmented network. Because all city departments were on the same network with no internal segmentation, the ransomware could move from its initial entry point to systems across 13 departments without crossing any internal security boundary. A segmented network would have contained the spread to the initial segment. The absence of segmentation allowed the ransomware to achieve city-wide impact.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Step 4: RobbinHood ransomware encrypts city systems</div>
+    <div class="blk-title" style="color:#A08860;">Step 4: RobbinHood ransomware encrypts city systems</div>
     <div class="blk-body">RobbinHood ransomware encrypted files across the systems it had reached, rendering them inaccessible. RobbinHood specifically targets network-connected drives and uses a driver-based technique to bypass antivirus software. The ransom note demanded approximately $76,000 in Bitcoin, threatening to increase the demand and permanently destroy files if payment was not made within 10 days. Baltimore chose not to pay and began the lengthy process of manually rebuilding its IT infrastructure.</div>
   </div>
 </div>
@@ -355,53 +238,53 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Control Failures</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">RDP exposed directly to the internet</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Remote Desktop Protocol open on public internet</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">RDP should always be behind VPN — never exposed</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">EternalBlue patch (MS17-010) not applied</text>
-    <text x="36" y="152" font-size="10" fill="#94a0b8" font-family="system-ui">Critical patch released March 2017 — not deployed</text>
-    <text x="36" y="166" font-size="10" fill="#56617a" font-family="system-ui">Two years without patching allowed lateral movement</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">No network segmentation</text>
-    <text x="36" y="208" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">No network segmentation</text>
-    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">All city departments on same flat network</text>
-    <text x="36" y="238" font-size="10" fill="#56617a" font-family="system-ui">Ransomware spread across all 18 departments</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">No tested offline backups for critical systems</text>
-    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">Recovery required rebuilding systems from scratch</text>
-    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Months of manual operations before full restoration</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Control Failures</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RDP exposed directly to the internet</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Remote Desktop Protocol open on public internet</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">RDP should always be behind VPN — never exposed</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">EternalBlue patch (MS17-010) not applied</text>
+    <text x="36" y="152" font-size="10" fill="#D6CCBC" font-family="system-ui">Critical patch released March 2017 — not deployed</text>
+    <text x="36" y="166" font-size="10" fill="#8A7D6B" font-family="system-ui">Two years without patching allowed lateral movement</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">No network segmentation</text>
+    <text x="36" y="208" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">No network segmentation</text>
+    <text x="36" y="224" font-size="10" fill="#D6CCBC" font-family="system-ui">All city departments on same flat network</text>
+    <text x="36" y="238" font-size="10" fill="#8A7D6B" font-family="system-ui">Ransomware spread across all 18 departments</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">No tested offline backups for critical systems</text>
+    <text x="36" y="296" font-size="10" fill="#D6CCBC" font-family="system-ui">Recovery required rebuilding systems from scratch</text>
+    <text x="36" y="310" font-size="10" fill="#8A7D6B" font-family="system-ui">Months of manual operations before full restoration</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Failure 1: RDP exposed directly to the internet</div>
+    <div class="blk-title" style="color:#A08860;">Failure 1: RDP exposed directly to the internet</div>
     <div class="blk-body">Remote Desktop Protocol should never be directly accessible from the public internet. RDP exposes administrative access to a Windows machine and has a history of vulnerabilities. When exposed on the public internet, RDP servers are continuously scanned and probed by automated tools. The correct architecture is to require VPN authentication before any RDP access — meaning attackers must first defeat VPN authentication before they can attempt any RDP attack. Baltimore had not applied this basic internet exposure reduction to its RDP infrastructure.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Failure 2: Critical patch MS17-010 not applied for two years</div>
+    <div class="blk-title" style="color:#1B2A4A;">Failure 2: Critical patch MS17-010 not applied for two years</div>
     <div class="blk-body">Microsoft released the patch for the EternalBlue vulnerability in March 2017 — weeks before WannaCry used the same vulnerability to cause global disruption in May 2017. Baltimore's systems were not patched with MS17-010 more than two years after the patch's release, despite WannaCry having dramatically demonstrated the consequences of not applying it. Effective patch management requires a defined process for critical patch application, with a maximum timeframe for deployment after release, and a tracking system that identifies unpatched systems.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Failure 3: No network segmentation — ransomware spread city-wide</div>
+    <div class="blk-title" style="color:#C4AA88;">Failure 3: No network segmentation — ransomware spread city-wide</div>
     <div class="blk-body">Baltimore's city government operated all 13 affected departments on the same flat network. When the ransomware entered through RDP and spread via EternalBlue, there were no internal network boundaries to stop its expansion. Network segmentation — placing each department or function in its own network zone with firewall rules controlling communication between zones — would have contained the ransomware to the segment where it first appeared. The city-wide impact was a direct consequence of the city-wide network.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Failure 4: No tested offline backups for critical systems</div>
+    <div class="blk-title" style="color:#A08860;">Failure 4: No tested offline backups for critical systems</div>
     <div class="blk-body">Baltimore's recovery required rebuilding many systems essentially from scratch, at a cost that far exceeded the ransom demand. Adequate offline backups — copies of critical systems stored in locations the ransomware could not reach — would have made recovery a matter of restoring from backup rather than rebuilding from nothing. The absence of offline backup capability was the reason the recovery cost $18 million instead of the much smaller cost of restoring from backup and resuming operations.</div>
   </div>
 </div>
@@ -417,52 +300,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Impact Summary</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="60" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Financial: $18M+ cost to recover from a $76K ransom</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Refused to pay $76K — spent $18M on recovery anyway</text>
-    <text x="36" y="88" font-size="10" fill="#56617a" font-family="system-ui">Cost included IT rebuild, contractors, lost revenue</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="106" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="130" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Operational: Weeks of city service disruption</text>
-    <text x="36" y="146" font-size="10" fill="#94a0b8" font-family="system-ui">600,000 residents could not access city services</text>
-    <text x="36" y="160" font-size="10" fill="#56617a" font-family="system-ui">Property records, permits, water bills all offline</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="202" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Residents: Real estate closings halted for weeks</text>
-    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">Property title searches impossible without records access</text>
-    <text x="36" y="232" font-size="10" fill="#56617a" font-family="system-ui">Thousands of pending transactions put on hold</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="250" width="480" height="66" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="274" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Industry: Government cybersecurity as public service</text>
-    <text x="36" y="290" font-size="10" fill="#94a0b8" font-family="system-ui">Attack on city systems is an attack on citizens</text>
-    <text x="36" y="306" font-size="10" fill="#56617a" font-family="system-ui">Second major Baltimore ransomware attack in 14 months</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Impact Summary</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Financial: $18M+ cost to recover from a $76K ransom</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Refused to pay $76K — spent $18M on recovery anyway</text>
+    <text x="36" y="88" font-size="10" fill="#8A7D6B" font-family="system-ui">Cost included IT rebuild, contractors, lost revenue</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="106" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="130" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Operational: Weeks of city service disruption</text>
+    <text x="36" y="146" font-size="10" fill="#D6CCBC" font-family="system-ui">600,000 residents could not access city services</text>
+    <text x="36" y="160" font-size="10" fill="#8A7D6B" font-family="system-ui">Property records, permits, water bills all offline</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="202" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Residents: Real estate closings halted for weeks</text>
+    <text x="36" y="218" font-size="10" fill="#D6CCBC" font-family="system-ui">Property title searches impossible without records access</text>
+    <text x="36" y="232" font-size="10" fill="#8A7D6B" font-family="system-ui">Thousands of pending transactions put on hold</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="250" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="274" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Industry: Government cybersecurity as public service</text>
+    <text x="36" y="290" font-size="10" fill="#D6CCBC" font-family="system-ui">Attack on city systems is an attack on citizens</text>
+    <text x="36" y="306" font-size="10" fill="#8A7D6B" font-family="system-ui">Second major Baltimore ransomware attack in 14 months</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Financial: Refusing $76K ransom cost $18 million</div>
+    <div class="blk-title" style="color:#A08860;">Financial: Refusing $76K ransom cost $18 million</div>
     <div class="blk-body">The attackers demanded approximately $76,000 in Bitcoin. Baltimore's mayor and city council declined to pay, which is consistent with FBI guidance. The decision not to pay, however, was not free. Baltimore's total recovery cost exceeded $18 million: IT contractors to rebuild systems, replacement hardware, new software licenses, and the staff time across dozens of departments to reconstruct operations that had to be rebuilt largely from scratch. The $18 million figure does not include the economic cost of the disruption to residents and businesses unable to complete transactions dependent on city systems.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Operational: Weeks without city services for 600,000 residents</div>
+    <div class="blk-title" style="color:#1B2A4A;">Operational: Weeks without city services for 600,000 residents</div>
     <div class="blk-body">Six hundred thousand Baltimore residents experienced weeks of disrupted city services. Water bills could not be paid online — eventually the city waived late fees for the duration of the outage. Property taxes could not be processed electronically. Real estate closings were halted city-wide because title searches require access to property records. Permit applications could not be submitted. City employees across 13 departments conducted operations manually — processing paperwork by hand, using personal phones, and maintaining handwritten records of transactions that would need to be entered into systems once they came back online.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Real estate market: Thousands of transactions halted</div>
+    <div class="blk-title" style="color:#C4AA88;">Real estate market: Thousands of transactions halted</div>
     <div class="blk-body">The impact on the Baltimore real estate market was one of the most concrete and economically significant effects of the breach. Real estate closings require access to property records to verify title and confirm ownership. With property records inaccessible, real estate attorneys could not perform the title searches required for closing. Thousands of pending property sales were put on hold for weeks. Buyers who had sold other properties or given notice at rental units and were depending on their pending purchases found themselves in difficult positions. The economic damage to individuals caught in this situation extended well beyond the city's own costs.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Lesson: Second major Baltimore ransomware attack in 14 months</div>
+    <div class="blk-title" style="color:#A08860;">Lesson: Second major Baltimore ransomware attack in 14 months</div>
     <div class="blk-body">The May 2019 attack was not Baltimore's first ransomware incident. In March 2018, just 14 months earlier, Baltimore's 911 dispatch system was hit by ransomware — that attack was contained more quickly but demonstrated that Baltimore's IT infrastructure had known vulnerabilities. The 2019 attack occurred in the same environment that had already been targeted. The failure to implement the controls that would have prevented the 2019 attack — RDP hardening, patch management, segmentation, offline backups — in the 14 months between the two attacks is the most damning aspect of the incident from a governance perspective.</div>
   </div>
 </div>
@@ -479,58 +362,58 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
   <g id="pg5-hl0" class="svg-hl" transform="translate(140,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">RDP BEHIND VPN</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Never expose RDP directly</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Remote access requires VPN first</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Block 3389 at firewall perimeter</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RDP BEHIND VPN</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Never expose RDP directly</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Remote access requires VPN first</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Block 3389 at firewall perimeter</text></g>
   <g id="pg5-hl1" class="svg-hl" transform="translate(380,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">PATCH MANAGEMENT</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Critical patches within 30 days</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Track all unpatched systems</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Emergency patch protocols</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">PATCH MANAGEMENT</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Critical patches within 30 days</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Track all unpatched systems</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Emergency patch protocols</text></g>
   <g id="pg5-hl2" class="svg-hl" transform="translate(140,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">NETWORK SEGMENTATION</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Separate critical departments</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Contain blast radius</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Ransomware stays in one zone</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">NETWORK SEGMENTATION</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Separate critical departments</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Contain blast radius</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Ransomware stays in one zone</text></g>
   <g id="pg5-hl3" class="svg-hl" transform="translate(380,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">OFFLINE BACKUPS</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Immutable, tested copies</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Ransomware cannot reach tape</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Test restore every quarter</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">OFFLINE BACKUPS</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Immutable, tested copies</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Ransomware cannot reach tape</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Test restore every quarter</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">RDP should never be exposed directly to the internet</div>
+    <div class="blk-title" style="color:#A08860;">RDP should never be exposed directly to the internet</div>
     <div class="blk-body">Remote Desktop Protocol accessible from the public internet is one of the most consistently exploited attack vectors in ransomware operations. The correct control is simple: block RDP at the perimeter firewall and require VPN authentication before any RDP access is permitted. This single architectural change removes the most common ransomware entry point.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Critical patches must be applied on a defined timeline</div>
+    <div class="blk-title" style="color:#1B2A4A;">Critical patches must be applied on a defined timeline</div>
     <div class="blk-body">EternalBlue was patched in March 2017. WannaCry demonstrated its consequences in May 2017. Baltimore had not applied the patch more than two years later. A patch management program with a defined maximum timeline for critical patch application and a tracking system that identifies unpatched systems is the control that prevents known vulnerabilities from remaining exploitable indefinitely.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Network segmentation contains ransomware blast radius</div>
+    <div class="blk-title" style="color:#C4AA88;">Network segmentation contains ransomware blast radius</div>
     <div class="blk-body">The ransomware spread from its initial entry point to systems across 13 departments because the city had a flat, unsegmented network. Segmentation — placing departments or functions in separate network zones with controlled communication between zones — limits how far ransomware can spread from its initial infection point. Containment does not prevent the attack; it limits the damage.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Offline backups determine recovery cost</div>
+    <div class="blk-title" style="color:#A08860;">Offline backups determine recovery cost</div>
     <div class="blk-body">Baltimore spent $18 million recovering from a $76,000 ransom demand because it did not have adequate offline backups to restore from. Offline or immutable backups that ransomware cannot reach determine whether recovery is a restoration exercise measured in days or a rebuild exercise measured in months and millions of dollars. Tested offline backups are the control that makes ransomware a recoverable incident rather than an existential one.</div>
   </div>
 </div>
@@ -542,40 +425,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Case Study: Baltimore — Ransomware Shuts Down a City</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">What two techniques did attackers use to enter and spread through Baltimore's network?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Phishing email plus credential theft</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Internet-exposed RDP plus the EternalBlue exploit via unpatched MS17-010</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Stolen VPN credentials plus lateral movement</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Web application exploit plus privilege escalation</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">How much did Baltimore's recovery cost compared to the ransom demand?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">They are roughly equal — about $76,000 each</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Recovery cost $1.8M vs. a $760K ransom demand</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Recovery cost over $18M vs. a $76,000 ransom demand</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Recovery cost $7.6M vs. a $760,000 ransom demand</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">Why was the Baltimore attack able to spread across 13 city departments?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">The ransomware had an advanced worm capability that bypassed all security</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Baltimore's flat, unsegmented network allowed the ransomware to reach all departments</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">The attackers had inside help from a city employee</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Each department had its own internet connection that was exploited separately</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">What would have been the most effective control for preventing the Baltimore attack's entry point?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Better antivirus software on Windows servers</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Blocking RDP at the firewall and requiring VPN before any RDP access</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Implementing multi-factor authentication on city email</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Training employees to recognize phishing emails</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">What control would have most reduced the $18M recovery cost?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Paying the $76,000 ransom immediately</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Better network segmentation to limit the blast radius</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Tested offline backups allowing restoration rather than rebuild</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Hiring more IT staff for faster recovery</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">What is significant about the MS17-010 vulnerability in the context of the Baltimore attack?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">It was a zero-day vulnerability with no available patch</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">The patch was released March 2017 but Baltimore's systems were unpatched over 2 years later</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">It specifically targeted government network configurations</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Microsoft refused to release a patch because the vulnerability required physical access</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -587,11 +470,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
-  'pg2':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
-  'pg3':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
-  'pg4':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
-  'pg5':["#f0a04a","#e05252","#4b8ef0","#6db86d"],
+  'pg1':["#A08860","#1B2A4A","#C4AA88","#A08860"],
+  'pg2':["#A08860","#1B2A4A","#C4AA88","#A08860"],
+  'pg3':["#A08860","#1B2A4A","#C4AA88","#A08860"],
+  'pg4':["#A08860","#1B2A4A","#C4AA88","#A08860"],
+  'pg5':["#A08860","#1B2A4A","#C4AA88","#A08860"],
 };
 
 const NARR={
@@ -606,7 +489,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,2,1,1,2,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -622,19 +505,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -680,7 +551,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

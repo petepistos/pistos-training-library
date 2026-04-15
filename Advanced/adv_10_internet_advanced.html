@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#f0a04a;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#A08860;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#A08860;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#A08860;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#A08860;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#A08860;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#A08860;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Internet Security — Advanced</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Advanced</span>
-    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Advanced Web Application Security</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Threat Intelligence Integration</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Cloud Security Architecture at Depth</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Internet Security Program Maturity</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Threat Intelligence Integration</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Cloud Security Architecture at Depth</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Internet Security Program Maturity</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Advanced Web Application Security</span>
-  </div>
-  <div class="mc-desc">▶ OWASP at depth, API security, and WAF architecture</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Threat Intelligence Integration</span>
-  </div>
-  <div class="mc-desc">▶ Operationalizing threat intel for insurance sector threats</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Cloud Security Architecture at Depth</span>
-  </div>
-  <div class="mc-desc">▶ CNAPP, workload security, and multi-cloud governance</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Internet Security Program Maturity</span>
-  </div>
-  <div class="mc-desc">▶ Program governance, metrics, and regulatory alignment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Internet Security — Advanced</div>
-  <div class="home-sub">Advanced — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Advanced Web Application Security</span>
-  </div>
-  <div class="mc-desc">▶ OWASP at depth, API security, and WAF architecture</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Threat Intelligence Integration</span>
-  </div>
-  <div class="mc-desc">▶ Operationalizing threat intel for insurance sector threats</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Cloud Security Architecture at Depth</span>
-  </div>
-  <div class="mc-desc">▶ CNAPP, workload security, and multi-cloud governance</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Internet Security Program Maturity</span>
-  </div>
-  <div class="mc-desc">▶ Program governance, metrics, and regulatory alignment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Advanced Web Application Security</div>
     <div class="ph-sub">OWASP at depth, API security, and WAF architecture</div>
@@ -232,50 +115,50 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Web Application Security Architecture</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="56" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">OWASP Top 10: Injection · Broken Access Control · Cryptographic Failures</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Parameterized queries · Server-side authz every request · bcrypt/Argon2 · Harden at deploy</text>
-    <text x="36" y="92" font-size="10" fill="#56617a" font-family="system-ui">Cost: code review fix = hours · pen test find = weeks · post-breach = millions</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="56" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">API Security: BOLA · Short-lived tokens · Rate limiting · Object-level authz</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">/api/policies/{id} must verify requesting user owns that policy · OAuth 15-min tokens · 60 req/min</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="56" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">WAF: Detection mode 2-4wk → tune exclusions → enforce → annual bypass test</text>
-    <text x="36" y="226" font-size="10" fill="#94a0b8" font-family="system-ui">Untuned WAF in detection mode = alert fatigue = ignored alerts = zero security value</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1e2235" stroke="#4bb8b8" stroke-width="1.5"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Web Application Security Architecture</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">OWASP Top 10: Injection · Broken Access Control · Cryptographic Failures</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Parameterized queries · Server-side authz every request · bcrypt/Argon2 · Harden at deploy</text>
+    <text x="36" y="92" font-size="10" fill="#8A7D6B" font-family="system-ui">Cost: code review fix = hours · pen test find = weeks · post-breach = millions</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="56" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">API Security: BOLA · Short-lived tokens · Rate limiting · Object-level authz</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">/api/policies/{id} must verify requesting user owns that policy · OAuth 15-min tokens · 60 req/min</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="56" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">WAF: Detection mode 2-4wk → tune exclusions → enforce → annual bypass test</text>
+    <text x="36" y="226" font-size="10" fill="#D6CCBC" font-family="system-ui">Untuned WAF in detection mode = alert fatigue = ignored alerts = zero security value</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="254" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#4bb8b8" stroke-width="1.5"/>
     <text x="36" y="276" font-size="11" fill="#4bb8b8" font-weight="700" font-family="system-ui">SDLC: Threat model → Security reqs → SAST + SCA → Pen test → Monitor</text>
-    <text x="36" y="294" font-size="10" fill="#94a0b8" font-family="system-ui">Vendors: WAF + API gateway + SOC 2 evidence · Custom dev: full SDLC applies</text>
-    <text x="36" y="312" font-size="10" fill="#56617a" font-family="system-ui">Start with dependency scanning + SAST — easy CI/CD integration, immediate value</text></g>
+    <text x="36" y="294" font-size="10" fill="#D6CCBC" font-family="system-ui">Vendors: WAF + API gateway + SOC 2 evidence · Custom dev: full SDLC applies</text>
+    <text x="36" y="312" font-size="10" fill="#8A7D6B" font-family="system-ui">Start with dependency scanning + SAST — easy CI/CD integration, immediate value</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">OWASP Top 10 at depth: the vulnerability classes that matter for insurance web applications</div>
+    <div class="blk-title" style="color:#A08860;">OWASP Top 10 at depth: the vulnerability classes that matter for insurance web applications</div>
     <div class="blk-body">Insurance agencies operate web applications — client portals, online application submission, certificate of insurance issuance, claims status tracking — that process NPI and must withstand the full spectrum of web application attacks. The OWASP Top 10 vulnerability classes most relevant to insurance web applications: Injection (SQL injection in application database queries, LDAP injection in directory queries, command injection in server-side processing — prevented by parameterized queries and input validation); Broken Access Control (users accessing other customers' policy data, agents accessing records outside their authorized book of business — prevented by server-side authorization checks on every request, not just at login); Cryptographic Failures (transmitting NPI without TLS, storing passwords without bcrypt or Argon2, using weak key derivation — prevented by current encryption standards applied consistently); Security Misconfiguration (default credentials on CMS or framework administrative interfaces, directory listing enabled, verbose error messages revealing stack traces and database schema — prevented by hardening procedures applied at deployment). Each OWASP category requires specific mitigations that go beyond generic 'implement security best practices' guidance — insurance web application developers and security reviewers must understand the category at the level needed to identify specific vulnerable patterns in code review.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">API security: authentication, authorization, and rate limiting for insurance APIs</div>
+    <div class="blk-title" style="color:#C4AA88;">API security: authentication, authorization, and rate limiting for insurance APIs</div>
     <div class="blk-body">Modern insurance applications use REST APIs extensively — for integration between the agency management system and carrier portals, for client portal data retrieval, for premium calculation engines, for third-party data enrichment services. API security vulnerabilities differ from traditional web application vulnerabilities in their attack surface and exploitation pattern. Broken Object Level Authorization (BOLA, OWASP API Security #1) is the API-specific variant of insecure direct object reference: an API endpoint that returns policy data at /api/policies/{policy_id} must verify that the authenticated user is authorized to access the specific policy identified by that ID, not just that the user is authenticated. A vulnerable implementation returns the policy for any valid policy_id regardless of the requesting user's authorization — allowing an attacker who knows or can guess policy IDs to access any customer's policy data. API authentication must use short-lived tokens (OAuth 2.0 bearer tokens with 15-minute expiration, not API keys that never expire), and all API endpoints must implement rate limiting that prevents automated enumeration of object identifiers. Rate limiting for insurance APIs should be calibrated to the expected legitimate usage pattern: a client portal API that a user accesses to check their policy status should allow 60 requests per minute, not 6,000.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Web Application Firewall architecture: rule tuning, bypass prevention, and DDoS mitigation</div>
+    <div class="blk-title" style="color:#1B2A4A;">Web Application Firewall architecture: rule tuning, bypass prevention, and DDoS mitigation</div>
     <div class="blk-body">Web Application Firewalls (WAFs) provide signature-based and behavioral filtering of HTTP/HTTPS traffic before it reaches web application servers. WAF deployment architectures: cloud-based WAF (AWS WAF, Azure Application Gateway WAF, Cloudflare) deployed in front of internet-facing applications with global threat intelligence, on-premises WAF appliances in the data center egress path, and hybrid configurations. WAF effectiveness depends critically on rule tuning — a WAF deployed with default rules in blocking mode generates false positives that block legitimate application traffic, causing operators to switch to detection mode to stop the false positives, effectively disabling the WAF's protective function. Tuning requires: running in detection mode for 2 to 4 weeks to measure the false positive rate for each rule category against actual application traffic, creating application-specific exclusions for legitimate traffic patterns that trigger rules (a URL-encoded parameter that legitimate users submit frequently will trigger SQL injection rules — the WAF needs an exclusion for that specific parameter in that specific endpoint), and testing bypass techniques against the tuned configuration to confirm that attackers cannot circumvent the rules through encoding variations, case permutations, or protocol-level techniques. WAF bypass testing requires specialized tools and techniques — confirming that a WAF blocks obvious SQL injection attempts does not confirm it blocks obfuscated injection attempts.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Secure Development Lifecycle for insurance web applications</div>
+    <div class="blk-title" style="color:#C4AA88;">Secure Development Lifecycle for insurance web applications</div>
     <div class="blk-body">A Secure Development Lifecycle (SDLC) integrates security into the development process at each stage rather than treating security as a post-development audit. For insurance agencies managing their own web applications or overseeing third-party developers: Threat modeling at design (identifying the attack surface, threat actors, and highest-risk vulnerabilities for the specific application before a line of code is written — a client portal that stores cached policy documents has a different threat model than a premium calculation API), security requirements specification (translating the threat model into specific security requirements that acceptance testing must verify — the application must enforce authorization checks on all policy data access, the application must not log NPI in application logs), secure code review (automated SAST scanning for known vulnerability patterns, manual review of authentication and authorization logic, dependency scanning for known-vulnerable libraries), penetration testing at release (black-box and gray-box testing against the deployed application before each major release), and production security monitoring (WAF, application performance monitoring with security anomaly detection, runtime application self-protection where available). The SDLC is most effective when security requirements are defined before development begins — retrofitting security into a completed application is substantially more expensive than building it correctly from design.</div>
   </div>
 </div>
@@ -291,62 +174,62 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Threat Intelligence Program</text>
-  <g id="pg2-hl0" class="svg-hl" transform="translate(92,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text y="-46" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">STRATEGIC</text>
-    <text y="-28" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Threat actors</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Sector targeting</text>
-    <text y="6" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Investment priorities</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Weeks/months</text>
-    <text y="50" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Executive audience</text></g>
-  <g id="pg2-hl1" class="svg-hl" transform="translate(260,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-46" text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">OPERATIONAL</text>
-    <text y="-28" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Active campaigns</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Malware families</text>
-    <text y="6" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Defensive posture</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Days/weeks</text>
-    <text y="50" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">SecOps audience</text></g>
-  <g id="pg2-hl2" class="svg-hl" transform="translate(428,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text y="-46" text-anchor="middle" font-size="10" fill="#9b7fe8" font-weight="700" font-family="system-ui">TACTICAL</text>
-    <text y="-28" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">IOCs: IPs · domains</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">File hashes · URLs</text>
-    <text y="6" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Tool blocklists</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Hours/days (burns fast)</text>
-    <text y="50" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Automated tools</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="190" width="480" height="136" rx="8" fill="#1e2235" stroke="#4bb8b8" stroke-width="1.5"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Threat Intelligence Program</text>
+  <g id="pg2-hl0" class="svg-hl" transform="translate(92,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-46" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">STRATEGIC</text>
+    <text y="-28" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Threat actors</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Sector targeting</text>
+    <text y="6" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Investment priorities</text>
+    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Weeks/months</text>
+    <text y="50" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Executive audience</text></g>
+  <g id="pg2-hl1" class="svg-hl" transform="translate(260,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-46" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">OPERATIONAL</text>
+    <text y="-28" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Active campaigns</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Malware families</text>
+    <text y="6" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Defensive posture</text>
+    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Days/weeks</text>
+    <text y="50" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">SecOps audience</text></g>
+  <g id="pg2-hl2" class="svg-hl" transform="translate(428,108)"><rect x="-72" y="-70" width="144" height="140" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-46" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">TACTICAL</text>
+    <text y="-28" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">IOCs: IPs · domains</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">File hashes · URLs</text>
+    <text y="6" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Tool blocklists</text>
+    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Hours/days (burns fast)</text>
+    <text y="50" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Automated tools</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="190" width="480" height="136" rx="8" fill="#1B2A4A" stroke="#4bb8b8" stroke-width="1.5"/>
     <text x="36" y="214" font-size="11" fill="#4bb8b8" font-weight="700" font-family="system-ui">FS-ISAC + Supply Chain + Browser Security</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">FS-ISAC: Sector-specific sharing · Bidirectional contribution required · Hours to IOC receipt</text>
-    <text x="36" y="250" font-size="10" fill="#94a0b8" font-family="system-ui">Supply chain: Integration inventory · Risk-tiered SOC 2 review · SCA for dependencies</text>
-    <text x="36" y="270" font-size="10" fill="#56617a" font-family="system-ui">Browser: Enterprise policies + DNS filtering + FIDO2/WebAuthn = credential phishing eliminated</text></g>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">FS-ISAC: Sector-specific sharing · Bidirectional contribution required · Hours to IOC receipt</text>
+    <text x="36" y="250" font-size="10" fill="#D6CCBC" font-family="system-ui">Supply chain: Integration inventory · Risk-tiered SOC 2 review · SCA for dependencies</text>
+    <text x="36" y="270" font-size="10" fill="#8A7D6B" font-family="system-ui">Browser: Enterprise policies + DNS filtering + FIDO2/WebAuthn = credential phishing eliminated</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Threat intelligence types: strategic, operational, and tactical applied to insurance</div>
+    <div class="blk-title" style="color:#A08860;">Threat intelligence types: strategic, operational, and tactical applied to insurance</div>
     <div class="blk-body">Threat intelligence has three levels of abstraction that serve different organizational functions. Strategic intelligence — reports on threat actor groups, nation-state cyber operations, industry-sector targeting trends, and emerging attack techniques — informs executive decisions about security investment priorities and regulatory risk. For insurance agencies, strategic intelligence includes: which threat actor groups specifically target financial services and insurance organizations, what attack techniques they prefer (initial access through phishing, credential stuffing, supply chain compromise), and what data they seek to monetize (NPI for identity theft, financial data for fraud, business email compromise for wire fraud). Operational intelligence — specific campaigns, malware families, and attack infrastructure in active use — informs current defensive posture adjustments: blocking newly identified phishing campaign infrastructure, adding detection rules for a new malware family affecting the financial sector. Tactical intelligence — specific indicators of compromise (IOCs) including IP addresses, domain names, file hashes, and URL patterns — is consumed directly by security tools: firewall blocklists, SIEM detection rules, endpoint EDR signatures. The tactical layer has the shortest useful life — IOCs are burned within hours to days as attackers rotate infrastructure.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Threat intelligence sharing: FS-ISAC and sector-specific sharing communities</div>
+    <div class="blk-title" style="color:#C4AA88;">Threat intelligence sharing: FS-ISAC and sector-specific sharing communities</div>
     <div class="blk-body">The Financial Services Information Sharing and Analysis Center (FS-ISAC) is the primary threat intelligence sharing community for financial institutions including insurance companies. FS-ISAC provides: real-time indicator sharing (IOCs shared by member institutions when they detect active attacks — other members can apply these indicators immediately), sector-specific analysis (threat intelligence contextualized for financial services operations, regulatory environment, and customer data types), and vulnerability alerts relevant to financial sector technology (AMS platforms, carrier integration APIs, payment processing systems). Participation requires FS-ISAC membership and integration of the sharing feeds into the organization's security tools. Beyond FS-ISAC, insurance agencies should also monitor: CIS MS-ISAC alerts for threats to organizations across all sectors, FBI and CISA joint advisories on actively exploited vulnerabilities and threat actor activity, and their technology vendors' threat intelligence communications. Threat intelligence sharing is bidirectional — organizations that only consume without contributing limit the program's value for the community and may receive lower-priority access to some feeds. Contributing indicators from detected attacks provides tangible intelligence value to peer organizations and strengthens the sharing relationship.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Supply chain security: third-party internet exposure and software supply chain risk</div>
+    <div class="blk-title" style="color:#1B2A4A;">Supply chain security: third-party internet exposure and software supply chain risk</div>
     <div class="blk-body">Insurance agencies depend on dozens of third-party services with internet connectivity — carrier portals, e-signature platforms, premium finance systems, comparative raters, CRM platforms, document management systems. Each integration represents a supply chain risk vector: a vulnerability in the third-party platform, a compromise of the third-party's infrastructure, or a malicious actor who compromises a software update mechanism can use the third-party relationship to reach the insurance agency's environment. Supply chain internet security requires: a complete inventory of third-party internet-facing integrations (many organizations have integrations that were established years ago and are not in current IT inventory), security assessment of third-party platforms before integration (SOC 2 Type II reports, penetration test summaries, security questionnaire responses — evaluated against the sensitivity of data the integration accesses), ongoing monitoring of third-party security posture (subscribing to vendor security notification lists, monitoring for CVEs affecting vendor platforms, reviewing annual SOC 2 reports when issued), and contractual security requirements (vendor contracts should require breach notification within a defined timeline, security assessment rights, and minimum security control implementation). Software supply chain risk — the risk that a library or component used in the agency's own applications contains a malicious or vulnerable dependency — is managed through software composition analysis (SCA) scanning of application dependencies as part of the SDLC.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Browser security at enterprise scale: enterprise browser and endpoint web filtering</div>
+    <div class="blk-title" style="color:#C4AA88;">Browser security at enterprise scale: enterprise browser and endpoint web filtering</div>
     <div class="blk-body">Web browsers are the primary attack surface for phishing, drive-by downloads, and web application session hijacking. Enterprise browser security goes beyond standard browser deployment to include: enterprise browser platforms (Microsoft Edge with enterprise policies, Chrome Enterprise, or purpose-built enterprise browsers like Island or Talon) that provide centralized policy management, web filtering integration, and DLP enforcement at the browser level; browser extension governance (a policy defining which extensions are permitted based on security review — malicious or vulnerable extensions are a common credential theft vector); web content filtering (blocking access to malicious and high-risk domains through DNS filtering or proxy-based filtering — Cisco Umbrella, Zscaler ZIA, or Microsoft Defender SmartScreen — applied consistently to all devices regardless of network location); and phishing-resistant authentication integration (FIDO2 security keys or passkeys eliminate the credential phishing attack entirely by using origin-bound cryptographic authentication that cannot be replayed against a phishing site). Web content filtering for insurance agencies should apply a policy appropriate to the regulatory environment: blocking known malicious domains, blocking uncategorized domains on managed devices handling NPI, and logging all web access from managed devices for security monitoring.</div>
   </div>
 </div>
@@ -362,48 +245,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Cloud Security Architecture</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="56" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">CNAPP: Attack path analysis — CSPM + CWPP + CASB correlated to NPI exposure</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">EC2 vuln → broad instance profile → NPI in S3: chain changes patch priority vs raw CVSS score</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="110" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="132" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CIEM: Last-90-day activity analysis removes 40-70% unused permissions</text>
-    <text x="36" y="150" font-size="10" fill="#94a0b8" font-family="system-ui">Unused perms · Wildcard policies · Privilege escalation paths · Iterative right-sizing</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Multi-cloud governance: Policy-level baseline · Multi-cloud CSPM · Central IdP</text>
-    <text x="36" y="226" font-size="10" fill="#94a0b8" font-family="system-ui">Provider-agnostic policy maps to AWS/Azure/GCP configs · Unified SIEM log aggregation</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="262" width="480" height="64" rx="8" fill="#1e2235" stroke="#4bb8b8" stroke-width="1.5"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Cloud Security Architecture</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CNAPP: Attack path analysis — CSPM + CWPP + CASB correlated to NPI exposure</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">EC2 vuln → broad instance profile → NPI in S3: chain changes patch priority vs raw CVSS score</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="110" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CIEM: Last-90-day activity analysis removes 40-70% unused permissions</text>
+    <text x="36" y="150" font-size="10" fill="#D6CCBC" font-family="system-ui">Unused perms · Wildcard policies · Privilege escalation paths · Iterative right-sizing</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Multi-cloud governance: Policy-level baseline · Multi-cloud CSPM · Central IdP</text>
+    <text x="36" y="226" font-size="10" fill="#D6CCBC" font-family="system-ui">Provider-agnostic policy maps to AWS/Azure/GCP configs · Unified SIEM log aggregation</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="262" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#4bb8b8" stroke-width="1.5"/>
     <text x="36" y="284" font-size="11" fill="#4bb8b8" font-weight="700" font-family="system-ui">Cloud IR: Pre-positioned data-plane logging · Cloud-specific forensic procedures</text>
-    <text x="36" y="302" font-size="10" fill="#94a0b8" font-family="system-ui">CloudTrail data-plane events (S3 access) must be enabled before incidents · Ephemeral evidence collection</text></g>
+    <text x="36" y="302" font-size="10" fill="#D6CCBC" font-family="system-ui">CloudTrail data-plane events (S3 access) must be enabled before incidents · Ephemeral evidence collection</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">CNAPP: unified cloud-native application protection platform architecture</div>
+    <div class="blk-title" style="color:#A08860;">CNAPP: unified cloud-native application protection platform architecture</div>
     <div class="blk-body">Cloud-Native Application Protection Platforms (CNAPP) unify the capabilities previously provided by separate tools — CSPM, CWPP, CASB, and infrastructure entitlement management — into a single platform that provides end-to-end visibility from development through runtime. CNAPP addresses a fundamental problem in cloud security: cloud threats often involve chains of misconfigurations and vulnerabilities that span multiple control domains. A compromised container that exploits a container escape vulnerability to reach the host, which has an EC2 instance profile with overly broad IAM permissions, which allows the attacker to access S3 buckets containing NPI — this attack chain spans CWPP (container runtime monitoring), CSPM (IAM over-permissioning), and data security (NPI in S3). Separate tools in siloed dashboards make it difficult to see the complete attack path; CNAPP correlates findings across domains to identify the complete risk chain and prioritize the finding that, if remediated, breaks the largest number of attack chains. CNAPP platforms (Wiz, Palo Alto Prisma Cloud, CrowdStrike Falcon Cloud Security) also provide cloud attack path analysis — showing the specific steps an attacker could take from an internet-facing entry point to a sensitive data target, helping security teams understand which misconfigurations represent actual exploitable risk rather than just compliance findings.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Identity and entitlement security: CIEM and least-privilege enforcement in cloud</div>
+    <div class="blk-title" style="color:#C4AA88;">Identity and entitlement security: CIEM and least-privilege enforcement in cloud</div>
     <div class="blk-body">Cloud Identity and Entitlement Management (CIEM) addresses the cloud-specific challenge of identity over-permissioning. Cloud environments have thousands of identity principals — human user accounts, service accounts, EC2 instance profiles, Lambda execution roles, Azure Managed Identities, GCP service accounts — each with a set of permissions defined by attached IAM policies. The principle of least privilege requires that each identity has exactly the permissions needed for its function and no more. In practice, cloud IAM configurations accumulate excessive permissions through three patterns: unused permissions (permissions granted and never exercised — CIEM platforms analyze the last 90 days of CloudTrail or equivalent activity to identify permissions that have never been used and recommend removing them), overly broad policies (AdministratorAccess or wildcard resource permissions attached to application service accounts that only need access to specific services and resources), and permission escalation paths (a combination of permissions that individually seem reasonable but together allow a user to escalate their own privileges to administrator — CIEM identifies these paths and flags them for remediation). Reducing the permission footprint of each identity — particularly service accounts used by applications — limits the blast radius of a credential compromise.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Multi-cloud governance: consistent security policy across cloud providers</div>
+    <div class="blk-title" style="color:#1B2A4A;">Multi-cloud governance: consistent security policy across cloud providers</div>
     <div class="blk-body">Insurance agencies increasingly operate workloads across multiple cloud providers — M365 and Azure for productivity and identity, AWS for specific workloads or to avoid vendor lock-in, and potentially GCP for specific analytical capabilities. Multi-cloud operations create governance complexity: each cloud provider has a different security model, different configuration options, different monitoring tools, and different compliance reporting capabilities. Multi-cloud governance requires: a unified security baseline that translates consistently across cloud providers (the equivalent of CIS Benchmark Level 2 exists for AWS, Azure, and GCP — the organization's baseline must be defined at the policy level, not the configuration-specific level, and then implemented with provider-specific configurations), a multi-cloud CSPM platform that can assess and report compliance across all providers in a unified dashboard (Wiz, Prisma Cloud, and Microsoft Defender for Cloud support multi-cloud assessment), centralized identity federation (using the organization's primary IdP — Microsoft Entra, Okta — as the identity source for all cloud providers, rather than maintaining separate identity stores in each provider), and unified logging to a central SIEM that collects cloud audit logs from all providers. The governance challenge scales with the number of cloud providers: each additional provider adds management complexity that must be addressed before the additional provider is adopted.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Cloud incident response: forensics in ephemeral environments</div>
+    <div class="blk-title" style="color:#C4AA88;">Cloud incident response: forensics in ephemeral environments</div>
     <div class="blk-body">Cloud incident response requires adapting traditional forensic procedures to the ephemeral and dynamic characteristics of cloud environments. Traditional forensic response — isolate the compromised host, take a forensic image of the disk, analyze the image — is difficult to apply directly to cloud workloads: a compromised container may have been terminated and replaced before the incident is detected, instance metadata that provides context for the attack may not be preserved in default logging configurations, and cloud-native attack techniques (IAM credential theft, metadata service SSRF, instance profile abuse) leave different forensic artifacts than on-premises attacks. Cloud IR requires: pre-incident preparation (ensuring CloudTrail/Azure Monitor logs are configured with appropriate retention before incidents occur, implementing GuardDuty or equivalent cloud threat detection that generates alerts for cloud-specific attack patterns), cloud forensic evidence collection procedures (capturing EC2 instance memory using SSM Run Command before isolating, taking EBS volume snapshots for disk forensics, collecting CloudTrail logs for the relevant time period from the centralized logging account where they cannot be modified by a compromised workload account), and cloud-specific attack analysis (understanding how IAM credential theft enables lateral movement through the cloud control plane, how metadata service abuse allows escalation from a compromised workload to the cloud account).</div>
   </div>
 </div>
@@ -419,48 +302,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Internet Security Program Governance</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="56" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Risk Assessment: EASM external scan + vuln rating + threat landscape + control effectiveness</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">EASM finds 30-50% more assets than internal inventory · DFS 500.13 asset management evidence</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="110" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="132" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Pen Testing: External · Internal · Cloud · Social engineering · 30-day retest</text>
-    <text x="36" y="150" font-size="10" fill="#94a0b8" font-family="system-ui">Risk-based scope includes highest-risk vectors · Social eng at aggregate level (no individual names)</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="64" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Metrics: Exposure · Detection · Response — frequency matched to rate of change</text>
-    <text x="36" y="226" font-size="10" fill="#94a0b8" font-family="system-ui">Attack surface: monthly · WAF blocks: daily ops · Patch SLA: weekly tracking · Trend reports</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="262" width="480" height="64" rx="8" fill="#1e2235" stroke="#4bb8b8" stroke-width="1.5"/>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Internet Security Program Governance</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="56" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Risk Assessment: EASM external scan + vuln rating + threat landscape + control effectiveness</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">EASM finds 30-50% more assets than internal inventory · DFS 500.13 asset management evidence</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="110" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="132" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Pen Testing: External · Internal · Cloud · Social engineering · 30-day retest</text>
+    <text x="36" y="150" font-size="10" fill="#D6CCBC" font-family="system-ui">Risk-based scope includes highest-risk vectors · Social eng at aggregate level (no individual names)</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Metrics: Exposure · Detection · Response — frequency matched to rate of change</text>
+    <text x="36" y="226" font-size="10" fill="#D6CCBC" font-family="system-ui">Attack surface: monthly · WAF blocks: daily ops · Patch SLA: weekly tracking · Trend reports</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="262" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#4bb8b8" stroke-width="1.5"/>
     <text x="36" y="284" font-size="11" fill="#4bb8b8" font-weight="700" font-family="system-ui">Regulatory: DFS 500.05/08/11/14 is the floor — threat environment tests actual program</text>
-    <text x="36" y="302" font-size="10" fill="#94a0b8" font-family="system-ui">500.05: annual pen test · 500.08: app sec policy · 500.11: third-party policy · SEC disclosure rule</text></g>
+    <text x="36" y="302" font-size="10" fill="#D6CCBC" font-family="system-ui">500.05: annual pen test · 500.08: app sec policy · 500.11: third-party policy · SEC disclosure rule</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Internet security risk assessment: quantifying exposure and prioritizing investment</div>
+    <div class="blk-title" style="color:#A08860;">Internet security risk assessment: quantifying exposure and prioritizing investment</div>
     <div class="blk-body">Internet security risk assessment for insurance agencies quantifies the organization's exposure through its internet-facing systems and provides the basis for prioritizing security investment. The assessment covers: attack surface enumeration (all internet-facing IP addresses, domains, web applications, APIs, cloud storage, and remote access systems — discovered through external scanning rather than relying solely on IT inventory, which is frequently incomplete), vulnerability assessment (current vulnerability findings for each internet-facing asset, rated by CVSS score and adjusted for exploitability and data sensitivity), threat landscape assessment (which threat actors target financial services organizations and what their preferred attack vectors are — from strategic threat intelligence), and control effectiveness assessment (what controls are currently in place for each attack vector and how effective they are at reducing exploitation probability). The output is a risk register of internet-facing exposure items, rated by the combination of asset sensitivity, vulnerability severity, and threat likelihood. The highest-rated items in the register are the investment priorities: these are the internet-facing exposures most likely to result in a material cybersecurity event that triggers NY DFS notification and reputational damage to the agency.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Penetration testing program: scope, frequency, and findings management</div>
+    <div class="blk-title" style="color:#C4AA88;">Penetration testing program: scope, frequency, and findings management</div>
     <div class="blk-body">Penetration testing provides empirical evidence of control effectiveness that vulnerability scanning and configuration review cannot provide — it tests whether an attacker can actually achieve a meaningful objective given the current controls, not just whether controls are configured. NY DFS 500.05 requires penetration testing annually with vulnerability assessment every six months. A mature penetration testing program goes beyond compliance minimum: external penetration test (testing internet-facing applications and infrastructure from an external attacker's perspective — web application testing, network perimeter testing, phishing simulation), internal penetration test (testing the environment from a foothold inside the network, simulating an attacker who has compromised an endpoint or credentials — lateral movement, privilege escalation, data exfiltration), cloud penetration test (specifically testing cloud configurations and cross-account attack paths), and social engineering assessment (phishing, vishing, and pretexting exercises targeting employees with access to sensitive systems). Findings management requires tracking each finding to remediation with assigned ownership, defined timeline, and retesting confirmation. The highest-severity findings from each test should be retested within 30 days of reported remediation — not allowed to carry forward to the next annual test.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Internet security metrics: attack surface, detection, and response KPIs</div>
+    <div class="blk-title" style="color:#1B2A4A;">Internet security metrics: attack surface, detection, and response KPIs</div>
     <div class="blk-body">Internet security program metrics must cover the three dimensions of the program: exposure (how much attack surface exists and how well it is secured), detection (how effectively the organization identifies attacks in progress), and response (how quickly and completely the organization responds when attacks are detected). Exposure metrics: number of internet-facing assets by classification (critical, high, medium), percentage of internet-facing assets with current vulnerability assessment, percentage of internet-facing web applications covered by WAF, mean time to remediate critical internet-facing vulnerabilities, external attack surface score from continuous external attack surface management (EASM) scanning. Detection metrics: time from first observable attack indicator to SIEM alert, percentage of phishing simulations that generate EDR or email security alerts within 5 minutes of user interaction, web application attack volume (WAF blocks per day by attack category, trending). Response metrics: mean time to contain a web application attack (isolate compromised application, block attack source), percentage of penetration test findings remediated within defined SLA, mean time to patch internet-facing systems for critical CVEs. These metrics translate to executive reporting as: the organization's internet-facing attack surface has been reduced by X% over the past year, critical vulnerabilities are being remediated in an average of Y days, and web application attacks are being blocked at a rate of Z per day.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Internet security regulatory alignment: NY DFS 500 and emerging requirements</div>
+    <div class="blk-title" style="color:#C4AA88;">Internet security regulatory alignment: NY DFS 500 and emerging requirements</div>
     <div class="blk-body">NY DFS 500 establishes specific requirements for internet-facing systems and third-party risk that translate directly to internet security program components. Section 500.05 (Penetration Testing and Vulnerability Assessments) requires annual penetration testing and biannual vulnerability assessment — met by the penetration testing program described above. Section 500.08 (Application Security) requires written policies and procedures for application security, secure development practices review, and periodic assessment of applications. Section 500.11 (Third-Party Service Provider Security Policy) requires a written policy for third-party service provider security, minimum security practices for third-party providers, and periodic assessment of third-party security. Section 500.14 (Training and Monitoring) requires risk-based policies for internet access monitoring. The SEC Cybersecurity Disclosure Rule — effective for public companies and relevant for insurance holding companies subject to SEC oversight — requires disclosure of material cybersecurity incidents within four business days of a materiality determination, and annual disclosure of cybersecurity risk management program information. Organizations subject to both NY DFS 500 and SEC disclosure requirements must align their incident classification and disclosure processes across both frameworks — an incident that is material for DFS 500.17 purposes may also require SEC disclosure within its own timeline.</div>
   </div>
 </div>
@@ -476,55 +359,55 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">WEB APP SECURITY</text>
-    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">OWASP + BOLA + WAF</text>
-    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">SDLC at each phase</text>
-    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Detection → tune → enforce</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">THREAT INTEL</text>
-    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">3-level + FS-ISAC</text>
-    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Supply chain + browser</text>
-    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">FIDO2 = phishing eliminated</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">CLOUD SECURITY</text>
-    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CNAPP attack path</text>
-    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CIEM + multi-cloud gov</text>
-    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Pre-positioned IR logging</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4bb8b8" stroke-width="1.5"/>
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">WEB APP SECURITY</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">OWASP + BOLA + WAF</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">SDLC at each phase</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Detection → tune → enforce</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">THREAT INTEL</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">3-level + FS-ISAC</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Supply chain + browser</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">FIDO2 = phishing eliminated</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CLOUD SECURITY</text>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CNAPP attack path</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CIEM + multi-cloud gov</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Pre-positioned IR logging</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,248)"><rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#4bb8b8" stroke-width="1.5"/>
     <text y="-32" text-anchor="middle" font-size="11" fill="#4bb8b8" font-weight="700" font-family="system-ui">PROGRAM GOV</text>
-    <text y="-12" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">EASM + pen testing</text>
-    <text y="6" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">3-dimension metrics</text>
-    <text y="28" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Regulatory = floor</text></g>
+    <text y="-12" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">EASM + pen testing</text>
+    <text y="6" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">3-dimension metrics</text>
+    <text y="28" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Regulatory = floor</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">OWASP at depth + API BOLA + WAF tuning + SDLC = defensible web application security</div>
+    <div class="blk-title" style="color:#A08860;">OWASP at depth + API BOLA + WAF tuning + SDLC = defensible web application security</div>
     <div class="blk-body">Injection, broken access control, cryptographic failures, and security misconfiguration are the highest-risk OWASP categories for insurance web applications. BOLA is the API-specific variant requiring server-side authorization on every object access. WAF requires 2-4 week detection-mode tuning before enforcement; bypass testing confirms rule effectiveness. SDLC integrates threat modeling, security requirements, SAST, dependency scanning, and penetration testing before release.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Strategic + operational + tactical intel + FS-ISAC + supply chain + browser security = threat-informed defense</div>
+    <div class="blk-title" style="color:#C4AA88;">Strategic + operational + tactical intel + FS-ISAC + supply chain + browser security = threat-informed defense</div>
     <div class="blk-body">Three-level threat intelligence serves executive (strategic), operations (operational), and tools (tactical) consumers. FS-ISAC provides sector-specific sharing with bidirectional contribution requirement. Supply chain: integration inventory, SOC 2 review, vendor notification subscription, SCA for software dependencies. Enterprise browser + DNS filtering + phishing-resistant auth eliminates major initial access vectors.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">CNAPP + CIEM + multi-cloud governance + cloud IR = unified cloud security program</div>
+    <div class="blk-title" style="color:#1B2A4A;">CNAPP + CIEM + multi-cloud governance + cloud IR = unified cloud security program</div>
     <div class="blk-body">CNAPP correlates CSPM, CWPP, CASB findings to show complete attack chains rather than siloed findings. CIEM identifies unused permissions, broad policies, and privilege escalation paths — reduces credential compromise blast radius. Multi-cloud governance requires unified baseline, multi-cloud CSPM, centralized IdP federation, and SIEM log aggregation. Cloud IR requires pre-positioned logging, cloud-specific forensic procedures, and ephemeral workload evidence collection.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Risk assessment + pen testing program + exposure/detection/response metrics + regulatory alignment</div>
+    <div class="blk-title" style="color:#C4AA88;">Risk assessment + pen testing program + exposure/detection/response metrics + regulatory alignment</div>
     <div class="blk-body">Internet security risk assessment: attack surface enumeration via external scanning + vulnerability rating + threat landscape + control effectiveness = risk register investment priorities. Pen testing: external, internal, cloud, and social engineering annually with 30-day retest for high findings. Three-dimension metrics: exposure (attack surface, vuln age), detection (time to alert, phishing detection rate), response (MTTC, patch SLA). DFS 500.05, 500.08, 500.11, 500.14 alignment + SEC disclosure rule.</div>
   </div>
 </div>
@@ -536,40 +419,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Internet Security — Advanced</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">An insurance agency's client portal has an API endpoint: GET /api/v1/policies/{policy_id}. Authentication is implemented correctly — users must present a valid JWT. However, if authenticated user A guesses user B's policy_id, they can retrieve user B's full policy data. What vulnerability is this and what is the correct fix?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">SQL injection — parameterize the query that retrieves the policy record</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Broken Object Level Authorization (BOLA) — the server verifies the JWT (authentication) but does not verify that the authenticated user is authorized to access the specific policy_id in the request. Fix: add a server-side authorization check that confirms the policy_id belongs to the authenticated user before returning the record.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Insecure Direct Object Reference — encrypt the policy_id so attackers cannot guess it</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Cross-site request forgery — add CSRF tokens to the API request</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">A WAF is deployed in front of an insurance agency's online application portal. In the first week of detection mode operation, 2,400 alerts fire, of which 2,350 are determined to be legitimate application traffic. The security team proposes enabling blocking mode to 'activate the WAF protection.' What should they do instead?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Enable blocking mode immediately — a 98% false positive rate is acceptable for security</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Analyze the 2,350 false positive alerts to identify the specific rules and application patterns generating them, create application-specific exclusions for legitimate traffic patterns, re-run in detection mode for another 1-2 weeks to verify the exclusion effectiveness, then enable blocking mode when the false positive rate is at an operationally acceptable level</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Disable the WAF — a 2% true positive rate is too low to justify the operational overhead</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Replace the WAF with a different vendor's product</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">An FS-ISAC member organization detects a phishing campaign using a lookalike domain for a major carrier's agent portal, collecting insurance agent credentials. They contribute the phishing infrastructure details to FS-ISAC. What should other member organizations do with this intelligence within the next two hours?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Schedule a threat intelligence review meeting for next week</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Apply the phishing domain as a block rule in DNS filtering and email security tools, brief the security operations team on the active campaign and the targeted carrier portal, check authentication logs for any recent successful authentications from the phishing domain's IP range, and consider notifying agents who have access to the targeted portal to verify their credentials have not been compromised</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">File the intelligence report for the annual threat landscape review</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Wait for CISA to confirm the campaign before taking action</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">A CNAPP platform identifies the following findings in an insurance agency's AWS environment: (1) An EC2 instance running a public-facing web application has a critical CVE in its OS kernel. (2) That EC2 instance has an IAM instance profile with S3:* permissions on all buckets. (3) One of the accessible S3 buckets contains 45,000 customer records with SSN and policy data. How does the attack path analysis change remediation priority compared to raw CVSS scoring?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">CVSS scoring and attack path analysis produce the same priority ranking — the critical CVE should be patched regardless</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Attack path analysis shows this specific EC2 instance is higher priority than other instances with identical CVE scores, because the attack path runs from the internet-exposed vulnerability through the instance profile to NPI. The complete chain: exploit kernel vuln → gain instance privileges → use instance profile → access NPI S3 bucket. This chain makes the CVE a direct path to a material breach. Remediation should address all three findings: patch the CVE, reduce the instance profile to least-privilege S3 access for specific required buckets only, and verify the S3 bucket has appropriate access controls.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Apply the NPI labels to the S3 bucket — classification is the priority</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The instance profile permissions are a separate issue from the CVE — prioritize them independently</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">An insurance agency's penetration testing scope excludes social engineering because management is concerned about employee morale. The external penetration test finds no critical findings. What is the security posture gap created by this scoping decision?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">None — if the external penetration test found no critical findings, the security program is effective</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">The most common initial access technique for threat actors targeting financial services is phishing — a social engineering attack. Excluding social engineering testing leaves the organization without empirical data on its phishing susceptibility rate (what percentage of employees click phishing links and submit credentials) and without testing whether its email security controls (DMARC, anti-phishing filters, sandboxing) effectively detect and block phishing attacks. The morale concern is addressed by presenting results at the aggregate level, not identifying individual employees. The external pen test finding no critical vulnerabilities in technical controls does not address the human vulnerability that phishing exploits.</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The external penetration test scope is sufficient — social engineering is not a technical test</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Social engineering testing is only necessary for organizations that have previously experienced phishing attacks</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">An insurance agency is comparing two vulnerability management approaches for internet-facing systems: (A) Annual penetration test plus biannual vulnerability assessment (the DFS 500 minimum). (B) Continuous EASM scanning plus monthly authenticated vulnerability assessment plus quarterly targeted penetration testing of highest-risk applications. What is the primary security difference between these approaches, and when is Approach B justified?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">There is no meaningful security difference — both approaches satisfy DFS 500.05</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Approach A creates vulnerability windows of up to 6 months between assessments during which new vulnerabilities may be introduced and remain undetected. Internet-facing vulnerability exploitation occurs within hours to days of public CVE disclosure for high-profile vulnerabilities. Approach B reduces the detection window through continuous external scanning and more frequent authenticated assessment. Approach B is justified when the organization has internet-facing applications that handle NPI directly — where a successful exploitation represents a direct path to a material breach with regulatory notification and reputational consequences that justify the additional assessment investment.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Approach B is unjustified — regulatory minimum is always sufficient</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Approach A is superior because more frequent testing creates alert fatigue</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -581,11 +464,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#f0a04a","#4b8ef0","#9b7fe8","#2a9d8f"],
-  'pg2':["#f0a04a","#4b8ef0","#9b7fe8","#2a9d8f"],
-  'pg3':["#f0a04a","#4b8ef0","#9b7fe8","#2a9d8f"],
-  'pg4':["#f0a04a","#4b8ef0","#9b7fe8","#2a9d8f"],
-  'pg5':["#f0a04a","#4b8ef0","#9b7fe8","#2a9d8f"],
+  'pg1':["#A08860","#C4AA88","#1B2A4A","#C4AA88"],
+  'pg2':["#A08860","#C4AA88","#1B2A4A","#C4AA88"],
+  'pg3':["#A08860","#C4AA88","#1B2A4A","#C4AA88"],
+  'pg4':["#A08860","#C4AA88","#1B2A4A","#C4AA88"],
+  'pg5':["#A08860","#C4AA88","#1B2A4A","#C4AA88"],
 };
 
 const NARR={
@@ -600,7 +483,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -616,19 +499,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -674,7 +545,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

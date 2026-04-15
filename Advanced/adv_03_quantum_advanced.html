@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#9b7fe8;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#1B2A4A;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#9b7fe822;color:#9b7fe8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#9b7fe8;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#9b7fe8;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#9b7fe8;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#9b7fe8;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#9b7fe8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Quantum Computing and Cybersecurity — Advanced</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Advanced</span>
-    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Quantum Algorithm Depth</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Post-Quantum Migration Strategy</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Quantum-Safe Protocols and Standards</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Organizational Quantum Risk Governance</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Post-Quantum Migration Strategy</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Quantum-Safe Protocols and Standards</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Organizational Quantum Risk Governance</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Quantum Algorithm Depth</span>
-  </div>
-  <div class="mc-desc">▶ Advanced analysis of cryptographic threats from quantum computation</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Post-Quantum Migration Strategy</span>
-  </div>
-  <div class="mc-desc">▶ Executing the transition for complex enterprise environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Quantum-Safe Protocols and Standards</span>
-  </div>
-  <div class="mc-desc">▶ Implementation guidance for post-quantum cryptographic standards</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Organizational Quantum Risk Governance</span>
-  </div>
-  <div class="mc-desc">▶ Building a quantum risk program for regulated organizations</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Quantum Computing and Cybersecurity — Advanced</div>
-  <div class="home-sub">Advanced — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Quantum Algorithm Depth</span>
-  </div>
-  <div class="mc-desc">▶ Advanced analysis of cryptographic threats from quantum computation</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Post-Quantum Migration Strategy</span>
-  </div>
-  <div class="mc-desc">▶ Executing the transition for complex enterprise environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Quantum-Safe Protocols and Standards</span>
-  </div>
-  <div class="mc-desc">▶ Implementation guidance for post-quantum cryptographic standards</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Organizational Quantum Risk Governance</span>
-  </div>
-  <div class="mc-desc">▶ Building a quantum risk program for regulated organizations</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #9b7fe8;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#9b7fe8;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Quantum Algorithm Depth</div>
     <div class="ph-sub">Advanced analysis of cryptographic threats from quantum computation</div>
@@ -232,51 +115,51 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Quantum Threat Landscape</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Cryptographically Relevant Quantum Computer (CRQC)</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Below threshold: classical crypto secure · Above: RSA/ECC broken</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">State-actor estimate: 2030–2040 · Monitor annually</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="142" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Harvest Now Decrypt Later (HNDL)</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Migration urgency = data sensitivity lifetime</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">Insurance long-tail data at current risk · Migrate comms now</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Annealing (D-Wave) vs Gate-Based Computers</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">D-Wave: optimization only — does not run Shor's algorithm</text>
-    <text x="36" y="246" font-size="10" fill="#56617a" font-family="system-ui">No current threat to NIST PQC standards · Monitor research</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Implementation Side-Channel Risks</text>
-    <text x="36" y="306" font-size="10" fill="#94a0b8" font-family="system-ui">Timing leaks in naive FALCON/Kyber · Use CAVP-validated libs</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Quantum Threat Landscape</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Cryptographically Relevant Quantum Computer (CRQC)</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Below threshold: classical crypto secure · Above: RSA/ECC broken</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">State-actor estimate: 2030–2040 · Monitor annually</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="142" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Harvest Now Decrypt Later (HNDL)</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Migration urgency = data sensitivity lifetime</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">Insurance long-tail data at current risk · Migrate comms now</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Annealing (D-Wave) vs Gate-Based Computers</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">D-Wave: optimization only — does not run Shor's algorithm</text>
+    <text x="36" y="246" font-size="10" fill="#8A7D6B" font-family="system-ui">No current threat to NIST PQC standards · Monitor research</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Implementation Side-Channel Risks</text>
+    <text x="36" y="306" font-size="10" fill="#D6CCBC" font-family="system-ui">Timing leaks in naive FALCON/Kyber · Use CAVP-validated libs</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Quantum computational complexity and the threshold problem</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum computational complexity and the threshold problem</div>
     <div class="blk-body">The cryptographic threat from quantum computing is not a binary transition — it is a threshold problem where the threat materializes when quantum hardware reaches specific capability milestones. The threshold for RSA-2048 requires approximately 4,000 logical qubits running Shor's algorithm, which translates to 4-40 million physical qubits depending on error correction overhead. Below this threshold, classical cryptography remains secure regardless of quantum hardware advances. Above it, RSA-2048 is broken. The practical implication for risk planning is that organizations must estimate when the threshold will be crossed — a judgment that requires tracking quantum hardware progress against the engineering requirements for fault-tolerant computation. NIST, NSA, and academic consensus places the threshold crossing somewhere between 2030 and 2040 for well-resourced state actors, with significant uncertainty in both directions. Conservative organizations planning for long-lived sensitive data treat 2030 as the planning horizon.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Harvest now decrypt later: the present threat from future capability</div>
+    <div class="blk-title" style="color:#C4AA88;">Harvest now decrypt later: the present threat from future capability</div>
     <div class="blk-body">The harvest now decrypt later (HNDL) threat model makes the quantum threat current rather than future. State-level adversaries are collecting encrypted network traffic today — intercepting VPN sessions, TLS connections, and encrypted communications — with the expectation that sufficiently capable quantum computers will be available in the future to decrypt this stored traffic. The threat is most acute for data with long confidentiality requirements: strategic plans that remain sensitive for decades, intelligence sources and methods, attorney-client communications, proprietary actuarial models, and personal records that could enable identity theft years into the future. For insurance agencies, customer NPI that will remain sensitive for decades is at risk from HNDL if current communications are being collected. The practical implication is that the migration urgency for communications encryption is not determined by when quantum computers arrive — it is determined by how long the data will remain sensitive.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Quantum annealing and optimization: a different threat class</div>
+    <div class="blk-title" style="color:#A08860;">Quantum annealing and optimization: a different threat class</div>
     <div class="blk-body">Quantum annealing — implemented by D-Wave systems — is a distinct quantum computing paradigm optimized for combinatorial optimization problems rather than general-purpose quantum computation. It does not implement Shor's algorithm and does not directly threaten RSA or elliptic curve cryptography. However, quantum annealing may provide advantages for specific optimization problems that underlie some cryptographic constructions — including certain lattice problems that form the security basis for post-quantum cryptographic algorithms. Researchers have analyzed whether quantum annealing could attack CRYSTALS-Kyber and similar lattice-based constructions by formulating the underlying lattice problems as optimization problems amenable to annealing. The current consensus is that quantum annealing does not provide significant advantage over classical algorithms for the specific lattice problems used in NIST PQC standards, but this is an active research area requiring continued monitoring.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Side-channel attacks on post-quantum implementations</div>
+    <div class="blk-title" style="color:#1B2A4A;">Side-channel attacks on post-quantum implementations</div>
     <div class="blk-body">Implementing post-quantum cryptographic algorithms correctly is significantly more difficult than implementing RSA or ECC, creating a risk that PQC deployments introduce implementation vulnerabilities even when the underlying algorithms are sound. Side-channel attacks on PQC implementations exploit physical information that leaks during computation: power consumption measurements, electromagnetic emissions, timing variations, and cache access patterns can reveal information about the private key material being used. CRYSTALS-Kyber and FALCON have both been demonstrated vulnerable to timing side-channels in naive implementations — the decapsulation operation in Kyber, if not implemented in constant time, leaks information through timing variations that can be exploited to recover the private key. The cryptographic engineering discipline of constant-time implementation — ensuring that the computation time does not vary with secret key material — is essential for secure PQC deployment and is a requirement for NIST-validated implementations.</div>
   </div>
 </div>
@@ -292,64 +175,64 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Post-Quantum Cryptography Migration</text>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Post-Quantum Cryptography Migration</text>
   <g id="pg2-hl0" class="svg-hl" transform="translate(140,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">CRYPTO AGILITY</text>
-    <text y="-18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Abstracted encrypt()/sign()</text>
-    <text y="-2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Provider config → migration</text>
-    <text y="14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Hardcoded = dev project</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Build agility now</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CRYPTO AGILITY</text>
+    <text y="-18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Abstracted encrypt()/sign()</text>
+    <text y="-2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Provider config → migration</text>
+    <text y="14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Hardcoded = dev project</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Build agility now</text></g>
   <g id="pg2-hl1" class="svg-hl" transform="translate(380,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">HYBRID TLS</text>
-    <text y="-18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">OpenSSL 3.2+ · Chrome/Edge</text>
-    <text y="-2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Classical + PQC combined</text>
-    <text y="14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Break requires defeating both</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Monitor negotiation telemetry</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">HYBRID TLS</text>
+    <text y="-18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">OpenSSL 3.2+ · Chrome/Edge</text>
+    <text y="-2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Classical + PQC combined</text>
+    <text y="14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Break requires defeating both</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Monitor negotiation telemetry</text></g>
   <g id="pg2-hl2" class="svg-hl" transform="translate(140,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">PQC PKI HIERARCHY</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Hybrid-sig root CA</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">PQC intermediate CA</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">PQC end-entity certs</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Classical hierarchy in parallel</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PQC PKI HIERARCHY</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Hybrid-sig root CA</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">PQC intermediate CA</text>
+    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">PQC end-entity certs</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Classical hierarchy in parallel</text></g>
   <g id="pg2-hl3" class="svg-hl" transform="translate(380,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">VENDOR ASSESSMENT</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Current algorithms used</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Published PQC roadmap</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Agility vs hardcoded</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Contract leverage point</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">VENDOR ASSESSMENT</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Current algorithms used</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Published PQC roadmap</text>
+    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Agility vs hardcoded</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Contract leverage point</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Cryptographic agility architecture for seamless algorithm transition</div>
+    <div class="blk-title" style="color:#1B2A4A;">Cryptographic agility architecture for seamless algorithm transition</div>
     <div class="blk-body">Cryptographic agility — the architectural property that allows algorithm replacement without system redesign — is the enabler of practical PQC migration. Agile cryptographic architecture abstracts algorithm selection behind defined interfaces: applications call encrypt(), sign(), or generateKey() functions that delegate to a configurable cryptographic provider rather than calling specific algorithm implementations directly. Algorithm selection, key size parameters, and provider implementations are configurable without code changes. This architecture was validated as essential by the PQC migration experience of early adopters: organizations that had abstracted cryptographic operations behind agile interfaces could deploy hybrid classical-PQC configurations through configuration changes; organizations with hardcoded algorithm dependencies required significant development work for each migration step. New applications should be required to use agile cryptographic interfaces as a security design requirement, and existing applications should be assessed for agility gaps as part of the CBOM process.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">TLS migration: deploying hybrid X25519+Kyber in production</div>
+    <div class="blk-title" style="color:#C4AA88;">TLS migration: deploying hybrid X25519+Kyber in production</div>
     <div class="blk-body">TLS 1.3 supports hybrid key exchange through extensions that allow negotiating both a classical and a post-quantum key exchange in the same handshake. The hybrid approach — X25519 elliptic curve Diffie-Hellman combined with CRYSTALS-Kyber key encapsulation — provides security against both classical and quantum adversaries: breaking the session requires defeating both algorithms simultaneously. Google deployed X25519+Kyber (X25519MLKEM768) in Chrome in 2023; Cloudflare, AWS, and major CDN providers have followed. TLS migration for an organization involves: updating server-side TLS libraries to versions supporting post-quantum extensions (OpenSSL 3.2+, BoringSSL, LibreSSL with PQC support), configuring the server to advertise hybrid cipher suites in preference order, and monitoring cipher suite negotiation telemetry to verify that PQC-capable clients are successfully negotiating hybrid sessions. The IETF has standardized hybrid TLS extensions in RFC 8446 update drafts and the parallel NIST PQC TLS profile work.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">PKI migration: establishing post-quantum certificate authority hierarchies</div>
+    <div class="blk-title" style="color:#A08860;">PKI migration: establishing post-quantum certificate authority hierarchies</div>
     <div class="blk-body">PKI migration is the most architecturally complex element of PQC transition because it involves the foundational trust infrastructure that validates all other certificates in the environment. The challenge: a new post-quantum root CA must be established and its certificate distributed to all relying parties before the certificates it issues can be trusted. Root CA certificate distribution happens through operating system and browser vendor trust store updates — a process that takes years and depends on vendor timelines, not organizational control. The recommended migration architecture for organizational PKI: establish a new root CA using hybrid signature algorithms (combining a classical algorithm like ECDSA P-256 with ML-DSA/Dilithium), issue a new intermediate CA under the post-quantum root, begin issuing end-entity certificates under the post-quantum intermediate, and maintain the existing classical PKI in parallel until all relying systems can validate post-quantum certificates. Dual-certificate issuance — providing both a classical and a post-quantum certificate for the same identity — allows clients to use whichever certificate type they support.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Vendor and supply chain PQC readiness assessment</div>
+    <div class="blk-title" style="color:#1B2A4A;">Vendor and supply chain PQC readiness assessment</div>
     <div class="blk-body">Most organizational cryptographic exposure exists in products and services procured from vendors, not in code the organization wrote. Vendor PQC readiness assessment is therefore as important as internal migration planning. The assessment framework: for each critical vendor, determine what cryptographic algorithms they use for data protection, authentication, and communications; ask for their published PQC migration roadmap and timeline; evaluate whether they are participating in standards bodies (IETF, NIST) that are defining migration standards; assess whether their products support algorithm agility or have hardcoded algorithm dependencies; and determine whether contract renewal cycles provide leverage for requiring migration commitments. Vendors who have published PQC migration plans with specific timelines and who have begun deploying hybrid or PQC-native solutions in production demonstrate concrete progress; vendors who have vague commitments to 'monitor developments' represent higher transition risk.</div>
   </div>
 </div>
@@ -365,51 +248,51 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Quantum Risk Governance Program</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Quantum Risk Committee</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Security + IT + Compliance + Legal + Leadership</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Owns CBOM · Migration roadmap · Exception approval</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="142" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Cryptography Bill of Materials (CBOM)</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Every algorithm, key size, and library cataloged</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">Designated quantum risk owner accountable</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Board Reporting: HNDL + Timeline + Investment</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Honest uncertainty: 2030–2040 range · Current data exposure</text>
-    <text x="36" y="246" font-size="10" fill="#56617a" font-family="system-ui">Migration progress vs roadmap milestones</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Regulatory Baseline: FIPS 203-206 · CISA Guidance</text>
-    <text x="36" y="306" font-size="10" fill="#94a0b8" font-family="system-ui">Federal 2030 mandate · Early mover advantage for DFS</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Quantum Risk Governance Program</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Quantum Risk Committee</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Security + IT + Compliance + Legal + Leadership</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">Owns CBOM · Migration roadmap · Exception approval</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="142" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Cryptography Bill of Materials (CBOM)</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Every algorithm, key size, and library cataloged</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">Designated quantum risk owner accountable</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Board Reporting: HNDL + Timeline + Investment</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Honest uncertainty: 2030–2040 range · Current data exposure</text>
+    <text x="36" y="246" font-size="10" fill="#8A7D6B" font-family="system-ui">Migration progress vs roadmap milestones</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Regulatory Baseline: FIPS 203-206 · CISA Guidance</text>
+    <text x="36" y="306" font-size="10" fill="#D6CCBC" font-family="system-ui">Federal 2030 mandate · Early mover advantage for DFS</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">FIPS 203/204/205/206: implementation requirements for standardized PQC</div>
+    <div class="blk-title" style="color:#1B2A4A;">FIPS 203/204/205/206: implementation requirements for standardized PQC</div>
     <div class="blk-body">NIST's finalized post-quantum standards impose specific implementation requirements beyond algorithm correctness. FIPS 203 (ML-KEM/Kyber) specifies parameter sets (ML-KEM-512, ML-KEM-768, ML-KEM-1024) with defined security levels, key sizes, and performance characteristics — implementations must use the specified parameter sets, not custom configurations. FIPS 204 (ML-DSA/Dilithium) and FIPS 206 (FN-DSA/FALCON) require deterministic signing — given the same message and private key, the signature must always be the same value, eliminating a class of implementation vulnerabilities where randomness failure during signing could leak private key information. FIPS 205 (SLH-DSA/SPHINCS+) defines multiple parameter sets optimized for different tradeoffs between signature size, signing speed, and security level. All FIPS-validated implementations must pass the NIST Cryptographic Algorithm Validation Program (CAVP) test vectors — organizations procuring PQC implementations should require CAVP validation certificates.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">SSH post-quantum migration: securing administrative access</div>
+    <div class="blk-title" style="color:#C4AA88;">SSH post-quantum migration: securing administrative access</div>
     <div class="blk-body">SSH is the primary protocol for secure administrative access to servers and network infrastructure, making it a high-priority target for PQC migration. SSH uses asymmetric cryptography in two contexts: key exchange (establishing the encrypted session) and host/user authentication (verifying identity). OpenSSH 9.0 added support for the sntrup761x25519-sha512@openssh.com hybrid key exchange algorithm, combining a classical and post-quantum algorithm. OpenSSH 9.3 added further PQC key exchange options. SSH host key authentication — where the server's identity is verified by its host key — and user authentication using SSH public key pairs both use asymmetric signatures, which require replacement with PQC signature algorithms as those algorithms become available in SSH implementations. The SSH migration challenge is inventory: organizations with large server fleets may have SSH keys distributed across thousands of authorized_keys files with no central inventory, requiring systematic enumeration before migration planning.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Code signing and software supply chain integrity</div>
+    <div class="blk-title" style="color:#A08860;">Code signing and software supply chain integrity</div>
     <div class="blk-body">Code signing protects the software supply chain by allowing users to verify that software was produced by a trusted entity and has not been modified since signing. If RSA and ECDSA code signing keys are compromised by quantum computers — including through HNDL collection of current signing operations — the integrity of all software signed with those keys is potentially compromised. Software signed years ago with a now-quantum-vulnerable key cannot be retroactively protected; the protection depends on the key remaining secure. Code signing migration to PQC algorithms requires: generating new PQC signing keys for all software signing operations, re-signing existing software artifacts where the signature is validated dynamically, updating verification tooling to support PQC signature validation, and establishing a transition timeline for deprecating classical signature verification. For critical infrastructure software, the PKI root that anchors code signing trust must migrate to PQC algorithms before or concurrently with the signing keys.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Quantum random number generation in cryptographic systems</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum random number generation in cryptographic systems</div>
     <div class="blk-body">Classical pseudorandom number generators (PRNGs) used in cryptographic applications generate output that is computationally indistinguishable from random — sufficient for classical adversaries. Quantum random number generators (QRNGs) produce genuinely random output based on quantum physical processes (photon detection, vacuum fluctuations) rather than computational indistinguishability. The cryptographic security improvement from QRNG use is limited in practice: the security of RSA and ECC already depends on computational assumptions that hold regardless of whether the key material was generated by a PRNG or QRNG. The benefit of QRNG is most relevant for applications where an adversary might have pre-computed attacks against PRNG output, and for post-quantum algorithms where larger key sizes amplify the importance of key generation quality. Cloud-accessible QRNG services are available from providers including ID Quantique and several national laboratories, but the practical security benefit of QRNG for most organizational applications is marginal compared to the benefit of algorithm migration.</div>
   </div>
 </div>
@@ -425,51 +308,51 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Insurance-Specific Quantum Risk</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Long-Tail HNDL Exposure</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">WC/life/professional liability: 30+ year data sensitivity</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">AMS/rater/carrier portal integrations use classical TLS today</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="142" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Carrier and Vendor Supply Chain Risk</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Agency crypto agility only as strong as weakest vendor</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">PQC roadmap contractual requirement in new agreements</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Regulatory Trajectory for Insurance</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">CISA/DFS guidance developing · Proactive positioning now</text>
-    <text x="36" y="246" font-size="10" fill="#56617a" font-family="system-ui">Crypto agility = compliance agility when mandates arrive</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Migration Priority: Communications First</text>
-    <text x="36" y="306" font-size="10" fill="#94a0b8" font-family="system-ui">Client data in transit · API integrations · Email encryption</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Insurance-Specific Quantum Risk</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Long-Tail HNDL Exposure</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">WC/life/professional liability: 30+ year data sensitivity</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">AMS/rater/carrier portal integrations use classical TLS today</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="142" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Carrier and Vendor Supply Chain Risk</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Agency crypto agility only as strong as weakest vendor</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">PQC roadmap contractual requirement in new agreements</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Regulatory Trajectory for Insurance</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">CISA/DFS guidance developing · Proactive positioning now</text>
+    <text x="36" y="246" font-size="10" fill="#8A7D6B" font-family="system-ui">Crypto agility = compliance agility when mandates arrive</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Migration Priority: Communications First</text>
+    <text x="36" y="306" font-size="10" fill="#D6CCBC" font-family="system-ui">Client data in transit · API integrations · Email encryption</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Quantum risk committee: oversight structure and responsibilities</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum risk committee: oversight structure and responsibilities</div>
     <div class="blk-body">Quantum risk governance requires a committee with representation across security, IT infrastructure, compliance, legal, and senior leadership — because PQC migration affects infrastructure, application development, vendor relationships, regulatory compliance, and budget allocation simultaneously. The committee's responsibilities: maintain the organizational CBOM and migration registry, review and approve the prioritized migration roadmap, track regulatory developments (NIST updates, sector-specific guidance, CISA and NSA advisories), assess vendor PQC readiness quarterly, approve exceptions to migration timelines with documented risk acceptance, and report program status and risk exposure to senior leadership and the board annually. The committee should include a designated quantum risk owner with accountability for program execution, equivalent to how organizations designate privacy officers for data governance programs. For insurance agencies, the CISO typically serves as quantum risk owner with the quantum risk committee reporting to the executive team.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Board and executive reporting on quantum risk</div>
+    <div class="blk-title" style="color:#C4AA88;">Board and executive reporting on quantum risk</div>
     <div class="blk-body">Quantum risk reporting to boards and executives requires translating technical concepts into business risk language without oversimplifying the nuanced timeline uncertainty. The effective reporting framework: current exposure (what cryptographic assets are at risk from HNDL collection today, with the highest-risk assets specifically identified), migration progress (percentage of highest-priority assets migrated, against the planned timeline), regulatory trajectory (what regulators are saying about PQC migration requirements and likely timelines), and investment requirements (what budget is required for the next 12-month migration phase). The honest representation of timeline uncertainty — acknowledging that 'quantum computers capable of breaking current encryption may arrive between 2030 and 2040, with significant uncertainty' — is more useful to boards than false precision or false reassurance. Boards that understand the uncertainty are better positioned to make informed decisions about migration pace and investment than those who have been told either that the threat is imminent or that it is distant.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Regulatory positioning for quantum compliance</div>
+    <div class="blk-title" style="color:#A08860;">Regulatory positioning for quantum compliance</div>
     <div class="blk-body">Regulated organizations must anticipate quantum-related regulatory requirements before they become mandatory — organizations that begin migration only when regulations require it face compressed timelines, higher costs, and regulatory scrutiny during the most challenging phase of implementation. The regulatory trajectory: NIST FIPS 203/204/205/206 published 2024 as the baseline standards; US federal mandate requires migration of National Security Systems by 2030 and civilian systems shortly thereafter; CISA has issued guidance for critical infrastructure; financial sector regulators are incorporating quantum risk into examination frameworks. Insurance regulators following the NAIC model and NY DFS are developing sector-specific quantum risk guidance. Organizations that can demonstrate to regulators that they have conducted a CBOM assessment, developed a prioritized migration roadmap, begun migrating highest-risk assets, and have executive oversight of the program are positioned well ahead of those who have done only a compliance checklist exercise.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Quantum risk in insurance: actuarial and operational dimensions</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum risk in insurance: actuarial and operational dimensions</div>
     <div class="blk-body">Insurance organizations face quantum risk in two dimensions that differ from other industries. The actuarial dimension: long-tail insurance lines (workers' compensation, professional liability, life insurance) require data confidentiality for periods that overlap with the quantum threat horizon — policy records created today may need to remain confidential for 30 years, well past the estimated quantum computing capability threshold. The operational dimension: insurance organizations depend on carrier portals, raters, and agency management systems built by vendors whose PQC readiness varies widely. For the actuarial dimension, HNDL risk assessment should evaluate which data flows — policy applications, claims submissions, underwriting communications — are being transmitted over potentially collected network paths today. For the operational dimension, vendor PQC readiness should be incorporated into the vendor security assessment and contract management programs, with PQC migration timelines and capabilities treated as security requirements alongside other cybersecurity controls.</div>
   </div>
 </div>
@@ -486,58 +369,58 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
   <g id="pg5-hl0" class="svg-hl" transform="translate(140,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">THREAT LANDSCAPE</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CRQC: 2030–2040 estimate</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">HNDL: current risk today</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Side-channels in PQC impls</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">THREAT LANDSCAPE</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CRQC: 2030–2040 estimate</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">HNDL: current risk today</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Side-channels in PQC impls</text></g>
   <g id="pg5-hl1" class="svg-hl" transform="translate(380,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">MIGRATION</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Crypto agility first</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Hybrid TLS deployed now</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">PQC PKI hierarchy</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">MIGRATION</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Crypto agility first</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Hybrid TLS deployed now</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">PQC PKI hierarchy</text></g>
   <g id="pg5-hl2" class="svg-hl" transform="translate(140,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">GOVERNANCE</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Quantum Risk Committee</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CBOM + migration roadmap</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Board reporting: HNDL + timeline</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">GOVERNANCE</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Quantum Risk Committee</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CBOM + migration roadmap</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Board reporting: HNDL + timeline</text></g>
   <g id="pg5-hl3" class="svg-hl" transform="translate(380,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">INSURANCE-SPECIFIC</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Long-tail HNDL exposure</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Vendor supply chain risk</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Migrate comms first</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">INSURANCE-SPECIFIC</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Long-tail HNDL exposure</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Vendor supply chain risk</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Migrate comms first</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Quantum threat is a threshold problem; HNDL makes migration urgency proportional to data confidentiality lifetime</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum threat is a threshold problem; HNDL makes migration urgency proportional to data confidentiality lifetime</div>
     <div class="blk-body">The RSA-2048 threshold requires ~4,000 logical qubits — orders of magnitude beyond current hardware. Conservative planning treats 2030 as the horizon for state actors. HNDL means communications protection is urgent now for data with long sensitivity lifetimes. Quantum annealing does not threaten current PQC standards. PQC implementations require constant-time execution to resist side-channel attacks.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Crypto-agile architecture enables configuration-driven migration; hybrid TLS and dual-cert PKI bridge the transition</div>
+    <div class="blk-title" style="color:#C4AA88;">Crypto-agile architecture enables configuration-driven migration; hybrid TLS and dual-cert PKI bridge the transition</div>
     <div class="blk-body">Algorithm abstraction behind configurable interfaces is the prerequisite for practical migration. X25519+Kyber hybrid TLS is deployable now with OpenSSL 3.2+. PKI migration requires establishing PQC root CAs in parallel with classical hierarchy. SSH migration requires inventory of distributed host and user keys. Vendor PQC readiness assessment is as important as internal migration.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">FIPS 203-206 require CAVP-validated implementations; code signing and SSH are high-priority migration targets</div>
+    <div class="blk-title" style="color:#A08860;">FIPS 203-206 require CAVP-validated implementations; code signing and SSH are high-priority migration targets</div>
     <div class="blk-body">FIPS standards impose specific parameter sets and deterministic signing requirements — CAVP validation certificates should be required from vendors. SSH PQC migration is supported in OpenSSH 9.0+. Code signing PQC migration must address both key generation and existing software re-signing. QRNG provides marginal benefit for most applications compared to algorithm migration.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Quantum risk governance requires a cross-functional committee, board reporting on HNDL exposure, and regulatory positioning ahead of mandates</div>
+    <div class="blk-title" style="color:#1B2A4A;">Quantum risk governance requires a cross-functional committee, board reporting on HNDL exposure, and regulatory positioning ahead of mandates</div>
     <div class="blk-body">The quantum risk committee owns the CBOM, migration roadmap, vendor assessment, and executive reporting. Board reporting must communicate HNDL exposure honestly including timeline uncertainty. Regulatory trajectory points to 2030 federal mandate with sector-specific guidance following. Insurance-specific risks include long-tail actuarial data lifetime and multi-vendor supply chain readiness gaps.</div>
   </div>
 </div>
@@ -549,40 +432,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Quantum Computing and Cybersecurity — Advanced</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">A workers' compensation insurance carrier processes claims involving medical records, wage data, and employer practices documentation. Claims from today may remain sensitive for 30 years. An adversary capable of collecting encrypted network traffic today gains access to a quantum computer in 2035. Which current communication flows are at risk from this HNDL scenario?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">None — current encryption cannot be broken by any adversary until quantum computers exist</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">All encrypted communications involving these claims that are being transmitted over networks accessible to the adversary today. The adversary collects the encrypted traffic now and decrypts it in 2035 when their quantum computer is available — 30 years of data sensitivity means today's communications are within the risk window.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Only communications sent without encryption</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Only communications using RSA-1024 or weaker algorithms</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">An organization implementing X25519+Kyber hybrid TLS on their web servers monitors cipher suite negotiation logs and finds that 40% of connections are negotiating pure X25519 (classical only) rather than the hybrid cipher suite. What does this indicate and is it a security failure?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Yes — all connections must use the hybrid cipher suite or the security benefit is lost</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">No — clients that connect using X25519 are clients that do not yet support the hybrid cipher suite. The server correctly falls back to classical X25519 for these clients. The hybrid cipher suite provides HNDL protection for PQC-capable clients (60%) while maintaining compatibility for classical clients (40%). This is the expected behavior during the ecosystem transition period.</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Yes — the server configuration is incorrect and must be fixed</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">No — X25519 provides the same security as the hybrid cipher suite</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">A security consultant recommends that an organization deploy Quantum Random Number Generators (QRNGs) for all AES-256 key generation as a post-quantum security improvement. How should this recommendation be evaluated?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Accept immediately — QRNG is required for post-quantum security</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Evaluate critically: AES-256 security depends on the computational difficulty of symmetric key search, not on whether key material was generated by a PRNG or QRNG. The security improvement from QRNG versus a CSPRNG for AES-256 is marginal at best. The same budget invested in migrating RSA and ECDSA usage to NIST PQC algorithms would produce significantly greater post-quantum security improvement.</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Accept only for the most sensitive key generation operations</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Reject — QRNG technology is not mature enough for production use</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">An organization's SSH migration reveals that 3,200 servers have authorized_keys files containing public keys, but there is no central inventory of which users have which keys on which servers. What must happen before migration can proceed, and why?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Migration can proceed by replacing all authorized_keys files with new PQC keys generated for each user</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Inventory discovery must occur first: automated scanning of all authorized_keys files to map which user public keys are authorized on which servers. Without this inventory, there is no way to coordinate the replacement of classical SSH keys with PQC keys across the fleet — users' access would break on servers where their old key was replaced without installing their new PQC key.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Delete all existing authorized_keys files and require users to re-authenticate using passwords while PQC keys are generated</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The migration can be skipped — SSH will eventually update its default algorithms</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">During a quantum risk committee meeting, the CFO asks for a specific date when quantum computers will be able to break current encryption, to plan the migration budget timeline. What is the most accurate and useful response?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">2033 — this is the consensus estimate from NIST and NSA</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">2045 — quantum computers capable of breaking RSA will not exist before then</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The honest answer is that credible estimates from government and academic sources range from 2030 to 2040 for state-actor capability, with significant uncertainty. Rather than planning to a single date, the budget timeline should be driven by data sensitivity lifetime: long-lived NPI data warrants beginning migration now; communications security warrants hybrid deployment within 18 months; full migration of all asymmetric crypto should target 2028-2030 to stay ahead of the lower end of the credible range.</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Quantum computers will never break RSA — the mathematical problem is provably hard</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">An insurance agency's CBOM assessment identifies that their agency management system vendor uses RSA-2048 for the TLS connection between the AMS and carrier portals. The vendor's response to PQC migration inquiry is: 'We're monitoring developments and will implement quantum-safe algorithms when regulators require it.' How should this response be evaluated in the vendor risk assessment?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Acceptable — the vendor will comply with regulatory requirements when they arrive</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">High risk: 'monitoring developments' without a migration roadmap means the vendor has not begun the assessment, planning, or development work needed for PQC migration. When regulatory requirements arrive, the vendor will face compressed timelines to migrate a complex system. This creates transition risk for the agency. The assessment should document this gap, include PQC migration timeline requirements in the next contract renewal, escalate to the agency principal as a vendor risk requiring monitoring, and consider whether alternative vendors with active PQC programs exist.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Low risk — RSA-2048 will remain secure until quantum computers arrive</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Acceptable if the vendor provides written confirmation of their monitoring activities</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -594,11 +477,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
-  'pg2':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
-  'pg3':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
-  'pg4':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
-  'pg5':["#9b7fe8","#4b8ef0","#f0a04a","#e05252"],
+  'pg1':["#1B2A4A","#C4AA88","#A08860","#1B2A4A"],
+  'pg2':["#1B2A4A","#C4AA88","#A08860","#1B2A4A"],
+  'pg3':["#1B2A4A","#C4AA88","#A08860","#1B2A4A"],
+  'pg4':["#1B2A4A","#C4AA88","#A08860","#1B2A4A"],
+  'pg5':["#1B2A4A","#C4AA88","#A08860","#1B2A4A"],
 };
 
 const NARR={
@@ -613,7 +496,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,2,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -629,19 +512,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -687,7 +558,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

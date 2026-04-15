@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#2a9d8f;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#C4AA88;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#2a9d8f22;color:#2a9d8f;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#2a9d8f;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#C4AA88;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#2a9d8f;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#C4AA88;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#2a9d8f;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#C4AA88;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#2a9d8f;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#C4AA88;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#2a9d8f;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#C4AA88;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Case Study: The Casino Fish Tank Hack</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Case Study</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Happened</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">How It Happened</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Root Cause</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Loss</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Lessons Learned</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ A casino's most sensitive database stolen via an aquarium thermometer</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ IoT device exploited as pivot into the business network</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Four control failures that turned a fish tank into a data breach</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ Data, trust, and the lesson every organization needs to absorb</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What a fish tank teaches about IoT, segmentation, and monitoring</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Case Study: The Casino Fish Tank Hack</div>
-  <div class="home-sub">Case Study — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">What Happened</span>
-  </div>
-  <div class="mc-desc">▶ A casino's most sensitive database stolen via an aquarium thermometer</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">How It Happened</span>
-  </div>
-  <div class="mc-desc">▶ IoT device exploited as pivot into the business network</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">Root Cause</span>
-  </div>
-  <div class="mc-desc">▶ Four control failures that turned a fish tank into a data breach</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">The Loss</span>
-  </div>
-  <div class="mc-desc">▶ Data, trust, and the lesson every organization needs to absorb</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;"></span>
-    <span class="mc-title">Lessons Learned</span>
-  </div>
-  <div class="mc-desc">▶ What a fish tank teaches about IoT, segmentation, and monitoring</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Happened</div>
     <div class="ph-sub">A casino's most sensitive database stolen via an aquarium thermometer</div>
@@ -232,52 +115,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Incident Overview — North American Casino, c.2017</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1e2235" stroke="#2a9d8f" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#2a9d8f" font-weight="700" font-family="system-ui">Entry Point: Internet-connected fish tank thermometer</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">IoT sensor installed in lobby aquarium</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Connected to internet for remote temperature monitoring</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Pivot: Fish tank → internal casino network</text>
-    <text x="36" y="152" font-size="10" fill="#94a0b8" font-family="system-ui">Attackers exploited the sensor to reach the network</text>
-    <text x="36" y="166" font-size="10" fill="#56617a" font-family="system-ui">Moved laterally from IoT device to business systems</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Target: High-roller database — VIP customer profiles</text>
-    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Names, gambling habits, spending limits of top players</text>
-    <text x="36" y="238" font-size="10" fill="#56617a" font-family="system-ui">Extremely high commercial value to competitors and criminals</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="280" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">10GB exfiltrated to a device in Finland</text>
-    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">Reported by Darktrace AI network monitoring system</text>
-    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Caught by behavioral anomaly detection — not traditional tools</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Overview — North American Casino, c.2017</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Entry Point: Internet-connected fish tank thermometer</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">IoT sensor installed in lobby aquarium</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">Connected to internet for remote temperature monitoring</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Pivot: Fish tank → internal casino network</text>
+    <text x="36" y="152" font-size="10" fill="#D6CCBC" font-family="system-ui">Attackers exploited the sensor to reach the network</text>
+    <text x="36" y="166" font-size="10" fill="#8A7D6B" font-family="system-ui">Moved laterally from IoT device to business systems</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Target: High-roller database — VIP customer profiles</text>
+    <text x="36" y="224" font-size="10" fill="#D6CCBC" font-family="system-ui">Names, gambling habits, spending limits of top players</text>
+    <text x="36" y="238" font-size="10" fill="#8A7D6B" font-family="system-ui">Extremely high commercial value to competitors and criminals</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">10GB exfiltrated to a device in Finland</text>
+    <text x="36" y="296" font-size="10" fill="#D6CCBC" font-family="system-ui">Reported by Darktrace AI network monitoring system</text>
+    <text x="36" y="310" font-size="10" fill="#8A7D6B" font-family="system-ui">Caught by behavioral anomaly detection — not traditional tools</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">The breach nobody expected</div>
+    <div class="blk-title" style="color:#C4AA88;">The breach nobody expected</div>
     <div class="blk-body">A North American casino suffered a data breach in which attackers exfiltrated 10 gigabytes of its high-roller database — the profiles of its most valuable VIP customers — to a server in Finland. The attackers did not get in through a phishing email, a stolen password, or a vulnerability in the casino's business systems. They got in through a fish tank. The aquarium in the casino's lobby had an internet-connected thermometer for remote temperature monitoring. That thermometer was on the same network as the casino's business systems, and it became the entry point for the breach. The case was reported by cybersecurity firm Darktrace and has become one of the most widely cited examples of IoT security risk.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">What was taken and why it mattered</div>
+    <div class="blk-title" style="color:#C4AA88;">What was taken and why it mattered</div>
     <div class="blk-body">The high-roller database contained detailed profiles of the casino's top-spending customers: their names, contact information, gambling habits, betting limits, preferred games, and other personal details that the casino used to provide personalized service. This data is commercially extremely sensitive. For a casino, high-roller relationships are the foundation of the business — a small number of very high-spending customers generate a disproportionate share of revenue. The stolen database gave whoever obtained it detailed intelligence on the casino's most valuable clients, including information that could be used for targeted fraud, competitive intelligence, or social engineering against those individuals.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">How the attack was discovered</div>
+    <div class="blk-title" style="color:#A08860;">How the attack was discovered</div>
     <div class="blk-body">The attack was detected not by traditional signature-based security tools but by Darktrace, an AI-powered network monitoring system that builds a behavioral baseline for every device on the network and alerts when a device behaves in ways inconsistent with that baseline. The Darktrace system flagged an anomaly: the fish tank thermometer was transmitting data to an IP address in Finland. A thermometer has no legitimate reason to communicate with servers in Finland. Traditional antivirus and intrusion detection systems saw no known malware signature and generated no alert. Behavioral monitoring — watching for what is unusual rather than what is known-bad — caught the breach in progress.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Why this case matters beyond casinos</div>
+    <div class="blk-title" style="color:#1B2A4A;">Why this case matters beyond casinos</div>
     <div class="blk-body">The casino fish tank breach has become a canonical example because it illustrates a principle that applies to every organization: any internet-connected device is a potential attack surface, and devices that are not normally considered part of the IT security perimeter — thermometers, smart TVs, building management systems, HVAC controllers, printers, IP cameras — can serve as entry points if they are connected to the same network as sensitive business systems. The attack surface of a modern organization includes every device with a network connection, regardless of its intended function.</div>
   </div>
 </div>
@@ -293,53 +176,53 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="18" text-anchor="middle" font-size="12" fill="#94a0b8" font-weight="600" font-family="system-ui">Attack Chain — From Fish Tank to Database</text>
-  <rect x="175" y="28" width="170" height="34" rx="6" fill="#2a9d8f" opacity="0.15" stroke="#2a9d8f" stroke-width="1.5"/>
-  <text x="260" y="49" text-anchor="middle" font-size="10" fill="#2a9d8f" font-weight="700" font-family="system-ui">1. Fish tank sensor scanned / exploited</text>
-  <line x1="260" y1="62" x2="260" y2="78" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="160" y="78" width="200" height="34" rx="6" fill="#4b8ef0" opacity="0.15" stroke="#4b8ef0" stroke-width="1.5"/>
-  <text x="260" y="99" text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">2. Foothold on internal network via IoT</text>
-  <line x1="260" y1="112" x2="260" y2="128" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="145" y="128" width="230" height="34" rx="6" fill="#f0a04a" opacity="0.15" stroke="#f0a04a" stroke-width="1.5"/>
-  <text x="260" y="149" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">3. Lateral movement to business network</text>
-  <line x1="260" y1="162" x2="260" y2="178" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="130" y="178" width="260" height="34" rx="6" fill="#e05252" opacity="0.15" stroke="#e05252" stroke-width="1.5"/>
-  <text x="260" y="199" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">4. High-roller database accessed</text>
-  <line x1="260" y1="212" x2="260" y2="228" stroke="#56617a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="115" y="228" width="290" height="34" rx="6" fill="#e05252" opacity="0.15" stroke="#e05252" stroke-width="2"/>
-  <text x="260" y="249" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">5. 10GB exfiltrated to Finland</text>
-  <line x1="260" y1="262" x2="260" y2="278" stroke="#2a9d8f" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <rect x="130" y="278" width="260" height="34" rx="6" fill="#2a9d8f" opacity="0.12" stroke="#2a9d8f" stroke-width="2"/>
-  <text x="260" y="299" text-anchor="middle" font-size="10" fill="#2a9d8f" font-weight="700" font-family="system-ui">6. Darktrace anomaly alert — detected</text>
+  <text x="260" y="18" text-anchor="middle" font-size="12" fill="#D6CCBC" font-weight="600" font-family="system-ui">Attack Chain — From Fish Tank to Database</text>
+  <rect x="175" y="28" width="170" height="34" rx="6" fill="#C4AA88" opacity="0.15" stroke="#C4AA88" stroke-width="1.5"/>
+  <text x="260" y="49" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">1. Fish tank sensor scanned / exploited</text>
+  <line x1="260" y1="62" x2="260" y2="78" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="160" y="78" width="200" height="34" rx="6" fill="#C4AA88" opacity="0.15" stroke="#C4AA88" stroke-width="1.5"/>
+  <text x="260" y="99" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">2. Foothold on internal network via IoT</text>
+  <line x1="260" y1="112" x2="260" y2="128" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="145" y="128" width="230" height="34" rx="6" fill="#A08860" opacity="0.15" stroke="#A08860" stroke-width="1.5"/>
+  <text x="260" y="149" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">3. Lateral movement to business network</text>
+  <line x1="260" y1="162" x2="260" y2="178" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="130" y="178" width="260" height="34" rx="6" fill="#1B2A4A" opacity="0.15" stroke="#1B2A4A" stroke-width="1.5"/>
+  <text x="260" y="199" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">4. High-roller database accessed</text>
+  <line x1="260" y1="212" x2="260" y2="228" stroke="#8A7D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="115" y="228" width="290" height="34" rx="6" fill="#1B2A4A" opacity="0.15" stroke="#1B2A4A" stroke-width="2"/>
+  <text x="260" y="249" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">5. 10GB exfiltrated to Finland</text>
+  <line x1="260" y1="262" x2="260" y2="278" stroke="#C4AA88" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="130" y="278" width="260" height="34" rx="6" fill="#C4AA88" opacity="0.12" stroke="#C4AA88" stroke-width="2"/>
+  <text x="260" y="299" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">6. Darktrace anomaly alert — detected</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Step 1: The fish tank as an attack surface</div>
+    <div class="blk-title" style="color:#C4AA88;">Step 1: The fish tank as an attack surface</div>
     <div class="blk-body">The fish tank thermometer was an internet-connected IoT device — a small computer running embedded software, connected to the internet for remote monitoring, and connected to the casino's internal network so that facility management staff could check water temperature from their computers. The device had a network address on the casino's internal network. It ran software that, like most embedded IoT firmware, had not been extensively security-tested and likely had default credentials that were not changed on installation. Attackers scanning the internet for accessible devices identified it as a target.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Step 2: Exploiting the thermometer</div>
+    <div class="blk-title" style="color:#C4AA88;">Step 2: Exploiting the thermometer</div>
     <div class="blk-body">The attackers exploited a vulnerability in the fish tank device — either a software vulnerability in its embedded firmware, a default or weak credential, or an exposed management interface. The exact exploitation method is not publicly documented, but the result is clear: the attackers obtained the ability to execute code on the thermometer or to use its network position to reach other systems on the casino's internal network. The thermometer, designed to report water temperature, became a foothold on the casino's network.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Step 3: Lateral movement to business systems</div>
+    <div class="blk-title" style="color:#A08860;">Step 3: Lateral movement to business systems</div>
     <div class="blk-body">From the thermometer's network position, the attackers moved laterally toward the casino's business systems. Because the IoT device was on the same network as the casino's internal systems — not isolated in a separate VLAN with firewall rules preventing communication to business systems — the thermometer's network address could communicate with the casino's servers. The attackers used this connectivity to reach the high-roller database, identifying it as the highest-value target on the network.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Step 4: 10GB exfiltrated to Finland</div>
+    <div class="blk-title" style="color:#1B2A4A;">Step 4: 10GB exfiltrated to Finland</div>
     <div class="blk-body">The attackers exfiltrated 10 gigabytes from the high-roller database to a server in Finland. This was the step that Darktrace detected: the thermometer sending a large volume of data to an external IP address in Finland was behaviorally anomalous. No thermometer has a legitimate reason to establish an outbound connection to Finland and transmit gigabytes of data. The behavioral monitoring system flagged the anomaly, the casino's security team investigated, and the exfiltration was stopped. Without that behavioral monitoring, the breach might have completed entirely without detection.</div>
   </div>
 </div>
@@ -355,52 +238,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Control Failures</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1e2235" stroke="#2a9d8f" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#2a9d8f" font-weight="700" font-family="system-ui">IoT device connected to the main business network</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Fish tank on same network as casino business systems</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">No IoT segmentation — should have been isolated VLAN</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">No IoT asset inventory or security review</text>
-    <text x="36" y="152" font-size="10" fill="#94a0b8" font-family="system-ui">Thermometer installed without security assessment</text>
-    <text x="36" y="166" font-size="10" fill="#56617a" font-family="system-ui">Vendor default credentials not changed</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="208" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">No east-west traffic monitoring</text>
-    <text x="36" y="224" font-size="10" fill="#94a0b8" font-family="system-ui">Lateral movement from IoT to business systems undetected</text>
-    <text x="36" y="238" font-size="10" fill="#56617a" font-family="system-ui">Internal traffic not treated as untrusted</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="280" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">High-roller DB accessible from IoT network path</text>
-    <text x="36" y="296" font-size="10" fill="#94a0b8" font-family="system-ui">Most sensitive data reachable from a fish tank thermometer</text>
-    <text x="36" y="310" font-size="10" fill="#56617a" font-family="system-ui">Database access not restricted to authorized systems only</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Control Failures</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">IoT device connected to the main business network</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Fish tank on same network as casino business systems</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">No IoT segmentation — should have been isolated VLAN</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="136" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">No IoT asset inventory or security review</text>
+    <text x="36" y="152" font-size="10" fill="#D6CCBC" font-family="system-ui">Thermometer installed without security assessment</text>
+    <text x="36" y="166" font-size="10" fill="#8A7D6B" font-family="system-ui">Vendor default credentials not changed</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="184" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="208" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">No east-west traffic monitoring</text>
+    <text x="36" y="224" font-size="10" fill="#D6CCBC" font-family="system-ui">Lateral movement from IoT to business systems undetected</text>
+    <text x="36" y="238" font-size="10" fill="#8A7D6B" font-family="system-ui">Internal traffic not treated as untrusted</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="256" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="280" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">High-roller DB accessible from IoT network path</text>
+    <text x="36" y="296" font-size="10" fill="#D6CCBC" font-family="system-ui">Most sensitive data reachable from a fish tank thermometer</text>
+    <text x="36" y="310" font-size="10" fill="#8A7D6B" font-family="system-ui">Database access not restricted to authorized systems only</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Failure 1: IoT device on the main business network</div>
+    <div class="blk-title" style="color:#C4AA88;">Failure 1: IoT device on the main business network</div>
     <div class="blk-body">The fundamental control failure was placing an IoT device — a fish tank thermometer — on the same network as the casino's business systems and sensitive databases. IoT devices should always be isolated in a dedicated network segment with firewall rules that explicitly deny all communication between IoT devices and business systems. The only traffic permitted from IoT devices should be the specific, defined traffic required for their function: in this case, the thermometer reporting temperature readings to a monitoring system, and nothing else. Connectivity to business networks should be architecturally impossible, not merely unlikely.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Failure 2: No IoT asset inventory or security review</div>
+    <div class="blk-title" style="color:#C4AA88;">Failure 2: No IoT asset inventory or security review</div>
     <div class="blk-body">The fish tank thermometer was installed without a security assessment. IoT devices are frequently installed by facilities, operations, or vendor staff without IT security involvement. They run embedded software that has often not been security-tested, they may have default credentials that were never changed, and they may have exploitable vulnerabilities in firmware that is rarely updated. Every internet-connected device installed in an organization's facility must be cataloged in the asset inventory, assessed for security risk, and subject to hardening requirements before it is connected to any network.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Failure 3: No east-west traffic monitoring</div>
+    <div class="blk-title" style="color:#A08860;">Failure 3: No east-west traffic monitoring</div>
     <div class="blk-body">After the attackers gained access to the thermometer, they moved laterally through the network to reach the high-roller database. This lateral movement — an IoT device communicating with a business database server — is exactly the kind of unusual east-west traffic that network monitoring should detect. Traditional security monitoring focuses on north-south traffic: what comes into the network from outside, and what leaves. East-west monitoring watches traffic between devices inside the network. A thermometer initiating connections to a database server is anomalous and should produce an alert.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Failure 4: High-value database accessible from the IoT path</div>
+    <div class="blk-title" style="color:#1B2A4A;">Failure 4: High-value database accessible from the IoT path</div>
     <div class="blk-body">The high-roller database — the casino's most sensitive data — was accessible from network paths that included the IoT device. The database containing the profiles of the casino's most valuable customers should have been in the most restricted network zone, accessible only from specific authorized application servers, with no path from IoT networks, guest networks, or other low-security segments. The principle of least privilege applies to network access: the most sensitive data should be the hardest to reach, with explicitly authorized access paths and no others.</div>
   </div>
 </div>
@@ -416,52 +299,52 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Impact Summary</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="60" rx="8" fill="#1e2235" stroke="#2a9d8f" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#2a9d8f" font-weight="700" font-family="system-ui">Data: High-roller VIP database exfiltrated</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">10GB of highest-value customer intelligence stolen</text>
-    <text x="36" y="88" font-size="10" fill="#56617a" font-family="system-ui">Gambling patterns, spending limits, contact details</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="106" width="480" height="60" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="130" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Detection: Darktrace AI caught what signatures missed</text>
-    <text x="36" y="146" font-size="10" fill="#94a0b8" font-family="system-ui">Behavioral anomaly: fish tank sending data to Finland</text>
-    <text x="36" y="160" font-size="10" fill="#56617a" font-family="system-ui">Traditional tools saw no known malware signature</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="60" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="202" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Industry: IoT attack surface now understood as real</text>
-    <text x="36" y="218" font-size="10" fill="#94a0b8" font-family="system-ui">Every internet-connected device is a potential entry point</text>
-    <text x="36" y="232" font-size="10" fill="#56617a" font-family="system-ui">Smart TVs, HVAC, printers, building systems — all at risk</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="250" width="480" height="66" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="274" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Reputational: Trust breach with VIP clientele</text>
-    <text x="36" y="290" font-size="10" fill="#94a0b8" font-family="system-ui">High-roller relationships depend on confidentiality</text>
-    <text x="36" y="306" font-size="10" fill="#56617a" font-family="system-ui">Casino's most valuable clients had data exposed</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Impact Summary</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Data: High-roller VIP database exfiltrated</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">10GB of highest-value customer intelligence stolen</text>
+    <text x="36" y="88" font-size="10" fill="#8A7D6B" font-family="system-ui">Gambling patterns, spending limits, contact details</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="106" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="130" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Detection: Darktrace AI caught what signatures missed</text>
+    <text x="36" y="146" font-size="10" fill="#D6CCBC" font-family="system-ui">Behavioral anomaly: fish tank sending data to Finland</text>
+    <text x="36" y="160" font-size="10" fill="#8A7D6B" font-family="system-ui">Traditional tools saw no known malware signature</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="178" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="202" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Industry: IoT attack surface now understood as real</text>
+    <text x="36" y="218" font-size="10" fill="#D6CCBC" font-family="system-ui">Every internet-connected device is a potential entry point</text>
+    <text x="36" y="232" font-size="10" fill="#8A7D6B" font-family="system-ui">Smart TVs, HVAC, printers, building systems — all at risk</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="250" width="480" height="66" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="274" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Reputational: Trust breach with VIP clientele</text>
+    <text x="36" y="290" font-size="10" fill="#D6CCBC" font-family="system-ui">High-roller relationships depend on confidentiality</text>
+    <text x="36" y="306" font-size="10" fill="#8A7D6B" font-family="system-ui">Casino's most valuable clients had data exposed</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Data loss: the casino's most valuable intelligence stolen</div>
+    <div class="blk-title" style="color:#C4AA88;">Data loss: the casino's most valuable intelligence stolen</div>
     <div class="blk-body">The high-roller database is among the most sensitive data a casino possesses. High-roller customers generate a disproportionate share of casino revenue, and the relationships with those customers are built on personalized service, discretion, and trust. The stolen database gave the attackers detailed profiles of the casino's most valuable clients: their gambling patterns, spending limits, preferred games, and personal contact information. This data has clear commercial value to competitors, value to fraudsters targeting high-net-worth individuals, and value for social engineering attacks against the individuals whose profiles were stolen.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Detection: behavioral monitoring caught what signatures missed</div>
+    <div class="blk-title" style="color:#C4AA88;">Detection: behavioral monitoring caught what signatures missed</div>
     <div class="blk-body">The breach detection story is almost as important as the breach itself. Darktrace's behavioral monitoring system flagged the anomaly that traditional tools missed. This reflects a fundamental limitation of signature-based security: it can only detect what it has already seen and cataloged. Novel attack techniques, unusual paths through the network, and attacks using legitimate network access rather than known malware evade signature detection entirely. Behavioral monitoring — building a baseline of what is normal and alerting on deviations — catches the anomalies that signatures miss. The fish tank case is cited in cybersecurity training programs worldwide as the canonical example of why behavioral monitoring matters.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Industry impact: IoT security became a board-level topic</div>
+    <div class="blk-title" style="color:#A08860;">Industry impact: IoT security became a board-level topic</div>
     <div class="blk-body">The casino fish tank case was disclosed by Darktrace in 2018 and immediately became one of the most widely shared cybersecurity stories in years. It resonated because it was concrete, counterintuitive, and universally applicable. Every organization with connected devices — which is every organization — could recognize their own thermostats, smart TVs, printers, and building management systems in the story. The case directly contributed to IoT security becoming a board-level topic and to the development of IoT-specific security frameworks, network segmentation requirements for IoT devices, and procurement requirements for IoT security standards.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Reputational: VIP trust is a casino's business model</div>
+    <div class="blk-title" style="color:#1B2A4A;">Reputational: VIP trust is a casino's business model</div>
     <div class="blk-body">The confidentiality of high-roller customer information is not merely a legal obligation for a casino — it is a core component of the business model. High-spending customers who visit casinos regularly do so in part because they trust that the casino will treat their presence and their habits with discretion. The theft of their detailed profiles — gambling patterns, spending limits, personal contact information — represented a direct breach of that trust. The reputational impact of a breach involving a casino's most valuable customers is not easily quantified, but the nature of the customer relationship means the damage is both real and enduring.</div>
   </div>
 </div>
@@ -478,58 +361,58 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
   <g id="pg5-hl0" class="svg-hl" transform="translate(140,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#2a9d8f" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#2a9d8f" font-weight="700" font-family="system-ui">IOT SEGMENTATION</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Isolated VLAN for all IoT</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">No path to business network</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Firewall rules deny lateral</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">IOT SEGMENTATION</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Isolated VLAN for all IoT</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">No path to business network</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Firewall rules deny lateral</text></g>
   <g id="pg5-hl1" class="svg-hl" transform="translate(380,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">ASSET INVENTORY</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Every device cataloged</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Security review before install</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Default creds always changed</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">ASSET INVENTORY</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Every device cataloged</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Security review before install</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Default creds always changed</text></g>
   <g id="pg5-hl2" class="svg-hl" transform="translate(140,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">NETWORK MONITORING</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Monitor east-west traffic</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Behavioral anomaly detection</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Alert on unusual destinations</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">NETWORK MONITORING</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Monitor east-west traffic</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Behavioral anomaly detection</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Alert on unusual destinations</text></g>
   <g id="pg5-hl3" class="svg-hl" transform="translate(380,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">DATA ACCESS CONTROL</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Restrict DB to auth systems</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Least-privilege data access</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Sensitive data in its own zone</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">DATA ACCESS CONTROL</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Restrict DB to auth systems</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Least-privilege data access</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Sensitive data in its own zone</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#2a9d8f;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#2a9d8f;">Every connected device is part of your attack surface</div>
+    <div class="blk-title" style="color:#C4AA88;">Every connected device is part of your attack surface</div>
     <div class="blk-body">The attack surface of your organization is not limited to computers, servers, and mobile devices. It includes every device connected to your network: thermostats, fish tanks, smart TVs, printers, IP cameras, HVAC controllers, badge readers, and building management systems. Every one of these devices is a potential entry point if it is not isolated from systems containing sensitive data.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">IoT devices must be isolated in their own network segment</div>
+    <div class="blk-title" style="color:#C4AA88;">IoT devices must be isolated in their own network segment</div>
     <div class="blk-body">IoT devices should never be on the same network as business systems. They should be placed in a dedicated IoT VLAN with firewall rules that explicitly prevent any communication between the IoT segment and business systems. The only permitted traffic from IoT devices should be the specific traffic required for their function — and nothing else.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Behavioral monitoring catches what signatures miss</div>
+    <div class="blk-title" style="color:#A08860;">Behavioral monitoring catches what signatures miss</div>
     <div class="blk-body">The casino breach was caught because behavioral monitoring flagged a thermometer sending data to Finland. Traditional signature-based tools saw nothing. Behavioral monitoring builds a baseline of what is normal for each device and alerts on deviations. It is the control that catches novel attack techniques, unusual lateral movement, and attackers using legitimate network access.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Your most sensitive data needs your strictest access controls</div>
+    <div class="blk-title" style="color:#1B2A4A;">Your most sensitive data needs your strictest access controls</div>
     <div class="blk-body">The high-roller database should have been in the most restricted network zone, accessible only from specific, explicitly authorized application servers. The principle of least privilege applies to network architecture: the more sensitive the data, the fewer systems should be able to reach it, and the more explicitly those permitted paths should be defined and enforced.</div>
   </div>
 </div>
@@ -541,40 +424,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Case Study: The Casino Fish Tank Hack</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">How did attackers initially access the casino's network?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Phishing email to a finance employee</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">SQL injection on the casino website</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Exploiting an internet-connected fish tank thermometer</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Stolen VPN credentials</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">What was the attackers' ultimate target in the casino network?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Payment processing systems</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">High-roller VIP customer database</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Slot machine control systems</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Employee payroll records</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">How was the breach detected?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Traditional antivirus flagged known malware</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">The casino's IT team noticed unusual database queries</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Darktrace behavioral monitoring flagged anomalous thermometer traffic</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Law enforcement notified the casino</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">What network control would most directly have prevented the lateral movement?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Better antivirus on the fish tank</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Placing IoT devices in an isolated VLAN with no path to business systems</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Stronger passwords on the thermometer</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Encrypting the high-roller database</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">How much data was exfiltrated in the casino breach?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">100MB</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">10GB</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">1TB</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">500MB</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">What principle does the casino case most directly illustrate?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Phishing is the primary attack vector</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Every internet-connected device is part of the attack surface</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Nation-state actors are the primary threat</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Passwords are the weakest security control</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -586,11 +469,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#2a9d8f","#4b8ef0","#f0a04a","#e05252"],
-  'pg2':["#2a9d8f","#4b8ef0","#f0a04a","#e05252"],
-  'pg3':["#2a9d8f","#4b8ef0","#f0a04a","#e05252"],
-  'pg4':["#2a9d8f","#4b8ef0","#f0a04a","#e05252"],
-  'pg5':["#2a9d8f","#4b8ef0","#f0a04a","#e05252"],
+  'pg1':["#C4AA88","#C4AA88","#A08860","#1B2A4A"],
+  'pg2':["#C4AA88","#C4AA88","#A08860","#1B2A4A"],
+  'pg3':["#C4AA88","#C4AA88","#A08860","#1B2A4A"],
+  'pg4':["#C4AA88","#C4AA88","#A08860","#1B2A4A"],
+  'pg5':["#C4AA88","#C4AA88","#A08860","#1B2A4A"],
 };
 
 const NARR={
@@ -605,7 +488,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[2,1,2,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -621,19 +504,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -679,7 +550,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

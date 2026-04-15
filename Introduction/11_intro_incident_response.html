@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#e05252;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#1B2A4A;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#e0525222;color:#e05252;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#e05252;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#e05252;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#e05252;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#e05252;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#e05252;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Introduction to Incident Reporting and Response</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Introductory</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Is a Security Incident</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Recognizing Incidents</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How to Report an Incident</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Incident Response Process</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Recognizing Incidents</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How to Report an Incident</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Incident Response Process</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Is a Security Incident</span>
-  </div>
-  <div class="mc-desc">▶ Recognizing when something has gone wrong</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Recognizing Incidents</span>
-  </div>
-  <div class="mc-desc">▶ The signals that indicate a potential security incident</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How to Report an Incident</span>
-  </div>
-  <div class="mc-desc">▶ The right way to respond when you suspect a security incident</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">The Incident Response Process</span>
-  </div>
-  <div class="mc-desc">▶ What happens after an incident is reported</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Introduction to Incident Reporting and Response</div>
-  <div class="home-sub">Introductory — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Is a Security Incident</span>
-  </div>
-  <div class="mc-desc">▶ Recognizing when something has gone wrong</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Recognizing Incidents</span>
-  </div>
-  <div class="mc-desc">▶ The signals that indicate a potential security incident</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How to Report an Incident</span>
-  </div>
-  <div class="mc-desc">▶ The right way to respond when you suspect a security incident</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">The Incident Response Process</span>
-  </div>
-  <div class="mc-desc">▶ What happens after an incident is reported</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Is a Security Incident</div>
     <div class="ph-sub">Recognizing when something has gone wrong</div>
@@ -232,48 +115,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Security Incident Types</text>
-  <g id="pg1-hl0" class="svg-hl" transform="translate(0,0)"><rect x="20" y="42" width="480" height="56" rx="9" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="56" y="72" font-size="16" font-family="system-ui">🔒</text><text x="90" y="67" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Malware / Ransomware</text>
-    <text x="90" y="85" font-size="10" fill="#94a0b8" font-family="system-ui">Files encrypted · System compromised · Security tools disabled</text></g>
-  <g id="pg1-hl1" class="svg-hl" transform="translate(0,0)"><rect x="20" y="113" width="480" height="56" rx="9" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="56" y="143" font-size="16" font-family="system-ui">📧</text><text x="90" y="138" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Phishing / Account Compromise</text>
-    <text x="90" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Credentials stolen · Unauthorized logins · Emails sent without knowledge</text></g>
-  <g id="pg1-hl2" class="svg-hl" transform="translate(0,0)"><rect x="20" y="184" width="480" height="56" rx="9" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="56" y="214" font-size="16" font-family="system-ui">💾</text><text x="90" y="209" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Data Loss / Exposure</text>
-    <text x="90" y="227" font-size="10" fill="#94a0b8" font-family="system-ui">Misdirected email · Unauthorized access · Missing files · Oversharing</text></g>
-  <g id="pg1-hl3" class="svg-hl" transform="translate(0,0)"><rect x="20" y="255" width="480" height="56" rx="9" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="56" y="285" font-size="16" font-family="system-ui">🖥️</text><text x="90" y="280" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Physical Security</text>
-    <text x="90" y="298" font-size="10" fill="#94a0b8" font-family="system-ui">Lost / stolen device · Unknown hardware · Unauthorized physical access</text></g>
+  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Security Incident Types</text>
+  <g id="pg1-hl0" class="svg-hl" transform="translate(0,0)"><rect x="20" y="42" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="56" y="72" font-size="16" font-family="system-ui">🔒</text><text x="90" y="67" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Malware / Ransomware</text>
+    <text x="90" y="85" font-size="10" fill="#D6CCBC" font-family="system-ui">Files encrypted · System compromised · Security tools disabled</text></g>
+  <g id="pg1-hl1" class="svg-hl" transform="translate(0,0)"><rect x="20" y="113" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="56" y="143" font-size="16" font-family="system-ui">📧</text><text x="90" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Phishing / Account Compromise</text>
+    <text x="90" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Credentials stolen · Unauthorized logins · Emails sent without knowledge</text></g>
+  <g id="pg1-hl2" class="svg-hl" transform="translate(0,0)"><rect x="20" y="184" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="56" y="214" font-size="16" font-family="system-ui">💾</text><text x="90" y="209" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Data Loss / Exposure</text>
+    <text x="90" y="227" font-size="10" fill="#D6CCBC" font-family="system-ui">Misdirected email · Unauthorized access · Missing files · Oversharing</text></g>
+  <g id="pg1-hl3" class="svg-hl" transform="translate(0,0)"><rect x="20" y="255" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="56" y="285" font-size="16" font-family="system-ui">🖥️</text><text x="90" y="280" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Physical Security</text>
+    <text x="90" y="298" font-size="10" fill="#D6CCBC" font-family="system-ui">Lost / stolen device · Unknown hardware · Unauthorized physical access</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">A security incident is any event that threatens the confidentiality, integrity, or availability of systems or data</div>
+    <div class="blk-title" style="color:#1B2A4A;">A security incident is any event that threatens the confidentiality, integrity, or availability of systems or data</div>
     <div class="blk-body">A security incident is any event that has or may have compromised the security of organizational systems or data. Incidents range in severity from minor — a single phishing email that was caught and not acted on — to critical — a ransomware attack encrypting the organization's file servers. Common incident types include: unauthorized access to systems or data; malware infection on one or more devices; phishing attacks, whether successful or not; data loss or exposure, including accidental misdelivery of sensitive information; account compromise; denial of service attacks; and physical security incidents involving organizational devices. Not every suspicious event becomes an incident, but every suspicious event warrants investigation to determine whether it is one.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Security incidents are frequently discovered by users, not automated systems</div>
+    <div class="blk-title" style="color:#A08860;">Security incidents are frequently discovered by users, not automated systems</div>
     <div class="blk-body">A common misconception is that security incidents are always detected by automated tools — antivirus alerts, intrusion detection systems, or security monitoring dashboards. In practice, a significant proportion of security incidents are first noticed by employees going about their regular work: a user notices that files they did not encrypt are now inaccessible, a manager receives a call from a customer asking about a phishing email purportedly from the organization, a finance employee receives a suspicious wire transfer request, or an IT administrator notices unusual login activity in audit logs. Users who recognize these signals and report them promptly enable faster response — which directly limits the damage an incident causes.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">What does not constitute an incident — and what does</div>
+    <div class="blk-title" style="color:#C4AA88;">What does not constitute an incident — and what does</div>
     <div class="blk-body">Understanding the boundary between normal operational issues and security incidents helps in making the right reporting decision. A computer that runs slowly, a forgotten password, a software application that crashes — these are technical issues to report to the helpdesk, not security incidents. A computer that runs slowly after an unusual email attachment was opened, a password that was shared with someone else and may have been used, or a software application that was installed from an unofficial source — these are security concerns warranting investigation. The key question is whether the issue might involve unauthorized access, data exposure, or a compromise of security controls. When in doubt, report to the security team — they can determine whether investigation is warranted.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Early reporting is the most important individual contribution to incident response</div>
+    <div class="blk-title" style="color:#A08860;">Early reporting is the most important individual contribution to incident response</div>
     <div class="blk-body">The damage caused by a security incident is directly related to how long it goes undetected. An attacker who has been in an organization's systems for thirty minutes and has been detected has caused less damage than one who has been present for thirty days undetected. Ransomware that is detected within minutes of execution, before it has encrypted more than a fraction of the target files, is significantly more recoverable than ransomware discovered after it has encrypted everything and deleted the backups. Every hour that an incident continues before detection represents additional data accessed, additional files encrypted, additional attacker footholds established. The employee who notices something unusual and reports it immediately — rather than waiting to see if it gets worse or trying to resolve it themselves — is making the most valuable possible contribution to incident response.</div>
   </div>
 </div>
@@ -289,62 +172,62 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Incident Warning Signs</text>
+  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Warning Signs</text>
   <g id="pg2-hl0" class="svg-hl" transform="translate(130,115)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
+    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
     <text y="-38" text-anchor="middle" font-size="22" font-family="system-ui">⚠️</text>
-    <text y="-14" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">SYSTEM BEHAVIOR</text>
-    <text y="6"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Encrypted files</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Unknown processes</text>
-    <text y="42" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Disabled security tools</text></g>
+    <text y="-14" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">SYSTEM BEHAVIOR</text>
+    <text y="6"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Encrypted files</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unknown processes</text>
+    <text y="42" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Disabled security tools</text></g>
   <g id="pg2-hl1" class="svg-hl" transform="translate(390,115)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
+    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
     <text y="-38" text-anchor="middle" font-size="22" font-family="system-ui">📧</text>
-    <text y="-14" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">EMAIL SIGNALS</text>
-    <text y="6"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Unsolicited resets</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Emails you didn't send</text>
-    <text y="42" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Unfamiliar login locations</text></g>
+    <text y="-14" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">EMAIL SIGNALS</text>
+    <text y="6"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unsolicited resets</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Emails you didn't send</text>
+    <text y="42" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Unfamiliar login locations</text></g>
   <g id="pg2-hl2" class="svg-hl" transform="translate(130,268)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">DATA ANOMALIES</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Missing / changed files</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Unauthorized access alerts</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Contacts report odd messages</text></g>
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DATA ANOMALIES</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Missing / changed files</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unauthorized access alerts</text>
+    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Contacts report odd messages</text></g>
   <g id="pg2-hl3" class="svg-hl" transform="translate(390,268)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="2"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">PHYSICAL</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Lost / stolen device</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Unknown hardware found</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Unauthorized area access</text></g>
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PHYSICAL</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Lost / stolen device</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unknown hardware found</text>
+    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Unauthorized area access</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Unexpected system behavior that could indicate malware or unauthorized access</div>
+    <div class="blk-title" style="color:#1B2A4A;">Unexpected system behavior that could indicate malware or unauthorized access</div>
     <div class="blk-body">Certain system behaviors are consistent with malware infection or unauthorized access and should be treated as security signals rather than routine technical problems. Files that cannot be opened and show unfamiliar extensions suggest ransomware encryption. Processes consuming unusual CPU or network resources may indicate malware activity. Security software that has been disabled or appears to have been tampered with warrants investigation. Browser behavior changes — new toolbars, unexpected redirections, homepage changes — may indicate unwanted software installation. Accounts that show login activity that the account owner did not perform, or that display settings changes the owner did not make, indicate account compromise. None of these observations are definitive by themselves, but each warrants reporting rather than ignoring.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Suspicious email activity — unexpected resets, login attempts, or messages sent without your knowledge</div>
+    <div class="blk-title" style="color:#A08860;">Suspicious email activity — unexpected resets, login attempts, or messages sent without your knowledge</div>
     <div class="blk-body">Email accounts are frequently targeted for compromise, and several specific signals indicate possible account compromise. Receiving password reset emails you did not request may mean someone is attempting to take over the account. Receiving notifications of login attempts from unfamiliar locations or devices suggests the credentials have been compromised. Finding email in your sent folder that you did not send, or finding email in your deleted folder that you did not delete, indicates that someone else has been operating your email account. Contacts reporting that they received strange messages from your email address is a strong signal of account compromise. Any of these observations should be reported immediately and the account password changed while awaiting security team guidance.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Data anomalies — missing files, unexpected changes, or unauthorized access notifications</div>
+    <div class="blk-title" style="color:#C4AA88;">Data anomalies — missing files, unexpected changes, or unauthorized access notifications</div>
     <div class="blk-body">Data-related incidents often produce specific observable signals. Files that were present are now missing or inaccessible. Files that should not have changed have been modified. Audit logs — if the user has access to them — show access by accounts that should not have been accessing that data. Cloud storage services send notifications of new logins or unusual activity. A colleague or customer reports receiving data that should not have been shared with them. These signals may indicate deliberate data theft, ransomware activity, accidental misconfiguration, or an account compromise that resulted in unauthorized data access. Each warrants prompt reporting to the security team for investigation.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Physical security signals — lost devices, unauthorized access, unfamiliar hardware</div>
+    <div class="blk-title" style="color:#A08860;">Physical security signals — lost devices, unauthorized access, unfamiliar hardware</div>
     <div class="blk-body">Physical security incidents can have significant digital security consequences. A lost or stolen laptop may expose the data stored on it, enable access to accounts with saved credentials, and potentially allow someone to access organizational systems. An unfamiliar device — a USB drive, a small device attached to a network port or a keyboard — may be a hardware-based attack tool. An unfamiliar person observed in a secure area of the workplace, or evidence that a physical area has been accessed when it should not have been, warrants reporting to both physical security and the IT team. Physical and digital security are not separate domains — physical access frequently enables digital access.</div>
   </div>
 </div>
@@ -360,49 +243,49 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">When You Suspect an Incident</text>
+  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">When You Suspect an Incident</text>
   <g id="pg3-hl0" class="svg-hl" transform="translate(260,90)">
-    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="12" fill="#e05252" font-weight="700" font-family="system-ui">STEP 1: REPORT — Know your channel NOW</text>
-    <text y="14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Security email · Helpdesk · Security team contact · Find out before you need it</text></g>
+    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5"/>
+    <text y="-8"  text-anchor="middle" font-size="12" fill="#1B2A4A" font-weight="700" font-family="system-ui">STEP 1: REPORT — Know your channel NOW</text>
+    <text y="14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Security email · Helpdesk · Security team contact · Find out before you need it</text></g>
   <g id="pg3-hl1" class="svg-hl" transform="translate(260,175)">
-    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text y="-8"  text-anchor="middle" font-size="12" fill="#f0a04a" font-weight="700" font-family="system-ui">STEP 2: BE SPECIFIC — What, when, where</text>
-    <text y="14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">What you observed · What you did before · Which systems affected · What time</text></g>
+    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-8"  text-anchor="middle" font-size="12" fill="#A08860" font-weight="700" font-family="system-ui">STEP 2: BE SPECIFIC — What, when, where</text>
+    <text y="14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">What you observed · What you did before · Which systems affected · What time</text></g>
   <g id="pg3-hl2" class="svg-hl" transform="translate(260,263)">
-    <rect x="-210" y="-48" width="420" height="96" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-22" text-anchor="middle" font-size="12" fill="#4b8ef0" font-weight="700" font-family="system-ui">STEP 3: PRESERVE — Do and don't</text>
-    <text y="0"  text-anchor="middle" font-size="10" fill="#6db86d" font-family="system-ui">✓ Stop using affected system · Write down observations · Keep device on</text>
-    <text y="18" text-anchor="middle" font-size="10" fill="#e05252" font-family="system-ui">✗ Don't run cleanup tools · Don't delete suspicious email · Don't post on social media</text></g>
+    <rect x="-210" y="-48" width="420" height="96" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-22" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="system-ui">STEP 3: PRESERVE — Do and don't</text>
+    <text y="0"  text-anchor="middle" font-size="10" fill="#A08860" font-family="system-ui">✓ Stop using affected system · Write down observations · Keep device on</text>
+    <text y="18" text-anchor="middle" font-size="10" fill="#1B2A4A" font-family="system-ui">✗ Don't run cleanup tools · Don't delete suspicious email · Don't post on social media</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Know your reporting channels before you need them</div>
+    <div class="blk-title" style="color:#1B2A4A;">Know your reporting channels before you need them</div>
     <div class="blk-body">The most common reason employees delay reporting suspected security incidents is uncertainty about who to contact and how. This uncertainty is best resolved before an incident occurs. Most organizations have a designated reporting mechanism: a specific email address for security incidents, a helpdesk ticketing category, a phone number for urgent security issues, or a direct contact for the security team. Some organizations have a dedicated security operations center with a 24-hour contact for critical incidents. Take a moment now to learn the reporting channel your organization uses. If you are not sure, ask your manager or IT department. Having this information available — ideally saved in a place accessible even if your work computer is unavailable — means you can report immediately when needed.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">What to include when reporting: be specific about what you observed and when</div>
+    <div class="blk-title" style="color:#A08860;">What to include when reporting: be specific about what you observed and when</div>
     <div class="blk-body">When reporting a suspected incident, provide as much specific information as you can: what you observed (specific error messages, file names, account behavior), when you first noticed it, what actions you had taken immediately before noticing it (what file you opened, what link you clicked, what device you connected), which systems are affected, and what you have done since noticing it. The security team uses this information to assess scope and begin investigation. Precise information speeds the response. 'My computer has been acting weird' is less actionable than 'I opened an email attachment from an unfamiliar sender about two hours ago and since then my files have unfamiliar extensions and I cannot open them.' Do not over-analyze whether the incident is real before reporting — report what you observed and let the security team assess.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">What to do (and not do) while waiting for the security team to respond</div>
+    <div class="blk-title" style="color:#C4AA88;">What to do (and not do) while waiting for the security team to respond</div>
     <div class="blk-body">When you suspect an active security incident, there are actions that help and actions that can make the situation worse. Do: stop using the affected system if possible, note everything you observed (write it down), disconnect the device from the network if instructed to by IT (or if you observe active data loss and cannot reach IT immediately), and make yourself available to the security team for questions. Do not: attempt to clean malware yourself (this may destroy forensic evidence), delete suspicious emails before the security team can examine them, turn off the device (which may destroy evidence in memory), or discuss the incident on social media or with parties outside the organization. The security team's ability to investigate depends on preserving evidence and containing the incident — individual actions that seem helpful can inadvertently undermine both.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">After the incident: contributing to lessons learned</div>
+    <div class="blk-title" style="color:#A08860;">After the incident: contributing to lessons learned</div>
     <div class="blk-body">Security incidents, regardless of how they are resolved, generate information that improves an organization's security posture if properly analyzed. After an incident is resolved, most organizations conduct a post-incident review: identifying how the attacker gained access, what controls failed or were absent, what response actions were effective, and what should be done differently. Employees who participated in the incident — whether as the person who first noticed something or as someone affected by the impact — can contribute valuable perspective to this review. Being open about what happened, what decisions were made, and what information was available at the time enables better analysis. The goal is not blame but improvement. Organizations that treat incidents as learning opportunities develop stronger security over time than those that treat them as failures to be minimized.</div>
   </div>
 </div>
@@ -418,70 +301,70 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Incident Response Lifecycle</text>
+  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Response Lifecycle</text>
   <defs><marker id="arr11" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#2a2f4a"/></marker></defs>
   <!-- Detect -->
   <g id="pg4-hl0" class="svg-hl" transform="translate(70,160)">
-    <circle r="48" fill="#1e2235" stroke="#e05252" stroke-width="2.5"/>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">DETECT</text>
-    <text y="6"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Confirm &amp;</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">scope</text>
-    <text x="0" y="68" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">01</text></g>
+    <circle r="48" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5"/>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">DETECT</text>
+    <text y="6"  text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Confirm &amp;</text>
+    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">scope</text>
+    <text x="0" y="68" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">01</text></g>
   <line x1="120" y1="160" x2="162" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
   <!-- Contain -->
   <g id="pg4-hl1" class="svg-hl" transform="translate(200,160)">
-    <circle r="40" fill="#1e2235" stroke="#f0a04a" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">CONTAIN</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Stop spread</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">02</text></g>
+    <circle r="40" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">CONTAIN</text>
+    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Stop spread</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">02</text></g>
   <line x1="242" y1="160" x2="278" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
   <!-- Eradicate -->
   <g id="pg4-hl2" class="svg-hl" transform="translate(318,160)">
-    <circle r="40" fill="#1e2235" stroke="#4b8ef0" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">ERADICATE</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Remove all</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">03</text></g>
+    <circle r="40" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2.5"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">ERADICATE</text>
+    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Remove all</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">03</text></g>
   <line x1="360" y1="160" x2="396" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
   <!-- Recover -->
   <g id="pg4-hl3" class="svg-hl" transform="translate(436,160)">
-    <circle r="40" fill="#1e2235" stroke="#6db86d" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">RECOVER</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Restore ops</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">04</text></g>
+    <circle r="40" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
+    <text y="-8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">RECOVER</text>
+    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Restore ops</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">04</text></g>
   <!-- Notify box -->
-  <rect x="30" y="255" width="460" height="66" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="260" y="280" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">NOTIFY — Regulatory obligations may apply</text>
-  <text x="260" y="298" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">72-hour clock from discovery · Legal/security team determines scope</text>
-  <text x="260" y="314" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Prompt reporting = more time to comply</text>
+  <rect x="30" y="255" width="460" height="66" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="260" y="280" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">NOTIFY — Regulatory obligations may apply</text>
+  <text x="260" y="298" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">72-hour clock from discovery · Legal/security team determines scope</text>
+  <text x="260" y="314" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Prompt reporting = more time to comply</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Detection and analysis: confirming the incident and assessing scope</div>
+    <div class="blk-title" style="color:#1B2A4A;">Detection and analysis: confirming the incident and assessing scope</div>
     <div class="blk-body">When an incident is reported, the security team's first task is to confirm that a security incident has occurred and to assess its scope. This involves examining the affected systems, reviewing logs, correlating events across multiple data sources, and determining what has been accessed, modified, or affected. The detection and analysis phase may reveal that what was reported as a potential incident is a technical issue without security implications — or it may reveal that the reported event is the visible tip of a much larger compromise that has been in progress for some time. Rapid and accurate assessment of scope is essential for making appropriate containment decisions.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Containment: stopping the spread and limiting further damage</div>
+    <div class="blk-title" style="color:#A08860;">Containment: stopping the spread and limiting further damage</div>
     <div class="blk-body">Once an incident is confirmed, the security team takes action to contain it — preventing the attacker from accessing additional systems or data, stopping ongoing malware activity, and limiting the damage that continues to accumulate. Containment actions may include: isolating affected systems from the network to prevent spread, forcing password resets for compromised accounts, blocking malicious IP addresses and domains at the firewall, revoking compromised credentials, and disabling specific services or access. The goal is to stop the incident from getting worse while preserving as much forensic evidence as possible. Containment decisions involve tradeoffs — more aggressive containment may cause more operational disruption but stops damage faster.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Eradication and recovery: removing the attacker and restoring operations</div>
+    <div class="blk-title" style="color:#C4AA88;">Eradication and recovery: removing the attacker and restoring operations</div>
     <div class="blk-body">After containment, the security team works to eradicate the attacker's presence from the environment: removing malware from affected systems, closing the vulnerability or access path used for initial entry, changing all potentially compromised credentials, and verifying that no attacker persistence mechanisms remain. Only after thorough eradication is recovery safe to begin. Recovery involves restoring affected systems from clean backups, verifying the integrity of restored systems, and gradually returning systems to production in a monitored state. Rushing recovery before eradication is complete risks re-infection from attacker persistence that was not identified. The sequence — contain, eradicate, then recover — exists specifically to avoid this failure mode.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Notification and regulatory requirements: who must be told about an incident</div>
+    <div class="blk-title" style="color:#A08860;">Notification and regulatory requirements: who must be told about an incident</div>
     <div class="blk-body">Many security incidents involving personal data or regulated information trigger mandatory notification requirements. Regulatory frameworks governing personal data typically require notification to affected individuals and regulators within specific timeframes — sometimes as short as 72 hours from discovery. Industry-specific regulations may have additional requirements. Insurance carriers may have notification requirements as a condition of coverage. Business partners and vendors may have contractual notification obligations. The security and legal teams determine what notification is required based on the nature of the incident and the data involved. Employees who discover an incident and report it promptly contribute to the organization's ability to meet these obligations — delayed discovery means compressed notification timelines.</div>
   </div>
 </div>
@@ -497,55 +380,55 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">WHAT IS AN INCIDENT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Threatens C · I · A</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Users often spot them first</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Early report = less damage</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">WARNING SIGNS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">System · Email · Data · Physical</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Report, don't resolve alone</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Preserve evidence</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">HOW TO REPORT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Know channel now</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Be specific · Preserve evidence</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Don't cleanup independently</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">RESPONSE LIFECYCLE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Detect · Contain · Eradicate</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Recover · Notify · Review</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">72-hr notification clock</text></g>
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">WHAT IS AN INCIDENT</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Threatens C · I · A</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Users often spot them first</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Early report = less damage</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">WARNING SIGNS</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">System · Email · Data · Physical</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Report, don't resolve alone</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Preserve evidence</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">HOW TO REPORT</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Know channel now</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Be specific · Preserve evidence</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Don't cleanup independently</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RESPONSE LIFECYCLE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Detect · Contain · Eradicate</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Recover · Notify · Review</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">72-hr notification clock</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">A security incident is any event threatening confidentiality, integrity, or availability — and many are first spotted by users</div>
+    <div class="blk-title" style="color:#1B2A4A;">A security incident is any event threatening confidentiality, integrity, or availability — and many are first spotted by users</div>
     <div class="blk-body">Employees are often the first to notice incidents — unusual file behavior, unexpected account activity, suspicious requests. Early reporting is the most valuable individual contribution to incident response.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Know the warning signs: unexpected system behavior, email anomalies, data changes, physical security events</div>
+    <div class="blk-title" style="color:#A08860;">Know the warning signs: unexpected system behavior, email anomalies, data changes, physical security events</div>
     <div class="blk-body">Each category of incident produces observable signals. Recognizing these patterns — and reporting rather than ignoring or attempting to resolve them personally — enables faster organizational response.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Know your reporting channel; report promptly and specifically; preserve evidence</div>
+    <div class="blk-title" style="color:#C4AA88;">Know your reporting channel; report promptly and specifically; preserve evidence</div>
     <div class="blk-body">Find out the reporting mechanism before you need it. When reporting, be specific about what you observed and when. Do not attempt to clean up or investigate independently — preserve evidence for the security team.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Incident response follows a sequence: detect, contain, eradicate, recover, notify</div>
+    <div class="blk-title" style="color:#A08860;">Incident response follows a sequence: detect, contain, eradicate, recover, notify</div>
     <div class="blk-body">Each phase has a specific purpose. Notification obligations may require action within 72 hours of discovery. Participating in post-incident review contributes to improvements that prevent future incidents.</div>
   </div>
 </div>
@@ -557,40 +440,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Introduction to Incident Reporting and Response</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">Which of the following is most likely a security incident requiring immediate reporting to the security team?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Your computer runs slowly because it has too many browser tabs open</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">A software application crashes when you open a large file</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">You open an email attachment from an unknown sender and immediately notice that your documents now have unfamiliar file extensions</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Your password expires and you need to create a new one</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">Why is early reporting of a suspected security incident so important?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">It satisfies regulatory requirements for immediate disclosure</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">The damage caused by an incident is directly related to how long it goes undetected — every hour allows more data access, more encryption, and more attacker foothold</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">IT systems automatically notify management when incidents are reported</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Early reporting reduces the cost of the security team's investigation</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">You notice that your email sent folder contains several messages you did not compose, sent to addresses you do not recognize. What does this indicate?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Your email client has a bug that is creating phantom messages</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Your email account has likely been compromised and is being actively used by someone else</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">You may have sent these messages while sleepwalking — delete them</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Your email storage is full and old messages are being moved to sent</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">While waiting for the security team to respond to an incident you reported, you should:</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Run a consumer antivirus scan to try to clean the infection before they arrive</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Turn off the affected computer to prevent further damage</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Stop using the affected system, write down everything you observed, keep the device on to preserve forensic evidence, and make yourself available for questions</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Delete the suspicious email that caused the issue so it cannot spread further</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">What is the significance of the '72-hour' timeframe in the context of data breach incidents?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Incident response teams have 72 hours to contain an incident before it becomes a major breach</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Many privacy regulations require notification to regulators within 72 hours of determining that a qualifying breach has occurred</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Ransomware attackers typically give 72 hours to pay before increasing the ransom</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Forensic investigators require 72 hours to analyze a compromised system</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">What is the correct order of phases in the incident response lifecycle?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Contain, detect, recover, eradicate, notify</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Detect, contain, eradicate, recover, notify</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Notify, detect, contain, recover, eradicate</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Recover, detect, contain, eradicate, notify</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -602,11 +485,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg2':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg3':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg4':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
-  'pg5':["#e05252","#f0a04a","#4b8ef0","#6db86d"],
+  'pg1':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg2':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg3':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg4':["#1B2A4A","#A08860","#C4AA88","#A08860"],
+  'pg5':["#1B2A4A","#A08860","#C4AA88","#A08860"],
 };
 
 const NARR={
@@ -621,7 +504,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[2,1,1,2,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -637,19 +520,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -695,7 +566,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

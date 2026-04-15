@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#4b8ef0;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#C4AA88;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#4b8ef022;color:#4b8ef0;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#4b8ef0;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#C4AA88;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#4b8ef0;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#C4AA88;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#4b8ef0;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#C4AA88;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#4b8ef0;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#C4AA88;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#4b8ef0;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#C4AA88;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Multifactor Authentication — Advanced</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Advanced</span>
-    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Advanced MFA Attack Techniques</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Enterprise MFA Architecture</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">MFA for Regulated Environments</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">MFA Program Maturity</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Enterprise MFA Architecture</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">MFA for Regulated Environments</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">MFA Program Maturity</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Advanced MFA Attack Techniques</span>
-  </div>
-  <div class="mc-desc">▶ Sophisticated bypasses targeting enterprise MFA deployments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Enterprise MFA Architecture</span>
-  </div>
-  <div class="mc-desc">▶ Designing phishing-resistant authentication at organizational scale</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">MFA for Regulated Environments</span>
-  </div>
-  <div class="mc-desc">▶ Meeting NY DFS and NIST authentication requirements</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">MFA Program Maturity</span>
-  </div>
-  <div class="mc-desc">▶ Building and measuring an enterprise-grade authentication program</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Multifactor Authentication — Advanced</div>
-  <div class="home-sub">Advanced — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Advanced MFA Attack Techniques</span>
-  </div>
-  <div class="mc-desc">▶ Sophisticated bypasses targeting enterprise MFA deployments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Enterprise MFA Architecture</span>
-  </div>
-  <div class="mc-desc">▶ Designing phishing-resistant authentication at organizational scale</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">MFA for Regulated Environments</span>
-  </div>
-  <div class="mc-desc">▶ Meeting NY DFS and NIST authentication requirements</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">MFA Program Maturity</span>
-  </div>
-  <div class="mc-desc">▶ Building and measuring an enterprise-grade authentication program</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Advanced MFA Attack Techniques</div>
     <div class="ph-sub">Sophisticated bypasses targeting enterprise MFA deployments</div>
@@ -232,50 +115,50 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">MFA Bypass Techniques</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">AiTM Phishing: Browser-in-the-Middle</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">Malicious proxy captures session cookies after MFA</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">Invisible to network monitoring · Defeats standard MFA</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Kerberos Delegation Abuse</text>
-    <text x="36" y="154" font-size="10" fill="#94a0b8" font-family="system-ui">Unconstrained delegation captures TGT post-MFA login</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="60" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="210" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Legacy Protocol Authentication</text>
-    <text x="36" y="226" font-size="10" fill="#94a0b8" font-family="system-ui">IMAP/SMTP/Basic Auth — no MFA mechanism · Must disable</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="258" width="480" height="68" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="282" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Social Engineering: MFA Reset Attacks</text>
-    <text x="36" y="298" font-size="10" fill="#94a0b8" font-family="system-ui">Impersonate user · Claim lost device · Obtain MFA reset</text>
-    <text x="36" y="312" font-size="10" fill="#56617a" font-family="system-ui">Bypasses technical controls through human process</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">MFA Bypass Techniques</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">AiTM Phishing: Browser-in-the-Middle</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">Malicious proxy captures session cookies after MFA</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">Invisible to network monitoring · Defeats standard MFA</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Kerberos Delegation Abuse</text>
+    <text x="36" y="154" font-size="10" fill="#D6CCBC" font-family="system-ui">Unconstrained delegation captures TGT post-MFA login</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="210" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Legacy Protocol Authentication</text>
+    <text x="36" y="226" font-size="10" fill="#D6CCBC" font-family="system-ui">IMAP/SMTP/Basic Auth — no MFA mechanism · Must disable</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="258" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="282" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Social Engineering: MFA Reset Attacks</text>
+    <text x="36" y="298" font-size="10" fill="#D6CCBC" font-family="system-ui">Impersonate user · Claim lost device · Obtain MFA reset</text>
+    <text x="36" y="312" font-size="10" fill="#8A7D6B" font-family="system-ui">Bypasses technical controls through human process</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Adversary-in-the-browser and real-time session hijacking</div>
+    <div class="blk-title" style="color:#C4AA88;">Adversary-in-the-browser and real-time session hijacking</div>
     <div class="blk-body">Adversary-in-the-browser (AiTB) attacks go beyond the adversary-in-the-middle proxy model to achieve persistent access through browser manipulation. Malicious browser extensions or browser-targeting malware inject JavaScript into web pages after they load, enabling real-time session manipulation that is invisible to both the user and the server. The attacker can read all page content including MFA codes as they appear, modify form submissions before they reach the server, exfiltrate session cookies from the browser's storage without the session ever leaving the victim's browser, and clone the authenticated session to attacker-controlled infrastructure. Unlike AiTM proxy attacks that require network interception, AiTB operates entirely within the victim's browser context, making it invisible to network monitoring. Detection requires endpoint-level behavioral monitoring of browser process activity and extension behavior.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Kerberos delegation abuse in enterprise MFA deployments</div>
+    <div class="blk-title" style="color:#1B2A4A;">Kerberos delegation abuse in enterprise MFA deployments</div>
     <div class="blk-body">Kerberos constrained and unconstrained delegation creates MFA bypass opportunities in enterprise environments where MFA is enforced at the application layer but Kerberos authentication is trusted implicitly. Unconstrained delegation allows a server to request Kerberos service tickets on behalf of any authenticating user for any service — an attacker who compromises a server with unconstrained delegation and induces a privileged user to authenticate to it (through a printer bug or coerced authentication technique) captures that user's Kerberos ticket, which they can then use to access any service the user can reach without re-authenticating and without triggering MFA. Resource-based constrained delegation (RBCD) abuse enables similar ticket capture with more targeted scope. These attacks bypass MFA because the Kerberos ticket proves prior authentication — MFA was satisfied at login, and the ticket represents that authenticated session, allowing access to additional resources without re-authentication.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">MFA bypass through authentication protocol downgrade</div>
+    <div class="blk-title" style="color:#A08860;">MFA bypass through authentication protocol downgrade</div>
     <div class="blk-body">Enterprise environments that support multiple authentication protocols simultaneously are vulnerable to protocol downgrade attacks that target legacy protocols lacking MFA support. Microsoft 365 tenants that have not disabled legacy authentication protocols — Basic Auth, IMAP, POP3, SMTP AUTH — can be attacked through those protocols using stolen credentials, bypassing MFA entirely because those protocols have no mechanism for MFA challenge. Legacy authentication disablement was a default change Microsoft implemented in 2022 for most tenants, but organizations with custom configurations, third-party email clients, or on-premises mail connectors may still have legacy protocols enabled. Active Directory environments that support NTLM alongside Kerberos allow attackers who have captured NTLM hashes to authenticate to services without triggering MFA, since NTLM hash-based authentication does not flow through the identity provider's MFA enforcement.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Social engineering targeting MFA administrators and enrollment</div>
+    <div class="blk-title" style="color:#A08860;">Social engineering targeting MFA administrators and enrollment</div>
     <div class="blk-body">At sufficient scale, every technical MFA control can be bypassed through social engineering of the people who administer it or the process by which users enroll. Help desk staff who process MFA reset requests without adequate identity verification provide an attacker with a persistent bypass path: impersonate the target user, claim the authenticator device was lost, and receive a temporary bypass code or new enrollment link that adds the attacker's device to the target's account. This attack is particularly effective against organizations where help desk staff have been trained to be helpful and accommodating and where call volume prevents rigorous verification for every request. Advanced persistent threat groups specifically include help desk social engineering as a technique when technical MFA bypasses are unavailable — a publicly disclosed example targeted a major technology company's help desk with a convincing social engineering script that obtained MFA bypass codes.</div>
   </div>
 </div>
@@ -291,64 +174,64 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">FIDO2 Enterprise Deployment</text>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">FIDO2 Enterprise Deployment</text>
   <g id="pg2-hl0" class="svg-hl" transform="translate(140,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">FIDO2 AT SCALE</text>
-    <text y="-18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Key lifecycle management</text>
-    <text y="-2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Backup auth provisioning</text>
-    <text y="14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">WHfB requires PKI</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Conditional access enforcement</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">FIDO2 AT SCALE</text>
+    <text y="-18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Key lifecycle management</text>
+    <text y="-2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Backup auth provisioning</text>
+    <text y="14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">WHfB requires PKI</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Conditional access enforcement</text></g>
   <g id="pg2-hl1" class="svg-hl" transform="translate(380,104)">
-    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">CONTINUOUS ACCESS EVAL</text>
-    <text y="-18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Real-time token revocation</text>
-    <text y="-2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Impossible travel signal</text>
-    <text y="14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Device non-compliant</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Account disabled → immediate</text></g>
+    <rect x="-108" y="-62" width="216" height="124" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CONTINUOUS ACCESS EVAL</text>
+    <text y="-18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Real-time token revocation</text>
+    <text y="-2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Impossible travel signal</text>
+    <text y="14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Device non-compliant</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Account disabled → immediate</text></g>
   <g id="pg2-hl2" class="svg-hl" transform="translate(140,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">PRIVILEGED ACCESS</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">No standing accounts</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">HW key + justification + timer</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Full audit trail</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">PIM/PAM integration</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PRIVILEGED ACCESS</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">No standing accounts</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">HW key + justification + timer</text>
+    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Full audit trail</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">PIM/PAM integration</text></g>
   <g id="pg2-hl3" class="svg-hl" transform="translate(380,258)">
-    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">MACHINE IDENTITY</text>
-    <text y="-12" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Platform-managed rotating creds</text>
-    <text y="4" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Never stored · Never exposed</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Managed identities (Azure)</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Eliminates svc acct exposure</text></g>
+    <rect x="-108" y="-56" width="216" height="112" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">MACHINE IDENTITY</text>
+    <text y="-12" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Platform-managed rotating creds</text>
+    <text y="4" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Never stored · Never exposed</text>
+    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Managed identities (Azure)</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Eliminates svc acct exposure</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Phishing-resistant MFA mandates: FIDO2 deployment at scale</div>
+    <div class="blk-title" style="color:#C4AA88;">Phishing-resistant MFA mandates: FIDO2 deployment at scale</div>
     <div class="blk-body">CISA's guidance on phishing-resistant MFA identifies FIDO2/WebAuthn as the only category of MFA that is immune to real-time phishing proxy attacks through cryptographic origin binding. Enterprise FIDO2 deployment at scale requires addressing several operational challenges that don't exist at small scale. Device management: FIDO2 hardware security keys must be inventoried, distributed, provisioned, and recovered when lost. Platform authenticator management: Windows Hello for Business enrollment requires PKI infrastructure and Group Policy or Intune configuration. Backup and recovery: users who lose their primary FIDO2 authenticator must have a pre-configured backup authenticator, not a fallback to weaker MFA. Cross-platform consistency: the same FIDO2 authentication experience must work across Windows, macOS, iOS, Android, and all organizational applications. Policy enforcement: conditional access must verify that the FIDO2 authentication method was used, not just that some form of MFA was satisfied.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Continuous access evaluation and adaptive authentication</div>
+    <div class="blk-title" style="color:#1B2A4A;">Continuous access evaluation and adaptive authentication</div>
     <div class="blk-body">Traditional MFA models authenticate once and issue a session token that persists until expiration. Continuous Access Evaluation (CAE) enables real-time revocation of access tokens when risk signals change after authentication. When Microsoft Entra ID detects that a user's location changed from New York to Russia within 30 minutes (impossible travel), that the user's account was reported compromised, that the device's compliance status changed, or that the user was disabled in the directory, CAE-capable applications receive a push notification to re-evaluate access rather than continuing to honor an existing valid token. For applications that do not support CAE, token lifetime management — issuing short-lived tokens that require frequent re-authentication — provides a weaker but available alternative. Adaptive authentication adjusts the MFA requirements at authentication time based on risk signals: low-risk scenarios complete with passwordless authentication, high-risk scenarios require hardware security key authentication.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Privileged identity management and just-in-time MFA</div>
+    <div class="blk-title" style="color:#A08860;">Privileged identity management and just-in-time MFA</div>
     <div class="blk-body">Privileged access requires stronger authentication controls than standard user access, and those controls must be architecturally integrated rather than applied as an afterthought. Microsoft Entra Privileged Identity Management (PIM) and equivalent platforms in other identity providers implement the just-in-time privileged access model: elevated permissions do not exist by default on the privileged account, activation requires justification and MFA authentication with a hardware key, activation has a maximum time limit after which permissions are automatically revoked, and all activation events are logged with the justification. This architecture means that even if an attacker obtains a privileged account's credentials and standard MFA, they cannot perform privileged actions without completing the PIM activation workflow — which requires the hardware security key that was not obtained in the compromise. Step-up authentication at the time of privileged action adds a final verification layer.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">MFA for machine-to-machine authentication: service identity</div>
+    <div class="blk-title" style="color:#A08860;">MFA for machine-to-machine authentication: service identity</div>
     <div class="blk-body">Traditional MFA is designed for human authentication, but automated systems — service accounts, APIs, CI/CD pipelines, serverless functions — also require authentication to other services. The machine-to-machine authentication equivalent of phishing-resistant MFA is certificate-based mutual authentication or managed identity credentials. Managed identities in cloud environments (Azure Managed Identities, AWS IAM Roles for EC2, GCP Service Accounts) provide automatically rotated credentials that the platform manages — the service receives credentials at runtime without storing them anywhere, eliminating the credential storage and rotation problems that make service account passwords a persistent vulnerability. Certificate-based authentication for on-premises service accounts provides cryptographic authentication that cannot be phished or stuffed. Workload identity federation — allowing cloud workloads to authenticate using identity tokens from another identity provider — extends managed identity concepts across cloud providers and to on-premises CI/CD pipelines.</div>
   </div>
 </div>
@@ -364,50 +247,50 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Regulatory Standards and Compliance</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">NY DFS 500.12 (2023): Technically Enforceable MFA</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">MFA must be impossible to bypass — not just policy-prohibited</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">CISO personally certifies compliance · Legacy auth eliminated</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="142" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">NIST 800-63B: AAL2 vs AAL3</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">AAL3 = verifier impersonation resistant = FIDO2</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">Required for privileged + highest-risk remote access</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">MFA Detection: Bypass · Legacy Auth · Enrollment Gaps</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Session revocation required — password reset alone insufficient</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Business Case: Risk + Regulatory + Efficiency</text>
-    <text x="36" y="306" font-size="10" fill="#94a0b8" font-family="system-ui">Quantified risk reduction + DFS positioning + FIDO2 UX gains</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Regulatory Standards and Compliance</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">NY DFS 500.12 (2023): Technically Enforceable MFA</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA must be impossible to bypass — not just policy-prohibited</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">CISO personally certifies compliance · Legacy auth eliminated</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="142" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">NIST 800-63B: AAL2 vs AAL3</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">AAL3 = verifier impersonation resistant = FIDO2</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">Required for privileged + highest-risk remote access</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">MFA Detection: Bypass · Legacy Auth · Enrollment Gaps</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Session revocation required — password reset alone insufficient</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Business Case: Risk + Regulatory + Efficiency</text>
+    <text x="36" y="306" font-size="10" fill="#D6CCBC" font-family="system-ui">Quantified risk reduction + DFS positioning + FIDO2 UX gains</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">NY DFS 500 MFA requirements and their architectural interpretation</div>
+    <div class="blk-title" style="color:#C4AA88;">NY DFS 500 MFA requirements and their architectural interpretation</div>
     <div class="blk-body">NY DFS 23 NYCRR 500.12 requires MFA for remote access to information systems, access to third-party applications containing NPI, and privileged access to systems. The 2023 amendments strengthened these requirements, adding that MFA must be implemented for 'any individual accessing the covered entity's information systems' with specific exceptions requiring written approval from the CISO. The architectural interpretation of these requirements goes beyond installing an MFA solution — it requires that MFA enforcement is technically impossible to bypass, not merely policy-prohibited. This means: conditional access policies that require MFA and fail closed when MFA cannot be satisfied, elimination of legacy authentication protocols that bypass MFA, monitoring that detects and alerts on MFA bypass attempts, and regular verification that MFA is actually being required for all access within scope. The 2023 amendments also require that the covered entity's CISO certify compliance, creating personal accountability for MFA program effectiveness.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">NIST SP 800-63B AAL2 and AAL3 requirements</div>
+    <div class="blk-title" style="color:#1B2A4A;">NIST SP 800-63B AAL2 and AAL3 requirements</div>
     <div class="blk-body">NIST SP 800-63B defines Authentication Assurance Levels (AALs) with specific requirements for each level. AAL2 requires multi-factor authentication but permits a range of implementations including OTP authenticators, push notifications, and hardware keys. AAL3 — the highest level — requires hardware-based authentication using an approved cryptographic device (FIDO2 security key or PIV card) and verifier impersonation resistance, which effectively mandates FIDO2/WebAuthn. The AAL framework provides technical specifications for MFA implementations that give organizations clear criteria for evaluating whether a specific MFA implementation meets a given assurance level. For insurance agencies subject to NY DFS, the relevant alignment is: AAL2 for standard user access to NPI, AAL3 for privileged access to the most sensitive systems and for remote access scenarios identified as highest risk. NIST 800-63B's guidance on session management, reauthentication requirements, and federation provides the technical depth behind the regulatory requirements.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Authentication analytics: detecting MFA program weaknesses</div>
+    <div class="blk-title" style="color:#A08860;">Authentication analytics: detecting MFA program weaknesses</div>
     <div class="blk-body">MFA program effectiveness is measurable through authentication telemetry analysis. Key metrics and their security implications: MFA enrollment rate (percentage of in-scope accounts with MFA enrolled — gaps indicate accounts that can be accessed without MFA), MFA success rate per method (unusually high success rates for push notifications during off-hours may indicate fatigue attack success), MFA bypass events (conditional access logs showing MFA being skipped for any reason — each bypass requires investigation), legacy authentication attempts (any successful legacy authentication in an environment that should have disabled it is an anomaly requiring immediate attention), and new authenticator enrollment events (an account that enrolls a new authenticator without an associated password reset or helpdesk ticket is suspicious). Authentication analytics dashboards that surface these metrics daily enable security operations to identify MFA program weaknesses before they are exploited.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">MFA incident response: playbooks for authentication compromise</div>
+    <div class="blk-title" style="color:#A08860;">MFA incident response: playbooks for authentication compromise</div>
     <div class="blk-body">Authentication compromise incidents require specific playbooks that address the unique characteristics of MFA-related attacks. The playbook for suspected MFA fatigue attack: verify that push notifications were denied (not approved) for the affected account, check for any successful authentications during the attack window that might indicate a prompt was approved, if authentication was successful revoke all sessions immediately, force re-enrollment of all MFA factors, and investigate what the attacker may have accessed during any authenticated window. The playbook for suspected help desk social engineering: immediately suspend the MFA reset that was processed, verify the identity of the user through an out-of-band channel, if the reset was processed by the attacker revoke all sessions and force re-enrollment, and review what access occurred after the reset. For each attack type, the playbook specifies: immediate containment actions, evidence collection requirements, escalation triggers, and documentation requirements for regulatory reporting assessment.</div>
   </div>
 </div>
@@ -423,51 +306,51 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">MFA Maturity and Resilience</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="58" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">L1 Compliant → L2 Hardened → L3 Resilient → L4 Leading</text>
-    <text x="36" y="74" font-size="10" fill="#94a0b8" font-family="system-ui">L3: FIDO2 standard, CAE, PIM, managed machine identity</text>
-    <text x="36" y="90" font-size="10" fill="#56617a" font-family="system-ui">L4: Passwordless org-wide, continuous risk-based auth</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="142" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Infrastructure Resilience: Geographic + Break-Glass</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">MFA outage = operations outage · Pre-provisioned recovery</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">Annual procedure test · Break-glass documented + monitored</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Vendor MFA: Contractual + Technical Controls</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Route vendor access through org identity provider</text>
-    <text x="36" y="246" font-size="10" fill="#56617a" font-family="system-ui">Assessment verifies contractual compliance annually</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">MFA Program Metrics: Coverage · Bypass Rate · Enrollment</text>
-    <text x="36" y="306" font-size="10" fill="#94a0b8" font-family="system-ui">Tracked monthly · Reported to CISO · Drives improvement</text></g>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">MFA Maturity and Resilience</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="34" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="58" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">L1 Compliant → L2 Hardened → L3 Resilient → L4 Leading</text>
+    <text x="36" y="74" font-size="10" fill="#D6CCBC" font-family="system-ui">L3: FIDO2 standard, CAE, PIM, managed machine identity</text>
+    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">L4: Passwordless org-wide, continuous risk-based auth</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="118" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="142" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Infrastructure Resilience: Geographic + Break-Glass</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA outage = operations outage · Pre-provisioned recovery</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">Annual procedure test · Break-glass documented + monitored</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Vendor MFA: Contractual + Technical Controls</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Route vendor access through org identity provider</text>
+    <text x="36" y="246" font-size="10" fill="#8A7D6B" font-family="system-ui">Assessment verifies contractual compliance annually</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">MFA Program Metrics: Coverage · Bypass Rate · Enrollment</text>
+    <text x="36" y="306" font-size="10" fill="#D6CCBC" font-family="system-ui">Tracked monthly · Reported to CISO · Drives improvement</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">MFA program roadmap: from compliance to resilience</div>
+    <div class="blk-title" style="color:#C4AA88;">MFA program roadmap: from compliance to resilience</div>
     <div class="blk-body">MFA program maturity progresses through distinct stages that each provide different security value. Level 1 — Compliant: MFA is deployed for the access paths required by regulation (remote access, privileged access, third-party NPI applications) using any MFA method. This satisfies the letter of NY DFS 500.12 but does not protect against sophisticated attacks. Level 2 — Hardened: MFA is extended to all access paths (not just those required by regulation), legacy authentication is disabled, MFA enrollment is monitored, and at least some high-risk access paths use phishing-resistant MFA. Level 3 — Resilient: Phishing-resistant FIDO2 authentication is the standard for all access, push notification MFA is eliminated or requires number matching, CAE is implemented, PIM is in place for privileged access, machine identity uses managed credentials, and authentication analytics continuously monitors for program weaknesses. Level 4 — Leading: Zero trust principles are fully implemented, passwordless authentication is the norm, continuous risk evaluation adjusts authentication requirements in real time.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Authentication infrastructure resilience: avoiding MFA lockouts</div>
+    <div class="blk-title" style="color:#1B2A4A;">Authentication infrastructure resilience: avoiding MFA lockouts</div>
     <div class="blk-body">MFA infrastructure that is not resilient creates availability risk: if the MFA service is unavailable, users cannot authenticate, potentially taking the organization's operations offline. Resilience design for MFA infrastructure includes: geographic distribution of the MFA platform (cloud-hosted MFA services provide this inherently; on-premises MFA servers require multi-site deployment), break-glass procedures that provide emergency access during MFA outages without permanently weakening security, pre-provisioned backup authenticators for critical accounts so that loss of a primary authenticator does not prevent access, documented procedures for MFA service outages that all help desk staff can execute, and testing of backup procedures at defined intervals. Break-glass accounts — administrative accounts with pre-positioned recovery credentials in physical secure storage — must be protected by physical access controls and their use must generate immediate security alerts.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Vendor and third-party access MFA requirements</div>
+    <div class="blk-title" style="color:#A08860;">Vendor and third-party access MFA requirements</div>
     <div class="blk-body">Third-party vendors who access organizational systems present a specific MFA challenge: the organization cannot directly control the vendor's authentication infrastructure, but vendors with access to NPI represent a material extension of the organization's attack surface. NY DFS 500.11 requires a third-party service provider security policy that includes MFA requirements. Contractually, covered entities should require: MFA for all vendor access to organizational systems, specific MFA method requirements (FIDO2 for the highest-risk access), reporting of authentication anomalies and MFA-related security incidents, and the right to audit MFA compliance. Technically, vendor access should be implemented through the organization's own MFA infrastructure where possible — a vendor who authenticates through the organization's identity provider is subject to the organization's MFA policies, rather than relying on the vendor's potentially weaker controls. Where this is not possible, the vendor's MFA implementation should be verified during security assessment.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Building the business case for phishing-resistant MFA investment</div>
+    <div class="blk-title" style="color:#A08860;">Building the business case for phishing-resistant MFA investment</div>
     <div class="blk-body">Transitioning from any-MFA to phishing-resistant FIDO2 MFA requires investment justification because the operational disruption and cost are real. The business case rests on three pillars. Risk quantification: phishing proxy attacks that defeat push notification and TOTP MFA are the leading cause of Microsoft 365 account compromise; the cost of a single account takeover incident — investigation, remediation, potential breach notification, productivity loss — typically exceeds the cost of hardware security key deployment for the affected users. Regulatory positioning: CISA has designated FIDO2 as phishing-resistant and push notification MFA as insufficient for federal systems; state regulators following federal guidance are likely to increase pressure on phishing-resistant MFA for regulated industries. Operational efficiency: paradoxically, FIDO2 passwordless authentication can reduce authentication time and MFA fatigue for users — a hardware key tap is faster and less disruptive than waiting for a push notification or TOTP app. Each pillar provides a dimension of justification that speaks to a different audience.</div>
   </div>
 </div>
@@ -484,58 +367,58 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
   <g id="pg5-hl0" class="svg-hl" transform="translate(140,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">BYPASS TECHNIQUES</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">AiTM · Kerberos delegation</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Legacy protocols · MFA reset</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">All require specific mitigations</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">BYPASS TECHNIQUES</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">AiTM · Kerberos delegation</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Legacy protocols · MFA reset</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">All require specific mitigations</text></g>
   <g id="pg5-hl1" class="svg-hl" transform="translate(380,98)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">STRONG MFA</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">FIDO2 · CAE · PIM</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Machine identity managed</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">No standing privilege</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">STRONG MFA</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">FIDO2 · CAE · PIM</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Machine identity managed</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">No standing privilege</text></g>
   <g id="pg5-hl2" class="svg-hl" transform="translate(140,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">COMPLIANCE</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">DFS 500.12 technically enforceable</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">NIST AAL3 for high risk</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CISO certification accountability</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">COMPLIANCE</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">DFS 500.12 technically enforceable</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">NIST AAL3 for high risk</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CISO certification accountability</text></g>
   <g id="pg5-hl3" class="svg-hl" transform="translate(380,244)">
-    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">RESILIENCE</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Geographic distribution</text>
-    <text y="4" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Break-glass procedures tested</text>
-    <text y="24" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Vendor MFA verified annually</text></g>
+    <rect x="-110" y="-58" width="220" height="116" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RESILIENCE</text>
+    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Geographic distribution</text>
+    <text y="4" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Break-glass procedures tested</text>
+    <text y="24" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Vendor MFA verified annually</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Advanced MFA attacks: AiTB, Kerberos delegation abuse, protocol downgrade, and help desk social engineering</div>
+    <div class="blk-title" style="color:#C4AA88;">Advanced MFA attacks: AiTB, Kerberos delegation abuse, protocol downgrade, and help desk social engineering</div>
     <div class="blk-body">Adversary-in-the-browser operates within the victim's browser, invisible to network monitoring. Kerberos delegation abuse captures tickets after MFA-authenticated login, bypassing re-authentication. Protocol downgrade exploits legacy auth protocols that have no MFA mechanism. Help desk social engineering bypasses technical controls through the human enrollment process.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Enterprise FIDO2 deployment requires device management, CAE, PIM integration, and managed machine identity</div>
+    <div class="blk-title" style="color:#1B2A4A;">Enterprise FIDO2 deployment requires device management, CAE, PIM integration, and managed machine identity</div>
     <div class="blk-body">At scale, FIDO2 requires hardware key lifecycle management, platform authenticator infrastructure, backup authenticator provisioning, and policy enforcement at the conditional access layer. CAE enables real-time token revocation on risk signal changes. PIM makes privileged permissions ephemeral. Managed identities eliminate service account credential storage.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">NY DFS 500.12 requires technically enforceable MFA with CISO certification; NIST 800-63B AAL3 mandates FIDO2 for highest assurance</div>
+    <div class="blk-title" style="color:#A08860;">NY DFS 500.12 requires technically enforceable MFA with CISO certification; NIST 800-63B AAL3 mandates FIDO2 for highest assurance</div>
     <div class="blk-body">MFA must be impossible to bypass, not merely policy-prohibited. Legacy authentication elimination, conditional access fail-closed design, and authentication analytics monitoring are required for effective compliance. AAL3 verifier impersonation resistance effectively requires FIDO2/WebAuthn.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">MFA program maturity progresses from compliant through hardened to resilient; resilience requires FIDO2, CAE, PIM, and analytics</div>
+    <div class="blk-title" style="color:#A08860;">MFA program maturity progresses from compliant through hardened to resilient; resilience requires FIDO2, CAE, PIM, and analytics</div>
     <div class="blk-body">Infrastructure resilience prevents MFA lockout through geographic distribution and break-glass procedures. Vendor MFA requirements must be contractual and technically enforced. The business case for phishing-resistant MFA rests on risk quantification, regulatory positioning, and operational efficiency arguments.</div>
   </div>
 </div>
@@ -547,40 +430,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Multifactor Authentication — Advanced</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">An attacker compromises a server in the DMZ that has Kerberos unconstrained delegation enabled. They then use a coerced authentication technique (PetitPotam) to force a Domain Admin account to authenticate to the compromised server. The Domain Admin's account uses FIDO2 hardware key MFA. Why does this attack succeed despite FIDO2 MFA?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">FIDO2 MFA does not protect against network-level attacks</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">The Domain Admin authenticated to the server with FIDO2 MFA at the initial login, producing a valid Kerberos TGT. Unconstrained delegation allows the compromised server to capture that TGT. The attacker can now use the TGT to request service tickets for any service the Domain Admin can access — MFA is not re-challenged because the TGT already proves prior authentication.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Kerberos attacks bypass all authentication controls regardless of MFA method</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">FIDO2 does not work in Active Directory environments with Kerberos</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">An organization's NY DFS examination reveals that MFA is enabled as a policy in their conditional access configuration, but the examiner shows authentication logs where several accounts successfully authenticated without completing MFA over the past three months. The CISO certified MFA compliance in the April filing. What is the most accurate characterization of this situation?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">The conditional access logs must be incorrect — if the policy is enabled, MFA cannot be bypassed</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">The organization has MFA deployed but not technically enforceable — gaps in conditional access coverage (legacy auth enabled, policy exclusions, or scope gaps) allowed bypass. The CISO certification may be inaccurate if compliance was assessed by policy existence rather than by verifying that MFA is technically impossible to bypass for all required access paths.</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">This is acceptable because MFA is enabled for most users — 100% enforcement is not required</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">The examiner is using incorrect log analysis methodology</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">An organization wants to implement Continuous Access Evaluation (CAE) to improve session security. What is the primary security benefit of CAE compared to traditional session token management with short expiration times?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">CAE eliminates the need for MFA by providing continuous authentication</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">CAE enables near-real-time revocation of access tokens when risk signals change after authentication — impossible travel, account compromise reports, device compliance changes — rather than waiting for the token to expire. A traditional 1-hour token provides the attacker with up to 60 minutes of access after discovery; CAE revokes access within seconds of a risk signal being detected.</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">CAE improves application performance by reducing authentication overhead</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">CAE is required by NIST 800-63B for AAL2 compliance</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">A help desk receives a call from someone claiming to be a senior vice president. The caller says they lost their FIDO2 hardware key before a critical client meeting and needs an immediate MFA reset to a temporary push notification method. The help desk representative cannot reach the SVP's assistant for verification. What is the correct response?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Process the reset immediately — the operational need outweighs the security risk for a senior executive</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Decline to process the MFA reset without completing identity verification through a pre-defined alternate channel (such as a video call where the caller presents their employee ID, a verification code sent to a pre-registered personal mobile number, or manager approval through an out-of-band channel). Urgency and seniority are classic social engineering pressure tactics.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Transfer the caller to the security team, who can approve MFA resets without verification</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Offer to temporarily disable MFA for the account until the hardware key is recovered</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">An organization is evaluating the business case for transitioning from push notification MFA to FIDO2 hardware key MFA for all employees. The CFO asks how to quantify the risk reduction benefit. What is the most analytically rigorous framing?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">FIDO2 is worth deploying because it is required by regulation</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Push notification MFA is defeated by phishing proxy attacks (AiTM) that are used in active campaigns targeting the organization's sector. The frequency of M365 account takeover incidents in comparable organizations, combined with the average cost of investigation, remediation, lost productivity, and potential breach notification, establishes the annual expected loss from the current MFA method. FIDO2 deployment cost (hardware keys at $25-50 each, deployment labor, support) is compared against the reduction in annual expected loss, producing a risk-adjusted ROI.</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">FIDO2 eliminates all cybersecurity risk, justifying any investment level</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The comparison should be made against the cost of cyber insurance premiums</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">An organization implements Entra PIM for all privileged roles. An administrator needs to perform a routine Group Policy update that requires Domain Admin access. They activate their eligible Domain Admin role in PIM, providing their hardware key and a justification. Thirty minutes later, PIM automatically revokes the role. What specific security property does this architecture provide that standing Domain Admin accounts do not?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">PIM provides better audit logging than standard Active Directory</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">There is no standing Domain Admin account to compromise — elevated permissions only exist during the defined activation window. An attacker who obtains the administrator's standard credentials cannot perform Domain Admin operations outside an activation window, and cannot perform them during an activation window without also compromising the hardware key used for PIM activation. The blast radius of the administrator's standard account compromise is limited to standard user permissions.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">PIM prevents all unauthorized access to Domain Admin capabilities</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">PIM satisfies NY DFS requirements for privileged access management</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -592,11 +475,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#4b8ef0","#e05252","#f0a04a","#6db86d"],
-  'pg2':["#4b8ef0","#e05252","#f0a04a","#6db86d"],
-  'pg3':["#4b8ef0","#e05252","#f0a04a","#6db86d"],
-  'pg4':["#4b8ef0","#e05252","#f0a04a","#6db86d"],
-  'pg5':["#4b8ef0","#e05252","#f0a04a","#6db86d"],
+  'pg1':["#C4AA88","#1B2A4A","#A08860","#A08860"],
+  'pg2':["#C4AA88","#1B2A4A","#A08860","#A08860"],
+  'pg3':["#C4AA88","#1B2A4A","#A08860","#A08860"],
+  'pg4':["#C4AA88","#1B2A4A","#A08860","#A08860"],
+  'pg5':["#C4AA88","#1B2A4A","#A08860","#A08860"],
 };
 
 const NARR={
@@ -611,7 +494,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -627,19 +510,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -685,7 +556,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

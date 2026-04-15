@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#4b8ef0;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#C4AA88;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#4b8ef022;color:#4b8ef0;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#4b8ef0;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#C4AA88;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#4b8ef0;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#C4AA88;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#4b8ef0;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#C4AA88;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;min-width:0;overflow:hidden;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;overflow-wrap:break-word;word-break:break-word;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#4b8ef0;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#C4AA88;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#4b8ef0;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#C4AA88;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Email Security — Advanced</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Advanced</span>
-    <button class="modules-btn" onclick="toggleMenu()">Modules &#9776;</button>
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Advanced Email Authentication</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Email-Based APT Techniques</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Email Threat Hunting and Telemetry</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Email Security for NY DFS Compliance</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Email-Based APT Techniques</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Email Threat Hunting and Telemetry</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Email Security for NY DFS Compliance</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Advanced Email Authentication</span>
-  </div>
-  <div class="mc-desc">▶ Comprehensive email authentication for regulated environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email-Based APT Techniques</span>
-  </div>
-  <div class="mc-desc">▶ Advanced persistent threat actor email tradecraft</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email Threat Hunting and Telemetry</span>
-  </div>
-  <div class="mc-desc">▶ Advanced threat detection in email environment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email Security for NY DFS Compliance</span>
-  </div>
-  <div class="mc-desc">▶ Regulatory requirements and audit trail management</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Email Security — Advanced</div>
-  <div class="home-sub">Advanced — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Advanced Email Authentication</span>
-  </div>
-  <div class="mc-desc">▶ Comprehensive email authentication for regulated environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email-Based APT Techniques</span>
-  </div>
-  <div class="mc-desc">▶ Advanced persistent threat actor email tradecraft</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email Threat Hunting and Telemetry</span>
-  </div>
-  <div class="mc-desc">▶ Advanced threat detection in email environment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Email Security for NY DFS Compliance</span>
-  </div>
-  <div class="mc-desc">▶ Regulatory requirements and audit trail management</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #4b8ef0;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#4b8ef0;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Advanced Email Authentication</div>
     <div class="ph-sub">Comprehensive email authentication for regulated environments</div>
@@ -232,48 +115,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Authentication Stack</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">DKIM: Multi-Selector + Key Rotation + Per-Stream Signing</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Ed25519 preferred · Selector-per-stream forensic accountability · Rotate on schedule · Old selector removed after propagation</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">BIMI: Verified Brand Logo Requires DMARC Enforcement + VMC</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">p=quarantine or p=reject required · VMC from DigiCert/Entrust · Trademark registration needed · Visual phishing differentiation</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Third-Party Sender Audit: Header Analysis Reveals Unknown Sources</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Marketing · HR · Financial · Ticketing — each needs SPF + DKIM before p=reject is safe</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">MTA-STS / DANE: Enforce TLS Transport Against Downgrade Attacks</text>
-    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">MTA-STS: HTTPS policy + DNS TXT · DANE: DNSSEC TLSA record · Server-to-server NPI encryption compliance</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Authentication Stack</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DKIM: Multi-Selector + Key Rotation + Per-Stream Signing</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Ed25519 preferred · Selector-per-stream forensic accountability · Rotate on schedule · Old selector removed after propagation</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">BIMI: Verified Brand Logo Requires DMARC Enforcement + VMC</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">p=quarantine or p=reject required · VMC from DigiCert/Entrust · Trademark registration needed · Visual phishing differentiation</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Third-Party Sender Audit: Header Analysis Reveals Unknown Sources</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Marketing · HR · Financial · Ticketing — each needs SPF + DKIM before p=reject is safe</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">MTA-STS / DANE: Enforce TLS Transport Against Downgrade Attacks</text>
+    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">MTA-STS: HTTPS policy + DNS TXT · DANE: DNSSEC TLSA record · Server-to-server NPI encryption compliance</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">DKIM signing architecture: key rotation and multi-selector deployment</div>
+    <div class="blk-title" style="color:#C4AA88;">DKIM signing architecture: key rotation and multi-selector deployment</div>
     <div class="blk-body">DKIM signing at advanced maturity requires key rotation, multiple selector deployment, and monitoring of signing coverage across all legitimate email paths. DKIM key rotation — replacing the current signing key with a new key on a defined schedule — limits the exposure window if a private signing key is compromised. The rotation procedure: generate a new RSA-2048 or Ed25519 signing key pair, publish the new public key in DNS as a new selector (selector2._domainkey.example.com), configure email signing infrastructure to sign outbound mail with the new key, verify that receiving servers can validate signatures using the new key, then remove the old selector from DNS after a propagation period. Multiple selectors enable different signing keys for different mail streams — one selector for corporate email, a separate selector for marketing automation, a third for HR systems — enabling key-level forensic analysis of which system sent a specific signed message and enabling per-stream key rotation without affecting other mail flows.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">BIMI: brand indicators in message identification</div>
+    <div class="blk-title" style="color:#1B2A4A;">BIMI: brand indicators in message identification</div>
     <div class="blk-body">BIMI (Brand Indicators for Message Identification) extends DMARC by associating a verified brand logo with authenticated email messages. When an email passes DMARC alignment (with p=quarantine or p=reject enforcement), and the organization has a published BIMI record in DNS pointing to a verified SVG logo file, supporting mail clients display the brand logo in the message list view. The logo serves as a visual authentication signal that distinguishes legitimate authenticated email from spoofed messages that lack the logo. BIMI implementation requires: DMARC enforcement at p=quarantine or p=reject (p=none is insufficient), a Verified Mark Certificate (VMC) from a certificate authority (DigiCert or Entrust) that validates the trademark ownership of the brand, an SVG logo file meeting BIMI specifications, and a BIMI DNS record. VMC issuance requires trademark registration, adding cost and process overhead that limits BIMI adoption to organizations with registered trademarks. For insurance agencies with brand equity, BIMI provides a meaningful visual differentiation between legitimate agency communications and phishing attempts impersonating the agency.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Third-party sender authentication auditing</div>
+    <div class="blk-title" style="color:#A08860;">Third-party sender authentication auditing</div>
     <div class="blk-body">Most organizations have legitimate email sent on their behalf by third-party platforms — marketing automation, HR systems, ticketing platforms, financial applications — that is invisible to the email security team until it either fails DMARC or causes deliverability problems. A comprehensive third-party sender audit examines: email headers in the organization's sent mail archive to identify all IP addresses and mail servers that have sent email with the organization's From address, SPF records to determine which of these senders are authorized, DKIM configuration in each sending platform to determine whether signed messages are being signed with a selector associated with the organization's domain, and DMARC alignment reports (from DMARC aggregate reports) to identify any sources generating failed authentication. The audit converts invisible email flows into documented, authenticated, monitored flows — each legitimate sender gets an SPF entry and DKIM selector, and any sender not on the list becomes an anomaly that DMARC enforcement would reject.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">SMTP MTA-STS and DANE: enforcing TLS for email transport</div>
+    <div class="blk-title" style="color:#1B2A4A;">SMTP MTA-STS and DANE: enforcing TLS for email transport</div>
     <div class="blk-body">SMTP email transport between mail servers uses opportunistic TLS by default — the TLS connection is established if both servers support it, but it is not enforced and can be downgraded by an active network attacker. MTA-STS (Mail Transfer Agent Strict Transport Security) allows organizations to publish a policy declaring that email to their domain must be delivered over validated TLS, preventing downgrade attacks. The MTA-STS policy is published via HTTPS at a well-known URL and referenced in a DNS TXT record; sending mail servers that support MTA-STS fetch the policy and enforce TLS delivery to the organization. DANE (DNS-Based Authentication of Named Entities) uses DNSSEC-signed TLSA records to bind specific TLS certificates to specific mail servers, enabling receiving servers to verify the mail server's TLS certificate against the DNS-published binding rather than the certificate authority trust store. DANE requires DNSSEC deployment for the domain, which adds operational complexity but provides stronger transport security than MTA-STS alone. Both mechanisms protect against active downgrade attacks on email delivery channels.</div>
   </div>
 </div>
@@ -289,49 +172,49 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">APT Email Attack Methods</text>
-  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">M&amp;A BEC: Procedural Control Required — No Technical Detection</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Out-of-band verification protocol at kick-off · Pre-verified phone number · Any deviation = potential fraud</text></g>
-  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="70" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">Account Takeover Forensics: Access → Persistence → Recon → Action</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Persistence: inbox rules + OAuth consent (both must be remediated)</text>
-    <text x="36" y="172" font-size="10" fill="#56617a" font-family="system-ui">Password reset alone does NOT remove OAuth app tokens</text></g>
-  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="198" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="222" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Lateral Phishing: Compromised Account Targets Trust Relationships</text>
-    <text x="36" y="240" font-size="10" fill="#94a0b8" font-family="system-ui">Elevated volume · Unusual recipients · Anomalous time · Behavioral detection + fast session revocation</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="274" width="480" height="52" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="298" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Thread Hijacking: Fraudulent Instruction Inside Trusted Thread</text>
-    <text x="36" y="316" font-size="10" fill="#94a0b8" font-family="system-ui">Thread history ≠ message authenticity · Train: reply IP/device deviation = red flag</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">APT Email Attack Methods</text>
+  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">M&amp;A BEC: Procedural Control Required — No Technical Detection</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Out-of-band verification protocol at kick-off · Pre-verified phone number · Any deviation = potential fraud</text></g>
+  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="70" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Account Takeover Forensics: Access → Persistence → Recon → Action</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Persistence: inbox rules + OAuth consent (both must be remediated)</text>
+    <text x="36" y="172" font-size="10" fill="#8A7D6B" font-family="system-ui">Password reset alone does NOT remove OAuth app tokens</text></g>
+  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="198" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="222" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Lateral Phishing: Compromised Account Targets Trust Relationships</text>
+    <text x="36" y="240" font-size="10" fill="#D6CCBC" font-family="system-ui">Elevated volume · Unusual recipients · Anomalous time · Behavioral detection + fast session revocation</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="274" width="480" height="52" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="298" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Thread Hijacking: Fraudulent Instruction Inside Trusted Thread</text>
+    <text x="36" y="316" font-size="10" fill="#D6CCBC" font-family="system-ui">Thread history ≠ message authenticity · Train: reply IP/device deviation = red flag</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">BEC at acquisition scale: targeting M&A communications</div>
+    <div class="blk-title" style="color:#C4AA88;">BEC at acquisition scale: targeting M&A communications</div>
     <div class="blk-body">Business Email Compromise attacks targeting mergers, acquisitions, and commercial transactions represent the highest-value email fraud category, with individual incident losses commonly exceeding millions of dollars. The attack lifecycle: threat intelligence about pending M&A transactions is gathered from public filings, press releases, and dark web broker announcements; the attacking party then targets one side of the transaction (typically the side expecting to receive funds) with either email account compromise or carefully spoofed email impersonating the counterparty; the spoofed or compromised communication provides modified banking instructions at the moment the target is expecting to receive real payment instructions. The control that breaks this attack: transaction-specific communication security protocols established at the transaction kickoff that require out-of-band verification (phone call to a pre-verified number, not a number provided in email) for any banking instruction, with explicit agreement between parties that instructions not following the protocol are not to be acted upon.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Account takeover forensics: reconstructing M365 compromise</div>
+    <div class="blk-title" style="color:#1B2A4A;">Account takeover forensics: reconstructing M365 compromise</div>
     <div class="blk-body">When a Microsoft 365 account is compromised, the forensic reconstruction requires analyzing multiple overlapping audit sources to establish the complete timeline. The compromise lifecycle typically: initial access through phished credentials or token theft, session establishment (authentication event in sign-in logs from unexpected IP with unusual user agent), persistence establishment (inbox rule creation to forward or delete specific emails, OAuth application consent for long-term access, new device registration), reconnaissance (email searches for financial information, payment processing emails, vendor banking details), and action (fraudulent email sent from the compromised account using the established trusted identity). Each lifecycle phase leaves specific audit log artifacts: sign-in log events for access, UAL events for inbox rule creation and message access, Audit log events for OAuth consent. The Microsoft Purview Audit (Premium) provides detailed mail item access logs showing which specific messages were read, enabling assessment of exactly what information the attacker accessed during the compromise period.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Lateral phishing: using compromised accounts to attack contacts</div>
+    <div class="blk-title" style="color:#A08860;">Lateral phishing: using compromised accounts to attack contacts</div>
     <div class="blk-body">Lateral phishing uses a compromised email account to send phishing messages to the account owner's contacts — leveraging the established trust relationship between the account owner and their contacts to achieve higher click rates than cold phishing campaigns. The attack pattern: attacker compromises account A, extracts the contact list and recent email thread history, sends phishing emails to contacts in threads that appear to continue legitimate conversations. Recipients who have recent email history with account A and see what appears to be a continuation of a legitimate conversation are significantly more likely to click than they would be for a cold phishing message. Detection: lateral phishing from a compromised account generates anomalous email sending patterns (emails to unusual recipients, high sending volume relative to the account's baseline, emails at unusual times) that behavioral email security tools can detect. Response when lateral phishing is suspected: immediately revoke the compromised account's session, suspend outbound email from the account, and notify contacts who received messages from the account during the compromise period.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Email thread hijacking for financial fraud</div>
+    <div class="blk-title" style="color:#1B2A4A;">Email thread hijacking for financial fraud</div>
     <div class="blk-body">Thread hijacking attacks insert the attacker into legitimate email conversations by compromising one participant's account and replying within the existing thread context. Unlike new-message BEC attacks, thread hijacking presents the fraudulent request within an established conversation with full thread history, making it significantly harder for recipients to identify as fraudulent. The attacker reads the existing thread to understand the business context, identifies the appropriate moment to insert a fraudulent instruction, and sends a reply that follows naturally from the conversation while redirecting a financial transaction. Thread hijacking for financial fraud typically occurs in email threads about vendor payments, real estate transactions, or M&A activity — wherever large payment instructions are expected. Email security controls that detect thread hijacking: monitoring for replies to email threads from IP addresses inconsistent with the sender's normal location, monitoring for emails in long-standing threads sent at unusual times, and flagging threads where the reply-to address or sending IP differs from the account's established pattern.</div>
   </div>
 </div>
@@ -347,48 +230,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Email Threat Hunting Framework</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Header Analysis: Bottom Received IP = Originating Server (Reliable)</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Cannot be forged by sender · TI match + WHOIS + geo · DKIM selector → signing stream attribution</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">KQL Hunting: EmailEvents + AttachmentInfo + UrlClickEvents</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Hash lookup · New-domain sender · MFA bypass pattern · Finance user URL click correlation → detection rules</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Email Forensic Preservation: Legally Defensible + Chain of Custody</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Content Search audit log · Hash documentation · Search params recorded · Legal counsel early in process</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">TI Integration: IOC Feeds + FS-ISAC + Behavioral Detection Layered</text>
-    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Commodity feeds miss zero-IOC targeted attacks · Behavioral detects new infra · Sector intel adds early warning</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Threat Hunting Framework</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Header Analysis: Bottom Received IP = Originating Server (Reliable)</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Cannot be forged by sender · TI match + WHOIS + geo · DKIM selector → signing stream attribution</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">KQL Hunting: EmailEvents + AttachmentInfo + UrlClickEvents</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Hash lookup · New-domain sender · MFA bypass pattern · Finance user URL click correlation → detection rules</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Email Forensic Preservation: Legally Defensible + Chain of Custody</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Content Search audit log · Hash documentation · Search params recorded · Legal counsel early in process</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">TI Integration: IOC Feeds + FS-ISAC + Behavioral Detection Layered</text>
+    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">Commodity feeds miss zero-IOC targeted attacks · Behavioral detects new infra · Sector intel adds early warning</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Email header analysis for threat attribution</div>
+    <div class="blk-title" style="color:#C4AA88;">Email header analysis for threat attribution</div>
     <div class="blk-body">Email headers contain a detailed record of the message's path from sender to recipient that is used for both threat detection and threat attribution. The Received chain traces each mail server the message passed through, in reverse chronological order — the bottom Received header reflects the originating server, and each subsequent header adds a hop. Authentication-Results headers record the outcome of SPF, DKIM, and DMARC checks at each receiving hop. X-Originating-IP headers (where present) may reveal the actual IP address of the original sending client. For threat hunting, the top Received IP (the IP that delivered to the organization's mail server) is the most reliable indicator — it is outside attacker control and can be compared against threat intelligence. IP addresses in received chains can be queried against threat intelligence databases, WHOIS, and geolocation services to identify suspicious originating infrastructure. The DKIM signature header (if present and valid) ties the message to a specific signing domain, which can be used to identify patterns across seemingly unrelated messages from the same infrastructure.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Microsoft Defender for Office 365: advanced hunting queries</div>
+    <div class="blk-title" style="color:#1B2A4A;">Microsoft Defender for Office 365: advanced hunting queries</div>
     <div class="blk-body">Microsoft Defender for Office 365 Plan 2 provides an advanced hunting capability using KQL (Kusto Query Language) that enables searching across email telemetry for specific threat patterns. Email threat hunting queries for insurance agency environments: identifying messages with specific attachment hash values (querying EmailAttachmentInfo for SHA256 hashes matching known malware), finding messages where the sender domain was registered within 30 days (joining EmailEvents with WHOIS data via UrlClickEvents), identifying accounts that clicked URLs from messages flagged as phishing by the detection engine (correlating EmailEvents with UrlClickEvents and AlertInfo), and hunting for MFA bypass indicators (searching for successful authentications immediately following failed MFA attempts that suggest MFA fatigue or token theft). KQL hunting queries can be saved and converted to custom detection rules that run continuously, converting threat hunting findings into automated detection coverage.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Email forensics: preservation and chain of custody</div>
+    <div class="blk-title" style="color:#A08860;">Email forensics: preservation and chain of custody</div>
     <div class="blk-body">Email forensic investigations require preservation methods that maintain the evidential integrity of email content, headers, and metadata for potential legal proceedings. Email preservation best practices: use the Microsoft Purview Compliance Portal's Content Search to export targeted email collections in PST or MSG format with complete headers preserved; document the search parameters, execution timestamp, and result set hash to demonstrate preservation completeness; maintain chain of custody documentation showing who handled the preserved evidence and when; export in formats that preserve all header metadata, not just visible body content. For litigation hold, Microsoft Purview In-Place Hold or Litigation Hold preserves all mailbox content from deletion or modification regardless of user action, maintaining evidential integrity. For criminal matters, engagement with law enforcement may require preservation requests to Microsoft directly, which follow a different process than organizational administrative preservation.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Threat intelligence integration for email security</div>
+    <div class="blk-title" style="color:#1B2A4A;">Threat intelligence integration for email security</div>
     <div class="blk-body">Email security threat intelligence integration enhances detection by adding context from external sources to email telemetry. IOC (Indicator of Compromise) integration: URL and domain blocklists from threat intelligence feeds are integrated into the email gateway to block delivery of messages containing known malicious links; file hash feeds identify known malware attachments; IP reputation feeds identify messages originating from known malicious infrastructure. For Microsoft 365 environments, Microsoft Sentinel and Defender XDR integrate with commercial threat intelligence platforms (Recorded Future, ThreatConnect, MISP) through threat intelligence blades and TAXII connectors, enabling automated IOC ingestion and matching against email telemetry. Beyond IOC matching, behavioral threat intelligence about specific threat actor campaigns targeting the insurance sector — distributed through FS-ISAC, the Insurance ISAO, and commercial threat intelligence subscriptions — enables proactive hunting for campaign-specific indicators before they appear in commodity blocklists.</div>
   </div>
 </div>
@@ -404,48 +287,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">NY DFS Email Compliance Framework</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Archiving: 7yr Base + Legal Hold + Searchable + Access Logged</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">NY Insurance Law + e-discovery alignment · Operationally searchable for examination · Legally defensible</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">DLP: Content + Context + Quantity to Distinguish Authorized vs Exfil</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">SIT + sensitivity labels + ML classifier + exact data match + document fingerprinting</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Annual Architecture Review: Map Controls to DFS 500 Sections</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Auth · DLP · Archiving · IR capability · 3-6mo before exam · Gap remediation timeline</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">72-Hour Notification: Pre-Built Template + Decision Framework</text>
-    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">Who decides · What evidence required · What is material · Draft template ready before any incident</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">NY DFS Email Compliance Framework</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Archiving: 7yr Base + Legal Hold + Searchable + Access Logged</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">NY Insurance Law + e-discovery alignment · Operationally searchable for examination · Legally defensible</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">DLP: Content + Context + Quantity to Distinguish Authorized vs Exfil</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">SIT + sensitivity labels + ML classifier + exact data match + document fingerprinting</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Annual Architecture Review: Map Controls to DFS 500 Sections</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Auth · DLP · Archiving · IR capability · 3-6mo before exam · Gap remediation timeline</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">72-Hour Notification: Pre-Built Template + Decision Framework</text>
+    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">Who decides · What evidence required · What is material · Draft template ready before any incident</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">NY DFS 500 audit trail requirements for email</div>
+    <div class="blk-title" style="color:#C4AA88;">NY DFS 500 audit trail requirements for email</div>
     <div class="blk-body">NY DFS 500 does not prescribe specific email retention periods but requires that covered entities maintain audit trails sufficient to detect and respond to cybersecurity events, and that covered entities have policies governing record retention consistent with their regulatory obligations. For insurance agencies, email retention obligations derive from multiple sources: New York Insurance Law record retention requirements (generally 6 years for policy records), e-discovery obligations (emails relevant to litigation must be preserved), and operational requirements (email is frequently the primary record of transactions, client communications, and regulatory filings). Email archiving systems — Microsoft Exchange Online Archiving, Proofpoint Archive, Mimecast Archive — provide the retention infrastructure, but retention alone is not sufficient for compliance: the archive must be searchable for regulatory examination requests, the archive must be legally defensible (demonstrating that email cannot be altered after archiving), and access to the archive must be logged and controlled.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">Data loss prevention for email: NPI detection and enforcement</div>
+    <div class="blk-title" style="color:#1B2A4A;">Data loss prevention for email: NPI detection and enforcement</div>
     <div class="blk-body">Email DLP for NY DFS compliance requires detecting and controlling the transmission of NPI through email channels. Microsoft Purview DLP for Exchange provides: sensitive information type detection (pattern matching for SSNs, account numbers, driver's license numbers, and custom patterns for insurance-specific data like policy numbers), sensitivity label enforcement (blocking emails with Restricted/NPI labels from being sent to external recipients without justification), and transport rule-based enforcement (applying encryption, adding disclaimers, or blocking transmission for emails matching defined conditions). Advanced DLP for email goes beyond pattern matching: machine learning classifiers trained on actual NPI content from the organization's environment improve precision over generic patterns; exact data match compares email content against specific databases of known sensitive values (a list of current policy numbers); and document fingerprinting detects transmission of specific document templates (completed claim forms, application templates) even when the content varies from the template.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Email security architecture review for regulated environments</div>
+    <div class="blk-title" style="color:#A08860;">Email security architecture review for regulated environments</div>
     <div class="blk-body">Email security architecture for NY DFS-regulated insurance agencies requires specific architectural components that support both security and regulatory compliance. The architecture review framework assesses: email authentication completeness (SPF, DKIM, DMARC p=reject for all sending domains and subdomains), inbound threat detection (gateway filtering with URL rewriting and time-of-click scanning, sandboxing for attachments, impersonation protection for executives and vendors), outbound DLP (NPI pattern detection, sensitivity label enforcement, encryption for external NPI transmission), email archiving (retention policy aligned with regulatory requirements, legal hold capability, searchable for examination requests), and incident response capability (account compromise detection, ability to retract phishing messages post-delivery, automated response to high-confidence threats). Each component maps to specific NY DFS 500 requirements: authentication to the anti-phishing requirement in 500.14, DLP to the data protection requirements in 500.13 and 500.15, archiving to the audit trail requirement in 500.06.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Email incident response for regulatory notification</div>
+    <div class="blk-title" style="color:#1B2A4A;">Email incident response for regulatory notification</div>
     <div class="blk-body">Email security incidents involving NPI exposure require assessment for NY DFS 500.17 notification obligations. The assessment chain for email incidents: confirm that an unauthorized access event occurred (not just delivery of a phishing email that was not clicked), determine whether NPI was accessed or exfiltrated (review email access logs from the compromised account, assess whether drafts, sent items, or received emails containing NPI were accessed), determine the scope of exposure (how many records, what NPI categories), assess encryption status (was the NPI in encrypted form that the attacker could not access), and apply the NY DFS materiality threshold to determine notification obligation. Email incidents that trigger notification: account compromise where forensic analysis confirms NPI was accessed, email misdirection of NPI to an unauthorized external recipient where the exposure is confirmed (not just suspected), and large-scale phishing campaigns that resulted in credential compromise affecting multiple accounts. The 72-hour notification clock runs from determination, not from incident discovery.</div>
   </div>
 </div>
@@ -461,55 +344,55 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">AUTHENTICATION</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">DKIM rotation · BIMI</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Sender audit · MTA-STS</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Audit before p=reject</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#9b7fe8" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#9b7fe8" font-weight="700" font-family="system-ui">APT TECHNIQUES</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">M&amp;A BEC · ATO forensics</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Lateral phishing · Thread hijack</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">OAuth consent survives password reset</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">THREAT HUNTING</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Received-chain analysis</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">KQL cross-table · FS-ISAC TI</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Hunt findings → detection rules</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">DFS COMPLIANCE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">7yr archive · Legal hold</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">DLP: content+context+qty</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">72hr template ready pre-incident</text></g>
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">AUTHENTICATION</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">DKIM rotation · BIMI</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Sender audit · MTA-STS</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Audit before p=reject</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">APT TECHNIQUES</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">M&amp;A BEC · ATO forensics</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Lateral phishing · Thread hijack</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">OAuth consent survives password reset</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">THREAT HUNTING</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Received-chain analysis</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">KQL cross-table · FS-ISAC TI</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Hunt findings → detection rules</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">DFS COMPLIANCE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">7yr archive · Legal hold</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">DLP: content+context+qty</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">72hr template ready pre-incident</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Email authentication maturity: DKIM key rotation, BIMI, third-party sender audit, MTA-STS/DANE</div>
+    <div class="blk-title" style="color:#C4AA88;">Email authentication maturity: DKIM key rotation, BIMI, third-party sender audit, MTA-STS/DANE</div>
     <div class="blk-body">DKIM multi-selector enables per-stream key rotation without disrupting other mail flows. BIMI requires DMARC p=quarantine/reject and VMC for visual brand authentication. Third-party sender audit converts invisible email flows into documented, monitored, authenticated paths. MTA-STS and DANE enforce TLS for email transport against active downgrade attacks.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#9b7fe8;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#9b7fe8;">APT email techniques: M&A BEC, account takeover forensics, lateral phishing, thread hijacking</div>
+    <div class="blk-title" style="color:#1B2A4A;">APT email techniques: M&A BEC, account takeover forensics, lateral phishing, thread hijacking</div>
     <div class="blk-body">M&A BEC exploits legitimate payment expectations — control is transaction-kick-off communication protocol. Account takeover forensic lifecycle: access, persistence (inbox rules, OAuth consent), reconnaissance, action. Lateral phishing uses compromised account trust relationships for higher click rates. Thread hijacking inserts fraudulent instructions into existing trusted conversation context.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Email threat hunting uses header analysis, KQL in Defender for O365 Plan 2, and FS-ISAC intelligence</div>
+    <div class="blk-title" style="color:#A08860;">Email threat hunting uses header analysis, KQL in Defender for O365 Plan 2, and FS-ISAC intelligence</div>
     <div class="blk-body">Received-chain IP analysis identifies originating infrastructure for threat attribution. KQL queries hunt attachment hashes, new-domain senders, MFA bypass patterns, and URL click correlation. Hunting findings convert to continuous custom detection rules. FS-ISAC and Insurance ISAO provide sector-specific intelligence ahead of commodity blocklists.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">NY DFS compliance: email archiving with legal hold, NPI DLP with exact data match, and 72-hour notification assessment</div>
+    <div class="blk-title" style="color:#1B2A4A;">NY DFS compliance: email archiving with legal hold, NPI DLP with exact data match, and 72-hour notification assessment</div>
     <div class="blk-body">Email archiving must be retention-compliant, legally defensible, searchable, and access-logged. DLP uses sensitive info types, sensitivity labels, ML classifiers, exact data match, and document fingerprinting. Architecture review maps authentication, DLP, archiving, and IR capability to DFS 500 requirements. 72-hour clock runs from determination of materiality — not from incident discovery.</div>
   </div>
 </div>
@@ -521,40 +404,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Email Security — Advanced</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">An organization has DMARC set to p=reject for their primary domain. A new HR benefits platform recently began sending enrollment communications using the organization's From address. Recipients report these legitimate emails are being rejected. What is the root cause and the correct fix?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">The DMARC policy is too strict — change to p=quarantine</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">The HR platform's sending infrastructure (IP addresses and mail servers) is not included in the organization's SPF record, and the platform is not configured for DKIM signing with an organization-specific selector. DMARC p=reject causes receiving servers to reject emails that fail both SPF alignment and DKIM alignment. The fix: add the HR platform's sending IPs to the SPF record and/or configure DKIM signing in the platform with a dedicated selector for the organization's domain. The platform's emails will then pass DMARC alignment and be delivered normally.</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">The HR platform must use a subdomain rather than the primary domain</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Increase the SPF record's DNS lookup limit to accommodate the new sender</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">An incident response team discovers that an executive's M365 mailbox was compromised 45 days ago. The executive's password has already been reset. Investigation reveals an inbox rule forwarding all emails containing 'invoice' or 'payment' to an external Gmail address, and an OAuth application consent for a third-party email analytics tool that the executive did not authorize. Which remediation steps are still required after the password reset?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Password reset is sufficient — session tokens expire within 24 hours automatically</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Delete the inbox forwarding rule from the mailbox settings; revoke the OAuth application consent from the Entra ID Enterprise Applications panel (revoking consent also revokes any active tokens issued to the application); review sign-in logs for the OAuth application's access pattern to determine what data was accessed; assess what emails were forwarded to the external Gmail address during the 45-day compromise window for breach notification assessment.</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Disable the executive's mailbox for 72 hours as a security precaution</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Block the external Gmail address at the email gateway to stop future forwarding</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">An insurance agency's email KQL hunt reveals that 23 employees in the finance and accounting departments clicked URLs from emails that originated from domains registered within the past 14 days. Three of those URL clicks resulted in credential submissions to external sites. What are the immediate incident response priorities, in order?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">Send a security awareness reminder to all finance employees about phishing</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">Priority 1: Immediately revoke active sessions for the three accounts where credentials were submitted and force password reset and MFA re-enrollment. Priority 2: Investigate those three accounts for compromise indicators (unusual sign-in locations, inbox rule creation, OAuth consents, lateral phishing activity). Priority 3: Check whether the credential submission sites captured MFA tokens (AiTM indicators). Priority 4: Notify the other 20 employees who clicked but did not submit credentials, verify no compromise, and use the incident for targeted training.</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">Alert all 23 employees to change their passwords as a precaution</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">Block all domains registered in the past 30 days at the email gateway before taking account action</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">A forensic investigation of an email compromise at an insurance agency needs to determine exactly which emails containing NPI were read by the attacker during a 72-day compromise window. Standard M365 E3 licensing is in use. What limitation does the investigator encounter?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">M365 forensic investigations cannot determine which specific messages were read — only which accounts were accessed</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Standard E3 licensing provides the Unified Audit Log with 90-day retention, which covers the 72-day window. However, detailed mail item access logs (which specific messages were read within the mailbox) require Microsoft Purview Audit Premium (formerly Advanced Audit), which is not included in E3. Without Audit Premium, the investigation can confirm that the account was accessed and emails were sent/received, but cannot enumerate the specific messages read. This creates a gap in the breach notification assessment — the scope of NPI exposure cannot be precisely determined.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">E3 licensing provides all forensic capabilities needed for email investigations</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The 90-day UAL retention covers the 72-day window, providing complete forensic visibility for all email activities</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">An insurance agency's DMARC aggregate reports show that 3% of email claiming to be from their domain is failing DMARC authentication and originating from IP addresses they do not recognize. The organization has DMARC at p=none (monitoring mode). What should they do with this information before advancing to p=reject?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Advance immediately to p=reject — the 3% failure rate confirms spoofing is occurring</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Investigate the 3% of failing sources: determine whether any are legitimate senders not yet added to SPF/DKIM (which would need to be remediated before p=reject to avoid losing legitimate email), or whether they are spoofing attempts (which p=reject will correctly block). DMARC aggregate reports provide the sending IP addresses — query each against WHOIS and SPF records to determine legitimacy. Only advance to p=reject after confirming that all legitimate senders are authenticated and the remaining failures are genuinely unauthorized sources.</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Continue monitoring at p=none indefinitely — the 3% failure rate is within acceptable limits</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Immediately block the IP addresses sending failing emails without further investigation</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">An organization is assessing whether a phishing incident that resulted in an employee submitting their credentials to a phishing site triggers NY DFS 500.17 notification. The employee's credentials were captured but investigation confirms the attacker never successfully authenticated to any organizational system using those credentials. Does this trigger notification?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Yes — any phishing incident where credentials are captured triggers NY DFS notification</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">No — NY DFS 500.17 notification is triggered by a cybersecurity event that meets the materiality threshold. An event where credentials were captured but the attacker never successfully accessed any organizational system or data did not result in unauthorized access to covered information. Without unauthorized access to NPI or systems, the materiality threshold is not met. The incident should be documented, the employee's password reset and MFA re-enrolled, and the assessment documented to demonstrate the notification determination was made.</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Yes — credential capture is equivalent to a data breach under NY DFS 500</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Notification is required only if the credentials captured included the employee's MFA factor</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -566,11 +449,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#4b8ef0","#9b7fe8","#f0a04a","#e05252"],
-  'pg2':["#4b8ef0","#9b7fe8","#f0a04a","#e05252"],
-  'pg3':["#4b8ef0","#9b7fe8","#f0a04a","#e05252"],
-  'pg4':["#4b8ef0","#9b7fe8","#f0a04a","#e05252"],
-  'pg5':["#4b8ef0","#9b7fe8","#f0a04a","#e05252"],
+  'pg1':["#C4AA88","#1B2A4A","#A08860","#1B2A4A"],
+  'pg2':["#C4AA88","#1B2A4A","#A08860","#1B2A4A"],
+  'pg3':["#C4AA88","#1B2A4A","#A08860","#1B2A4A"],
+  'pg4':["#C4AA88","#1B2A4A","#A08860","#1B2A4A"],
+  'pg5':["#C4AA88","#1B2A4A","#A08860","#1B2A4A"],
 };
 
 const NARR={
@@ -585,7 +468,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -601,19 +484,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -659,7 +530,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#e05252;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#1B2A4A;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#e0525222;color:#e05252;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#e05252;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#e05252;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#e05252;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#e05252;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#e05252;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,126 +90,23 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Introduction to Cybersecurity</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Introductory</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">What Is Cybersecurity</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Common Threats</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How Attacks Happen</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Basic Defenses</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Common Threats</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How Attacks Happen</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Basic Defenses</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
   <div class="narr-text" id="narrText">Narration playing…</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
-
-
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Is Cybersecurity</span>
-  </div>
-  <div class="mc-desc">▶ The basics every person in your organization needs to know</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Common Threats</span>
-  </div>
-  <div class="mc-desc">▶ The attacks most likely to affect your organization</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How Attacks Happen</span>
-  </div>
-  <div class="mc-desc">▶ Understanding the attacker's process</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Basic Defenses</span>
-  </div>
-  <div class="mc-desc">▶ The controls that stop most attacks</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ What you have learned in this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Introduction to Cybersecurity</div>
-  <div class="home-sub">Introductory — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">What Is Cybersecurity</span>
-  </div>
-  <div class="mc-desc">▶ The basics every person in your organization needs to know</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Common Threats</span>
-  </div>
-  <div class="mc-desc">▶ The attacks most likely to affect your organization</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">How Attacks Happen</span>
-  </div>
-  <div class="mc-desc">▶ Understanding the attacker's process</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Basic Defenses</span>
-  </div>
-  <div class="mc-desc">▶ The controls that stop most attacks</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ What you have learned in this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Is Cybersecurity</div>
     <div class="ph-sub">The basics every person in your organization needs to know</div>
@@ -239,67 +122,67 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <!-- Central shield -->
   <g id="pg1-hl0" class="svg-hl" transform="translate(260,170)">
     <path d="M0,-90 L60,-60 L60,30 Q60,90 0,115 Q-60,90 -60,30 L-60,-60 Z"
-          fill="#1e2235" stroke="#e05252" stroke-width="2.5" filter="url(#gs1)"/>
-    <text y="-20" text-anchor="middle" font-size="13" fill="#e05252" font-weight="700" font-family="system-ui">CYBER</text>
-    <text y="0"  text-anchor="middle" font-size="13" fill="#e05252" font-weight="700" font-family="system-ui">SECURITY</text>
-    <path d="M-18,18 L-6,32 L20,8" stroke="#e05252" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5" filter="url(#gs1)"/>
+    <text y="-20" text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="system-ui">CYBER</text>
+    <text y="0"  text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="system-ui">SECURITY</text>
+    <path d="M-18,18 L-6,32 L20,8" stroke="#1B2A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   </g>
   <!-- Confidentiality -->
   <g id="pg1-hl1" class="svg-hl" transform="translate(120,100)">
-    <rect x="-55" y="-32" width="110" height="64" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-10" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CONFIDENTIALITY</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Only authorized</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">access</text>
-    <line x1="55" y1="0" x2="138" y2="55" stroke="#4b8ef0" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <rect x="-55" y="-32" width="110" height="64" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-10" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CONFIDENTIALITY</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Only authorized</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">access</text>
+    <line x1="55" y1="0" x2="138" y2="55" stroke="#C4AA88" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
   </g>
   <!-- Integrity -->
   <g id="pg1-hl2" class="svg-hl" transform="translate(260,65)">
-    <rect x="-52" y="-30" width="104" height="60" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-10" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">INTEGRITY</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Data remains</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">accurate</text>
-    <line x1="0" y1="30" x2="0" y2="78" stroke="#6db86d" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <rect x="-52" y="-30" width="104" height="60" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-10" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">INTEGRITY</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Data remains</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">accurate</text>
+    <line x1="0" y1="30" x2="0" y2="78" stroke="#A08860" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
   </g>
   <!-- Availability -->
   <g id="pg1-hl3" class="svg-hl" transform="translate(400,100)">
-    <rect x="-52" y="-32" width="104" height="64" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-10" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">AVAILABILITY</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Systems</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">accessible</text>
-    <line x1="-55" y1="0" x2="-138" y2="55" stroke="#f0a04a" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+    <rect x="-52" y="-32" width="104" height="64" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-10" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">AVAILABILITY</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Systems</text>
+    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">accessible</text>
+    <line x1="-55" y1="0" x2="-138" y2="55" stroke="#A08860" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
   </g>
   <!-- Bottom label -->
-  <text x="260" y="310" text-anchor="middle" font-size="11" fill="#56617a" font-family="system-ui">The CIA Triad — the foundation of information security</text>
+  <text x="260" y="310" text-anchor="middle" font-size="11" fill="#8A7D6B" font-family="system-ui">The CIA Triad — the foundation of information security</text>
 </svg>
 </div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Cybersecurity protects information from unauthorized access, damage, or disruption</div>
+    <div class="blk-title" style="color:#1B2A4A;">Cybersecurity protects information from unauthorized access, damage, or disruption</div>
     <div class="blk-body">Cybersecurity is the practice of protecting systems, networks, and the data they hold from digital attacks, theft, and damage. Every organization — regardless of size or industry — stores sensitive information: customer records, financial data, employee files, and internal communications. Cybersecurity is the collection of technologies, policies, and human behaviors that keep that information safe. It is not just an IT concern. Every person who uses a computer, sends an email, or accesses a business system is part of an organization's security posture.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">The CIA Triad: the three properties that define secure information</div>
+    <div class="blk-title" style="color:#C4AA88;">The CIA Triad: the three properties that define secure information</div>
     <div class="blk-body">Security professionals organize the goals of cybersecurity around three properties known as the CIA Triad. Confidentiality means only authorized people can read or access information. Integrity means information cannot be altered without detection — data must remain accurate and trustworthy. Availability means systems and data are accessible when needed; an organization cannot operate if its systems are down. Every security control — every password policy, firewall, or backup system — exists to protect one or more of these three properties.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Cyber threats are deliberate, opportunistic, and constantly evolving</div>
+    <div class="blk-title" style="color:#A08860;">Cyber threats are deliberate, opportunistic, and constantly evolving</div>
     <div class="blk-body">Threats to cybersecurity come from many sources: organized criminal groups seeking financial gain, individual attackers looking for easy targets, and in some cases, nation-state actors targeting industries or infrastructure. Most attacks are not targeted at a specific organization by name. Attackers scan the internet for known vulnerabilities and attack whatever is exposed. This means every organization, regardless of size or perceived importance, is a potential target. The organizations that get attacked are usually the ones that made themselves easy targets — through outdated systems, weak passwords, or untrained staff.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Your role in cybersecurity is active, not passive</div>
+    <div class="blk-title" style="color:#A08860;">Your role in cybersecurity is active, not passive</div>
     <div class="blk-body">Many people assume cybersecurity is something IT handles and that they have no meaningful role to play. This assumption is one of the most significant vulnerabilities in any organization. Attackers consistently exploit human behavior — clicking a malicious link, sharing a password, connecting to an unsecured network — because it is easier than breaking through technical defenses. Security awareness training exists because informed people are one of the most effective defenses an organization has. Understanding basic threats and how to avoid them makes you a meaningful part of your organization's security.</div>
   </div>
 </div>
@@ -325,62 +208,62 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
   <!-- Phishing node -->
   <g id="pg2-hl0" class="svg-hl" transform="translate(170,95)">
-    <circle r="34" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text y="-6"  text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">PHISHING</text>
-    <text y="10" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">#1 threat</text>
+    <circle r="34" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text y="-6"  text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">PHISHING</text>
+    <text y="10" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">#1 threat</text>
   </g>
   <!-- Malware node -->
   <g id="pg2-hl1" class="svg-hl" transform="translate(355,95)">
-    <circle r="30" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-5"  text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">MALWARE</text>
-    <text y="10" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">software harm</text>
+    <circle r="30" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-5"  text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">MALWARE</text>
+    <text y="10" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">software harm</text>
   </g>
   <!-- Weak Passwords node -->
   <g id="pg2-hl2" class="svg-hl" transform="translate(170,260)">
-    <circle r="34" fill="#1e2235" stroke="#6db86d" stroke-width="2"/>
-    <text y="-6"  text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">WEAK</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">PASSWORDS</text>
+    <circle r="34" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-6"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">WEAK</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">PASSWORDS</text>
   </g>
   <!-- Social Eng node -->
   <g id="pg2-hl3" class="svg-hl" transform="translate(355,260)">
-    <circle r="34" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text y="-6"  text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">SOCIAL</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">ENGINEERING</text>
+    <circle r="34" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text y="-6"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">SOCIAL</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">ENGINEERING</text>
   </g>
   <!-- Center label -->
-  <text x="260" y="170" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">ATTACK</text>
-  <text x="260" y="183" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">SURFACE</text>
-  <text x="260" y="320" text-anchor="middle" font-size="11" fill="#56617a" font-family="system-ui">Common threat categories</text>
+  <text x="260" y="170" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">ATTACK</text>
+  <text x="260" y="183" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">SURFACE</text>
+  <text x="260" y="320" text-anchor="middle" font-size="11" fill="#8A7D6B" font-family="system-ui">Common threat categories</text>
 </svg>
 </div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Phishing: manipulating people into revealing information or taking harmful actions</div>
+    <div class="blk-title" style="color:#1B2A4A;">Phishing: manipulating people into revealing information or taking harmful actions</div>
     <div class="blk-body">Phishing is the most common method attackers use to compromise organizations. A phishing attack is a message — usually an email — designed to look legitimate and trick the recipient into doing something harmful: clicking a malicious link, opening a malware-containing attachment, or entering credentials into a fake login page. Phishing messages are carefully crafted to appear trustworthy. They may impersonate a bank, a software vendor, a government agency, or even a colleague. The goal is always the same: get the recipient to take an action they would not take if they knew the truth about the message.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Malware: software designed to damage, disrupt, or steal</div>
+    <div class="blk-title" style="color:#C4AA88;">Malware: software designed to damage, disrupt, or steal</div>
     <div class="blk-body">Malware is any software deliberately created to cause harm. It enters systems through malicious email attachments, infected downloads, compromised websites, or physical media like USB drives. Once installed, malware can take many forms: ransomware encrypts files and demands payment for their return; spyware silently records keystrokes and sends data to attackers; trojans disguise themselves as legitimate software while performing malicious functions in the background. Most malware is designed to be invisible — victims often do not know they are infected until significant damage has occurred.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Weak and reused passwords: one of the simplest and most exploited vulnerabilities</div>
+    <div class="blk-title" style="color:#A08860;">Weak and reused passwords: one of the simplest and most exploited vulnerabilities</div>
     <div class="blk-body">Passwords remain one of the primary mechanisms for controlling access to systems and data, and they remain one of the most consistently exploited weaknesses. Attackers use automated tools that test millions of common passwords per second. They also use credential stuffing — taking username and password combinations stolen from one breached service and trying them against banking sites, email accounts, and business systems. If you use the same password across multiple services, one breach anywhere exposes you everywhere. Strong, unique passwords — and multifactor authentication — dramatically reduce this exposure.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Social engineering: using psychological manipulation rather than technical methods</div>
+    <div class="blk-title" style="color:#A08860;">Social engineering: using psychological manipulation rather than technical methods</div>
     <div class="blk-body">Social engineering attacks exploit human psychology rather than software vulnerabilities. An attacker might call an employee pretending to be IT support and ask for their login credentials to 'fix an issue.' They might impersonate a vendor requesting urgent payment. They might create a sense of urgency — 'your account will be locked in ten minutes' — to pressure someone into acting without thinking. These attacks work because they exploit the same traits that make people good employees: helpfulness, trust in authority, and willingness to act quickly when a problem seems urgent. Recognizing social engineering requires healthy skepticism about unsolicited requests.</div>
   </div>
 </div>
@@ -409,65 +292,65 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
   <!-- Stage 1: Recon -->
   <g id="pg3-hl0" class="svg-hl" transform="translate(100,170)">
-    <circle r="38" fill="#1e2235" stroke="#e05252" stroke-width="2.5"/>
-    <text y="-7" text-anchor="middle" font-size="10" fill="#e05252" font-weight="700" font-family="system-ui">RECON</text>
-    <text y="8"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">gather info</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">01</text>
+    <circle r="38" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5"/>
+    <text y="-7" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">RECON</text>
+    <text y="8"  text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">gather info</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#8A7D6B" font-family="system-ui">01</text>
   </g>
   <!-- Stage 2: Initial Access -->
   <g id="pg3-hl1" class="svg-hl" transform="translate(220,170)">
-    <circle r="38" fill="#1e2235" stroke="#4b8ef0" stroke-width="2.5"/>
-    <text y="-7" text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">INITIAL</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#4b8ef0" font-weight="700" font-family="system-ui">ACCESS</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">02</text>
+    <circle r="38" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2.5"/>
+    <text y="-7" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">INITIAL</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">ACCESS</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#8A7D6B" font-family="system-ui">02</text>
   </g>
   <!-- Stage 3: Lateral Movement -->
   <g id="pg3-hl2" class="svg-hl" transform="translate(340,170)">
-    <circle r="38" fill="#1e2235" stroke="#6db86d" stroke-width="2.5"/>
-    <text y="-7" text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">LATERAL</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#6db86d" font-weight="700" font-family="system-ui">MOVEMENT</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">03</text>
+    <circle r="38" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
+    <text y="-7" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">LATERAL</text>
+    <text y="8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">MOVEMENT</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#8A7D6B" font-family="system-ui">03</text>
   </g>
   <!-- Stage 4: Impact -->
   <g id="pg3-hl3" class="svg-hl" transform="translate(450,170)">
-    <circle r="38" fill="#1e2235" stroke="#f0a04a" stroke-width="2.5"/>
-    <text y="-7" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">IMPACT</text>
-    <text y="8"  text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">damage/theft</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#56617a" font-family="system-ui">04</text>
+    <circle r="38" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
+    <text y="-7" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">IMPACT</text>
+    <text y="8"  text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">damage/theft</text>
+    <text x="0" y="58" text-anchor="middle" font-size="9.5" fill="#8A7D6B" font-family="system-ui">04</text>
   </g>
   <!-- Label -->
-  <text x="260" y="36" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">The Attack Lifecycle</text>
-  <text x="260" y="316" text-anchor="middle" font-size="11" fill="#56617a" font-family="system-ui">Each stage can be disrupted with the right defenses</text>
+  <text x="260" y="36" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">The Attack Lifecycle</text>
+  <text x="260" y="316" text-anchor="middle" font-size="11" fill="#8A7D6B" font-family="system-ui">Each stage can be disrupted with the right defenses</text>
 </svg>
 </div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Reconnaissance: attackers gather information before they strike</div>
+    <div class="blk-title" style="color:#1B2A4A;">Reconnaissance: attackers gather information before they strike</div>
     <div class="blk-body">Before launching an attack, adversaries typically research their target. This reconnaissance phase can be passive — reviewing a company's website, LinkedIn profiles, and public records to identify employees, technology vendors, and business relationships. It can also be active — scanning the organization's internet-facing systems for open ports and known vulnerabilities. The information gathered during reconnaissance shapes every subsequent phase of the attack. Organizations that limit what information they expose publicly, and that monitor their internet-facing attack surface, are harder targets from the very start of an attacker's process.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Initial access: the entry point into your organization's systems</div>
+    <div class="blk-title" style="color:#C4AA88;">Initial access: the entry point into your organization's systems</div>
     <div class="blk-body">An attacker gains initial access through the weakest point available to them. In most cases, that weakest point is a person, not a system. A phishing email that tricks an employee into entering their credentials gives the attacker a valid username and password for legitimate use of the organization's systems. An unpatched vulnerability in a public-facing application gives the attacker a technical entry point. Once inside, the attacker typically operates using legitimate credentials and tools, making their presence difficult to distinguish from normal user activity. This is why detection is hard and prevention at the entry point is so valuable.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Lateral movement: expanding access across the organization's systems</div>
+    <div class="blk-title" style="color:#A08860;">Lateral movement: expanding access across the organization's systems</div>
     <div class="blk-body">After gaining initial access, attackers rarely stop at one account or one system. They move laterally — using the access they have to discover and gain access to additional systems, credentials, and data. An attacker who compromises a single employee's email account may find password reset links, internal system names, or vendor communications that allow them to expand their foothold. Segmentation — dividing networks and limiting what each account can access — limits how far an attacker can move even after gaining initial entry. The principle of least privilege, granting each account only the access it needs, is a direct countermeasure to lateral movement.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Impact: the final stage where damage, theft, or disruption occurs</div>
+    <div class="blk-title" style="color:#A08860;">Impact: the final stage where damage, theft, or disruption occurs</div>
     <div class="blk-body">The impact phase is when an attacker achieves their objective — and when the organization first becomes aware something is wrong. For ransomware, the impact is sudden: files become encrypted and a ransom demand appears. For data theft, the impact may not be apparent for months — until stolen data appears for sale or is used in fraud. For business email compromise, the impact is a fraudulent wire transfer that is often discovered only when the legitimate recipient asks why payment has not arrived. Understanding that attacks follow a process — and that they can be interrupted at any phase — underscores why layered defenses and monitoring matter.</div>
   </div>
 </div>
@@ -487,82 +370,82 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <!-- Four defense pillars -->
   <!-- MFA -->
   <g id="pg4-hl0" class="svg-hl" transform="translate(95,170)">
-    <rect x="-68" y="-100" width="136" height="200" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <rect x="-68" y="-100" width="136" height="36" rx="10" fill="#e05252" opacity="0.15"/>
-    <text y="-75" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">MFA</text>
-    <text y="-52" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Blocks</text>
-    <text y="-39" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">credential</text>
-    <text y="-26" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">attacks</text>
+    <rect x="-68" y="-100" width="136" height="200" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <rect x="-68" y="-100" width="136" height="36" rx="10" fill="#1B2A4A" opacity="0.15"/>
+    <text y="-75" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">MFA</text>
+    <text y="-52" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Blocks</text>
+    <text y="-39" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">credential</text>
+    <text y="-26" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">attacks</text>
     <text y="10"  text-anchor="middle" font-size="32" font-family="system-ui">🔐</text>
-    <text y="55"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">2+ factors</text>
-    <text y="68"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">to authenticate</text>
+    <text y="55"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">2+ factors</text>
+    <text y="68"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">to authenticate</text>
   </g>
   <!-- Patching -->
   <g id="pg4-hl1" class="svg-hl" transform="translate(215,170)">
-    <rect x="-58" y="-100" width="116" height="200" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <rect x="-58" y="-100" width="116" height="36" rx="10" fill="#4b8ef0" opacity="0.15"/>
-    <text y="-75" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">PATCHING</text>
-    <text y="-52" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Closes known</text>
-    <text y="-39" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">vulnerabilities</text>
+    <rect x="-58" y="-100" width="116" height="200" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <rect x="-58" y="-100" width="116" height="36" rx="10" fill="#C4AA88" opacity="0.15"/>
+    <text y="-75" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">PATCHING</text>
+    <text y="-52" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Closes known</text>
+    <text y="-39" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">vulnerabilities</text>
     <text y="10"  text-anchor="middle" font-size="32" font-family="system-ui">🛡️</text>
-    <text y="55"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Apply updates</text>
-    <text y="68"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">promptly</text>
+    <text y="55"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Apply updates</text>
+    <text y="68"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">promptly</text>
   </g>
   <!-- Backups -->
   <g id="pg4-hl2" class="svg-hl" transform="translate(330,170)">
-    <rect x="-58" y="-100" width="116" height="200" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="2"/>
-    <rect x="-58" y="-100" width="116" height="36" rx="10" fill="#6db86d" opacity="0.15"/>
-    <text y="-75" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">BACKUPS</text>
-    <text y="-52" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Recovery</text>
-    <text y="-39" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">when defenses</text>
-    <text y="-26" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">fail</text>
+    <rect x="-58" y="-100" width="116" height="200" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <rect x="-58" y="-100" width="116" height="36" rx="10" fill="#A08860" opacity="0.15"/>
+    <text y="-75" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">BACKUPS</text>
+    <text y="-52" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Recovery</text>
+    <text y="-39" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">when defenses</text>
+    <text y="-26" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">fail</text>
     <text y="10"  text-anchor="middle" font-size="32" font-family="system-ui">💾</text>
-    <text y="55"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">3-2-1 rule,</text>
-    <text y="68"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">test regularly</text>
+    <text y="55"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">3-2-1 rule,</text>
+    <text y="68"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">test regularly</text>
   </g>
   <!-- Awareness -->
   <g id="pg4-hl3" class="svg-hl" transform="translate(445,170)">
-    <rect x="-62" y="-100" width="124" height="200" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <rect x="-62" y="-100" width="124" height="36" rx="10" fill="#f0a04a" opacity="0.15"/>
-    <text y="-75" text-anchor="middle" font-size="10" fill="#f0a04a" font-weight="700" font-family="system-ui">AWARENESS</text>
-    <text y="-52" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Human</text>
-    <text y="-39" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">first line of</text>
-    <text y="-26" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">defense</text>
+    <rect x="-62" y="-100" width="124" height="200" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <rect x="-62" y="-100" width="124" height="36" rx="10" fill="#A08860" opacity="0.15"/>
+    <text y="-75" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">AWARENESS</text>
+    <text y="-52" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Human</text>
+    <text y="-39" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">first line of</text>
+    <text y="-26" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">defense</text>
     <text y="10"  text-anchor="middle" font-size="32" font-family="system-ui">👁️</text>
-    <text y="55"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Recognize and</text>
-    <text y="68"  text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">report threats</text>
+    <text y="55"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Recognize and</text>
+    <text y="68"  text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">report threats</text>
   </g>
-  <text x="260" y="310" text-anchor="middle" font-size="11" fill="#56617a" font-family="system-ui">Four high-impact controls that stop most attacks</text>
+  <text x="260" y="310" text-anchor="middle" font-size="11" fill="#8A7D6B" font-family="system-ui">Four high-impact controls that stop most attacks</text>
 </svg>
 </div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Multifactor authentication: requiring more than a password to log in</div>
+    <div class="blk-title" style="color:#1B2A4A;">Multifactor authentication: requiring more than a password to log in</div>
     <div class="blk-body">Multifactor authentication (MFA) requires a user to provide two or more verification factors to access a system: something they know (password), something they have (a phone or hardware token), or something they are (a fingerprint or face scan). MFA is one of the highest-impact security controls available. Even if an attacker obtains a valid username and password through phishing or a data breach, they cannot complete login without the second factor. Organizations that deploy MFA on all user accounts eliminate the majority of credential-based attacks. If only one security control can be implemented, MFA is consistently the strongest choice.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Software updates and patching: closing the doors attackers use most often</div>
+    <div class="blk-title" style="color:#C4AA88;">Software updates and patching: closing the doors attackers use most often</div>
     <div class="blk-body">Software vulnerabilities are flaws in programs that attackers can exploit to gain unauthorized access or execute malicious code. Vendors release security patches when vulnerabilities are discovered, and attackers closely track which patches have been released — because they know unpatched systems remain vulnerable. Organizations that delay applying patches give attackers a window of opportunity that can last months or years. Enabling automatic updates for operating systems and applications, and establishing a process for testing and deploying patches quickly, removes a significant portion of the attack surface that automated scanning tools find and exploit every day.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Backups: the essential recovery mechanism when all other defenses fail</div>
+    <div class="blk-title" style="color:#A08860;">Backups: the essential recovery mechanism when all other defenses fail</div>
     <div class="blk-body">No set of defenses is perfect. Backups are the recovery mechanism of last resort — and one of the most important security investments any organization can make. A reliable backup system means that a ransomware attack, a hardware failure, or an accidental deletion does not result in permanent data loss. Effective backups follow the 3-2-1 rule: keep three copies of data, on two different media types, with one copy stored offsite or in a separate cloud environment. Critically, backups must be tested regularly. An untested backup is not a backup — it is an assumption.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Security awareness: making informed people your first line of defense</div>
+    <div class="blk-title" style="color:#A08860;">Security awareness: making informed people your first line of defense</div>
     <div class="blk-body">Technology controls are essential, but they are not sufficient. Attackers consistently exploit human behavior because it is frequently easier than overcoming technical defenses. Security awareness training equips every person in an organization to recognize threats, make better decisions, and respond appropriately when something seems wrong. Key behaviors include: verifying unexpected requests through a separate channel before acting, reporting suspicious emails rather than deleting them, following password policies and using a password manager, and knowing who to contact when something appears wrong. An organization where everyone understands and practices basic security behaviors is a meaningfully harder target.</div>
   </div>
 </div>
@@ -581,32 +464,32 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 <svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
   <!-- Summary grid -->
   <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)">
-    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">CIA TRIAD</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Confidentiality · Integrity</text>
-    <text y="6"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Availability</text>
-    <text y="28"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Foundation of all security</text>
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CIA TRIAD</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Confidentiality · Integrity</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Availability</text>
+    <text y="28"  text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Foundation of all security</text>
   </g>
   <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)">
-    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">THREAT TYPES</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Phishing · Malware</text>
-    <text y="6"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Weak passwords · Social eng.</text>
-    <text y="28"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Human behavior is the target</text>
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">THREAT TYPES</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Phishing · Malware</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Weak passwords · Social eng.</text>
+    <text y="28"  text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Human behavior is the target</text>
   </g>
   <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)">
-    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">ATTACK LIFECYCLE</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Recon → Access →</text>
-    <text y="6"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Lateral movement → Impact</text>
-    <text y="28"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Disrupt at each stage</text>
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">ATTACK LIFECYCLE</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Recon → Access →</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Lateral movement → Impact</text>
+    <text y="28"  text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Disrupt at each stage</text>
   </g>
   <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)">
-    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">4 KEY CONTROLS</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">MFA · Patching</text>
-    <text y="6"   text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Backups · Awareness</text>
-    <text y="28"  text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Stop most attacks</text>
+    <rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">4 KEY CONTROLS</text>
+    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA · Patching</text>
+    <text y="6"   text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Backups · Awareness</text>
+    <text y="28"  text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Stop most attacks</text>
   </g>
 </svg>
 </div>
@@ -614,30 +497,30 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Cybersecurity protects the confidentiality, integrity, and availability of information</div>
+    <div class="blk-title" style="color:#1B2A4A;">Cybersecurity protects the confidentiality, integrity, and availability of information</div>
     <div class="blk-body">The CIA Triad defines the three core goals of security. Confidentiality keeps information accessible only to authorized parties. Integrity ensures information cannot be altered without detection. Availability ensures systems remain accessible when needed. Every security control exists to protect one or more of these properties.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">The most common threats exploit people, not just technology</div>
+    <div class="blk-title" style="color:#C4AA88;">The most common threats exploit people, not just technology</div>
     <div class="blk-body">Phishing, social engineering, weak passwords, and malware delivered through human action account for the majority of successful attacks. Understanding these threat types — and recognizing the tactics attackers use — is the foundation of effective security behavior.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Attacks follow a predictable process that can be disrupted at multiple stages</div>
+    <div class="blk-title" style="color:#A08860;">Attacks follow a predictable process that can be disrupted at multiple stages</div>
     <div class="blk-body">Reconnaissance, initial access, lateral movement, and impact define the attack lifecycle. Defenses at each stage — limiting exposed information, deploying MFA, segmenting networks, monitoring for anomalies — can interrupt an attack before it reaches the impact phase.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">A small number of high-impact controls stop the majority of attacks</div>
+    <div class="blk-title" style="color:#A08860;">A small number of high-impact controls stop the majority of attacks</div>
     <div class="blk-body">Multifactor authentication, timely patching, reliable backups, and security awareness training are consistently the most effective defenses. Organizations that implement these four controls address the methods used in the overwhelming majority of successful cyberattacks.</div>
   </div>
 </div>
@@ -649,40 +532,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Introduction to Cybersecurity</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">Which of the three CIA Triad properties ensures that systems and data are accessible when your organization needs them?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Confidentiality</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Integrity</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Availability</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Authentication</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">What is the most common method attackers use to gain initial access to an organization's systems?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Exploiting unpatched software vulnerabilities</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Phishing emails that trick users into revealing credentials or clicking malicious links</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Brute-force attacks against administrator accounts</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Physical theft of devices</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">Why is multifactor authentication (MFA) considered one of the highest-impact security controls?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">It encrypts all data in transit</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">It prevents malware from installing on endpoints</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">It blocks attackers from completing login even when they have a valid password</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">It monitors network traffic for suspicious patterns</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">What does the 3-2-1 backup rule specify?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Back up data once per day, twice per week, once per month</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Keep three copies of data, on two different media types, with one copy offsite or in a separate environment</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Use three different cloud providers, two on-premises servers, and one tape archive</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Perform a restore test three times per year on two systems, with one test under observation</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">In the attack lifecycle, what happens during the lateral movement phase?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">The attacker gathers public information about the target organization</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">The attacker deploys ransomware to encrypt files</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The attacker uses existing access to discover and compromise additional systems, accounts, and data</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The attacker sends phishing emails to employees</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">Social engineering attacks are effective primarily because they:</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Use sophisticated malware that is difficult for antivirus to detect</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Exploit psychological tendencies like helpfulness and urgency rather than technical weaknesses</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Target only senior executives with access to financial systems</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Require access to the organization's internal network before they can work</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -694,11 +577,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#e05252","#4b8ef0","#6db86d","#f0a04a"],
-  'pg2':["#e05252","#4b8ef0","#6db86d","#f0a04a"],
-  'pg3':["#e05252","#4b8ef0","#6db86d","#f0a04a"],
-  'pg4':["#e05252","#4b8ef0","#6db86d","#f0a04a"],
-  'pg5':["#e05252","#4b8ef0","#6db86d","#f0a04a"],
+  'pg1':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg2':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg3':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg4':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg5':["#1B2A4A","#C4AA88","#A08860","#A08860"],
 };
 
 const NARR={
@@ -713,7 +596,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[2,1,2,1,2,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -729,19 +612,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -787,7 +658,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

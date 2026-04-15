@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#e05252;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#1B2A4A;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#e0525222;color:#e05252;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#e05252;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#e05252;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#e05252;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#e05252;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#e05252;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,20 +90,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Security Architecture — Intermediate</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Intermediate</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Security Architecture Principles</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Secure Architecture Patterns</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Threat Modeling</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Security Architecture for Insurance Agencies</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Secure Architecture Patterns</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Threat Modeling</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Security Architecture for Insurance Agencies</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
@@ -126,104 +108,7 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 </div>
 
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Security Architecture Principles</span>
-  </div>
-  <div class="mc-desc">▶ The frameworks and principles that guide secure system design</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Secure Architecture Patterns</span>
-  </div>
-  <div class="mc-desc">▶ Common patterns for building secure systems</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Threat Modeling</span>
-  </div>
-  <div class="mc-desc">▶ Systematic analysis of what can go wrong and how to prevent it</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Security Architecture for Insurance Agencies</span>
-  </div>
-  <div class="mc-desc">▶ Applying security architecture principles to the NY DFS regulatory environment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Security Architecture — Intermediate</div>
-  <div class="home-sub">Intermediate — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Security Architecture Principles</span>
-  </div>
-  <div class="mc-desc">▶ The frameworks and principles that guide secure system design</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Secure Architecture Patterns</span>
-  </div>
-  <div class="mc-desc">▶ Common patterns for building secure systems</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Threat Modeling</span>
-  </div>
-  <div class="mc-desc">▶ Systematic analysis of what can go wrong and how to prevent it</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Security Architecture for Insurance Agencies</span>
-  </div>
-  <div class="mc-desc">▶ Applying security architecture principles to the NY DFS regulatory environment</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #e05252;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#e05252;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Security Architecture Principles</div>
     <div class="ph-sub">The frameworks and principles that guide secure system design</div>
@@ -232,48 +117,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Core Security Design Principles</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Defense in Depth — Layered Independent Controls</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Firewall + Segmentation + EDR + Auth + Monitoring · Failure of one layer does not defeat all security</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Least Privilege — Minimum Access for Each Function</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Over-provisioning is the default · Limits blast radius · Service accounts, apps, and users all apply</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Fail Secure — Control Failure Defaults to Protected State</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Block on failure, not allow · Authentication failure = deny · Accept availability impact over security impact</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Separation of Duties — Multiple Actors for Critical Functions</text>
-    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">No single person authorizes + executes · Limits insider threat + compromised account impact · Requires process design</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Core Security Design Principles</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Defense in Depth — Layered Independent Controls</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Firewall + Segmentation + EDR + Auth + Monitoring · Failure of one layer does not defeat all security</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Least Privilege — Minimum Access for Each Function</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Over-provisioning is the default · Limits blast radius · Service accounts, apps, and users all apply</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Fail Secure — Control Failure Defaults to Protected State</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Block on failure, not allow · Authentication failure = deny · Accept availability impact over security impact</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Separation of Duties — Multiple Actors for Critical Functions</text>
+    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">No single person authorizes + executes · Limits insider threat + compromised account impact · Requires process design</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Defense in depth: why no single control is sufficient</div>
+    <div class="blk-title" style="color:#1B2A4A;">Defense in depth: why no single control is sufficient</div>
     <div class="blk-body">Defense in depth is the architectural principle that security controls must be layered so that the failure of any single control does not result in a complete security failure. A firewall blocking external access is useful, but if it is the only control, a single misconfiguration or exploit defeats all security. When the firewall is complemented by network segmentation, endpoint detection, authentication controls, and monitoring, an attacker must defeat multiple independent controls sequentially to reach their objective. Each layer should be independently designed and independently operated where possible — controls implemented in the same platform or by the same team can fail simultaneously through shared vulnerabilities or shared configuration errors. Defense in depth is not about redundancy of the same control type; it is about diversity of control types covering the same threat from different angles.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Least privilege: minimum access required for each function</div>
+    <div class="blk-title" style="color:#C4AA88;">Least privilege: minimum access required for each function</div>
     <div class="blk-body">The principle of least privilege holds that every user, process, and system component should have access to only the resources and capabilities required for its specific function, and no more. In practice, least privilege is violated constantly through over-provisioning: giving new employees broad access because scoping precisely is difficult, granting Domain Admin to service accounts because it is easier than determining the minimum permissions needed, and allowing applications to run as SYSTEM because the developer did not restrict the execution context. Each over-provisioned permission is attack surface that an adversary can exploit. An application that runs as a standard user can only do damage within that user's permissions; the same application running as SYSTEM can modify the operating system, disable security tools, and access any file on the disk. Implementing least privilege requires explicit effort — the default in most systems is to grant broad access and restrict specific actions, when the correct approach is the inverse.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Fail secure: what happens when controls fail</div>
+    <div class="blk-title" style="color:#A08860;">Fail secure: what happens when controls fail</div>
     <div class="blk-body">Fail secure (also called fail closed or fail safe depending on the domain) is the design principle that when a security control fails, it should fail in the state that maintains security rather than the state that maintains availability. A firewall that fails by blocking all traffic is fail secure — connections cannot pass, but neither can attackers. A firewall that fails by allowing all traffic is fail open — the system remains available but completely unprotected. Authentication systems that fail by granting access rather than denying access are fail open and represent a significant security risk. Network access controls that fail by placing devices on the production network rather than the remediation VLAN are fail open. Designing for fail secure requires explicitly considering failure modes for every control and ensuring that the failure state is the secure one, accepting that availability may be impacted during failure rather than security.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Separation of duties: preventing single points of control</div>
+    <div class="blk-title" style="color:#A08860;">Separation of duties: preventing single points of control</div>
     <div class="blk-body">Separation of duties is the architectural principle that critical functions should require multiple independent actors to complete, so that no single person or system can unilaterally perform the function. In finance, no single individual should be able to both authorize and execute a wire transfer. In IT operations, no single administrator should be able to both make a production change and approve it in the change management system. In security, no single person should be able to both create security exceptions and approve them. Separation of duties limits insider threat (a malicious actor cannot act alone), limits the impact of compromised credentials (an attacker who compromises one account cannot complete a two-person function), and creates audit trails (each step in a multi-person process is logged independently). Implementing separation of duties requires process redesign and tool support — technical enforcement is more reliable than policy-only controls.</div>
   </div>
 </div>
@@ -289,64 +174,64 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Security Architecture Patterns</text>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Security Architecture Patterns</text>
   <g id="pg2-hl0" class="svg-hl" transform="translate(130,110)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text y="-40" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">ZERO TRUST</text>
-    <text y="-22" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Verify every request</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Identity + device + behavior</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Network location ≠ trust</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Progressive implementation</text></g>
+    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text y="-40" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">ZERO TRUST</text>
+    <text y="-22" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Verify every request</text>
+    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Identity + device + behavior</text>
+    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Network location ≠ trust</text>
+    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Progressive implementation</text></g>
   <g id="pg2-hl1" class="svg-hl" transform="translate(390,110)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1e2235" stroke="#4b8ef0" stroke-width="2"/>
-    <text y="-40" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">API SECURITY</text>
-    <text y="-22" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Auth + AuthZ + Validation</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Rate limiting + Logging</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Gateway centralizes controls</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Internal APIs also require auth</text></g>
+    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
+    <text y="-40" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">API SECURITY</text>
+    <text y="-22" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Auth + AuthZ + Validation</text>
+    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Rate limiting + Logging</text>
+    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Gateway centralizes controls</text>
+    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Internal APIs also require auth</text></g>
   <g id="pg2-hl2" class="svg-hl" transform="translate(130,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">CRYPTO ARCHITECTURE</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">AES-256, TLS 1.3, SHA-256+</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">HSM for key storage</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Crypto-agile design</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">PQC-ready for long-lived data</text></g>
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CRYPTO ARCHITECTURE</text>
+    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">AES-256, TLS 1.3, SHA-256+</text>
+    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">HSM for key storage</text>
+    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Crypto-agile design</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">PQC-ready for long-lived data</text></g>
   <g id="pg2-hl3" class="svg-hl" transform="translate(390,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">RESILIENCE</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Redundancy + geo distribution</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">Graceful degradation</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#94a0b8" font-family="system-ui">DDoS scrubbing + CDN</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#56617a" font-family="system-ui">Test RTO/RPO under real conditions</text></g>
+    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RESILIENCE</text>
+    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Redundancy + geo distribution</text>
+    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Graceful degradation</text>
+    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">DDoS scrubbing + CDN</text>
+    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Test RTO/RPO under real conditions</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Zero trust network architecture: verify every request</div>
+    <div class="blk-title" style="color:#1B2A4A;">Zero trust network architecture: verify every request</div>
     <div class="blk-body">Zero trust architecture abandons the perimeter security model's implicit trust for internal network traffic. In a zero trust model, every access request — regardless of whether it comes from inside the corporate network, a VPN, or the open internet — must be authenticated, authorized, and continuously evaluated before access is granted. The architectural components of zero trust include: a strong identity foundation (every user and device has a verified identity, not just an IP address), device health verification (managed, patched, compliant devices have different access rights than unmanaged devices), application-level access controls (users access specific applications, not network segments), and micro-segmentation (east-west traffic between systems is restricted, not assumed trusted). Zero trust is an architectural direction, not a single product — organizations implement it progressively across the identity, device, network, application, and data dimensions.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">API security architecture: protecting service interfaces</div>
+    <div class="blk-title" style="color:#C4AA88;">API security architecture: protecting service interfaces</div>
     <div class="blk-body">Modern applications are built on APIs — interfaces that allow systems to communicate. APIs represent a major attack surface because they expose application logic and data access to any caller who can reach them. Secure API architecture requires: authentication for every API call (API keys, OAuth tokens, or mutual TLS certificates), authorization checks that verify the caller is permitted to perform the specific action on the specific resource, input validation that rejects malformed or unexpected input before it reaches business logic, rate limiting that prevents abuse through excessive API calls, logging of all API calls for security monitoring, and API gateway infrastructure that enforces these controls centrally rather than depending on individual API implementations. APIs that are publicly accessible require all of these controls; internal-only APIs still require authentication and authorization because internal network access cannot be assumed trustworthy in a zero trust architecture.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Cryptographic architecture: selecting and implementing encryption</div>
+    <div class="blk-title" style="color:#A08860;">Cryptographic architecture: selecting and implementing encryption</div>
     <div class="blk-body">Cryptographic architecture encompasses all decisions about how data is protected at rest, in transit, and in use. Key decisions include: algorithm selection (AES-256 for symmetric encryption, RSA-2048 or higher for asymmetric, SHA-256 or higher for hashing — and post-quantum-ready alternatives for long-lived data), key management (where keys are stored, how they are generated, when they are rotated, and who can access them), certificate management (PKI hierarchy design, certificate validity periods, certificate lifecycle automation), and protocol selection (TLS 1.2 minimum, TLS 1.3 preferred, with secure cipher suite configuration). Cryptographic architecture failures — using deprecated algorithms, hardcoding encryption keys in application code, neglecting certificate rotation — are common sources of security vulnerabilities. Hardware security modules (HSMs) provide tamper-resistant key storage for the most sensitive cryptographic material.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Resilience architecture: designing for availability under attack</div>
+    <div class="blk-title" style="color:#A08860;">Resilience architecture: designing for availability under attack</div>
     <div class="blk-body">Security architecture must consider availability as a security property, not just confidentiality and integrity. Resilience architecture designs systems to continue operating under attack or failure conditions. Key patterns include: redundancy (multiple independent instances of critical components so that the failure of one does not cause total outage), geographic distribution (components spread across locations so that a physical event or regional disruption does not affect all instances), graceful degradation (the ability to provide reduced functionality rather than complete failure when some components are unavailable), and chaos engineering (deliberately introducing failures in controlled conditions to verify that resilience designs actually work). Distributed denial of service (DDoS) resilience requires upstream scrubbing, CDN distribution, and rate limiting architecture designed for high-volume attack traffic. Backup and recovery architecture must ensure that recovery time and recovery point objectives are achievable under realistic incident conditions, not just in vendor documentation.</div>
   </div>
 </div>
@@ -362,48 +247,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Threat Modeling Process</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">STRIDE Threat Categories</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Spoofing · Tampering · Repudiation · Information Disclosure · Denial of Service · Elevation of Privilege</text>
-    <text x="36" y="98" font-size="10" fill="#56617a" font-family="system-ui">Apply systematically to every component and data flow crossing a trust boundary</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="148" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Attack Trees — Modeling Attacker Paths</text>
-    <text x="36" y="166" font-size="10" fill="#94a0b8" font-family="system-ui">Goal at root · OR/AND branches · Reveals which controls block the most paths efficiently</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Data Flow Diagrams — Trust Boundary Analysis</text>
-    <text x="36" y="244" font-size="10" fill="#94a0b8" font-family="system-ui">Where does NPI live, move, and get processed? · Every trust boundary crossing = security control required</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="303" font-size="10" fill="#94a0b8" font-family="system-ui">Most valuable early in design · Applicable to existing systems for gap identification · Recurring practice for material changes</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Threat Modeling Process</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">STRIDE Threat Categories</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Spoofing · Tampering · Repudiation · Information Disclosure · Denial of Service · Elevation of Privilege</text>
+    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Apply systematically to every component and data flow crossing a trust boundary</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="148" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Attack Trees — Modeling Attacker Paths</text>
+    <text x="36" y="166" font-size="10" fill="#D6CCBC" font-family="system-ui">Goal at root · OR/AND branches · Reveals which controls block the most paths efficiently</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Data Flow Diagrams — Trust Boundary Analysis</text>
+    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Where does NPI live, move, and get processed? · Every trust boundary crossing = security control required</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="303" font-size="10" fill="#D6CCBC" font-family="system-ui">Most valuable early in design · Applicable to existing systems for gap identification · Recurring practice for material changes</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">STRIDE: categorizing threats systematically</div>
+    <div class="blk-title" style="color:#1B2A4A;">STRIDE: categorizing threats systematically</div>
     <div class="blk-body">STRIDE is a threat categorization framework developed at Microsoft that provides a systematic vocabulary for identifying security threats. Spoofing — impersonating another user, system, or component to gain unauthorized access. Tampering — modifying data or code without authorization, including data in transit, at rest, or in processing. Repudiation — denying having performed an action, either maliciously or through lack of audit trails. Information disclosure — exposing data to unauthorized parties, whether through direct access, inference, or side channels. Denial of service — preventing legitimate access by exhausting resources or disrupting availability. Elevation of privilege — gaining capabilities or permissions beyond what was granted, either through vulnerability exploitation or misconfiguration. Applying STRIDE systematically to each component, data flow, and trust boundary in a system architecture ensures comprehensive threat identification rather than ad hoc enumeration of the threats that come to mind first.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Attack trees: modeling attacker paths to objectives</div>
+    <div class="blk-title" style="color:#C4AA88;">Attack trees: modeling attacker paths to objectives</div>
     <div class="blk-body">Attack trees model the paths an attacker might take to achieve a specific objective, structured as a tree with the attacker's goal at the root and the specific actions required to achieve it as branches and leaves. Each node in the tree represents a subgoal or action; branches represent alternative paths (OR nodes, where any branch achieves the goal) or required combinations (AND nodes, where all branches must succeed). Attack trees enable systematic enumeration of attack paths, analysis of which paths are most likely based on attacker capability and motivation, and identification of where controls would most effectively block the most paths. A tree for 'gain administrative access to the billing system' might branch into 'steal administrator credentials,' 'exploit a vulnerability in the billing application,' and 'obtain physical access to the server room' — each with its own sub-branches that reveal the specific actions each path requires.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Data flow diagramming: identifying trust boundaries and data exposure</div>
+    <div class="blk-title" style="color:#A08860;">Data flow diagramming: identifying trust boundaries and data exposure</div>
     <div class="blk-body">Data flow diagrams (DFDs) document how data moves through a system — where it originates, how it is processed, where it is stored, and what external entities interact with it. Trust boundaries in a DFD mark the transitions between components with different trust levels: the boundary between the internet and the DMZ, between the web tier and the application tier, between the application tier and the database. Data flows that cross trust boundaries are the primary focus of threat modeling analysis because they represent points where data transitions between environments with different security controls. DFD threat modeling asks: what happens to data at each trust boundary crossing? Is authentication enforced? Is data validated before processing? Is sensitive data encrypted in transit? Are audit logs capturing the data access? Systematically answering these questions for every trust boundary crossing identifies security controls that are missing or insufficient.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Threat modeling in practice: when and how to apply it</div>
+    <div class="blk-title" style="color:#A08860;">Threat modeling in practice: when and how to apply it</div>
     <div class="blk-body">Threat modeling is most valuable when performed early in the design process, before implementation decisions are locked in — changing an architecture to add a missing security control before code is written is far less expensive than retrofitting the same control after deployment. However, threat modeling can be applied to existing systems to identify gaps and prioritize remediation. The practical process: create a data flow diagram of the system or feature being analyzed, identify all trust boundaries, apply STRIDE to each data flow crossing a trust boundary and each component, prioritize identified threats by likelihood and impact, and design mitigations for each significant threat. Threat modeling should be a recurring practice for material changes to systems, not a one-time exercise. The output is a documented list of identified threats and their mitigations — a living document that evolves with the system architecture.</div>
   </div>
 </div>
@@ -419,48 +304,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Insurance Agency Security Architecture</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">NY DFS 500 Architectural Requirements</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">MFA for NPI access · Encryption of NPI at rest and in transit · PAM for privileged accounts · JIT access workflows</text>
-    <text x="36" y="98" font-size="10" fill="#56617a" font-family="system-ui">Performance-based: document why your implementation achieves each outcome</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="148" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Third-Party Architecture (500.11)</text>
-    <text x="36" y="166" font-size="10" fill="#94a0b8" font-family="system-ui">Minimum access · Secure auth at integration boundary · Monitor third-party API calls · Assess before granting access</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Architecture Documentation: Living Documents</text>
-    <text x="36" y="244" font-size="10" fill="#94a0b8" font-family="system-ui">Network diagrams · DFDs · Crypto inventory · Access control architecture · IR architecture · Maintained current</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="303" font-size="10" fill="#94a0b8" font-family="system-ui">Architecture review integrated into change management · New systems and significant changes receive security review before deployment</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Insurance Agency Security Architecture</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">NY DFS 500 Architectural Requirements</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA for NPI access · Encryption of NPI at rest and in transit · PAM for privileged accounts · JIT access workflows</text>
+    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Performance-based: document why your implementation achieves each outcome</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="148" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Third-Party Architecture (500.11)</text>
+    <text x="36" y="166" font-size="10" fill="#D6CCBC" font-family="system-ui">Minimum access · Secure auth at integration boundary · Monitor third-party API calls · Assess before granting access</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Architecture Documentation: Living Documents</text>
+    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Network diagrams · DFDs · Crypto inventory · Access control architecture · IR architecture · Maintained current</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="303" font-size="10" fill="#D6CCBC" font-family="system-ui">Architecture review integrated into change management · New systems and significant changes receive security review before deployment</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">NY DFS 500 architectural requirements and their implementation</div>
+    <div class="blk-title" style="color:#1B2A4A;">NY DFS 500 architectural requirements and their implementation</div>
     <div class="blk-body">NY DFS 23 NYCRR 500 mandates specific security architectural elements that covered entities must implement. Multi-factor authentication is required for access to critical systems and nonpublic information — architectural implementation requires selecting MFA methods appropriate to each access pattern and ensuring MFA is enforced at the identity layer, not just at individual application login pages. Encryption is required for NPI in transit and at rest — architectural implementation requires a cryptographic inventory identifying where NPI is stored and how it moves, and verifying that encryption is applied at each point. Privileged access management is required — architectural implementation requires separating privileged accounts from standard user accounts, implementing PAM tooling for credential vaulting, and establishing JIT access workflows. Each requirement maps to specific architectural decisions and technical implementations that must be documented and demonstrable during regulatory examination.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Third-party and vendor security architecture</div>
+    <div class="blk-title" style="color:#C4AA88;">Third-party and vendor security architecture</div>
     <div class="blk-body">Insurance agencies typically rely on many third-party systems — agency management systems, comparative raters, carrier portals, email platforms, document management systems. Each represents an architectural integration point that may create security risk. The architectural principles for third-party integration include: minimum necessary access (third-party systems should have access only to the data they need to perform their function, not broad access to all organizational data), authentication and access control at the integration boundary (API integrations should use secure authentication methods, not shared passwords), monitoring of third-party access (API calls from third-party systems should be logged and monitored for anomalous patterns), and vendor security assessment before integration (evaluating whether the third party's security controls meet the organization's standards before granting access). NY DFS 500.11 mandates a third-party service provider security policy covering these elements.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Security architecture documentation and evidence</div>
+    <div class="blk-title" style="color:#A08860;">Security architecture documentation and evidence</div>
     <div class="blk-body">Security architecture for regulated entities must be documentable and evidentiable — regulators expect to see written documentation of architectural decisions, not just implemented systems. Required documentation includes: network architecture diagrams showing all network zones, trust boundaries, and security controls at each boundary; data flow diagrams showing where NPI is stored, processed, and transmitted; cryptographic architecture documentation showing what algorithms are used where and how keys are managed; access control architecture documentation showing how least privilege is implemented and how privileged access is managed; and incident response architecture showing detection, containment, and notification capabilities. This documentation serves multiple purposes: it supports regulatory examination, it enables security assessments to identify gaps, it ensures continuity when key personnel change, and it demonstrates that security architecture is designed, not accidental.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Security architecture review and continuous improvement</div>
+    <div class="blk-title" style="color:#A08860;">Security architecture review and continuous improvement</div>
     <div class="blk-body">Security architecture is not a static design — it must evolve as the threat landscape, technology environment, and regulatory requirements change. Architecture review processes that identify when security review is required (new system deployments, significant changes to existing systems, new integration partners, regulatory changes) ensure that new components meet the same standards as the existing architecture. Security architecture reviews assess whether proposed designs align with security principles, whether identified threats have appropriate mitigations, whether new components introduce gaps in existing controls, and whether documentation is maintained. Post-incident architecture reviews examine whether the incident revealed architectural weaknesses that should be addressed through design changes rather than just operational response. The goal is an architecture that improves continuously rather than one that was designed once and degraded as the environment changed around it.</div>
   </div>
 </div>
@@ -476,55 +361,55 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">CORE PRINCIPLES</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Defense in depth · Least privilege</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Fail secure · Separation of duties</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Foundational — all architecture builds on these</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">PATTERNS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Zero trust · API security</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Crypto architecture · Resilience</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Apply patterns to design decisions</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">THREAT MODELING</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">STRIDE · Attack trees · DFDs</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Trust boundary analysis</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Recurring — not one-time</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">NY DFS 500</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">MFA · Encryption · PAM · 500.11</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Living documentation required</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Architecture review in change mgmt</text></g>
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CORE PRINCIPLES</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Defense in depth · Least privilege</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Fail secure · Separation of duties</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Foundational — all architecture builds on these</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">PATTERNS</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Zero trust · API security</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Crypto architecture · Resilience</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Apply patterns to design decisions</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">THREAT MODELING</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">STRIDE · Attack trees · DFDs</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Trust boundary analysis</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Recurring — not one-time</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">NY DFS 500</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA · Encryption · PAM · 500.11</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Living documentation required</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Architecture review in change mgmt</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Defense in depth, least privilege, fail secure, and separation of duties are the foundational principles</div>
+    <div class="blk-title" style="color:#1B2A4A;">Defense in depth, least privilege, fail secure, and separation of duties are the foundational principles</div>
     <div class="blk-body">Defense in depth layers independent controls so no single failure is catastrophic. Least privilege limits attack surface by restricting access to what is needed. Fail secure ensures control failure defaults to the protected state. Separation of duties requires multiple actors for critical functions, limiting insider threat and compromised credential impact.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Architecture patterns: zero trust, API security, cryptographic architecture, and resilience design</div>
+    <div class="blk-title" style="color:#C4AA88;">Architecture patterns: zero trust, API security, cryptographic architecture, and resilience design</div>
     <div class="blk-body">Zero trust verifies every request regardless of network location. API security requires authentication, authorization, input validation, and rate limiting at every interface. Cryptographic architecture covers algorithm selection, key management, and protocol configuration. Resilience architecture designs for availability under attack through redundancy, distribution, and graceful degradation.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Threat modeling uses STRIDE, attack trees, and DFDs to systematically identify threats before they are exploited</div>
+    <div class="blk-title" style="color:#A08860;">Threat modeling uses STRIDE, attack trees, and DFDs to systematically identify threats before they are exploited</div>
     <div class="blk-body">STRIDE categorizes threats as Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege. Attack trees model paths to attacker objectives. DFDs identify trust boundaries where security controls must be applied. Threat modeling is most valuable early in design but applicable to existing systems for gap identification.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">NY DFS 500 requires documented security architecture covering MFA, encryption, PAM, and third-party controls</div>
+    <div class="blk-title" style="color:#A08860;">NY DFS 500 requires documented security architecture covering MFA, encryption, PAM, and third-party controls</div>
     <div class="blk-body">Each regulatory requirement maps to specific architectural implementations that must be documented and evidentiable. Third-party integrations require minimum access, secure authentication, monitoring, and vendor assessment. Architecture must evolve through formal review processes as systems, threats, and regulations change.</div>
   </div>
 </div>
@@ -536,40 +421,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Security Architecture — Intermediate</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">An organization deploys a next-generation firewall as its primary security control. An attacker exploits a zero-day vulnerability in the firewall and gains access to the internal network. Which architectural principle, if properly implemented, would have most limited the damage from this compromise?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">Fail secure — the firewall should have blocked all traffic on failure</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">Defense in depth — additional controls (network segmentation, EDR, authentication requirements) would have limited what the attacker could do after bypassing the firewall</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">Separation of duties — multiple administrators should have been managing the firewall</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">Least privilege — the firewall should have been running with minimal system permissions</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">A service account is being configured to run a batch processing application that needs to read from one specific database table and write results to a log file. The administrator assigns it Domain Admin privileges because 'it's easier and we know it works.' What principle is violated and what is the security risk?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Separation of duties — only humans should have administrative rights, not service accounts</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Least privilege — the service account has vastly more access than needed. If the application is compromised, the attacker gains Domain Admin privileges — complete control over Active Directory — rather than read access to one table and write access to one log file</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Defense in depth — the service account should have had MFA enforced</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Fail secure — Domain Admin accounts should not be used for automated processes</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">A web application authentication system is designed with a fail-open behavior: if the authentication service is unavailable, users are allowed access rather than denied access. What principle does this violate, and what is the correct design?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">This violates least privilege — unauthenticated users should have read-only access</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">This violates fail secure — the failure state (authentication service unavailable) should deny access, not grant access. The correct design is to deny all access when authentication cannot be verified, accepting that users cannot log in during the outage rather than accepting that security is bypassed during the outage</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">This violates defense in depth — additional authentication methods should be available as backup</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">This is acceptable if the application contains no sensitive data</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">During a threat modeling session using STRIDE, the team is analyzing a data flow where a broker portal sends customer policy data to an agency management system via a REST API. Which STRIDE category does the following scenario fall under: 'An attacker sends malformed API requests to the agency management system, causing it to store incorrect policy data without triggering validation errors'?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">Spoofing — the attacker is pretending to be the broker portal</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">Tampering — unauthorized modification of data through malformed input that bypasses validation and corrupts stored policy records</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Repudiation — the attacker is denying their malicious actions</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">Denial of Service — the malformed requests prevent legitimate policy data from being stored</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">An insurance agency's data flow diagram shows that customer NPI (names, policy details, SSNs) flows from the agency management system to a third-party comparative rater via an API integration. The integration uses a shared API key stored in the agency management system's configuration file. What security concern does this represent?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">This integration is acceptable because comparative raters are trusted business partners</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">The shared API key in a configuration file represents a credential management risk — if the configuration file is accessed by an attacker or the key is exposed in a code repository, the third party's API is accessible without any user identity verification. The architectural improvement is mutual TLS or OAuth with short-lived tokens, combined with key management that stores credentials in a secrets manager rather than a configuration file</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">The data flow diagram reveals that NPI is leaving the organization, which is prohibited by NY DFS</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">The comparative rater should be using FIDO2 hardware keys for API authentication</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">What is the primary purpose of integrating security architecture review into the organization's change management process, rather than conducting security reviews only for new system deployments?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">Change management reviews are faster than dedicated security reviews</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Integrating security review into change management ensures that significant changes to existing systems — new integrations, expanded access, modified data flows — receive the same security scrutiny as entirely new deployments, preventing architectural security debt from accumulating through incremental changes that individually seem minor but collectively degrade the security posture</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">Change management integration satisfies NY DFS requirements for annual security reviews</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">Security reviews should only be required for systems that process NPI</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -581,11 +466,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#e05252","#4b8ef0","#f0a04a","#6db86d"],
-  'pg2':["#e05252","#4b8ef0","#f0a04a","#6db86d"],
-  'pg3':["#e05252","#4b8ef0","#f0a04a","#6db86d"],
-  'pg4':["#e05252","#4b8ef0","#f0a04a","#6db86d"],
-  'pg5':["#e05252","#4b8ef0","#f0a04a","#6db86d"],
+  'pg1':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg2':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg3':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg4':["#1B2A4A","#C4AA88","#A08860","#A08860"],
+  'pg5':["#1B2A4A","#C4AA88","#A08860","#A08860"],
 };
 
 const NARR={
@@ -600,7 +485,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -616,19 +501,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -674,7 +547,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });

@@ -9,31 +9,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#e8f0f9;--surface:#ffffff;--surface2:#d4e3f0;
-  --border:#b8cfe0;--text:#0a0f1a;--muted:#4a5568;
-  --primary:#f0a04a;
+  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
+  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
+  --primary:#A08860;
   --radius:10px;
 }
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
 /* TOPBAR */
-.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
 .topbar-logo img{height:38px;width:auto;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-.topbar-level{font-size:11px;padding:3px 10px;border-radius:20px;background:#f0a04a22;color:#f0a04a;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:"IBM Plex Mono",monospace;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.modules-btn{background:none;border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text);font-family:"IBM Plex Mono",monospace;}
-.modules-btn:hover{background:var(--surface2);}
 /* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
-.nav-pill.active{background:#f0a04a;color:#fff;font-weight:600;}
-/* MENU */
-.menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:300;}
-.menu-panel{position:fixed;top:0;right:0;width:380px;height:100%;background:#fff;z-index:400;overflow-y:auto;padding:28px;box-shadow:-4px 0 24px rgba(0,0,0,0.12);}
-.menu-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.menu-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.nav-pill.active{background:#A08860;color:#fff;font-weight:600;}
 .menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
 .menu-card:hover{transform:translateX(-2px);}
 .mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
@@ -42,9 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
 /* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
-.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#f0a04a;white-space:nowrap;}
+.ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#A08860;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#f0a04a;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#A08860;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
 .play-btn:hover{opacity:.88;}
 /* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
@@ -60,8 +51,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 /* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#4b8ef0);background:rgba(75,142,240,0.06);box-shadow:0 0 0 1.5px rgba(75,142,240,0.2);}
-.hl-block.done{border-left-color:#6db86d;background:rgba(109,184,109,0.05);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
@@ -78,21 +69,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opts{display:flex;flex-direction:column;gap:8px;}
 .q-opt{text-align:left;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;cursor:pointer;transition:all .15s;}
 .q-opt:hover{background:var(--surface2);border-color:var(--primary);}
-.q-opt.correct{background:rgba(109,184,109,0.15);border-color:#6db86d;color:#2d6a2d;font-weight:600;}
-.q-opt.wrong{background:rgba(224,82,82,0.1);border-color:#e05252;color:#8b1a1a;}
+.q-opt.correct{background:rgba(160,136,96,0.18);border-color:#A08860;color:#2d6a2d;font-weight:600;}
+.q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
 /* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
-.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#f0a04a;}
+.score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#A08860;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
-.score-retry{background:#f0a04a;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* HOME */
-#home{padding:40px 28px;}
-.home-title{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text);}
-.home-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
-.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.score-retry{background:#A08860;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
 /* MOBILE */
 @media(max-width:700px){
   .page-cols{flex-direction:column;height:auto;}
@@ -104,20 +90,16 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAXpeqz8AAAAASUVORK5CYII=" style="height:78px;width:auto;display:block;" alt="Pistos">
+    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
     <div>
       <div class="topbar-title">Internet Security — Intermediate</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <span class="topbar-level">Intermediate</span>
-    
-  </div>
 </div>
 
 <div class="nav-bar" id="navBar">
-  <button class="nav-pill active" id="nav-home" onclick="gotoPage('home')">Overview</button>
-  <button class="nav-pill" id="nav-pg1" onclick="gotoPage('pg1')">Browser Security and Web Threats</button><button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Cloud Security and SaaS Risk</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Secure Web Gateway and Content Filtering</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Incident Response for Internet-Based Threats</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Cloud Security and SaaS Risk</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">Secure Web Gateway and Content Filtering</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">Incident Response for Internet-Based Threats</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
 
 <div class="narr-bar" id="narrBar">
@@ -126,104 +108,7 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 </div>
 
 <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-<div class="menu-panel" id="menuPanel">
-  <button class="menu-close" onclick="toggleMenu()">&#10005;</button>
-  <div class="menu-heading">MODULE CONTENTS</div>
-  
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Browser Security and Web Threats</span>
-  </div>
-  <div class="mc-desc">▶ Understanding browser-based attacks and protective controls</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Cloud Security and SaaS Risk</span>
-  </div>
-  <div class="mc-desc">▶ Protecting data and access in cloud and SaaS environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Secure Web Gateway and Content Filtering</span>
-  </div>
-  <div class="mc-desc">▶ Controlling and monitoring internet access</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Incident Response for Internet-Based Threats</span>
-  </div>
-  <div class="mc-desc">▶ Responding to web-based attacks and data exposure</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div>
-</div>
-
-<div id="home">
-  <div class="home-title">Internet Security — Intermediate</div>
-  <div class="home-sub">Intermediate — Select a section below to begin</div>
-  <div class="home-grid">
-<div class="menu-card" onclick="gotoPage('pg1')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Browser Security and Web Threats</span>
-  </div>
-  <div class="mc-desc">▶ Understanding browser-based attacks and protective controls</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg2')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Cloud Security and SaaS Risk</span>
-  </div>
-  <div class="mc-desc">▶ Protecting data and access in cloud and SaaS environments</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg3')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Secure Web Gateway and Content Filtering</span>
-  </div>
-  <div class="mc-desc">▶ Controlling and monitoring internet access</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg4')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Incident Response for Internet-Based Threats</span>
-  </div>
-  <div class="mc-desc">▶ Responding to web-based attacks and data exposure</div>
-</div>
-<div class="menu-card" onclick="gotoPage('pg5')" style="border-top:3px solid #f0a04a;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#f0a04a;"></span>
-    <span class="mc-title">Summary</span>
-  </div>
-  <div class="mc-desc">▶ Key concepts from this module</div>
-</div>
-<div class="menu-card" onclick="gotoPage('quiz')" style="border-top:3px solid #2a9d8f;">
-  <div class="mc-top">
-    <span class="mc-num" style="color:#2a9d8f;">Q</span>
-    <span class="mc-title">Knowledge Check</span>
-  </div>
-  <div class="mc-desc">▶ 6 questions — test your understanding</div>
-</div></div>
-</div>
-
-
-<div class="page" id="pg1" style="display:none;">
+<div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — Browser Security and Web Threats</div>
     <div class="ph-sub">Understanding browser-based attacks and protective controls</div>
@@ -232,48 +117,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Browser Attack Surface</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Drive-by Downloads (Exploit Kits)</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Fingerprint browser → select exploit → execute → deliver payload · No user action required</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Malicious Browser Extensions</text>
-    <text x="36" y="156" font-size="10" fill="#94a0b8" font-family="system-ui">Read all page content + credentials · Delivered via store or silent update of acquired extension · Allowlist only</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Web Skimming / Formjacking</text>
-    <text x="36" y="232" font-size="10" fill="#94a0b8" font-family="system-ui">Injected JS copies form inputs to attacker · Transaction completes normally · Invisible to user and operator</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Security Headers: CSP · HSTS · X-Frame-Options</text>
-    <text x="36" y="308" font-size="10" fill="#94a0b8" font-family="system-ui">CSP prevents unauthorized script sources (defeats skimmers) · HSTS enforces HTTPS · Require explicit config</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Browser Attack Surface</text>
+  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Drive-by Downloads (Exploit Kits)</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Fingerprint browser → select exploit → execute → deliver payload · No user action required</text></g>
+  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="138" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Malicious Browser Extensions</text>
+    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Read all page content + credentials · Delivered via store or silent update of acquired extension · Allowlist only</text></g>
+  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="214" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Web Skimming / Formjacking</text>
+    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Injected JS copies form inputs to attacker · Transaction completes normally · Invisible to user and operator</text></g>
+  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Security Headers: CSP · HSTS · X-Frame-Options</text>
+    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">CSP prevents unauthorized script sources (defeats skimmers) · HSTS enforces HTTPS · Require explicit config</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
       
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Drive-by downloads and exploit kits</div>
+    <div class="blk-title" style="color:#A08860;">Drive-by downloads and exploit kits</div>
     <div class="blk-body">Drive-by downloads deliver malware to visitors of compromised or malicious websites without any intentional download action by the user. The attack chain begins when a user visits a website — which may be a legitimate site that has been compromised, or a malicious site reached through a phishing link or malvertising. The page loads JavaScript or HTML that identifies the user's browser version and installed plugins, selects an exploit appropriate for the detected environment, and executes it. The exploit leverages a vulnerability in the browser itself, a browser extension, or a plugin such as PDF readers to execute code. Successful exploitation downloads and executes a malware payload. Exploit kit infrastructure — RIG, Fallout, Magnitude — automates exploit selection and payload delivery. The primary defenses are: keeping browsers and plugins current to eliminate known vulnerabilities, disabling or removing plugins that are not needed, enabling browser sandboxing, and using DNS and web filtering to block known exploit kit infrastructure.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b1" onclick="jumpToBlock('pg1',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Browser extensions: the overlooked attack surface</div>
+    <div class="blk-title" style="color:#C4AA88;">Browser extensions: the overlooked attack surface</div>
     <div class="blk-body">Browser extensions are frequently underestimated as a security risk. Extensions run with elevated privileges inside the browser — they can read and modify all page content, access browsing history, intercept network requests, and read form inputs including credentials entered into web forms. Malicious extensions are distributed through official browser extension stores despite review processes, and legitimate popular extensions are acquired and converted to malicious purposes after the original developer sells them. Extension acquisition attacks target developers of popular extensions with phishing campaigns to obtain their store credentials, then publish a malicious update that reaches all existing users automatically. Users rarely review what permissions browser extensions request or monitor them after installation. Browser extension security policies in enterprise environments should: inventory all installed extensions, enforce an allowlist of approved extensions using browser policy, and prevent installation of extensions from sources other than the official store.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b2" onclick="jumpToBlock('pg1',2)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Web skimming and formjacking</div>
+    <div class="blk-title" style="color:#1B2A4A;">Web skimming and formjacking</div>
     <div class="blk-body">Web skimming — also known as formjacking or Magecart-style attacks — injects malicious JavaScript into websites that process payment card data or other sensitive form inputs. The injected script runs in the browser alongside the legitimate page content, intercepting form field values (card numbers, expiration dates, CVV codes, billing addresses) as users type them and transmitting them to attacker-controlled servers. The legitimate payment processing continues normally — the user's transaction completes, but their card data has been copied. The injected code may be placed directly in the target site, in a third-party library the site loads, or in a fourth-party service that the third-party library loads — supply chain injection allows a single compromise to affect hundreds of sites simultaneously. Detection is difficult for users and challenging even for the site operators because the skimming code is designed to be invisible during normal operation.</div>
   </div>
 </div>
 <div class="hl-block" id="pg1-b3" onclick="jumpToBlock('pg1',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Content security policy and browser security headers</div>
+    <div class="blk-title" style="color:#A08860;">Content security policy and browser security headers</div>
     <div class="blk-body">Web security headers allow web application developers to instruct browsers to enforce security restrictions that limit the impact of common vulnerabilities. Content Security Policy (CSP) specifies which sources of scripts, styles, images, and other resources the browser is permitted to load for a given page. A strict CSP that allows scripts only from the site's own origin prevents injected third-party scripts — including web skimmers — from executing, because the browser refuses to load scripts from sources not on the allowlist. HTTP Strict Transport Security (HSTS) instructs browsers to always use HTTPS for a domain and to refuse connections that cannot be secured, preventing protocol downgrade attacks. X-Frame-Options prevents the page from being embedded in an iframe, defeating clickjacking attacks. These headers require explicit configuration by web developers and are absent from many sites, leaving users relying on browser-level protections alone.</div>
   </div>
 </div>
@@ -289,48 +174,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Cloud Security Framework</text>
-  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Shared Responsibility: Provider secures infra — You secure identity, data, config</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Provider: physical DC, hypervisor, network · Customer: IAM, data, bucket access, app security, encryption</text></g>
-  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="62" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">OAuth Governance: Admin consent required for org data access</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Users grant third-party apps persistent access without scrutiny · Review permissions vs stated function</text></g>
-  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Shadow IT: CASB Discovery + Enforcement</text>
-    <text x="36" y="234" font-size="10" fill="#94a0b8" font-family="system-ui">Employees adopt unapproved cloud services for unmet needs · CASB reveals hundreds of services in large orgs</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="268" width="480" height="58" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="292" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">CSPM: Continuous Cloud IAM + Config Assessment</text>
-    <text x="36" y="310" font-size="10" fill="#94a0b8" font-family="system-ui">Root keys, wildcard permissions, public buckets = highest priority · Automated remediation for high-confidence findings</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Cloud Security Framework</text>
+  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Shared Responsibility: Provider secures infra — You secure identity, data, config</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Provider: physical DC, hypervisor, network · Customer: IAM, data, bucket access, app security, encryption</text></g>
+  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">OAuth Governance: Admin consent required for org data access</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Users grant third-party apps persistent access without scrutiny · Review permissions vs stated function</text></g>
+  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="216" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Shadow IT: CASB Discovery + Enforcement</text>
+    <text x="36" y="234" font-size="10" fill="#D6CCBC" font-family="system-ui">Employees adopt unapproved cloud services for unmet needs · CASB reveals hundreds of services in large orgs</text></g>
+  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="268" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="292" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CSPM: Continuous Cloud IAM + Config Assessment</text>
+    <text x="36" y="310" font-size="10" fill="#D6CCBC" font-family="system-ui">Root keys, wildcard permissions, public buckets = highest priority · Automated remediation for high-confidence findings</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
       
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Shared responsibility model: what the cloud provider secures and what you must secure</div>
+    <div class="blk-title" style="color:#A08860;">Shared responsibility model: what the cloud provider secures and what you must secure</div>
     <div class="blk-body">The shared responsibility model defines the division of security obligations between the cloud provider and the customer. The cloud provider is responsible for the security of the cloud infrastructure: physical data centers, network hardware, hypervisors, and the underlying computing platforms. The customer is responsible for security in the cloud: operating system configuration and patching (for IaaS), application security, identity and access management, data classification and protection, and network configuration within the cloud environment. The boundary shifts depending on the service model: in SaaS, the provider manages nearly everything, and the customer is responsible primarily for user access configuration and data governance. Misunderstanding or ignoring this boundary is a leading cause of cloud security incidents — organizations that assume the provider handles all security are not configuring the controls they are responsible for.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b1" onclick="jumpToBlock('pg2',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">OAuth and third-party application access risks</div>
+    <div class="blk-title" style="color:#C4AA88;">OAuth and third-party application access risks</div>
     <div class="blk-body">OAuth 2.0 authorization allows users to grant third-party applications access to their accounts without sharing passwords. When a user clicks 'Sign in with Google' or 'Connect to Microsoft 365' in a third-party application, they are granting that application defined permissions to their account. The OAuth consent screen lists what permissions are requested — read email, access files, send email on the user's behalf — but users rarely scrutinize these permissions before granting consent. Organizations that do not manage OAuth application access allow an unbounded proliferation of third-party applications with access to organizational data. Risky OAuth patterns include: applications requesting more permissions than their stated function requires, applications from unrecognized developers with few installs, and applications that request continuous access rather than read-only access. In Microsoft 365, tenant-wide OAuth consent policies should require admin approval for applications requesting access to organizational data.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b2" onclick="jumpToBlock('pg2',2)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Shadow IT: unauthorized cloud services and data exfiltration</div>
+    <div class="blk-title" style="color:#1B2A4A;">Shadow IT: unauthorized cloud services and data exfiltration</div>
     <div class="blk-body">Shadow IT refers to cloud services, applications, and tools used by employees without organizational knowledge, approval, or security review. When employees find that approved tools do not meet their needs, they adopt alternatives — transferring files through personal Dropbox accounts, using personal Gmail for business communications, connecting unapproved AI tools to organizational data. Each shadow IT instance creates: data governance risk (organizational data in an uncontrolled third-party environment), security risk (credentials for these services are managed outside organizational security controls), compliance risk (regulated data in unapproved environments), and discovery risk (the organization cannot account for where its data resides). CASB (Cloud Access Security Broker) platforms provide visibility into cloud service usage through analysis of network traffic metadata, allowing discovery of shadow IT usage and enforcement of policies that block unapproved services or require routing through controlled channels.</div>
   </div>
 </div>
 <div class="hl-block" id="pg2-b3" onclick="jumpToBlock('pg2',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Cloud identity and access management hygiene</div>
+    <div class="blk-title" style="color:#A08860;">Cloud identity and access management hygiene</div>
     <div class="blk-body">Cloud environments enable rapid creation of users, service accounts, and access policies, which leads to identity sprawl if not actively managed. Common cloud IAM hygiene failures include: excessive permissions granted because the least-privilege principle is difficult to implement precisely, access keys for service accounts that have not been rotated and may have been exposed, root account usage in cloud environments where the root account should be locked down and never used for routine operations, and access policies that use wildcard permissions rather than specific actions and resources. Cloud security posture management (CSPM) tools continuously assess the cloud environment's configuration against security best practices, generating findings for misconfigurations including overly permissive IAM policies, publicly accessible storage buckets, and unencrypted sensitive data stores. Regular CSPM findings review, combined with automated remediation for high-confidence findings, maintains cloud IAM hygiene as the environment scales.</div>
   </div>
 </div>
@@ -346,50 +231,50 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Web Gateway Architecture</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">SWG: URL Filtering + SSL Inspection</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">Category-based allow/block/warn · Decrypt-inspect-re-encrypt HTTPS · Threat intelligence enrichment</text>
-    <text x="36" y="96" font-size="10" fill="#56617a" font-family="system-ui">Requires root cert on managed endpoints · Privacy policy for personal browsing categories</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="68" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="144" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">DNS Filtering: Protocol-Agnostic Coverage</text>
-    <text x="36" y="162" font-size="10" fill="#94a0b8" font-family="system-ui">Blocks at resolution — no connection formed · Covers IoT, OT, unmanaged devices · All protocols blocked</text>
-    <text x="36" y="180" font-size="10" fill="#56617a" font-family="system-ui">Enforce: block alt DNS servers at firewall to prevent bypass via 8.8.8.8 or DoH</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="62" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Threat Intelligence Integration</text>
-    <text x="36" y="244" font-size="10" fill="#94a0b8" font-family="system-ui">Sub-hour updates on attacker infrastructure · Free: CISA, Spamhaus, abuse.ch · Commercial: higher fidelity</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="278" width="480" height="48" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="299" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">BYOD: MDM (full control) or MAM (app container)</text>
-    <text x="36" y="315" font-size="10" fill="#94a0b8" font-family="system-ui">Define what data is permitted on personal devices · Policy must address lost/stolen device data wipe</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Web Gateway Architecture</text>
+  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">SWG: URL Filtering + SSL Inspection</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Category-based allow/block/warn · Decrypt-inspect-re-encrypt HTTPS · Threat intelligence enrichment</text>
+    <text x="36" y="96" font-size="10" fill="#8A7D6B" font-family="system-ui">Requires root cert on managed endpoints · Privacy policy for personal browsing categories</text></g>
+  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="144" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DNS Filtering: Protocol-Agnostic Coverage</text>
+    <text x="36" y="162" font-size="10" fill="#D6CCBC" font-family="system-ui">Blocks at resolution — no connection formed · Covers IoT, OT, unmanaged devices · All protocols blocked</text>
+    <text x="36" y="180" font-size="10" fill="#8A7D6B" font-family="system-ui">Enforce: block alt DNS servers at firewall to prevent bypass via 8.8.8.8 or DoH</text></g>
+  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="226" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Threat Intelligence Integration</text>
+    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Sub-hour updates on attacker infrastructure · Free: CISA, Spamhaus, abuse.ch · Commercial: higher fidelity</text></g>
+  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="278" width="480" height="48" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="299" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">BYOD: MDM (full control) or MAM (app container)</text>
+    <text x="36" y="315" font-size="10" fill="#D6CCBC" font-family="system-ui">Define what data is permitted on personal devices · Policy must address lost/stolen device data wipe</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
       
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Web proxy and URL filtering: categories and enforcement</div>
+    <div class="blk-title" style="color:#A08860;">Web proxy and URL filtering: categories and enforcement</div>
     <div class="blk-body">Secure web gateways (SWG) intercept all web traffic from internal users and apply policy before allowing or blocking access. URL category filtering classifies websites into categories — productivity tools, social media, gambling, adult content, malware distribution, newly registered domains — and applies allow, block, or warn policies by category. Organizations configure category policies to match their acceptable use policies and security requirements: blocking malware and phishing categories entirely, warning for social media categories, and logging all access for forensic purposes. SWG also applies SSL inspection to HTTPS traffic, decrypting and inspecting content before re-encrypting and forwarding, allowing content inspection of encrypted traffic. The combination of category filtering, SSL inspection, and threat intelligence integration creates a web security layer that reduces the attack surface available to users browsing the internet and provides visibility into web activity that would otherwise be invisible in encrypted traffic.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b1" onclick="jumpToBlock('pg3',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">DNS filtering: blocking at resolution rather than connection</div>
+    <div class="blk-title" style="color:#C4AA88;">DNS filtering: blocking at resolution rather than connection</div>
     <div class="blk-body">DNS-based web filtering blocks access to malicious or policy-violating domains at the DNS resolution layer — before a connection is ever established. When a user's device attempts to resolve a domain that is blocked by policy, the DNS filter returns a block page address instead of the real IP, preventing the connection from forming. DNS filtering provides security value that differs from URL filtering: it is protocol-agnostic (it blocks malware C2 domains used by any protocol, not just web browsers), it is faster to implement (no SSL inspection certificate distribution required), and it provides coverage for devices that cannot have proxy certificates installed. Cloud-delivered DNS security platforms like Cisco Umbrella, Cloudflare Gateway, and similar services provide DNS filtering with threat intelligence integration, reporting, and policy management. Enforcing DNS filtering requires ensuring all devices use organizational DNS resolvers and cannot bypass filtering by configuring alternative DNS servers.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b2" onclick="jumpToBlock('pg3',2)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Threat intelligence integration in internet security controls</div>
+    <div class="blk-title" style="color:#1B2A4A;">Threat intelligence integration in internet security controls</div>
     <div class="blk-body">Internet security controls are most effective when enriched with current threat intelligence — continuously updated information about known malicious infrastructure, active phishing campaigns, malware distribution sites, and attacker-controlled domains. Threat intelligence feeds integrate with web gateways, DNS filters, firewalls, and SIEM platforms to provide real-time blocking of known threats and detection of communication with identified attacker infrastructure. Free threat intelligence sources include: CISA advisories and known exploited vulnerabilities catalog, FBI flash alerts, abuse.ch (which tracks malware and botnet infrastructure), Spamhaus (which tracks spam, phishing, and malware domains), and VirusTotal (which aggregates antivirus verdicts for files and URLs). Commercial threat intelligence platforms aggregate and normalize feeds from multiple sources with higher update frequency and lower false positive rates. The combination of free and commercial intelligence sources provides breadth and depth.</div>
   </div>
 </div>
 <div class="hl-block" id="pg3-b3" onclick="jumpToBlock('pg3',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Personal device and BYOD internet security risks</div>
+    <div class="blk-title" style="color:#A08860;">Personal device and BYOD internet security risks</div>
     <div class="blk-body">Bring-your-own-device policies create internet security challenges because personal devices operate in both personal and professional contexts that have different security requirements and different levels of organizational control. Personal devices may have: unpatched operating systems and applications, browser extensions that capture credentials entered into corporate applications, personal use that exposes the device to threats that would then have access to corporate data and applications, and no endpoint protection software meeting organizational standards. Mobile device management (MDM) and mobile application management (MAM) provide different levels of organizational control over personal devices — from full device management (high control, high privacy impact) to application-level containerization (controls only the work applications, does not monitor personal use). BYOD policy should define what data classifications are permitted on personal devices, what controls are required, and what happens to organizational data if the device is lost or stolen.</div>
   </div>
 </div>
@@ -405,48 +290,48 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#94a0b8" font-weight="600" font-family="system-ui">Internet Threat Incident Response</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1e2235" stroke="#f0a04a" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">Web App Exploitation: Identify → Webshell Hunt → WAF Contain</text>
-    <text x="36" y="80" font-size="10" fill="#94a0b8" font-family="system-ui">WAF + app logs for exploit method · File integrity monitoring for webshell detection · Patch or take offline</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">Cloud Misconfiguration: Correct → Inventory → Access Logs → Notify</text>
-    <text x="36" y="158" font-size="10" fill="#94a0b8" font-family="system-ui">Fix access controls immediately · Bucket access logs show who accessed what · NY DFS 72-hr notification threshold</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">Malvertising / Watering Hole: Proxy Logs → EDR → Triage</text>
-    <text x="36" y="236" font-size="10" fill="#94a0b8" font-family="system-ui">Web proxy identifies visitors → cross-reference EDR alerts → investigate matched devices · Notify site operator</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text x="36" y="296" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">Credential Exposure: Reset → Revoke Sessions → Auth Log Review</text>
-    <text x="36" y="314" font-size="10" fill="#94a0b8" font-family="system-ui">Dark web monitoring alerts → force resets → revoke sessions → check auth logs for exposure window access</text></g>
+  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Internet Threat Incident Response</text>
+  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
+    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Web App Exploitation: Identify → Webshell Hunt → WAF Contain</text>
+    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">WAF + app logs for exploit method · File integrity monitoring for webshell detection · Patch or take offline</text></g>
+  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="36" y="140" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Cloud Misconfiguration: Correct → Inventory → Access Logs → Notify</text>
+    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Fix access controls immediately · Bucket access logs show who accessed what · NY DFS 72-hr notification threshold</text></g>
+  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text x="36" y="218" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Malvertising / Watering Hole: Proxy Logs → EDR → Triage</text>
+    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Web proxy identifies visitors → cross-reference EDR alerts → investigate matched devices · Notify site operator</text></g>
+  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text x="36" y="296" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Credential Exposure: Reset → Revoke Sessions → Auth Log Review</text>
+    <text x="36" y="314" font-size="10" fill="#D6CCBC" font-family="system-ui">Dark web monitoring alerts → force resets → revoke sessions → check auth logs for exposure window access</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
       
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Web application attack response: identifying and containing exploitation</div>
+    <div class="blk-title" style="color:#A08860;">Web application attack response: identifying and containing exploitation</div>
     <div class="blk-body">Web applications exposed to the internet are a primary attack surface and a common initial access vector. When web application exploitation is suspected — through WAF alerts, anomalous application logs, or security scanner findings — the incident response begins with determining: what vulnerability was exploited (specific CVE, application logic flaw, injection vulnerability), whether exploitation resulted in unauthorized data access or code execution, and whether a persistent backdoor (webshell) was installed. Webshell detection requires examining the web server's file system for recently modified or created files in web-accessible directories, particularly scripts with names that blend with legitimate application files. Web application firewall (WAF) logs provide exploitation attempt patterns. Application logs show authentication anomalies, unusual query patterns, and error conditions consistent with exploitation. Containment may require taking the application offline, blocking specific attack patterns in the WAF, or deploying temporary mitigations while a permanent patch is developed.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b1" onclick="jumpToBlock('pg4',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Data exposure incidents from cloud misconfiguration</div>
+    <div class="blk-title" style="color:#C4AA88;">Data exposure incidents from cloud misconfiguration</div>
     <div class="blk-body">Cloud storage misconfiguration — particularly publicly accessible storage buckets containing sensitive data — is among the most common data exposure incident types. Response to a discovered cloud storage exposure requires: immediately correcting the access control configuration to remove public access, determining how long the exposure existed by examining bucket creation and access control change logs, assessing what data was exposed by inventorying bucket contents, determining whether the data was accessed by analyzing access logs for GET requests to sensitive objects during the exposure window, and assessing regulatory notification obligations based on the nature of the exposed data and the applicable regulations. For insurance agencies subject to NY DFS 500, exposure of NPI triggers notification requirements with specific timelines. Cloud storage access logs provide granular per-object access history if logging was enabled — organizations should verify that access logging is enabled on all storage buckets containing sensitive data before an incident requires them.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b2" onclick="jumpToBlock('pg4',2)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">Malvertising and watering hole attack response</div>
+    <div class="blk-title" style="color:#1B2A4A;">Malvertising and watering hole attack response</div>
     <div class="blk-body">Malvertising (malicious advertising) and watering hole attacks deliver malware through websites that users visit in the course of normal activity — legitimate news sites, industry publications, and professional forums that serve malicious ads or have been compromised to deliver exploit code. Response to these incidents requires: identifying which users visited the affected site during the window when malicious content was served, assessing whether any of those visits resulted in successful exploitation based on endpoint detection telemetry from the same time window, triaging affected endpoints for malware indicators, and communicating with affected users about what to look for and how to report symptoms. DNS query logs and web proxy logs provide the list of users who visited the affected site. EDR telemetry shows exploitation attempts and subsequent malicious activity. Watering hole incidents may require notifying the compromised site operator about their compromise.</div>
   </div>
 </div>
 <div class="hl-block" id="pg4-b3" onclick="jumpToBlock('pg4',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Credential exposure and dark web monitoring</div>
+    <div class="blk-title" style="color:#A08860;">Credential exposure and dark web monitoring</div>
     <div class="blk-body">Credentials exposed through breaches, phishing campaigns, and info-stealer malware appear on dark web markets and paste sites where they are traded, sold, and used for credential stuffing attacks. Dark web monitoring services watch these sources for credentials associated with the organization's domains, alerting when email addresses and associated passwords appear in breach data or are offered for sale. When exposed credentials are identified: force password resets for all exposed accounts, assess whether the exposed accounts were used in credential stuffing or other attacks between the exposure and the notification, check for unauthorized access from the same time window, and revoke all active sessions for affected accounts. Organizations should configure their identity platform to check new and changed passwords against breach databases (HIBP integration) to prevent reuse of credentials that are already in attacker databases. Dark web monitoring is a complementary detective control that catches exposure that is not prevented by preventive controls.</div>
   </div>
 </div>
@@ -462,55 +347,55 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#f0a04a" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#f0a04a" font-weight="700" font-family="system-ui">BROWSER THREATS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Exploit kits · Extensions · Skimming</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CSP prevents unauthorized scripts</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Patch + remove unused plugins</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#4b8ef0" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#4b8ef0" font-weight="700" font-family="system-ui">CLOUD SECURITY</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Shared responsibility · OAuth admin</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">CASB shadow IT · CSPM IAM</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Customer owns the config</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#e05252" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#e05252" font-weight="700" font-family="system-ui">WEB GATEWAY</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">SWG URL + SSL inspection</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">DNS blocks all protocols</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">TI integration + BYOD policy</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1e2235" stroke="#6db86d" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#6db86d" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Web app · Cloud misconfig</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#94a0b8" font-family="system-ui">Malvertising · Credential expose</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#56617a" font-family="system-ui">Dark web monitoring ongoing</text></g>
+  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">BROWSER THREATS</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Exploit kits · Extensions · Skimming</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CSP prevents unauthorized scripts</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Patch + remove unused plugins</text></g>
+  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CLOUD SECURITY</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Shared responsibility · OAuth admin</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CASB shadow IT · CSPM IAM</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Customer owns the config</text></g>
+  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">WEB GATEWAY</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">SWG URL + SSL inspection</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">DNS blocks all protocols</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">TI integration + BYOD policy</text></g>
+  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
+    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Web app · Cloud misconfig</text>
+    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Malvertising · Credential expose</text>
+    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Dark web monitoring ongoing</text></g>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
       
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
-  <div class="hl-bar" style="background:#f0a04a;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#f0a04a;">Browser threats include drive-by downloads, malicious extensions, web skimming, and CSP-preventable injection</div>
+    <div class="blk-title" style="color:#A08860;">Browser threats include drive-by downloads, malicious extensions, web skimming, and CSP-preventable injection</div>
     <div class="blk-body">Exploit kits target unpatched browser plugins and extensions. Malicious browser extensions read all page content including credentials. Web skimmers inject JavaScript that copies form inputs to attacker servers. Content Security Policy prevents unauthorized script execution. Keeping browsers and extensions current is the foundational defense.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b1" onclick="jumpToBlock('pg5',1)">
-  <div class="hl-bar" style="background:#4b8ef0;"></div>
+  <div class="hl-bar" style="background:#C4AA88;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#4b8ef0;">Cloud security is shared responsibility; OAuth, shadow IT, and IAM sprawl are the primary risk areas</div>
+    <div class="blk-title" style="color:#C4AA88;">Cloud security is shared responsibility; OAuth, shadow IT, and IAM sprawl are the primary risk areas</div>
     <div class="blk-body">Customers are responsible for identity, access, and data configuration regardless of service model. OAuth grants third-party apps access to organizational data — require admin consent for new apps. CASB discovers shadow IT usage. CSPM continuously assesses cloud IAM and configuration against best practices.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b2" onclick="jumpToBlock('pg5',2)">
-  <div class="hl-bar" style="background:#e05252;"></div>
+  <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#e05252;">SWG provides URL filtering and SSL inspection; DNS filtering blocks at resolution and covers all protocols</div>
+    <div class="blk-title" style="color:#1B2A4A;">SWG provides URL filtering and SSL inspection; DNS filtering blocks at resolution and covers all protocols</div>
     <div class="blk-body">Threat intelligence integration enriches both controls with current attacker infrastructure data. BYOD requires MDM or MAM to enforce minimum security requirements for devices accessing organizational resources.</div>
   </div>
 </div>
 <div class="hl-block" id="pg5-b3" onclick="jumpToBlock('pg5',3)">
-  <div class="hl-bar" style="background:#6db86d;"></div>
+  <div class="hl-bar" style="background:#A08860;"></div>
   <div class="hl-inner">
-    <div class="blk-title" style="color:#6db86d;">Internet incident response covers web app exploitation, cloud misconfiguration, malvertising, and credential exposure</div>
+    <div class="blk-title" style="color:#A08860;">Internet incident response covers web app exploitation, cloud misconfiguration, malvertising, and credential exposure</div>
     <div class="blk-body">Web app response: identify vulnerability, find webshells, contain via WAF and patch. Cloud misconfiguration: correct access controls, inventory exposed data, check access logs, assess regulatory notification. Credential exposure: force resets, session revocation, dark web monitoring for ongoing detection.</div>
   </div>
 </div>
@@ -522,40 +407,40 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="quiz-heading">Knowledge Check — Internet Security — Intermediate</div>
   
 <div class="q-card" id="qc0">
-  <div class="q-num" style="color:#e05252;">Q1</div>
+  <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">A user visits a legitimate news website and their workstation becomes infected with malware without any download prompt or interaction. What attack technique most likely caused this?</div>
   <div class="q-opts"><button class="q-opt" data-qi="0" data-oi="0" onclick="answerQ(0,0)">A phishing email delivered a malicious attachment that the user opened</button><button class="q-opt" data-qi="0" data-oi="1" onclick="answerQ(0,1)">A drive-by download — the page executed an exploit against an unpatched browser plugin or extension that silently downloaded and executed the malware payload</button><button class="q-opt" data-qi="0" data-oi="2" onclick="answerQ(0,2)">The user accidentally downloaded a file from the site's archives</button><button class="q-opt" data-qi="0" data-oi="3" onclick="answerQ(0,3)">A malicious browser extension was installed by another user on the same workstation</button></div>
-  <div class="q-exp" id="qe0" style="border-left-color:#e05252;"></div>
+  <div class="q-exp" id="qe0" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc1">
-  <div class="q-num" style="color:#f0a04a;">Q2</div>
+  <div class="q-num" style="color:#A08860;">Q2</div>
   <div class="q-text">An organization's CSPM tool identifies an S3 bucket containing customer insurance applications that is publicly accessible. What is the correct immediate response and the regulatory implication?</div>
   <div class="q-opts"><button class="q-opt" data-qi="1" data-oi="0" onclick="answerQ(1,0)">Document the finding for the next quarterly remediation cycle — CSPM findings are informational</button><button class="q-opt" data-qi="1" data-oi="1" onclick="answerQ(1,1)">Immediately remove public access from the bucket, then assess the exposure duration using bucket access logs, determine what data was exposed, and evaluate whether NY DFS 500 material cybersecurity event notification is required within 72 hours</button><button class="q-opt" data-qi="1" data-oi="2" onclick="answerQ(1,2)">Encrypt the contents of the bucket — encryption prevents exposure even when access controls are misconfigured</button><button class="q-opt" data-qi="1" data-oi="3" onclick="answerQ(1,3)">Contact AWS support to remediate the misconfiguration on the organization's behalf</button></div>
-  <div class="q-exp" id="qe1" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe1" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc2">
-  <div class="q-num" style="color:#4b8ef0;">Q3</div>
+  <div class="q-num" style="color:#C4AA88;">Q3</div>
   <div class="q-text">Your organization deploys a DNS filtering platform that blocks known malicious domains. An employee's workstation is infected with malware that uses DNS tunneling for C2 communication, encoding commands in DNS query names. How does DNS monitoring help detect this even if the C2 domain is not yet known to be malicious?</div>
   <div class="q-opts"><button class="q-opt" data-qi="2" data-oi="0" onclick="answerQ(2,0)">DNS filtering automatically decrypts and inspects DNS payload content for malware signatures</button><button class="q-opt" data-qi="2" data-oi="1" onclick="answerQ(2,1)">DNS monitoring detects anomalously high query volumes from the workstation, unusually large DNS queries (consistent with data encoding), and queries to domains with unusual entropy or length — behavioral indicators of DNS tunneling even before the domain appears in threat intelligence</button><button class="q-opt" data-qi="2" data-oi="2" onclick="answerQ(2,2)">DNS filtering blocks all DNS queries to newly registered domains, preventing any DNS tunneling</button><button class="q-opt" data-qi="2" data-oi="3" onclick="answerQ(2,3)">The DNS filter will automatically quarantine the workstation when malware is detected</button></div>
-  <div class="q-exp" id="qe2" style="border-left-color:#4b8ef0;"></div>
+  <div class="q-exp" id="qe2" style="border-left-color:#C4AA88;"></div>
 </div>
 <div class="q-card" id="qc3">
-  <div class="q-num" style="color:#6db86d;">Q4</div>
+  <div class="q-num" style="color:#A08860;">Q4</div>
   <div class="q-text">A user installs a productivity browser extension that requests permission to 'read and change all your data on the websites you visit.' Six months later, the original developer sells the extension to a new owner who publishes a silent malicious update. What is the security impact, and what control prevents this?</div>
   <div class="q-opts"><button class="q-opt" data-qi="3" data-oi="0" onclick="answerQ(3,0)">The extension can only affect websites the user explicitly grants it permission to access — the impact is limited</button><button class="q-opt" data-qi="3" data-oi="1" onclick="answerQ(3,1)">The extension now has access to read every credential the user enters, every page they visit, and every form they submit across all websites — equivalent to a full keylogger. Enterprise browser policy enforcing an approved extension allowlist prevents unapproved extensions and unauthorized updates.</button><button class="q-opt" data-qi="3" data-oi="2" onclick="answerQ(3,2)">Extensions are sandboxed and cannot access form fields or credentials</button><button class="q-opt" data-qi="3" data-oi="3" onclick="answerQ(3,3)">The browser vendor will automatically detect and remove the malicious update</button></div>
-  <div class="q-exp" id="qe3" style="border-left-color:#6db86d;"></div>
+  <div class="q-exp" id="qe3" style="border-left-color:#A08860;"></div>
 </div>
 <div class="q-card" id="qc4">
-  <div class="q-num" style="color:#9b7fe8;">Q5</div>
+  <div class="q-num" style="color:#1B2A4A;">Q5</div>
   <div class="q-text">An employee's Microsoft 365 credentials appear in a dark web monitoring alert. Investigation shows the credentials appeared in a breach database and have likely been exposed for 45 days. What is the complete response protocol?</div>
   <div class="q-opts"><button class="q-opt" data-qi="4" data-oi="0" onclick="answerQ(4,0)">Reset only the Microsoft 365 password — this is sufficient to prevent unauthorized access</button><button class="q-opt" data-qi="4" data-oi="1" onclick="answerQ(4,1)">Force a password reset, revoke all active sessions for the account, review authentication logs for the 45-day exposure window to identify unauthorized access, check for inbox rules or forwarding established during that period, and assess whether any data accessed during unauthorized sessions requires regulatory notification</button><button class="q-opt" data-qi="4" data-oi="2" onclick="answerQ(4,2)">Send the employee an email recommending they change their password</button><button class="q-opt" data-qi="4" data-oi="3" onclick="answerQ(4,3)">Block the account temporarily until the breach source is identified</button></div>
-  <div class="q-exp" id="qe4" style="border-left-color:#9b7fe8;"></div>
+  <div class="q-exp" id="qe4" style="border-left-color:#1B2A4A;"></div>
 </div>
 <div class="q-card" id="qc5">
-  <div class="q-num" style="color:#f0a04a;">Q6</div>
+  <div class="q-num" style="color:#A08860;">Q6</div>
   <div class="q-text">An employee on a split-tunnel VPN connection has their workstation compromised by malware. The malware establishes a C2 connection to an external server. What security limitation means the security team will not see this C2 traffic?</div>
   <div class="q-opts"><button class="q-opt" data-qi="5" data-oi="0" onclick="answerQ(5,0)">VPN encryption prevents security tools from inspecting any VPN traffic</button><button class="q-opt" data-qi="5" data-oi="1" onclick="answerQ(5,1)">Split-tunnel VPN routes only traffic destined for internal resources through the corporate network — internet-bound traffic goes directly from the remote device, bypassing corporate egress controls, DNS filtering, web proxy, and network monitoring entirely</button><button class="q-opt" data-qi="5" data-oi="2" onclick="answerQ(5,2)">The security team would see all traffic — VPN provides comprehensive monitoring regardless of tunnel mode</button><button class="q-opt" data-qi="5" data-oi="3" onclick="answerQ(5,3)">C2 traffic is encrypted and cannot be detected by any security control</button></div>
-  <div class="q-exp" id="qe5" style="border-left-color:#f0a04a;"></div>
+  <div class="q-exp" id="qe5" style="border-left-color:#A08860;"></div>
 </div>
   <div class="score-panel" id="scorePanel">
     <div class="score-big" id="scoreBig"></div>
@@ -567,11 +452,11 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 
 <script>
 const HL_COLOR={
-  'pg1':["#f0a04a","#4b8ef0","#e05252","#6db86d"],
-  'pg2':["#f0a04a","#4b8ef0","#e05252","#6db86d"],
-  'pg3':["#f0a04a","#4b8ef0","#e05252","#6db86d"],
-  'pg4':["#f0a04a","#4b8ef0","#e05252","#6db86d"],
-  'pg5':["#f0a04a","#4b8ef0","#e05252","#6db86d"],
+  'pg1':["#A08860","#C4AA88","#1B2A4A","#A08860"],
+  'pg2':["#A08860","#C4AA88","#1B2A4A","#A08860"],
+  'pg3':["#A08860","#C4AA88","#1B2A4A","#A08860"],
+  'pg4':["#A08860","#C4AA88","#1B2A4A","#A08860"],
+  'pg5':["#A08860","#C4AA88","#1B2A4A","#A08860"],
 };
 
 const NARR={
@@ -586,7 +471,7 @@ const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
 
 const ANSWERS=[1,1,1,1,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
-const QUIZ_COLORS=["#e05252","#f0a04a","#4b8ef0","#6db86d","#9b7fe8","#f0a04a"];
+const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
 
@@ -602,19 +487,7 @@ function gotoPage(pid){
   if(np)np.classList.add('active');
   stopNarr();
   if(pid!=='home'&&pid!=='quiz')window.scrollTo(0,0);
-  const menuOverlay=document.getElementById('menuOverlay');
-  const menuPanel=document.getElementById('menuPanel');
-  if(menuOverlay){menuOverlay.style.display='none';menuPanel.style.display='none';}
 }
-
-function toggleMenu(){
-  const ov=document.getElementById('menuOverlay');
-  const mp=document.getElementById('menuPanel');
-  const open=ov.style.display==='block';
-  ov.style.display=open?'none':'block';
-  mp.style.display=open?'none':'block';
-}
-
 function togglePlay(pid){
   if(narrRunning&&narrPid===pid){stopNarr();return;}
   stopNarr();
@@ -660,7 +533,7 @@ function highlightBlock(pid,idx){
     if(i===idx)b.classList.add('lit');
   });
   const colors=HL_COLOR[pid]||[];
-  const col=colors[idx]||'#4b8ef0';
+  const col=colors[idx]||'#C4AA88';
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });
