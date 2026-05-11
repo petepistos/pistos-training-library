@@ -117,25 +117,100 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">MFA Bypass Techniques vs. Defenses</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="64" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Phishing Proxy (Evilginx2)</text>
-    <text x="36" y="82" font-size="10" fill="#D6CCBC" font-family="system-ui">Defeats SMS / TOTP / Push · Session cookie stolen in real time</text>
-    <rect x="360" y="52" width="128" height="22" rx="5" fill="#A08860" opacity="0.25"/>
-    <text x="424" y="67" text-anchor="middle" font-size="9" fill="#A08860" font-family="system-ui">Immune: FIDO2 only</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">SIM Swap / SS7 Interception</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Defeats SMS only · Carrier social engineering / protocol flaw</text>
-    <rect x="330" y="128" width="158" height="22" rx="5" fill="#A08860" opacity="0.25"/>
-    <text x="409" y="143" text-anchor="middle" font-size="9" fill="#A08860" font-family="system-ui">Fix: Move to app / hardware</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">MFA Fatigue / Prompt Bombing</text>
-    <text x="36" y="234" font-size="10" fill="#D6CCBC" font-family="system-ui">Defeats push without number match · Repeated prompts until approved</text>
-    <rect x="310" y="204" width="178" height="22" rx="5" fill="#1B2A4A" opacity="0.25"/>
-    <text x="399" y="219" text-anchor="middle" font-size="9" fill="#1B2A4A" font-family="system-ui">Fix: Enable number matching</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="56" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="36" y="290" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">FIDO2/WebAuthn — Phishing-Proof</text>
-    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">Origin binding · Asymmetric keys · Private key never transmitted · Immune to all proxy attacks</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">MFA BYPASS TECHNIQUES vs. DEFENSES</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,106)">
+<ellipse cx="2" cy="36" rx="16" ry="2.5" fill="#0f1a32" opacity="0.4"/>
+<path d="M-14,-8 Q-14,-18 0,-18 Q14,-18 14,-8 L16,34 L-16,34 Z" fill="#0f1a32" stroke="#A08860" stroke-width="0.6"/>
+<path d="M-12,-8 Q-12,-16 -4,-17" fill="none" stroke="#2a3a5e" stroke-width="0.5"/>
+<ellipse cx="0" cy="-3" rx="8" ry="7" fill="#000000"/>
+<circle cx="-3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<circle cx="3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<text x="0" y="48" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">ATTACKER</text>
+</g><text x="130" y="152" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">PROXY ATTACK</text>
+<text x="130" y="162" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Steals session cookie</text>
+<text x="130" y="172" text-anchor="middle" font-size="6" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">FIDO2 only defense</text>
+<g transform="translate(390,108)">
+<ellipse cx="1" cy="48" rx="20" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-24" y="-46" width="49" height="86" rx="7" fill="url(#scr)" stroke="#C4AA88" stroke-width="1.3"/>
+<rect x="-20" y="-40" width="41" height="68" rx="2" fill="#0f1a32"/>
+<rect x="-7" y="-44" width="14" height="2" rx="1" fill="#A08860"/>
+<circle cx="0" cy="36" r="3" fill="#A08860" stroke="#C4AA88" stroke-width="0.5"/>
+<text x="0" y="-30" text-anchor="middle" font-size="4.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">INCOMING CALL</text>
+<circle cx="0" cy="-18" r="9" fill="#2a3a5e" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="0" cy="-21" r="3" fill="#C4AA88"/>
+<path d="M-5,-13 Q-5,-16 0,-16 Q5,-16 5,-13" fill="#C4AA88"/>
+<text x="0" y="-3" text-anchor="middle" font-size="5.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">"IT SUPPORT"</text>
+<circle cx="0" cy="5" r="3.5" fill="#9B2B2B"/>
+<line x1="-2" y1="3" x2="2" y2="7" stroke="#ffffff" stroke-width="1"/>
+<line x1="-2" y1="7" x2="2" y2="3" stroke="#ffffff" stroke-width="1"/>
+<circle cx="-10" cy="23" r="4" fill="#9B2B2B"/>
+<text x="-10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✕</text>
+<circle cx="10" cy="23" r="4" fill="#2d6a2d"/>
+<text x="10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✓</text>
+</g><text x="390" y="164" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">SIM SWAP / SS7</text>
+<text x="390" y="175" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Defeats SMS MFA only</text>
+<g transform="translate(100,253)">
+<ellipse cx="1" cy="48" rx="20" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-24" y="-46" width="49" height="86" rx="7" fill="url(#scr)" stroke="#C4AA88" stroke-width="1.3"/>
+<rect x="-20" y="-40" width="41" height="68" rx="2" fill="#0f1a32"/>
+<rect x="-7" y="-44" width="14" height="2" rx="1" fill="#A08860"/>
+<circle cx="0" cy="36" r="3" fill="#A08860" stroke="#C4AA88" stroke-width="0.5"/>
+</g><rect x="136" y="233" width="52" height="14" rx="3" fill="#9B2B2B" opacity="0.2" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="162" y="242" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">APPROVE? #1</text>
+<rect x="136" y="251" width="52" height="14" rx="3" fill="#9B2B2B" opacity="0.2" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="162" y="260" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">APPROVE? #2</text>
+<rect x="136" y="269" width="52" height="14" rx="3" fill="#9B2B2B" opacity="0.2" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="162" y="278" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">APPROVE? #3</text>
+<text x="130" y="307" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">MFA FATIGUE</text>
+<text x="130" y="317" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Use number matching</text>
+<g transform="translate(390,231) scale(1.4)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#2d6a2d" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#2d6a2d" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/>
+</g>
+<rect x="354" y="265" width="72" height="14" rx="3" fill="#2d6a2d" opacity="0.15" stroke="#2d6a2d" stroke-width="0.8"/>
+<text x="390" y="276" text-anchor="middle" font-size="6.5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">bank.com ≠ evil.com</text>
+<text x="390" y="295" text-anchor="middle" font-size="7" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">FIDO2: IMMUNE</text>
+<text x="390" y="306" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Domain-bound key pair</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -180,35 +255,76 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">FIDO2 Authentication Flow</text>
-  <defs><marker id="arr2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#C4AA88" opacity="0.7"/></marker></defs>
-  <!-- Registration -->
-  <g id="pg2-hl0" class="svg-hl" transform="translate(0,0)">
-    <rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="60" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">REGISTRATION</text>
-    <text x="36" y="76" font-size="10" fill="#D6CCBC" font-family="system-ui">Authenticator generates key pair for bank.com · Private key stays in hardware · Public key sent to service</text>
-    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">Different key pair for every domain — bank.com ≠ email.com</text>
-  </g>
-  <!-- Authentication -->
-  <g id="pg2-hl1" class="svg-hl" transform="translate(0,0)">
-    <rect x="20" y="116" width="480" height="80" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="138" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">AUTHENTICATION</text>
-    <text x="36" y="154" font-size="10" fill="#D6CCBC" font-family="system-ui">Service sends: challenge + origin (bank.com)</text>
-    <text x="36" y="170" font-size="10" fill="#D6CCBC" font-family="system-ui">Authenticator checks: does origin match registered relying party?</text>
-    <text x="36" y="186" font-size="10" fill="#A08860" font-family="system-ui">If YES → signs challenge · Service verifies signature with public key → access granted</text>
-  </g>
-  <!-- Phishing scenario -->
-  <g id="pg2-hl2" class="svg-hl" transform="translate(0,0)">
-    <rect x="20" y="212" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="234" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">PHISHING ATTEMPT (evil-bank.com proxy)</text>
-    <text x="36" y="250" font-size="10" fill="#D6CCBC" font-family="system-ui">Browser origin: evil-bank.com · Registered relying party: bank.com</text>
-    <text x="36" y="266" font-size="10" fill="#1B2A4A" font-family="system-ui">Origins do not match → Authenticator REFUSES → Attacker receives nothing</text>
-  </g>
-  <!-- Origin binding label -->
-  <g id="pg2-hl3" class="svg-hl" transform="translate(0,0)">
-    <rect x="20" y="295" width="480" height="34" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="260" y="316" text-anchor="middle" font-size="10" fill="#1B2A4A" font-family="system-ui">Origin binding is enforced by hardware — no user judgment required, no proxy workaround possible</text>
-  </g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">FIDO2 AUTHENTICATION FLOW</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<rect x="28" y="105" width="88" height="90" rx="6" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<rect x="28" y="105" width="88" height="16" rx="4" fill="#C4AA88" opacity="0.15"/>
+<circle cx="72" cy="119" r="10" fill="#0f1a32" stroke="#C4AA88" stroke-width="1"/>
+<text x="72" y="123" text-anchor="middle" font-size="9" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">1</text>
+<text x="72" y="143" text-anchor="middle" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">REGISTRATION</text>
+<text x="72" y="157" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Authenticator generates key pair</text>
+<text x="72" y="169" text-anchor="middle" font-size="6" fill="#A08860" font-family="IBM Plex Sans,sans-serif">Private key → hardware</text>
+<line x1="116" y1="151" x2="146" y2="151" stroke="#C4AA88" stroke-width="1" marker-end="url(#arr)" opacity="0.6"/>
+<rect x="146" y="105" width="88" height="90" rx="6" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<rect x="146" y="105" width="88" height="16" rx="4" fill="#5BA3D9" opacity="0.15"/>
+<circle cx="190" cy="119" r="10" fill="#0f1a32" stroke="#5BA3D9" stroke-width="1"/>
+<text x="190" y="123" text-anchor="middle" font-size="9" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">2</text>
+<text x="190" y="143" text-anchor="middle" font-size="7.5" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">DOMAIN BIND</text>
+<text x="190" y="157" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">bank.com key ≠ evil.com key</text>
+<text x="190" y="169" text-anchor="middle" font-size="6" fill="#A08860" font-family="IBM Plex Sans,sans-serif">Phishing defeated</text>
+<line x1="234" y1="151" x2="264" y2="151" stroke="#5BA3D9" stroke-width="1" marker-end="url(#arr)" opacity="0.6"/>
+<rect x="264" y="105" width="88" height="90" rx="6" fill="#1B2A4A" stroke="#A8925C" stroke-width="1.2"/>
+<rect x="264" y="105" width="88" height="16" rx="4" fill="#A8925C" opacity="0.15"/>
+<circle cx="308" cy="119" r="10" fill="#0f1a32" stroke="#A8925C" stroke-width="1"/>
+<text x="308" y="123" text-anchor="middle" font-size="9" fill="#A8925C" font-weight="700" font-family="IBM Plex Mono,monospace">3</text>
+<text x="308" y="143" text-anchor="middle" font-size="7.5" fill="#A8925C" font-weight="700" font-family="IBM Plex Mono,monospace">CHALLENGE</text>
+<text x="308" y="157" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Service sends challenge + origin</text>
+<text x="308" y="169" text-anchor="middle" font-size="6" fill="#A08860" font-family="IBM Plex Sans,sans-serif">Authenticator signs</text>
+<line x1="352" y1="151" x2="382" y2="151" stroke="#A8925C" stroke-width="1" marker-end="url(#arr)" opacity="0.6"/>
+<rect x="382" y="105" width="88" height="90" rx="6" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<rect x="382" y="105" width="88" height="16" rx="4" fill="#2d6a2d" opacity="0.15"/>
+<circle cx="426" cy="119" r="10" fill="#0f1a32" stroke="#2d6a2d" stroke-width="1"/>
+<text x="426" y="123" text-anchor="middle" font-size="9" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">4</text>
+<text x="426" y="143" text-anchor="middle" font-size="7.5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">VERIFY</text>
+<text x="426" y="157" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Server checks signature</text>
+<text x="426" y="169" text-anchor="middle" font-size="6" fill="#A08860" font-family="IBM Plex Sans,sans-serif">Against stored public key</text>
+<text x="260" y="258" text-anchor="middle" font-size="8.5" fill="#2d6a2d" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">private key never leaves hardware — phishing impossible</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -253,33 +369,90 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">MFA Deployment Architecture</text>
-  <g id="pg3-hl0" class="svg-hl" transform="translate(130,108)">
-    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CONDITIONAL ACCESS</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Risk signals evaluated per login</text>
-    <text y="4"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Device · Location · Resource</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Behavior · Time of day</text>
-    <text y="44" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">MFA proportionate to risk</text></g>
-  <g id="pg3-hl1" class="svg-hl" transform="translate(390,108)">
-    <rect x="-100" y="-60" width="200" height="120" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-34" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PRIVILEGED ACCESS</text>
-    <text y="-14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">PAW — dedicated device</text>
-    <text y="4"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Hardware FIDO2 required</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Step-up per action</text>
-    <text y="44" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Highest controls for highest risk</text></g>
-  <g id="pg3-hl2" class="svg-hl" transform="translate(130,258)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-30" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">EXCEPTIONS</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Document · Justify · Compensate</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Time-limit · Review regularly</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Every gap must be tracked</text></g>
-  <g id="pg3-hl3" class="svg-hl" transform="translate(390,258)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text y="-30" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">ENROLLMENT SECURITY</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Verify identity before enroll</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Alert on new factor added</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Monitor enrollment events</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">MFA DEPLOYMENT ARCHITECTURE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<text x="130" y="72" text-anchor="middle" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">CONDITIONAL ACCESS</text>
+<circle cx="98" cy="88" r="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1"/>
+<text x="98" y="92" text-anchor="middle" font-size="5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">Dev</text>
+<circle cx="120" cy="88" r="8" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1"/>
+<text x="120" y="92" text-anchor="middle" font-size="5" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">Loc</text>
+<circle cx="142" cy="88" r="8" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1"/>
+<text x="142" y="92" text-anchor="middle" font-size="5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">Beh</text>
+<circle cx="164" cy="88" r="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1"/>
+<text x="164" y="92" text-anchor="middle" font-size="5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">Tim</text>
+<rect x="94" y="104" width="72" height="14" rx="3" fill="#2d6a2d" opacity="0.2" stroke="#2d6a2d" stroke-width="0.8"/>
+<text x="130" y="115" text-anchor="middle" font-size="6" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">MFA ∝ RISK LEVEL</text>
+<text x="130" y="144" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">CONDITIONAL ACCESS</text>
+<g transform="translate(390,104) scale(1.5)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#C4AA88" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#C4AA88" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="138" text-anchor="middle" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">FIDO2 / WEBAUTHN</text>
+<text x="390" y="150" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Admins + Finance first</text>
+<text x="390" y="166" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">PHISHING-RESISTANT</text>
+<g transform="translate(130,241)">
+<ellipse cx="0" cy="24" rx="15.399999999999999" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-22 22,22 -22,22" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="18" text-anchor="middle" font-size="15.399999999999999" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="277" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">SSPR BYPASS RISK</text>
+<text x="130" y="289" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Require MFA before reset</text>
+<text x="130" y="307" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">SSPR HARDENING</text>
+<text x="344" y="232" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Admins</text>
+<rect x="380" y="224" width="50" height="10" rx="2" fill="#0f1a32"/>
+<rect x="380" y="224" width="45" height="10" rx="2" fill="#2d6a2d" opacity="0.7"/>
+<text x="434" y="232" font-size="6" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">90%</text>
+<text x="344" y="250" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Finance</text>
+<rect x="380" y="242" width="50" height="10" rx="2" fill="#0f1a32"/>
+<rect x="380" y="242" width="37" height="10" rx="2" fill="#5BA3D9" opacity="0.7"/>
+<text x="434" y="250" font-size="6" fill="#5BA3D9" font-family="IBM Plex Mono,monospace">75%</text>
+<text x="344" y="268" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">HR</text>
+<rect x="380" y="260" width="50" height="10" rx="2" fill="#0f1a32"/>
+<rect x="380" y="260" width="25" height="10" rx="2" fill="#A08860" opacity="0.7"/>
+<text x="434" y="268" font-size="6" fill="#A08860" font-family="IBM Plex Mono,monospace">50%</text>
+<text x="344" y="286" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">All Staff</text>
+<rect x="380" y="278" width="50" height="10" rx="2" fill="#0f1a32"/>
+<rect x="380" y="278" width="15" height="10" rx="2" fill="#D6CCBC" opacity="0.7"/>
+<text x="434" y="286" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">30%</text>
+<text x="390" y="303" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">ROLLOUT ADOPTION</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -324,23 +497,106 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">MFA Incident Response</text>
-  <g id="pg4-hl0" class="svg-hl" transform="translate(0,0)"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="60" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Detect Phishing Proxy</text>
-    <text x="36" y="76" font-size="10" fill="#D6CCBC" font-family="system-ui">Wrong domain in address bar · Password manager won't autofill · FIDO2 key refuses</text>
-    <text x="36" y="90" font-size="10" fill="#8A7D6B" font-family="system-ui">→ Stop immediately. Do not enter credentials.</text></g>
-  <g id="pg4-hl1" class="svg-hl" transform="translate(0,0)"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Unexpected MFA Prompt</text>
-    <text x="36" y="152" font-size="10" fill="#D6CCBC" font-family="system-ui">DENY explicitly · Document time · Report to security · Change password from clean device</text>
-    <text x="36" y="168" font-size="10" fill="#8A7D6B" font-family="system-ui">→ Review account activity for unauthorized actions before the prompt appeared</text></g>
-  <g id="pg4-hl2" class="svg-hl" transform="translate(0,0)"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="212" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Suspected SIM Swap</text>
-    <text x="36" y="228" font-size="10" fill="#D6CCBC" font-family="system-ui">Sudden loss of service · Call carrier from alternate phone · Request port freeze immediately</text>
-    <text x="36" y="244" font-size="10" fill="#8A7D6B" font-family="system-ui">→ Check accounts on Wi-Fi · Force password reset · Remove SMS MFA</text></g>
-  <g id="pg4-hl3" class="svg-hl" transform="translate(0,0)"><rect x="20" y="266" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="288" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Confirmed MFA Bypass (Org Response)</text>
-    <text x="36" y="304" font-size="10" fill="#D6CCBC" font-family="system-ui">Revoke all sessions · Re-enroll all factors · Audit activity window · Assess lateral movement</text>
-    <text x="36" y="318" font-size="10" fill="#8A7D6B" font-family="system-ui">→ Regulatory assessment · Warn broader user population if campaign detected</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">MFA INCIDENT RESPONSE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+
+    <g transform="translate(130,108)">
+      <ellipse cx="2" cy="50" rx="54" ry="4" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+      <path d="M-54,-34 L-50,-38 L50,-38 L54,-34 Z" fill="#2a3a5e"/>
+      <rect x="-54" y="-34" width="108" height="62" rx="3" fill="#0f1a32" stroke="#C4AA88" stroke-width="1.4"/>
+      <rect x="-50" y="-30" width="100" height="54" fill="url(#scr)"/>
+      
+      <rect x="-46" y="-9" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="-1" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">⚠ evil-bank.com</text>
+<rect x="-46" y="3" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="11" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">password: </text>
+<rect x="-46" y="15" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="23" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">▌</text>
+      <path d="M-54,28 L54,28 L62,40 L-62,40 Z" fill="url(#goldB)" stroke="#1B2A4A" stroke-width="0.7"/>
+    </g><circle cx="182" cy="96" r="8" fill="#9B2B2B"/>
+<text x="182" y="100" text-anchor="middle" font-size="9" fill="#ffffff">✕</text>
+<text x="130" y="166" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">WRONG DOMAIN</text>
+<text x="130" y="177" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">STOP — do not enter creds</text>
+<g transform="translate(390,108)">
+<ellipse cx="1" cy="48" rx="20" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-24" y="-46" width="49" height="86" rx="7" fill="url(#scr)" stroke="#C4AA88" stroke-width="1.3"/>
+<rect x="-20" y="-40" width="41" height="68" rx="2" fill="#0f1a32"/>
+<rect x="-7" y="-44" width="14" height="2" rx="1" fill="#A08860"/>
+<circle cx="0" cy="36" r="3" fill="#A08860" stroke="#C4AA88" stroke-width="0.5"/>
+<text x="0" y="-30" text-anchor="middle" font-size="4.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">INCOMING CALL</text>
+<circle cx="0" cy="-18" r="9" fill="#2a3a5e" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="0" cy="-21" r="3" fill="#C4AA88"/>
+<path d="M-5,-13 Q-5,-16 0,-16 Q5,-16 5,-13" fill="#C4AA88"/>
+<text x="0" y="-3" text-anchor="middle" font-size="5.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">APPROVE LOGIN?</text>
+<circle cx="0" cy="5" r="3.5" fill="#9B2B2B"/>
+<line x1="-2" y1="3" x2="2" y2="7" stroke="#ffffff" stroke-width="1"/>
+<line x1="-2" y1="7" x2="2" y2="3" stroke="#ffffff" stroke-width="1"/>
+<circle cx="-10" cy="23" r="4" fill="#9B2B2B"/>
+<text x="-10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✕</text>
+<circle cx="10" cy="23" r="4" fill="#2d6a2d"/>
+<text x="10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✓</text>
+</g><text x="390" y="164" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">DENY + REPORT</text>
+<text x="390" y="175" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Change pwd from clean device</text>
+<rect x="84" y="223" width="92" height="16" rx="2" fill="#9B2B2B" opacity="0.12" stroke="#9B2B2B" stroke-width="0.5"/>
+<text x="88" y="234" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">MFA FAIL #1 — 46.88.201.0</text>
+<rect x="84" y="243" width="92" height="16" rx="2" fill="#9B2B2B" opacity="0.12" stroke="#9B2B2B" stroke-width="0.5"/>
+<text x="88" y="254" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">MFA FAIL #2 — 46.88.201.3</text>
+<rect x="84" y="263" width="92" height="16" rx="2" fill="#9B2B2B" opacity="0.12" stroke="#9B2B2B" stroke-width="0.5"/>
+<text x="88" y="274" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">MFA FAIL #3 — 46.88.201.6</text>
+<rect x="84" y="283" width="92" height="16" rx="2" fill="#9B2B2B" opacity="0.12" stroke="#9B2B2B" stroke-width="0.5"/>
+<text x="88" y="294" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">MFA FAIL #4 — 46.88.201.9</text>
+<g transform="translate(160,231)">
+<ellipse cx="0" cy="10" rx="5.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-4,0 Q-4,-8 0,-8 Q4,-8 4,0" fill="none" stroke="#9B2B2B" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-8" y="0" width="16" height="8" rx="3" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.6"/>
+<circle cx="0" cy="2" r="4" fill="#9B2B2B" opacity="0.8"/>
+</g><text x="130" y="305" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">LOCK ACCOUNT</text>
+<circle cx="348" cy="233" r="7" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.5"/>
+<polyline points="345.2,233 347.3,235.8 351.15,230.2" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="360" y="238" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">① Revoke all sessions</text>
+<circle cx="348" cy="253" r="7" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.5"/>
+<polyline points="345.2,253 347.3,255.8 351.15,250.2" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="360" y="258" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">② Reset credentials</text>
+<circle cx="348" cy="273" r="7" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+<polyline points="345.2,273 347.3,275.8 351.15,270.2" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="360" y="278" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">③ Re-enroll FIDO2</text>
+<circle cx="348" cy="293" r="7" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+<polyline points="345.2,293 347.3,295.8 351.15,290.2" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="360" y="298" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">④ Audit access logs</text>
+<text x="390" y="311" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">RECOVERY PROCEDURE</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -385,26 +641,77 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">BYPASS TECHNIQUES</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Proxy · SIM swap · Fatigue · SS7</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Each defeats specific MFA type</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">FIDO2 immune to proxy only</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">FIDO2 MECHANICS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Asymmetric · Domain-bound</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Private key never leaves hardware</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Origin check is cryptographic</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">DEPLOYMENT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Conditional access · PAW</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Exception tracking · Enrollment sec</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Policy + technology together</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Deny · Report · Rotate · Audit</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Revoke sessions · Re-enroll</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Speed limits damage</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">MFA MODULE — SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,102)">
+<ellipse cx="0" cy="24" rx="15.399999999999999" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-22 22,22 -22,22" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="18" text-anchor="middle" font-size="15.399999999999999" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="138" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">BYPASS TECHNIQUES</text>
+<text x="130" y="150" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Proxy · SIM · Fatigue · SS7</text>
+<g transform="translate(390,102) scale(1.5)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#2d6a2d" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#2d6a2d" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#2d6a2d" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="140" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">FIDO2 MECHANICS</text>
+<text x="390" y="152" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Asymmetric · Domain-bound</text>
+<g transform="translate(130,253)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="130" y="297" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">DEPLOYMENT</text>
+<text x="130" y="309" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Conditional · Rollout · SSPR</text>
+<g transform="translate(390,249)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<text x="0" y="4" text-anchor="middle" font-size="14" fill="#C4AA88">✓</text>
+</g><text x="390" y="283" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">INCIDENT RESPONSE</text>
+<text x="390" y="295" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Deny · Report · Reset · Audit</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">

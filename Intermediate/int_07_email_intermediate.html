@@ -117,21 +117,97 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Authentication Stack</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">SPF — IP Allowlist in DNS</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Checks envelope sender IP · Breaks on forwarding · 10-lookup limit</text>
-    <text x="36" y="96" font-size="10" fill="#8A7D6B" font-family="system-ui">Stops simple domain spoofing only — must combine with DKIM and DMARC</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="144" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">DKIM — Cryptographic Content Signature</text>
-    <text x="36" y="162" font-size="10" fill="#D6CCBC" font-family="system-ui">Survives forwarding · 2048-bit key required · Rotate keys periodically · Replay attack limitation</text>
-    <text x="36" y="180" font-size="10" fill="#8A7D6B" font-family="system-ui">d= domain must match From header for DMARC alignment</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">DMARC — Alignment + Enforcement Policy</text>
-    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">p=none (monitor only) · p=quarantine (spam folder) · p=reject (block delivery)</text>
-    <text x="36" y="262" font-size="10" fill="#8A7D6B" font-family="system-ui">Only p=reject prevents spoofed delivery · Aggregate reports guide safe migration</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="284" width="480" height="42" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="307" font-size="10" fill="#1B2A4A" font-family="system-ui">Compromised account indicator: Set-InboxRule event in UAL correlated with unusual authentication → mail forwarding established</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">EMAIL AUTHENTICATION STACK</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">SPF</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">IP allowlist in DNS</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Checks envelope sender IP</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Breaks on forwarding</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Stops simple spoofing only</text>
+<g transform="translate(390,72) scale(1.3)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">DKIM</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Cryptographic content sig</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Survives forwarding</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">2048-bit key required</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Rotate keys periodically</text>
+<g transform="translate(130,209)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#2d6a2d" opacity="0.8"/>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">DMARC</text>
+<circle cx="88" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Alignment + policy enforce</text>
+<circle cx="88" cy="271" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">p=none: monitor only</text>
+<circle cx="88" cy="285" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">p=quarantine: junk folder</text>
+<circle cx="88" cy="299" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">p=reject: only real protection</text>
+<circle cx="390" cy="217" r="20" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+<polyline points="382.0,217 388.0,225.0 399.0,209.0" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">BIMI</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Requires DMARC p=reject</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">VMC certificate + logo</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Displayed in mail clients</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Brand incentive for enforcement</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -176,19 +252,104 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Evasion Techniques</text>
-  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">HTML Evasion (Content Scanning Defeat)</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Zero-width characters · Image-based text · HTML entity encoding · CSS hidden content · Punycode URLs</text></g>
-  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Redirect Chains + Time-of-Click Analysis</text>
-    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Trusted redirect → phishing page · Late-stage weaponization after delivery · Safe Links evaluates at click time</text></g>
-  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Attachment Evasion</text>
-    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Password-protected ZIP (unscannble) · ISO bypass MOTW · HTML smuggling reconstructs payload locally · LNK files</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Macro Evolution (blocked → OneNote → MSIX → LNK)</text>
-    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">Each control improvement displaces to adjacent technique · Behavioral sandbox execution required for detection</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">EMAIL EVASION TECHNIQUES</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,66)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">HTML EVASION</text>
+<circle cx="88" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Zero-width characters</text>
+<circle cx="88" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Image-based text</text>
+<circle cx="88" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">HTML entity encoding</text>
+<circle cx="88" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">CSS hidden content</text>
+<g transform="translate(390,72)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">REDIRECT CHAINS</text>
+<circle cx="348" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Trusted redirect → phishing</text>
+<circle cx="348" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Late-stage weaponization</text>
+<circle cx="348" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">After-delivery URL swap</text>
+<circle cx="348" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Safe Links: time-of-click eval</text>
+<g transform="translate(130,213)">
+<path d="M-19,-24 L11,-24 L19,-16 L19,24 L-19,24 Z" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<path d="M11,-24 L11,-16 L19,-16" fill="none" stroke="#A08860" stroke-width="0.6"/>
+<text x="0" y="-10" text-anchor="middle" font-size="5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">ATTACHME</text>
+<line x1="-15" y1="-2" x2="15" y2="-2" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+<line x1="-15" y1="6" x2="15" y2="6" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">ATTACHMENT EVASION</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Password-protected ZIP</text>
+<circle cx="88" cy="271" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">ISO/IMG auto-mount</text>
+<circle cx="88" cy="285" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">HTML smuggling client-side</text>
+<circle cx="88" cy="299" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Sandbox bypass techniques</text>
+<g transform="translate(390,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#A08860" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">HEADER SPOOFING</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Display name spoofing</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Lookalike From: domain</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Reply-To mismatch</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Inspect envelope, not display</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -233,21 +394,94 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Security Architecture (M365)</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Defender for O365: Safe Links · Safe Attachments · Impersonation ML</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Configure Standard or Strict preset (not Default) · Safe Links = time-of-click · Safe Attach = sandbox detonation</text>
-    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Impersonation protection uses ML trained on org communication patterns</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="148" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Email DLP: Outbound NPI Protection</text>
-    <text x="36" y="166" font-size="10" fill="#D6CCBC" font-family="system-ui">Pattern matching + doc fingerprinting + sensitivity labels · Block/encrypt on NPI to unauthorized recipients</text>
-    <text x="36" y="180" font-size="10" fill="#8A7D6B" font-family="system-ui">Tune false positive thresholds — overly aggressive policies create shadow IT workarounds</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Archiving + eDiscovery: Configure Before Disputes</text>
-    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Litigation hold preserves all content including deleted items · NY DFS requires 3-year audit trail retention</text>
-    <text x="36" y="260" font-size="10" fill="#8A7D6B" font-family="system-ui">Test eDiscovery export annually — untested archiving is often found broken during regulatory exam</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="303" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Header Forensics: Received chain (bottom=first) · Auth-Results · X-Originating-IP · Timestamp gaps</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">EMAIL SECURITY ARCHITECTURE — M365</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">DEFENDER FOR O365</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Safe Links: time-of-click</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Safe Attachments: sandbox</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Impersonation ML trained</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Use Strict preset (not Default)</text>
+<g transform="translate(390,64)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#5BA3D9" opacity="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">EMAIL DLP</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Pattern matching + fingerprint</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Sensitivity labels travel</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Block/encrypt NPI externally</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Log all policy matches</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">INBOX RULE MONITOR</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Auto-forward = top indicator</text>
+<circle cx="88" cy="271" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Alert on new rules</text>
+<circle cx="88" cy="285" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Rules that delete alerts</text>
+<circle cx="88" cy="299" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Post-compromise signal</text>
+<circle cx="390" cy="217" r="20" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.5"/>
+<polyline points="382.0,217 388.0,225.0 399.0,209.0" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="390" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">DMARC ENFORCEMENT</text>
+<circle cx="348" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">p=reject all owned domains</text>
+<circle cx="348" cy="271" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Include legacy domains</text>
+<circle cx="348" cy="285" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Include parked domains</text>
+<circle cx="348" cy="299" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Review aggregate reports weekly</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -292,20 +526,84 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Email Incident Response Playbook</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">1. SCOPE — Threat Explorer search (URL / sender / hash)</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">How many received? Opened? Clicked? → Isolated message vs active campaign determines response urgency</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="112" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="136" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">2. RETRACT + BLOCK — Soft/hard delete · URL + domain block</text>
-    <text x="36" y="154" font-size="10" fill="#D6CCBC" font-family="system-ui">Post-delivery removal from all mailboxes · Tenant Allow/Block List · Verify Plan 2 licensing before incident</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="186" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="210" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">3. CREDENTIAL ASSESSMENT</text>
-    <text x="36" y="228" font-size="10" fill="#D6CCBC" font-family="system-ui">Auth logs from click timestamp · New login location? MFA bypassed? · Inbox rules created? Forwarding? File access?</text>
-    <text x="36" y="246" font-size="10" fill="#8A7D6B" font-family="system-ui">Speed critical — attacker may have had active access for minutes before detection</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="268" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="292" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">4. COMMUNICATE — Timely · Specific · Actionable · No blame</text>
-    <text x="36" y="310" font-size="10" fill="#D6CCBC" font-family="system-ui">Send while campaign is active · Describe exact indicators · Tell employees what to do · Maximize reporting</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">EMAIL INCIDENT RESPONSE PLAYBOOK</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<rect x="28" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<circle cx="72" cy="91" r="12" fill="#0f1a32" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="72" y="95" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">1</text>
+<text x="72" y="113" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">SCOPE</text>
+<text x="72" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Threat Explorer search</text>
+<text x="72" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">By URL, sender, hash</text>
+<text x="72" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">How many received?</text>
+<text x="72" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Opened? Clicked?</text>
+<text x="72" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Isolated vs. campaign?</text>
+<line x1="116" y1="107" x2="147" y2="107" stroke="#C4AA88" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="147" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<circle cx="191" cy="91" r="12" fill="#0f1a32" stroke="#5BA3D9" stroke-width="1.2"/>
+<text x="191" y="95" text-anchor="middle" font-size="10" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">2</text>
+<text x="191" y="113" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">RETRACT + BLOCK</text>
+<text x="191" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Soft or hard delete</text>
+<text x="191" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">All mailboxes searched</text>
+<text x="191" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">URL + domain block</text>
+<text x="191" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Verify Defender Plan 2</text>
+<text x="191" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Before incident, not during</text>
+<line x1="235" y1="107" x2="266" y2="107" stroke="#5BA3D9" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="266" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<circle cx="310" cy="91" r="12" fill="#0f1a32" stroke="#A08860" stroke-width="1.2"/>
+<text x="310" y="95" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">3</text>
+<text x="310" y="113" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">CREDENTIAL ASSESS</text>
+<text x="310" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Did any user click?</text>
+<text x="310" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Assume compromise</text>
+<text x="310" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Check sign-in logs</text>
+<text x="310" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">New inbox rules?</text>
+<text x="310" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Consent grants? Forwarding?</text>
+<line x1="354" y1="107" x2="385" y2="107" stroke="#A08860" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="385" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<circle cx="429" cy="91" r="12" fill="#0f1a32" stroke="#2d6a2d" stroke-width="1.2"/>
+<text x="429" y="95" text-anchor="middle" font-size="10" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">4</text>
+<text x="429" y="113" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">CONTAIN + REPORT</text>
+<text x="429" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Reset credentials</text>
+<text x="429" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Revoke all sessions</text>
+<text x="429" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Document indicators</text>
+<text x="429" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Report to ISAC if campaign</text>
+<text x="429" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Notify impacted users</text>
+<text x="260" y="278" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">email incident response playbook</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -350,26 +648,80 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">AUTH PROTOCOLS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">SPF + DKIM + DMARC</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">p=reject only protection</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">UAL inbox rules = indicator</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">EVASION</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">HTML · Redirects · Attachments</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Time-of-click defeats late staging</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Sandbox required for attachments</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">GATEWAY CONFIG</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Standard/Strict preset · DLP</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Archive before disputes</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Header forensics skill</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Scope → Retract → Block</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Credential assess → Notify</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Speed limits damage</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">EMAIL SECURITY SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">AUTH PROTOCOLS</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">SPF+DKIM+DMARC p=reject required</text>
+<g transform="translate(390,72) scale(1.3)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">EVASION TECHNIQUES</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">HTML·Redirects·Attachments·Headers</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">M365 ARCHITECTURE</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Strict preset·Safe Links·Inbox rules</text>
+<g transform="translate(390,217)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">INCIDENT RESPONSE</text>
+<circle cx="348" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Scope→Retract→Assess→Contain+Report</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">

@@ -8,59 +8,40 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;
-  --border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;
-  --primary:#1B2A4A;
-  --radius:10px;
-}
+:root{--bg:#F5F1EB;--surface:#ffffff;--surface2:#EDE8E0;--border:#D6CCBC;--text:#2E2A25;--muted:#5A4E3F;--primary:#1B2A4A;--radius:10px;}
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100vh;}
-/* TOPBAR */
 .topbar{background:#fff;border-bottom:1.5px solid var(--border);padding:0 28px;height:90px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .topbar-logo{display:flex;align-items:center;gap:12px;}
-.topbar-logo img{height:38px;width:auto;}
+.topbar-logo img{height:72px;width:auto;display:block;}
 .topbar-title{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.2px;}
-/* NAV */
 .nav-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:8px;overflow-x:auto;height:44px;}
 .nav-pill{background:none;border:none;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);white-space:nowrap;font-family:"IBM Plex Mono",monospace;transition:all .15s;}
 .nav-pill:hover{background:var(--surface2);color:var(--text);}
 .nav-pill.active{background:#1B2A4A;color:#fff;font-weight:600;}
-.menu-card{background:var(--bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .1s;}
-.menu-card:hover{transform:translateX(-2px);}
-.mc-top{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
-.mc-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;}
-.mc-title{font-size:13px;font-weight:600;color:var(--text);}
-.mc-desc{font-size:11px;color:var(--muted);padding-left:26px;}
-/* PAGE HEADER */
 .page-header{background:#fff;border-bottom:1.5px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:20px;}
 .ph-section{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;color:#1B2A4A;white-space:nowrap;}
 .ph-sub{font-size:12px;color:var(--muted);flex:1;}
-.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;}
+.play-btn{background:#1B2A4A;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;white-space:nowrap;font-weight:600;}
 .play-btn:hover{opacity:.88;}
-/* NARRATION BAR */
 .narr-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:none;align-items:center;gap:14px;}
 .narr-bar.active{display:flex;}
 .narr-text{font-size:12px;color:var(--muted);flex:1;font-style:italic;}
 .narr-stop{background:none;border:1.5px solid var(--border);padding:5px 12px;border-radius:5px;font-size:11px;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
-/* TWO-COLUMN */
 .page-cols{display:flex;height:calc(100vh - 148px);overflow:hidden;}
 .col-diagram{width:52%;border-right:1px solid var(--border);position:sticky;top:0;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;overflow:hidden;}
 .svg-pad{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .svg-pad svg{max-width:100%;max-height:100%;}
 .col-content{flex:1;overflow-y:auto;padding:20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
-/* BLOCKS */
 .hl-block{background:#fff;border-radius:var(--radius);margin-bottom:12px;border-left:4px solid transparent;transition:all .2s;cursor:pointer;display:flex;overflow:hidden;}
 .hl-block:hover{box-shadow:0 2px 8px rgba(0,0,0,0.07);}
-.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.10);box-shadow:0 0 0 1.5px rgba(196,170,136,0.25);}
+.hl-block.lit{border-left-color:var(--primary-lit,#C4AA88);background:rgba(196,170,136,0.13);box-shadow:0 0 0 2px rgba(196,170,136,0.4),inset 0 0 0 0 transparent;border-left-width:5px;}
 .hl-block.done{border-left-color:#A08860;background:rgba(160,136,96,0.08);}
 .hl-bar{width:4px;flex-shrink:0;}
 .hl-inner{padding:14px 16px;flex:1;}
 .blk-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
 .blk-body{font-size:13px;line-height:1.65;color:var(--muted);}
-/* SVG highlight */
-.svg-hl .hl-rect{transition:opacity .3s;opacity:0.4;}
-.svg-hl.lit .hl-rect{opacity:1;}
-/* QUIZ */
+.svg-hl .hl-rect{transition:opacity .35s ease,filter .35s ease;opacity:0.18;}
+.svg-hl.lit .hl-rect{opacity:1;filter:drop-shadow(0 0 6px rgba(196,170,136,0.7));}
 #quiz{display:none;padding:28px;max-width:780px;margin:0 auto;}
 .quiz-heading{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:700;margin-bottom:24px;}
 .q-card{background:#fff;border-radius:var(--radius);padding:20px;margin-bottom:16px;border-left:4px solid transparent;}
@@ -73,65 +54,125 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
 .q-opt.wrong{background:rgba(27,42,74,0.10);border-color:#1B2A4A;color:#8b1a1a;}
 .q-exp{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;padding-left:12px;border-left:3px solid transparent;display:none;}
 .q-exp.show{display:block;}
-/* SCORE */
 .score-panel{background:#fff;border-radius:var(--radius);padding:28px;margin-top:24px;text-align:center;display:none;}
 .score-big{font-family:"IBM Plex Mono",monospace;font-size:48px;font-weight:700;color:#1B2A4A;}
 .score-grade{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--muted);margin-top:4px;}
 .score-comment{font-size:14px;color:var(--muted);margin-top:12px;}
 .score-retry{background:#1B2A4A;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;cursor:pointer;margin-top:16px;font-family:"IBM Plex Mono",monospace;}
-/* MOBILE */
-@media(max-width:700px){
-  .page-cols{flex-direction:column;height:auto;}
-  .col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}
-}
+@media(max-width:700px){.page-cols{flex-direction:column;height:auto;}.col-diagram{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border);position:relative;}}
 </style>
 </head>
 <body>
-
 <div class="topbar">
   <div class="topbar-logo">
-    <img src="../images/pistos-logo.png" style="height:72px;width:auto;display:block;" alt="Pistos Information Protection">
-    <div>
-      <div class="topbar-title">Introduction to Incident Reporting and Response</div>
-    </div>
+    <img src="data:image/png;base64,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" alt="Pistos Information Protection">
+    <div class="topbar-title">Introduction to Incident Reporting and Response</div>
   </div>
 </div>
-
 <div class="nav-bar" id="navBar">
   <button class="nav-pill active" id="nav-pg1" onclick="gotoPage('pg1')">Overview</button>
-  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Recognizing Incidents</button><button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How to Report an Incident</button><button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Incident Response Process</button><button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button><button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
+  <button class="nav-pill" id="nav-pg2" onclick="gotoPage('pg2')">Recognizing Incidents</button>
+  <button class="nav-pill" id="nav-pg3" onclick="gotoPage('pg3')">How to Report an Incident</button>
+  <button class="nav-pill" id="nav-pg4" onclick="gotoPage('pg4')">The Incident Response Process</button>
+  <button class="nav-pill" id="nav-pg5" onclick="gotoPage('pg5')">Summary</button>
+  <button class="nav-pill" id="nav-quiz" onclick="gotoPage('quiz')">Quiz</button>
 </div>
-
 <div class="narr-bar" id="narrBar">
-  <div class="narr-text" id="narrText">Narration playing…</div>
+  <div class="narr-text" id="narrText">Narration playing...</div>
   <button class="narr-stop" onclick="stopNarr()">&#9632; Stop</button>
 </div>
 <div class="page" id="pg1">
   <div class="page-header">
     <div class="ph-section"> — What Is a Security Incident</div>
-    <div class="ph-sub">Recognizing when something has gone wrong</div>
+    <div class="ph-sub">Types of incidents users are positioned to discover</div>
     <button class="play-btn" id="play-pg1" onclick="togglePlay('pg1')">&#9654; Play Narration</button>
   </div>
   <div class="page-cols">
-    <div class="col-diagram">
-      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Security Incident Types</text>
-  <g id="pg1-hl0" class="svg-hl" transform="translate(0,0)"><rect x="20" y="42" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="56" y="72" font-size="16" font-family="system-ui">🔒</text><text x="90" y="67" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Malware / Ransomware</text>
-    <text x="90" y="85" font-size="10" fill="#D6CCBC" font-family="system-ui">Files encrypted · System compromised · Security tools disabled</text></g>
-  <g id="pg1-hl1" class="svg-hl" transform="translate(0,0)"><rect x="20" y="113" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="56" y="143" font-size="16" font-family="system-ui">📧</text><text x="90" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Phishing / Account Compromise</text>
-    <text x="90" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Credentials stolen · Unauthorized logins · Emails sent without knowledge</text></g>
-  <g id="pg1-hl2" class="svg-hl" transform="translate(0,0)"><rect x="20" y="184" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="56" y="214" font-size="16" font-family="system-ui">💾</text><text x="90" y="209" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Data Loss / Exposure</text>
-    <text x="90" y="227" font-size="10" fill="#D6CCBC" font-family="system-ui">Misdirected email · Unauthorized access · Missing files · Oversharing</text></g>
-  <g id="pg1-hl3" class="svg-hl" transform="translate(0,0)"><rect x="20" y="255" width="480" height="56" rx="9" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="56" y="285" font-size="16" font-family="system-ui">🖥️</text><text x="90" y="280" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Physical Security</text>
-    <text x="90" y="298" font-size="10" fill="#D6CCBC" font-family="system-ui">Lost / stolen device · Unknown hardware · Unauthorized physical access</text></g>
-</svg></div>
-    </div>
+    <div class="col-diagram"><div class="svg-pad"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="520" height="380" fill="#F5F1EB"/>
+  <text x="260" y="26" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2">WHAT IS A SECURITY INCIDENT</text>
+  <line x1="170" y1="34" x2="350" y2="34" stroke="#C4AA88" stroke-width="0.8" opacity="0.6"/>
+  <g id="pg1-hl0" class="svg-hl">
+    <rect x="20" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="42" width="232" height="158" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,108)">
+    <!-- CIA Shield (captive — stroked in threat red) -->
+    <path d="M-30,-22 L-14,-12 L-14,0 Q-14,14 -30,18 Q-46,14 -46,0 L-46,-12 Z" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.5"/>
+    <text x="-30" y="-7" text-anchor="middle" font-size="8.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">CIA</text>
+    <line x1="-38" y1="-1" x2="-22" y2="-1" stroke="#9B2B2B" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Chain links between shield and attacker -->
+    <ellipse cx="-7" cy="-3" rx="4" ry="2.5" fill="none" stroke="#9B2B2B" stroke-width="1.3" transform="rotate(-25,-7,-3)"/>
+    <ellipse cx="1" cy="-3" rx="4" ry="2.5" fill="none" stroke="#9B2B2B" stroke-width="1.3" transform="rotate(25,1,-3)"/>
+    <ellipse cx="9" cy="-3" rx="4" ry="2.5" fill="none" stroke="#9B2B2B" stroke-width="1.3" transform="rotate(-25,9,-3)"/>
+    <!-- Attacker figure — hooded dark silhouette -->
+    <circle cx="28" cy="-18" r="9" fill="#2d0000" stroke="#9B2B2B" stroke-width="1.2"/>
+    <path d="M19,-20 Q19,-28 28,-28 Q37,-28 37,-20" fill="#1a0000" opacity="0.95"/>
+    <circle cx="25" cy="-19" r="1.5" fill="#9B2B2B"/>
+    <circle cx="31" cy="-19" r="1.5" fill="#9B2B2B"/>
+    <path d="M18,-8 L20,8 L36,8 L38,-8 Q33,-4 28,-4 Q23,-4 18,-8 Z" fill="#2d0000" opacity="0.85"/>
+    <!-- Arm gripping chain -->
+    <line x1="18" y1="-2" x2="13" y2="-2" stroke="#2d0000" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="-4" y="22" text-anchor="middle" font-size="6.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">threat to C·I·A = incident</text>
+  </g>
+    <line x1="34" y1="174" x2="238" y2="174" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">INCIDENTS THREATEN CIA</text>
+    <text x="136" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">unauthorized access · malware · data loss</text>
+  </g>
+  <g id="pg1-hl1" class="svg-hl">
+    <rect x="268" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="42" width="232" height="158" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,108)">
+    <circle cx="0" cy="-10" r="9" fill="#C4AA88"/>
+    <path d="-10,0 L-11,18 L11,18 L10,0 Q5,-2 0,-2 Q-5,-2 -10,0 Z" fill="#C4AA88" opacity="0.8"/>
+    <circle cx="16" cy="-22" r="9" fill="#9B2B2B" opacity="0.15"/>
+    <circle cx="16" cy="-22" r="9" fill="none" stroke="#9B2B2B" stroke-width="1.5"/>
+    <text x="16" y="-18" text-anchor="middle" font-size="12" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+    <text x="0" y="26" text-anchor="middle" font-size="7" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">users often detect it first</text>
+  </g>
+    <line x1="282" y1="174" x2="486" y2="174" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">USERS DETECT MANY FIRST</text>
+    <text x="384" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">your observation has real value</text>
+  </g>
+  <g id="pg1-hl2" class="svg-hl">
+    <rect x="20" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="212" width="232" height="130" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,278)">
+    <rect x="-43" y="-16" width="32" height="18" rx="2" fill="#D6CCBC" stroke="#A08860" stroke-width="0.7"/>
+    <text x="-27" y="-5" text-anchor="middle" font-size="5.5" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">slow pc</text>
+    <text x="-27" y="2" text-anchor="middle" font-size="5.5" fill="#A08860" font-family="IBM Plex Mono,monospace">helpdesk</text>
+    <text x="0" y="0" text-anchor="middle" font-size="9" fill="#8A7D6B" font-weight="700" font-family="IBM Plex Mono,monospace">vs</text>
+    <rect x="11" y="-16" width="32" height="18" rx="2" fill="#F5F1EB" stroke="#9B2B2B" stroke-width="1"/>
+    <text x="27" y="-5" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">slow +</text>
+    <text x="27" y="2" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">attach</text>
+    <text x="0" y="14" text-anchor="middle" font-size="7" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">key: any unauthorized access?</text>
+  </g>
+    <line x1="34" y1="316" x2="238" y2="316" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">INCIDENT vs TECH ISSUE</text>
+    <text x="136" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">key question: unauthorized access?</text>
+  </g>
+  <g id="pg1-hl3" class="svg-hl">
+    <rect x="268" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="212" width="232" height="130" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,278)">
+    <circle cx="0" cy="-6" r="14" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+    <line x1="0" y1="-6" x2="0" y2="-14" stroke="#C4AA88" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="-6" x2="7" y2="-1" stroke="#C4AA88" stroke-width="1.2" stroke-linecap="round"/>
+    <circle cx="0" cy="-6" r="2" fill="#C4AA88"/>
+    <rect x="-14" y="12" width="10" height="7" rx="1" fill="#2d6a2d" opacity="0.7"/>
+    <text x="-9" y="18" text-anchor="middle" font-size="5.5" fill="#fff" font-weight="700" font-family="IBM Plex Mono,monospace">1h</text>
+    <rect x="-1" y="10" width="10" height="9" rx="1" fill="#C4AA88" opacity="0.7"/>
+    <text x="4" y="17" text-anchor="middle" font-size="5.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">1d</text>
+    <rect x="12" y="7" width="10" height="12" rx="1" fill="#9B2B2B" opacity="0.7"/>
+    <text x="17" y="16" text-anchor="middle" font-size="5.5" fill="#fff" font-weight="700" font-family="IBM Plex Mono,monospace">30d</text>
+    <text x="0" y="28" text-anchor="middle" font-size="7" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">early report = less damage</text>
+  </g>
+    <line x1="282" y1="316" x2="486" y2="316" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">EARLY REPORT = LESS DAMAGE</text>
+    <text x="384" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">detection hour determines impact</text>
+  </g>
+  <text x="260" y="366" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">every suspicious event warrants investigation — when in doubt, report</text>
+</svg></div></div>
     <div class="col-content" id="cc-pg1">
-      
 <div class="hl-block" id="pg1-b0" onclick="jumpToBlock('pg1',0)">
   <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
@@ -170,39 +211,82 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <button class="play-btn" id="play-pg2" onclick="togglePlay('pg2')">&#9654; Play Narration</button>
   </div>
   <div class="page-cols">
-    <div class="col-diagram">
-      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Warning Signs</text>
-  <g id="pg2-hl0" class="svg-hl" transform="translate(130,115)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="22" font-family="system-ui">⚠️</text>
-    <text y="-14" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">SYSTEM BEHAVIOR</text>
-    <text y="6"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Encrypted files</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unknown processes</text>
-    <text y="42" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Disabled security tools</text></g>
-  <g id="pg2-hl1" class="svg-hl" transform="translate(390,115)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-38" text-anchor="middle" font-size="22" font-family="system-ui">📧</text>
-    <text y="-14" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">EMAIL SIGNALS</text>
-    <text y="6"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unsolicited resets</text>
-    <text y="22" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Emails you didn't send</text>
-    <text y="42" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Unfamiliar login locations</text></g>
-  <g id="pg2-hl2" class="svg-hl" transform="translate(130,268)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DATA ANOMALIES</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Missing / changed files</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unauthorized access alerts</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Contacts report odd messages</text></g>
-  <g id="pg2-hl3" class="svg-hl" transform="translate(390,268)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PHYSICAL</text>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Lost / stolen device</text>
-    <text y="8"  text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Unknown hardware found</text>
-    <text y="32" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Unauthorized area access</text></g>
-</svg></div>
-    </div>
+    <div class="col-diagram"><div class="svg-pad"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="520" height="380" fill="#F5F1EB"/>
+  <text x="260" y="26" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2">RECOGNIZING SECURITY INCIDENTS</text>
+  <line x1="165" y1="34" x2="355" y2="34" stroke="#C4AA88" stroke-width="0.8" opacity="0.6"/>
+  <g id="pg2-hl0" class="svg-hl">
+    <rect x="20" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="42" width="232" height="158" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,108)">
+    <rect x="-44" y="-18" width="88" height="28" rx="3" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1"/>
+    <rect x="-44" y="-18" width="88" height="10" fill="#2a3a5e"/>
+    <text x="0" y="-10.5" text-anchor="middle" font-size="6" fill="#C4AA88" font-family="IBM Plex Mono,monospace">system</text>
+    <text x="0" y="0" text-anchor="middle" font-size="6.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">files.locked</text>
+    <text x="0" y="8" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">HIGH CPU · unknown proc</text>
+    <g transform="translate(40,-22)"><polygon points="0,-8 -6,4 6,4" fill="#9B2B2B" opacity="0.85"/><text x="0" y="2" text-anchor="middle" font-size="7" fill="#fff" font-weight="700" font-family="IBM Plex Mono,monospace">!</text></g>
+  </g>
+    <line x1="34" y1="174" x2="238" y2="174" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">SYSTEM BEHAVIOUR</text>
+    <text x="136" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">encrypted files · unknown processes</text>
+  </g>
+  <g id="pg2-hl1" class="svg-hl">
+    <rect x="268" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="42" width="232" height="158" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,108)">
+    <rect x="-38" y="-14" width="76" height="28" rx="3" fill="#F5F1EB" stroke="#9B2B2B" stroke-width="1.2"/>
+    <path d="-38,-14 L0,0 L38,-14" fill="none" stroke="#9B2B2B" stroke-width="0.8"/>
+    <text x="0" y="4" text-anchor="middle" font-size="6.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">SENT: you didn't</text>
+    <text x="0" y="12" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">login: Moscow 3am</text>
+    <circle cx="34" cy="-18" r="8" fill="#9B2B2B" opacity="0.85"/>
+    <text x="34" y="-14.5" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+  </g>
+    <line x1="282" y1="174" x2="486" y2="174" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">EMAIL SIGNALS</text>
+    <text x="384" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">sent mail you didn't write · odd logins</text>
+  </g>
+  <g id="pg2-hl2" class="svg-hl">
+    <rect x="20" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="212" width="232" height="130" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,278)">
+    <ellipse cx="0" cy="-12" rx="12" ry="4" fill="#C4AA88"/>
+    <rect x="-12" y="-12" width="24" height="16" fill="#C4AA88" opacity="0.7"/>
+    <ellipse cx="0" cy="4" rx="12" ry="4" fill="#C4AA88" opacity="0.85"/>
+    <path d="M4,4 Q5,12 3,16 Q0,14 1,10" fill="#9B2B2B" opacity="0.8"/>
+    <text x="0" y="22" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">DATA EXPOSED</text>
+  </g>
+    <line x1="34" y1="316" x2="238" y2="316" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">DATA LOSS / EXPOSURE</text>
+    <text x="136" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">misdirected email · missing files</text>
+  </g>
+  <g id="pg2-hl3" class="svg-hl">
+    <rect x="268" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="212" width="232" height="130" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,278)">
+    <!-- Laptop lid / screen -->
+    <rect x="-30" y="-24" width="60" height="36" rx="3" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+    <rect x="-27" y="-21" width="54" height="28" rx="2" fill="#0f1a32"/>
+    <text x="0" y="-13" text-anchor="middle" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">CORP DEVICE</text>
+    <text x="0" y="-5" text-anchor="middle" font-size="5" fill="#C4AA88" font-family="IBM Plex Mono,monospace">🔒 DATA AT RISK</text>
+    <!-- Hinge bar -->
+    <rect x="-32" y="12" width="64" height="2.5" rx="1" fill="#A08860" opacity="0.5"/>
+    <!-- Keyboard base -->
+    <rect x="-32" y="14" width="64" height="10" rx="2" fill="#2a3a5e" stroke="#A08860" stroke-width="0.8"/>
+    <rect x="-26" y="17" width="24" height="4" rx="1" fill="#1B2A4A" opacity="0.9"/>
+    <rect x="2" y="17" width="16" height="4" rx="1" fill="#1B2A4A" opacity="0.9"/>
+    <rect x="-12" y="22" width="24" height="1.5" rx="1" fill="#1B2A4A" opacity="0.5"/>
+    <!-- Warning badge -->
+    <circle cx="26" cy="-28" r="9" fill="#9B2B2B"/>
+    <text x="26" y="-24.5" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+    <text x="0" y="33" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">LOST · STOLEN · FOUND HW</text>
+  </g>
+    <line x1="282" y1="316" x2="486" y2="316" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">PHYSICAL SECURITY</text>
+    <text x="384" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">lost device · unfamiliar hardware</text>
+  </g>
+  <text x="260" y="366" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">each type warrants reporting — when in doubt, escalate</text>
+</svg></div></div>
     <div class="col-content" id="cc-pg2">
-      
 <div class="hl-block" id="pg2-b0" onclick="jumpToBlock('pg2',0)">
   <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
@@ -241,26 +325,49 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <button class="play-btn" id="play-pg3" onclick="togglePlay('pg3')">&#9654; Play Narration</button>
   </div>
   <div class="page-cols">
-    <div class="col-diagram">
-      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">When You Suspect an Incident</text>
-  <g id="pg3-hl0" class="svg-hl" transform="translate(260,90)">
-    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="12" fill="#1B2A4A" font-weight="700" font-family="system-ui">STEP 1: REPORT — Know your channel NOW</text>
-    <text y="14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Security email · Helpdesk · Security team contact · Find out before you need it</text></g>
-  <g id="pg3-hl1" class="svg-hl" transform="translate(260,175)">
-    <rect x="-210" y="-34" width="420" height="68" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-8"  text-anchor="middle" font-size="12" fill="#A08860" font-weight="700" font-family="system-ui">STEP 2: BE SPECIFIC — What, when, where</text>
-    <text y="14" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">What you observed · What you did before · Which systems affected · What time</text></g>
-  <g id="pg3-hl2" class="svg-hl" transform="translate(260,263)">
-    <rect x="-210" y="-48" width="420" height="96" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text y="-22" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="system-ui">STEP 3: PRESERVE — Do and don't</text>
-    <text y="0"  text-anchor="middle" font-size="10" fill="#A08860" font-family="system-ui">✓ Stop using affected system · Write down observations · Keep device on</text>
-    <text y="18" text-anchor="middle" font-size="10" fill="#1B2A4A" font-family="system-ui">✗ Don't run cleanup tools · Don't delete suspicious email · Don't post on social media</text></g>
-</svg></div>
-    </div>
+    <div class="col-diagram"><div class="svg-pad"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="520" height="380" fill="#F5F1EB"/>
+  <text x="260" y="26" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2">HOW TO REPORT AN INCIDENT</text>
+  <line x1="170" y1="34" x2="350" y2="34" stroke="#C4AA88" stroke-width="0.8" opacity="0.6"/>
+  <g id="pg3-hl0" class="svg-hl">
+    <rect x="20" y="42" width="480" height="60" rx="10" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="42" width="480" height="60" rx="10" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <circle cx="50" cy="72" r="17" fill="#C4AA88" opacity="0.85"/>
+    <text x="50" y="77" text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">01</text>
+    <text x="78" y="58" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="0.5">STEP 1 — REPORT</text>
+    <text x="78" y="72" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">Know your channel before you need it</text>
+    <text x="78" y="86" font-size="9" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">security ops · helpdesk · security email — find the contact now</text>
+  </g>
+  <g id="pg3-hl1" class="svg-hl">
+    <rect x="20" y="110" width="480" height="60" rx="10" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="110" width="480" height="60" rx="10" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <circle cx="50" cy="140" r="17" fill="#A08860" opacity="0.85"/>
+    <text x="50" y="145" text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">02</text>
+    <text x="78" y="126" font-size="7.5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="0.5">STEP 2 — BE SPECIFIC</text>
+    <text x="78" y="140" font-size="10" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">What · when · where · what preceded it</text>
+    <text x="78" y="154" font-size="9" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">exact time · system · actions taken — 'acted weird' is not enough</text>
+  </g>
+  <g id="pg3-hl2" class="svg-hl">
+    <rect x="20" y="178" width="480" height="90" rx="10" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="178" width="480" height="90" rx="10" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <circle cx="50" cy="223" r="17" fill="#C4AA88" opacity="0.85"/>
+    <text x="50" y="228" text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">03</text>
+    <text x="78" y="194" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="0.5">STEP 3 — PRESERVE</text>
+    <text x="78" y="208" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">Stop using device · keep it on · note all</text>
+    <text x="78" y="222" font-size="9" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">DO NOT: run cleanup · delete suspicious email · turn device off</text>
+  </g>
+  <g id="pg3-hl3" class="svg-hl">
+    <rect x="20" y="276" width="480" height="60" rx="10" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="276" width="480" height="60" rx="10" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <circle cx="50" cy="306" r="17" fill="#A08860" opacity="0.85"/>
+    <text x="50" y="311" text-anchor="middle" font-size="13" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">04</text>
+    <text x="78" y="292" font-size="7.5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="0.5">STEP 4 — REVIEW</text>
+    <text x="78" y="306" font-size="10" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">Participate honestly in post-incident review</text>
+    <text x="78" y="320" font-size="9" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">your perspective improves controls that prevent future incidents</text>
+  </g>
+  <text x="260" y="366" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">report · specify · preserve · participate in review</text>
+</svg></div></div>
     <div class="col-content" id="cc-pg3">
-      
 <div class="hl-block" id="pg3-b0" onclick="jumpToBlock('pg3',0)">
   <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
@@ -299,47 +406,62 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <button class="play-btn" id="play-pg4" onclick="togglePlay('pg4')">&#9654; Play Narration</button>
   </div>
   <div class="page-cols">
-    <div class="col-diagram">
-      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="26" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Response Lifecycle</text>
-  <defs><marker id="arr11" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#2a2f4a"/></marker></defs>
-  <!-- Detect -->
-  <g id="pg4-hl0" class="svg-hl" transform="translate(70,160)">
-    <circle r="48" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2.5"/>
-    <text y="-10" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="system-ui">DETECT</text>
-    <text y="6"  text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Confirm &amp;</text>
-    <text y="20" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">scope</text>
-    <text x="0" y="68" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">01</text></g>
-  <line x1="120" y1="160" x2="162" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
-  <!-- Contain -->
-  <g id="pg4-hl1" class="svg-hl" transform="translate(200,160)">
-    <circle r="40" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">CONTAIN</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Stop spread</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">02</text></g>
-  <line x1="242" y1="160" x2="278" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
-  <!-- Eradicate -->
-  <g id="pg4-hl2" class="svg-hl" transform="translate(318,160)">
-    <circle r="40" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="system-ui">ERADICATE</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Remove all</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">03</text></g>
-  <line x1="360" y1="160" x2="396" y2="160" stroke="#2a2f4a" stroke-width="1.5" marker-end="url(#arr11)"/>
-  <!-- Recover -->
-  <g id="pg4-hl3" class="svg-hl" transform="translate(436,160)">
-    <circle r="40" fill="#1B2A4A" stroke="#A08860" stroke-width="2.5"/>
-    <text y="-8"  text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="system-ui">RECOVER</text>
-    <text y="8"   text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Restore ops</text>
-    <text x="0" y="58" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">04</text></g>
-  <!-- Notify box -->
-  <rect x="30" y="255" width="460" height="66" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5" stroke-dasharray="5,3"/>
-  <text x="260" y="280" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">NOTIFY — Regulatory obligations may apply</text>
-  <text x="260" y="298" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">72-hour clock from discovery · Legal/security team determines scope</text>
-  <text x="260" y="314" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Prompt reporting = more time to comply</text>
-</svg></div>
-    </div>
+    <div class="col-diagram"><div class="svg-pad"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="520" height="380" fill="#F5F1EB"/>
+  <text x="260" y="26" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2">INCIDENT RESPONSE LIFECYCLE</text>
+  <line x1="185" y1="34" x2="335" y2="34" stroke="#C4AA88" stroke-width="0.8" opacity="0.6"/>
+  <text x="260" y="46" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">Five phases — strict sequence — each enables the next</text>
+  <line x1="52" y1="148" x2="468" y2="148" stroke="#C4AA88" stroke-width="1" opacity="0.18"/>
+  <g id="pg4-hl0" class="svg-hl">
+    <circle cx="52" cy="148" r="28" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <circle class="hl-rect" cx="52" cy="148" r="28" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <text x="52" y="141" text-anchor="middle" font-size="7" fill="#C4AA88" opacity="0.55" font-family="IBM Plex Mono,monospace">01</text>
+    <text x="52" y="153" text-anchor="middle" font-size="9" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">DET</text>
+    <text x="52" y="193" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">DETECT</text>
+    <text x="52" y="207" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Confirm scope</text>
+    <text x="52" y="220" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Review logs</text>
+  </g>  <line x1="80" y1="148" x2="128" y2="148" stroke="#C4AA88" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+  <polygon points="126,144 130,148 126,152" fill="#C4AA88" opacity="0.4"/>
+  <g id="pg4-hl1" class="svg-hl">
+    <circle cx="156" cy="148" r="28" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <circle class="hl-rect" cx="156" cy="148" r="28" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <text x="156" y="141" text-anchor="middle" font-size="7" fill="#A08860" opacity="0.55" font-family="IBM Plex Mono,monospace">02</text>
+    <text x="156" y="153" text-anchor="middle" font-size="9" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">CON</text>
+    <text x="156" y="193" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">CONTAIN</text>
+    <text x="156" y="207" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Isolate systems</text>
+    <text x="156" y="220" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Force resets</text>
+  </g>  <line x1="184" y1="148" x2="232" y2="148" stroke="#C4AA88" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+  <polygon points="230,144 234,148 230,152" fill="#C4AA88" opacity="0.4"/>
+  <g id="pg4-hl2" class="svg-hl">
+    <circle cx="260" cy="148" r="28" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <circle class="hl-rect" cx="260" cy="148" r="28" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <text x="260" y="141" text-anchor="middle" font-size="7" fill="#C4AA88" opacity="0.55" font-family="IBM Plex Mono,monospace">03</text>
+    <text x="260" y="153" text-anchor="middle" font-size="9" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">ERA</text>
+    <text x="260" y="193" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">ERADICATE</text>
+    <text x="260" y="207" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Remove malware</text>
+    <text x="260" y="220" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Close access</text>
+  </g>  <line x1="288" y1="148" x2="336" y2="148" stroke="#C4AA88" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+  <polygon points="334,144 338,148 334,152" fill="#C4AA88" opacity="0.4"/>
+  <circle cx="364" cy="148" r="28" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+  <circle cx="364" cy="148" r="28" fill="none" stroke="#C4AA88" stroke-width="0.8" opacity="0.3"/>
+  <text x="364" y="141" text-anchor="middle" font-size="7" fill="#C4AA88" opacity="0.4" font-family="IBM Plex Mono,monospace">04</text>
+  <text x="364" y="153" text-anchor="middle" font-size="9" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" opacity="0.5">REC</text>
+  <text x="364" y="193" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">RECOVER</text>
+  <text x="364" y="207" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Restore systems</text>
+  <text x="364" y="220" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Clean backups only</text>
+  <line x1="392" y1="148" x2="440" y2="148" stroke="#C4AA88" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+  <polygon points="438,144 442,148 438,152" fill="#C4AA88" opacity="0.4"/>
+  <g id="pg4-hl3" class="svg-hl">
+    <circle cx="468" cy="148" r="28" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <circle class="hl-rect" cx="468" cy="148" r="28" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <text x="468" y="141" text-anchor="middle" font-size="7" fill="#A08860" opacity="0.55" font-family="IBM Plex Mono,monospace">05</text>
+    <text x="468" y="153" text-anchor="middle" font-size="9" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">NOT</text>
+    <text x="468" y="193" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">NOTIFY</text>
+    <text x="468" y="207" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">Notify regulators</text>
+    <text x="468" y="220" text-anchor="middle" font-size="8" fill="#8A7D6B" font-family="IBM Plex Sans,sans-serif">72-hr clock</text>
+  </g>  <text x="260" y="252" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">contain → eradicate → recover → notify within 72 hours of discovery</text>
+</svg></div></div>
     <div class="col-content" id="cc-pg4">
-      
 <div class="hl-block" id="pg4-b0" onclick="jumpToBlock('pg4',0)">
   <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
@@ -378,32 +500,83 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <button class="play-btn" id="play-pg5" onclick="togglePlay('pg5')">&#9654; Play Narration</button>
   </div>
   <div class="page-cols">
-    <div class="col-diagram">
-      <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">WHAT IS AN INCIDENT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Threatens C · I · A</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Users often spot them first</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Early report = less damage</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">WARNING SIGNS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">System · Email · Data · Physical</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Report, don't resolve alone</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Preserve evidence</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">HOW TO REPORT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Know channel now</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Be specific · Preserve evidence</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Don't cleanup independently</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RESPONSE LIFECYCLE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Detect · Contain · Eradicate</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Recover · Notify · Review</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">72-hr notification clock</text></g>
-</svg></div>
-    </div>
+    <div class="col-diagram"><div class="svg-pad"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="520" height="380" fill="#F5F1EB"/>
+  <text x="260" y="26" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2">MODULE SUMMARY</text>
+  <line x1="185" y1="34" x2="335" y2="34" stroke="#C4AA88" stroke-width="0.8" opacity="0.6"/>
+  <g id="pg5-hl0" class="svg-hl">
+    <rect x="20" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="42" width="232" height="158" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,108)">
+    <path d="M0,-24 L20,-12 L20,2 Q20,16 0,20 Q-20,16 -20,2 L-20,-12 Z" fill="#C4AA88" opacity="0.2"/>
+    <path d="M0,-24 L20,-12 L20,2 Q20,16 0,20 Q-20,16 -20,2 L-20,-12 Z" fill="none" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">CIA</text>
+    <line x1="-6" y1="0" x2="6" y2="0" stroke="#9B2B2B" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+    <line x1="34" y1="174" x2="238" y2="174" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">WHAT IS AN INCIDENT</text>
+    <text x="136" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">threatens C · I · A of data</text>
+  </g>
+  <g id="pg5-hl1" class="svg-hl">
+    <rect x="268" y="42" width="232" height="158" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="42" width="232" height="158" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,108)">
+    <polygon points="0,-22 -6,-8 6,-8" fill="#C4AA88" opacity="0.2"/>
+    <polygon points="0,-22 -6,-8 6,-8" fill="none" stroke="#C4AA88" stroke-width="1.5"/>
+    <text x="0" y="-10" text-anchor="middle" font-size="10" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+    <text x="0" y="2" text-anchor="middle" font-size="7" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">system · email · data · phys</text>
+    <text x="0" y="12" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">each signal warrants action</text>
+  </g>
+    <line x1="282" y1="174" x2="486" y2="174" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="184" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">WARNING SIGNS</text>
+    <text x="384" y="196" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">system · email · data · physical</text>
+  </g>
+  <g id="pg5-hl2" class="svg-hl">
+    <rect x="20" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="20" y="212" width="232" height="130" rx="12" fill="none" stroke="#C4AA88" stroke-width="2.5"/>
+    <g transform="translate(136,278)">
+    <circle cx="-8" cy="-10" r="5" fill="#C4AA88" opacity="0.7"/>
+    <text x="-8" y="-7" text-anchor="middle" font-size="6" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">1</text>
+    <line x1="-8" y1="-5" x2="-8" y2="-2" stroke="#C4AA88" stroke-width="1.2"/>
+    <polygon points="-10,-2 -6,-2 -8,2" fill="#C4AA88" opacity="0.7"/>
+    <circle cx="-8" cy="3" r="5" fill="#C4AA88" opacity="0.55"/>
+    <text x="-8" y="6" text-anchor="middle" font-size="6" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">2</text>
+    <line x1="-8" y1="8" x2="-8" y2="11" stroke="#C4AA88" stroke-width="1.2"/>
+    <polygon points="-10,11 -6,11 -8,15" fill="#C4AA88" opacity="0.55"/>
+    <circle cx="-8" cy="16" r="5" fill="#C4AA88" opacity="0.35"/>
+    <text x="-8" y="19" text-anchor="middle" font-size="6" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">3</text>
+    <text x="6" y="-7" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">channel</text>
+    <text x="6" y="5" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">specific</text>
+    <text x="6" y="17" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">preserve</text>
+  </g>
+    <line x1="34" y1="316" x2="238" y2="316" stroke="#C4AA88" stroke-width="0.4" opacity="0.3"/>
+    <text x="136" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">HOW TO REPORT</text>
+    <text x="136" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">channel · specific · preserve evidence</text>
+  </g>
+  <g id="pg5-hl3" class="svg-hl">
+    <rect x="268" y="212" width="232" height="130" rx="12" fill="#fff" stroke="#D6CCBC" stroke-width="0.8"/>
+    <rect class="hl-rect" x="268" y="212" width="232" height="130" rx="12" fill="none" stroke="#A08860" stroke-width="2.5"/>
+    <g transform="translate(384,278)">
+    <line x1="-36" y1="0" x2="36" y2="0" stroke="#C4AA88" stroke-width="0.8" opacity="0.3"/>
+    <circle cx="-36" cy="0" r="6" fill="#C4AA88" opacity="0.7"/>
+    <circle cx="-18" cy="0" r="6" fill="#A08860" opacity="0.7"/>
+    <circle cx="0"   cy="0" r="6" fill="#C4AA88"/>
+    <circle cx="18"  cy="0" r="6" fill="#A08860" opacity="0.7"/>
+    <circle cx="36"  cy="0" r="7" fill="#9B2B2B" opacity="0.8"/>
+    <text x="-36" y="16" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">det</text>
+    <text x="-18" y="16" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">con</text>
+    <text x="0"   y="16" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">era</text>
+    <text x="18"  y="16" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">rec</text>
+    <text x="36"  y="16" text-anchor="middle" font-size="6" fill="#1B2A4A" font-family="IBM Plex Mono,monospace">not</text>
+    <text x="36"  y="-10" text-anchor="middle" font-size="6" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">72h</text>
+  </g>
+    <line x1="282" y1="316" x2="486" y2="316" stroke="#A08860" stroke-width="0.4" opacity="0.3"/>
+    <text x="384" y="326" text-anchor="middle" font-size="9.5" fill="#1B2A4A" font-weight="700" font-family="IBM Plex Mono,monospace">RESPONSE LIFECYCLE</text>
+    <text x="384" y="338" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace">detect · contain · eradicate · recover · notify</text>
+  </g>
+  <text x="260" y="366" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="IBM Plex Mono,monospace">Recognise · Report · Preserve · Support</text>
+</svg></div></div>
     <div class="col-content" id="cc-pg5">
-      
 <div class="hl-block" id="pg5-b0" onclick="jumpToBlock('pg5',0)">
   <div class="hl-bar" style="background:#1B2A4A;"></div>
   <div class="hl-inner">
@@ -435,10 +608,8 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     </div>
   </div>
 </div>
-
 <div id="quiz">
   <div class="quiz-heading">Knowledge Check — Introduction to Incident Reporting and Response</div>
-  
 <div class="q-card" id="qc0">
   <div class="q-num" style="color:#1B2A4A;">Q1</div>
   <div class="q-text">Which of the following is most likely a security incident requiring immediate reporting to the security team?</div>
@@ -482,7 +653,6 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
     <button class="score-retry" onclick="retryQuiz()">Retry Quiz</button>
   </div>
 </div>
-
 <script>
 const HL_COLOR={
   'pg1':["#1B2A4A","#A08860","#C4AA88","#A08860"],
@@ -491,7 +661,6 @@ const HL_COLOR={
   'pg4':["#1B2A4A","#A08860","#C4AA88","#A08860"],
   'pg5':["#1B2A4A","#A08860","#C4AA88","#A08860"],
 };
-
 const NARR={
   'pg1':['A security incident is any event that has compromised or may have compromised the security of organizational systems, data, or operations. The range of incidents is broad — from a single phishing email caught and reported without any action taken, to a ransomware attack that has encrypted the organization\'s core servers. Common incident types include unauthorized access to systems or accounts, malware infections, phishing attacks, data exposure whether intentional or accidental, denial of service attacks, and physical security incidents affecting organizational devices. Not every suspicious event becomes a confirmed incident, but every suspicious event warrants investigation, because the consequence of failing to investigate an actual incident is far greater than the cost of investigating a false alarm.','Automated security tools — antivirus systems, intrusion detection systems, security information and event management platforms — detect many incidents. But a significant proportion of incidents are first noticed by employees doing their ordinary work. A user opens an email attachment and immediately notices that files in the same folder now have unfamiliar extensions. A finance employee receives a wire transfer request that does not match any known project or vendor and something feels wrong about it. An IT administrator reviewing routine logs notices authentication events from an account at times and locations inconsistent with normal use. A customer calls to ask about a phishing email they received that appeared to come from the organization. These observations by attentive employees are not rare edge cases — they are how many significant incidents are first discovered.','Part of recognizing incidents is understanding what is a security concern versus what is a routine technical issue. A computer that runs slowly is a helpdesk call. A computer that starts running slowly immediately after an unusual email attachment was opened, and then shows files with changed extensions, is a potential security incident. A forgotten password is a helpdesk call. A password that was shared with someone else and may now be in the wrong hands is a security concern. A software application that crashes is a helpdesk call. A software application that was downloaded from an unofficial site is a security concern — even if it appears to be working normally, because malware frequently operates silently. The key question is whether there may be unauthorized access, data exposure, or compromise of a security control involved in the situation.','The relationship between detection timing and incident damage is direct and measurable. An attacker who has been in an organization\'s systems for one hour and is then detected has had limited time to conduct reconnaissance, move laterally, and access sensitive data. An attacker detected after thirty days has had time to identify and exfiltrate the most sensitive data, compromise administrator credentials, disable backup systems, and position for maximum impact. Ransomware discovered within minutes of execution may have encrypted only a fraction of the targeted files; discovered hours later, it may have encrypted everything. Every hour between the moment of initial compromise and the moment of detection represents additional attacker access, additional data exposure, and additional recovery cost. Prompt reporting by the person who first notices something unusual is, measurably, the most important contribution any individual can make to an effective incident response.'],
   'pg2':['Malware infection and unauthorized access frequently produce observable changes in system behavior that users are positioned to notice. Files that cannot be opened, display unfamiliar extensions, or have been renamed in an unfamiliar pattern are characteristic of ransomware encryption. Unusually high CPU or network activity — particularly from processes the user does not recognize — may indicate malware using the device\'s resources for cryptomining, botnet activity, or data exfiltration. Security software that appears to have been disabled, or that generates alerts about itself being tampered with, is a strong indicator of malware that specifically disables security tools as a first action. Browser behavior that changes without user action — new toolbars appearing, default search engine changing, unexpected redirections — often indicates unwanted software that entered through a download or browsing activity.','Email account compromise produces specific and recognizable signals. An unsolicited password reset email — one the account owner did not initiate — indicates that someone has the account\'s login name and is attempting to take over the account. A notification of a login attempt from an unfamiliar country, device, or time of day indicates that credentials have been compromised and are being tested. Email found in the sent folder that the account owner did not compose, or email found in the deleted folder that the owner did not delete, indicates that the account has been accessed by someone else who composed and sent or deleted messages. Contacts reporting that they received unusual messages from the account are a particularly clear signal of compromise — the account is actively being used by someone else. Each of these signals warrants immediate reporting and password change.','Data-related incidents produce signals that vary depending on the nature of the loss. Files that were present and are now missing, inaccessible, or corrupted may indicate ransomware, accidental deletion, or deliberate data destruction. Audit logs showing access by accounts that have no business reason to be accessing specific data may indicate an insider threat or a compromised credential being used to exfiltrate data. Cloud storage notifications of new devices or locations accessing the account indicate unauthorized access. Most visibly, a colleague or client contact who reports receiving information that should not have been sent to them — data that appears in an email that should not have been sent, or access to a file that should not have been shared — is reporting a data incident that requires investigation and potential regulatory notification. These signals are actionable and specific; reporting them immediately gives the security team the best ability to respond.','Physical security incidents bridge the physical and digital worlds in ways that can have significant security consequences. A lost or stolen laptop may carry unencrypted data, stored credentials, and session tokens that allow access to accounts without requiring the password. If full-disk encryption is in place, the data risk is substantially reduced — but the device still warrants immediate reporting so that accounts accessed from the device can be assessed. An unfamiliar device discovered attached to a network port, connected to a keyboard, or otherwise physically interfaced with organizational infrastructure may be a hardware attack tool: a network tap, a keylogger, or a device designed to provide wireless access to the internal network. An unfamiliar person observed in a secure area warrants report to both physical security and IT. Physical and digital security are increasingly intertwined and should be treated as a unified concern.'],
@@ -499,21 +668,17 @@ const NARR={
   'pg4':['The detection and analysis phase begins when an incident is reported and continues until the security team has confirmed what happened and assessed the full scope. This phase involves examining the affected systems, reviewing event logs across multiple sources — authentication logs, network logs, endpoint logs, email logs — and correlating events to build a timeline of attacker activity. A reported incident that appears to be a single infected workstation may, upon analysis, reveal that the initial compromise occurred weeks earlier and that the attacker has since moved laterally to multiple systems. Conversely, an incident that appears significant in the initial report may turn out to be a false alarm or a minor technical issue without security implications. Rapid and accurate scoping during this phase enables proportionate and effective containment.','Containment actions are taken to prevent an incident from getting worse while the full investigation continues. For a ransomware incident, containment means isolating affected systems from the network to prevent the ransomware from spreading to additional systems or backup destinations. For an account compromise, containment means forcing a password reset and revoking active sessions. For a phishing campaign that has successfully compromised multiple accounts, containment means blocking the sending domain, revoking active sessions for all affected accounts, and alerting employees who may have received the same message. Containment decisions involve operational tradeoffs — isolating a critical server from the network stops the incident from spreading but also stops legitimate use of that server. The security team makes these decisions in consultation with business stakeholders, balancing security urgency against operational impact.','Eradication is the phase in which the attacker\'s presence is fully removed from the environment before recovery begins. This involves removing malware from all affected systems, closing the vulnerability or access pathway the attacker used, changing all credentials that may have been compromised, and searching for persistence mechanisms — backdoors, scheduled tasks, new accounts, modified configurations — that the attacker may have left to maintain access after their initial tools are removed. Thorough eradication requires confidence that all attacker footholds have been identified and removed. Recovering too early — before eradication is complete — frequently results in re-infection because the attacker retained a mechanism to return. The gap between containment and recovery, spent on thorough eradication, is not delay; it is the investment that makes recovery sustainable.','Notification obligations are an important and time-sensitive component of incident response for incidents involving personal data, regulated information, or contractual notification requirements. Many privacy regulations require notification to affected individuals and to regulators within specific timeframes — often 72 hours from the time the organization determines that a qualifying breach has occurred. This clock starts from discovery, which means that an incident discovered at 2 PM on a Friday imposes notification obligations that may expire before business hours on Monday. The legal and security teams determine what notification is required, to whom, and by when, based on the specific facts of the incident and the regulatory frameworks that apply. The most important contribution an employee makes to meeting notification obligations is prompt reporting — every hour of delay in reporting is an hour of delay in the discovery clock, which compresses the time available for appropriate notification.'],
   'pg5':['A security incident is any event that threatens the confidentiality, integrity, or availability of systems or data. Users are frequently the first to detect incidents — through unusual system behavior, suspicious communications, data anomalies, or physical security signals. Early reporting by the person who first notices something unusual is the most valuable individual contribution to incident response, because it directly limits the damage an incident causes.','Recognizable warning signs include unexpected system behaviors consistent with malware, email account signals like unsolicited resets and unauthorized sent messages, data changes including missing files and unauthorized access notifications, and physical security incidents involving lost devices or unfamiliar hardware. Each category produces specific, observable signals that warrant reporting rather than ignoring or attempting to resolve independently.','Know your reporting channel before an incident occurs. When reporting, be as specific as possible about what was observed and when. While awaiting the security team: stop using the affected system if possible, preserve evidence by keeping the device on and in its current state, and do not attempt to clean up or delete suspicious content. The security team\'s investigation depends on evidence you preserve.','The incident response lifecycle — detect, contain, eradicate, recover, notify — provides a structured approach that limits damage and enables regulatory compliance. Post-incident reviews convert incidents into security improvements. Participating honestly in those reviews, and reporting incidents promptly when they are first suspected, are the two most significant individual contributions to organizational incident response capability.'],
 };
-
 const CNT={'pg1':4,'pg2':4,'pg3':4,'pg4':4,'pg5':4};
-
 const ANSWERS=[2,1,1,2,1,1];
 const SCORE_COMMENTS=["Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Keep reviewing — this material is important for your security.","Good foundation. Review the explanations and try once more.","Solid performance. You understand most of the material well.","Very strong — just one or two areas to revisit.","Outstanding — perfect score. You have mastered this module."];
 const QUIZ_COLORS=["#1B2A4A","#A08860","#C4AA88","#A08860","#1B2A4A","#A08860"];
 const GRADE_LABELS=["—","—","—","C","B","A","A+"];
 const N_QUIZ=6;
-
 let curPage='home', narr=null, narrPid=null, narrIdx=0, narrRunning=false;
-
 function gotoPage(pid){
   document.querySelectorAll('.page,[id="home"],[id="quiz"]').forEach(el=>el.style.display='none');
   const el=document.getElementById(pid);
-  if(el)el.style.display=(pid==='quiz')?'block':'block';
+  if(el)el.style.display='block';
   curPage=pid;
   document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
   const np=document.getElementById('nav-'+pid);
@@ -530,7 +695,6 @@ function togglePlay(pid){
   const nb=document.getElementById('narrBar');
   if(nb)nb.classList.add('active');
 }
-
 function playBlock(pid,idx){
   const scripts=NARR[pid]||[];
   if(idx>=scripts.length){narrRunning=false;markBlockDone(pid,idx-1);updateNarrBar('Narration complete.');return;}
@@ -544,7 +708,6 @@ function playBlock(pid,idx){
   narr=utter;
   window.speechSynthesis.speak(utter);
 }
-
 function stopNarr(){
   window.speechSynthesis.cancel();
   narrRunning=false; narr=null;
@@ -553,15 +716,12 @@ function stopNarr(){
   const btn=narrPid?document.getElementById('play-'+narrPid):null;
   if(btn)btn.innerHTML='&#9654; Play Narration';
 }
-
 function updateNarrBar(txt){
   const el=document.getElementById('narrText');
   if(el)el.textContent=txt;
 }
-
 function highlightBlock(pid,idx){
-  const pid_blocks=document.querySelectorAll('#'+pid+' .hl-block');
-  pid_blocks.forEach((b,i)=>{
+  document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     b.classList.remove('lit');
     if(i===idx)b.classList.add('lit');
   });
@@ -570,12 +730,10 @@ function highlightBlock(pid,idx){
   document.querySelectorAll('#'+pid+' .hl-block').forEach((b,i)=>{
     if(i===idx)b.style.setProperty('--primary-lit',col);
   });
-  // SVG highlight
   document.querySelectorAll('#'+pid+' .svg-hl').forEach((g,i)=>{
     g.classList.remove('lit');
     if(i===idx)g.classList.add('lit');
   });
-  // scroll block into view in col-content
   const block=document.getElementById(pid+'-b'+idx);
   const col_cont=document.getElementById('cc-'+pid);
   if(block&&col_cont){
@@ -583,17 +741,14 @@ function highlightBlock(pid,idx){
     col_cont.scrollTo({top:bTop-20,behavior:'smooth'});
   }
 }
-
 function markBlockDone(pid,idx){
   const b=document.getElementById(pid+'-b'+idx);
   if(b){b.classList.remove('lit');b.classList.add('done');}
 }
-
 function clearBlockStates(pid){
   document.querySelectorAll('#'+pid+' .hl-block').forEach(b=>b.classList.remove('lit','done'));
   document.querySelectorAll('#'+pid+' .svg-hl').forEach(g=>g.classList.remove('lit'));
 }
-
 function jumpToBlock(pid,idx){
   if(narrRunning&&narrPid===pid){
     window.speechSynthesis.cancel();
@@ -601,11 +756,7 @@ function jumpToBlock(pid,idx){
     playBlock(pid,idx);
   }
 }
-
-// QUIZ
 let answers_given=new Array(N_QUIZ).fill(null);
-let quiz_done=false;
-
 function answerQ(qi,oi){
   if(answers_given[qi]!==null)return;
   answers_given[qi]=oi;
@@ -616,27 +767,21 @@ function answerQ(qi,oi){
     if(i===correct)o.classList.add('correct');
     else if(i===oi&&oi!==correct)o.classList.add('wrong');
   });
-  const exp=document.getElementById('qe'+qi);
-  if(exp){exp.textContent="{}" ; /* filled per question */ }
-  // fill explanation
   const exps=["Opening an email attachment from an unknown sender followed immediately by files showing unfamiliar extensions is a classic ransomware indicator. This is a security incident requiring immediate reporting to the security team, not a routine helpdesk matter.","Detection timing directly determines incident impact. An attacker detected after one hour has caused far less damage than one detected after thirty days. Ransomware caught within minutes may have encrypted a fraction of files; caught after hours, it may have encrypted everything. Early reporting is the highest-value individual contribution.","Emails in the sent folder that you did not compose or send indicate that someone else has access to your email account and is using it. This is account compromise — report it to the security team immediately and change your password.","The security team's investigation depends on evidence preservation. Keep the device on (volatile memory may contain critical forensic data), stop using it to prevent further activity, write down exactly what you observed, and be available for questions. Do not attempt cleanup, turn the device off, or delete evidence.","Many privacy regulations, including GDPR-influenced frameworks, require organizations to notify regulators within 72 hours of determining that a qualifying personal data breach has occurred. This clock starts at discovery — which is why prompt employee reporting of suspected incidents is critical to meeting this obligation.","The sequence is detect (confirm and scope), contain (stop spread), eradicate (remove attacker presence completely), recover (restore operations from clean state), and notify (meet regulatory and contractual obligations). Recovering before eradication frequently results in re-infection because attacker persistence mechanisms remain."];
+  const exp=document.getElementById('qe'+qi);
   if(exp){exp.textContent=exps[qi];exp.classList.add('show');}
   card.style.borderLeftColor=QUIZ_COLORS[qi];
-  // check if all answered
   if(answers_given.every(a=>a!==null))showScore();
 }
-
 function showScore(){
   let correct=0;
   answers_given.forEach((a,i)=>{if(a===ANSWERS[i])correct++;});
-  const panel=document.getElementById('scorePanel');
   document.getElementById('scoreBig').textContent=correct+'/'+N_QUIZ;
   document.getElementById('scoreGrade').textContent=GRADE_LABELS[correct]||'';
   document.getElementById('scoreComment').textContent=SCORE_COMMENTS[correct]||'';
-  if(panel)panel.style.display='block';
-  panel.scrollIntoView({behavior:'smooth'});
+  const panel=document.getElementById('scorePanel');
+  if(panel){panel.style.display='block';panel.scrollIntoView({behavior:'smooth'});}
 }
-
 function retryQuiz(){
   answers_given=new Array(N_QUIZ).fill(null);
   document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.cursor='pointer';});

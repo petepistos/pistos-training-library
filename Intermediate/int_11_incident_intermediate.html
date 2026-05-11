@@ -117,20 +117,96 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Incident Triage Framework</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Event → Incident Threshold</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Event: detected, low risk, no coordination needed · Incident: confirmed/probable breach requiring response</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="80" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Severity Tiers</text>
-    <text x="36" y="156" font-size="10" fill="#1B2A4A" font-family="system-ui">P1 Critical: active ransomware/breach → immediate all-hands (minutes)</text>
-    <text x="36" y="172" font-size="10" fill="#A08860" font-family="system-ui">P2 High: confirmed access/suspected exfil → escalate within 1 hour</text>
-    <text x="36" y="186" font-size="10" fill="#D6CCBC" font-family="system-ui">P3/P4: suspected or low-impact → investigate within 4 hours / 1 business day</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="208" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="232" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">First 30 Minutes: Confirm · Scope · Active? · Contain? · Escalate</text>
-    <text x="36" y="250" font-size="10" fill="#D6CCBC" font-family="system-ui">Speed over completeness · Enough information for containment decisions · Parallel action not sequential</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="286" width="480" height="40" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="310" font-size="10" fill="#D6CCBC" font-family="system-ui">EDR tool use = high confidence · Auth + inbox rules = account compromise · Encrypted files = lagging → damage limitation</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">INCIDENT TRIAGE FRAMEWORK</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">EVENT vs INCIDENT</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Event: low risk, no coord needed</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Incident: confirmed/probable breach</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Requires structured response</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Escalation path defined</text>
+<g transform="translate(390,66)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">SEVERITY P1 CRITICAL</text>
+<circle cx="348" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Active ransomware or breach</text>
+<circle cx="348" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Immediate all-hands: minutes</text>
+<circle cx="348" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Executive + legal + DFS notif</text>
+<circle cx="348" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Contain before investigating</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#A08860" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">SEVERITY P2 HIGH</text>
+<circle cx="88" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Confirmed unauthorized access</text>
+<circle cx="88" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Suspected exfiltration</text>
+<circle cx="88" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Assign IR lead: within 1 hour</text>
+<circle cx="88" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Contain before full investigation</text>
+<g transform="translate(390,209)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#5BA3D9" opacity="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">P3 / P4 MODERATE</text>
+<circle cx="348" cy="257" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">P3: suspicious activity</text>
+<circle cx="348" cy="271" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">P4: policy violation / minor</text>
+<circle cx="348" cy="285" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Documented + investigated</text>
+<circle cx="348" cy="299" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remediated within SLA window</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -175,19 +251,94 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Containment and Eradication</text>
-  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Containment: Security vs. Operations Tradeoff</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Aggressive = max security, max disruption · Targeted = less disruption, risk of incomplete containment · Document rationale</text></g>
-  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Containment Tools: EDR Isolation · Network Quarantine · Credential Revocation</text>
-    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">EDR: cuts network but keeps management channel · VLAN/FW: segments · Credential reset: blocks auth without isolating host</text></g>
-  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Eradication: All Persistence — Not Just the First Found</text>
-    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Registry · Tasks · Services · WMI · Browser extensions · Backdoor accounts · All harvested credentials</text>
-    <text x="36" y="250" font-size="10" fill="#1B2A4A" font-family="system-ui">Reimaging is more reliable than manual removal — guarantees elimination of unknown persistence</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="296" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Recovery Sequence: Eradicate → Restore Pre-compromise Backup → Patch → Enhanced Monitoring</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">CONTAINMENT AND ERADICATION</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">CONTAINMENT PHILOSOPHY</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Aggressive: max security/disruption</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Targeted: less disrupt, some risk</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Document rationale chosen</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Cannot undo without documentation</text>
+<g transform="translate(390,64)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#5BA3D9" opacity="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">CONTAINMENT TOOLS</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">EDR: cuts net, keeps mgmt channel</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">VLAN/FW: segments host</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Credential revoke: blocks auth</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Layer tools for confidence</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">ERADICATION</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Find ALL persistence mechanisms</text>
+<circle cx="88" cy="271" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Attackers plant multiple backdoors</text>
+<circle cx="88" cy="285" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Missing one = re-infection hours</text>
+<circle cx="88" cy="299" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Declare only when fully clear</text>
+<circle cx="390" cy="217" r="20" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
+<polyline points="382.0,217 388.0,225.0 399.0,209.0" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">REBUILD vs REMEDIATE</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remediation: faster, may miss</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Rebuild: slower, guarantees clean</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Prefer rebuild for confirmed compromise</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Golden image = trusted baseline</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -232,19 +383,97 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">NY DFS Notification Timeline</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="80" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">500.17: 72 Hours from DETERMINATION (not detection)</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">NPI accessed · System availability affected · Other regulator notification triggered</text>
-    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Investigation need not be complete — notify when materiality is determined, update as facts develop</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="132" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="156" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Annual Certification: April 15 · Covers prior calendar year</text>
-    <text x="36" y="174" font-size="10" fill="#D6CCBC" font-family="system-ui">Incidents that revealed compliance gaps must be remediated and documented before certification · Coordinate security + compliance throughout year</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="210" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="234" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Materiality Factors: Pre-define thresholds before incidents</text>
-    <text x="36" y="252" font-size="10" fill="#D6CCBC" font-family="system-ui">Volume of NPI records accessed · Duration of system unavailability · Involve legal counsel in determination</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="288" width="480" height="38" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="310" font-size="10" fill="#D6CCBC" font-family="system-ui">Documentation: Timeline · Decision rationale · Actions/who/when · Communications · Forensic evidence chain of custody</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">NY DFS NOTIFICATION TIMELINE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,66)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">500.17: 72-HOUR RULE</text>
+<circle cx="88" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Clock: determination of materiality</text>
+<circle cx="88" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Not at initial detection</text>
+<circle cx="88" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">NPI accessed → triggers clock</text>
+<circle cx="88" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Availability affected → triggers</text>
+<g transform="translate(390,68)">
+<path d="M-19,-24 L11,-24 L19,-16 L19,24 L-19,24 Z" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<path d="M11,-24 L11,-16 L19,-16" fill="none" stroke="#A08860" stroke-width="0.6"/>
+<text x="0" y="-10" text-anchor="middle" font-size="5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">NOTIFICA</text>
+<line x1="-15" y1="-2" x2="15" y2="-2" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+<line x1="-15" y1="6" x2="15" y2="6" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">NOTIFICATION CONTENT</text>
+<circle cx="348" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Investigation need not be complete</text>
+<circle cx="348" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Notify when materiality confirmed</text>
+<circle cx="348" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Update DFS as facts develop</text>
+<circle cx="348" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Late notification = separate violation</text>
+<circle cx="130" cy="217" r="20" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.5"/>
+<polyline points="122.0,217 128.0,225.0 139.0,209.0" fill="none" stroke="#5BA3D9" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="130" y="241" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">ANNUAL CERTIFICATION</text>
+<circle cx="88" cy="257" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">April 15 deadline</text>
+<circle cx="88" cy="271" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Covers prior calendar year</text>
+<circle cx="88" cy="285" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remediate compliance gaps first</text>
+<circle cx="88" cy="299" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Security + compliance coordinate</text>
+<g transform="translate(390,209)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#A08860" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#A08860" opacity="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">EVIDENCE PRESERVATION</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Do not destroy relevant evidence</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Litigation hold coordination</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Consult legal before wiping</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Forensic chain of custody</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -289,19 +518,101 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Post-Incident Review Process</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Blameless Retrospective</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Focus on systemic failures, not individual errors · What controls failed, why detection was slow, how containment could improve</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Root Cause Analysis: Address Conditions, Not Symptoms</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Five whys reveals process failures behind individual events · Policy-practice gaps · Missing or misconfigured controls</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Metrics: MTTD · MTTR · False Positive Rate · Alert-to-Incident Rate</text>
-    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Consistent methodology required for meaningful trends · Quarterly tracking shows program improvement over time</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="296" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Tabletop Exercises: Required by NY DFS 500 · Test regulatory notification</text>
-    <text x="36" y="314" font-size="10" fill="#D6CCBC" font-family="system-ui">Test 72-hr notification decision, certification implications, role clarity · Track observations to completion</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">POST-INCIDENT REVIEW PROCESS</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">BLAMELESS RETROSPECTIVE</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Focus on systemic failures</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Not individual errors</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">What controls failed?</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Culture determines honesty</text>
+<g transform="translate(390,72)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">ROOT CAUSE ANALYSIS</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Five whys technique</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Reveals process failures</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Policy-practice gaps identified</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Address conditions not symptoms</text>
+<circle cx="130" cy="217" r="20" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.5"/>
+<polyline points="122.0,217 128.0,225.0 139.0,209.0" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="130" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">METRICS REVIEW</text>
+<circle cx="88" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">MTTD: mean time to detect</text>
+<circle cx="88" cy="271" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">MTTR: mean time to respond</text>
+<circle cx="88" cy="285" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">False positive rate tracking</text>
+<circle cx="88" cy="299" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Alert-to-incident conversion rate</text>
+<g transform="translate(390,213)">
+<path d="M-19,-24 L11,-24 L19,-16 L19,24 L-19,24 Z" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<path d="M11,-24 L11,-16 L19,-16" fill="none" stroke="#A08860" stroke-width="0.6"/>
+<text x="0" y="-10" text-anchor="middle" font-size="5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">REMEDIAT</text>
+<line x1="-15" y1="-2" x2="15" y2="-2" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+<line x1="-15" y1="6" x2="15" y2="6" stroke="#D6CCBC" stroke-width="0.7" opacity="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">REMEDIATION TRACKING</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Owner + due date + acceptance</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Overdue → executive review</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Closed findings validated</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Retesting confirms closure</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -346,26 +657,80 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">TRIAGE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Event vs incident threshold</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Severity tiers + SLAs</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">First 30 min: parallel action</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CONTAIN + ERADICATE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Layered containment tools</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">All persistence removed</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Eradicate before recovery</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">REGULATORY</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">72 hrs from determination</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">April 15 certification</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Document throughout year</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">POST-INCIDENT</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Blameless · Root cause</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">MTTD / MTTR metrics</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Tabletop tests notification</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">INCIDENT RESPONSE SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">TRIAGE</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Event/incident threshold·Severity SLAs</text>
+<g transform="translate(390,72) scale(1.3)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">CONTAIN + ERADICATE</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Layered tools·All persistence·Rebuild</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">NY DFS COMPLIANCE</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">72hr clock·April 15 cert·Evidence hold</text>
+<g transform="translate(390,217)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">POST-INCIDENT</text>
+<circle cx="348" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Blameless retro·RCA·MTTD/MTTR·Track</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">

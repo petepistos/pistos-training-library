@@ -117,19 +117,102 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Browser Attack Surface</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Drive-by Downloads (Exploit Kits)</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Fingerprint browser → select exploit → execute → deliver payload · No user action required</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Malicious Browser Extensions</text>
-    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Read all page content + credentials · Delivered via store or silent update of acquired extension · Allowlist only</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Web Skimming / Formjacking</text>
-    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Injected JS copies form inputs to attacker · Transaction completes normally · Invisible to user and operator</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Security Headers: CSP · HSTS · X-Frame-Options</text>
-    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">CSP prevents unauthorized script sources (defeats skimmers) · HSTS enforces HTTPS · Require explicit config</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">BROWSER ATTACK SURFACE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,66)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">DRIVE-BY DOWNLOADS</text>
+<circle cx="88" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fingerprint browser → exploit</text>
+<circle cx="88" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">No user action required</text>
+<circle cx="88" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Patch browsers + plugins</text>
+<circle cx="88" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remove unused extensions</text>
+<g transform="translate(390,66)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">MALICIOUS EXTENSIONS</text>
+<circle cx="348" cy="112" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Read all page content+creds</text>
+<circle cx="348" cy="126" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Delivered via store or update</text>
+<circle cx="348" cy="140" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Allowlist approved only</text>
+<circle cx="348" cy="154" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Review permissions vs stated function</text>
+
+    <g transform="translate(130,217)">
+      <ellipse cx="2" cy="50" rx="54" ry="4" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+      <path d="M-54,-34 L-50,-38 L50,-38 L54,-34 Z" fill="#2a3a5e"/>
+      <rect x="-54" y="-34" width="108" height="62" rx="3" fill="#0f1a32" stroke="#C4AA88" stroke-width="1.4"/>
+      <rect x="-50" y="-30" width="100" height="54" fill="url(#scr)"/>
+      <text x="0" y="-18" text-anchor="middle" font-size="5.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">WEB SKIM</text>
+      <rect x="-46" y="-9" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="-1" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Injected JS steals input</text>
+<rect x="-46" y="3" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="11" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Payment + credential theft</text>
+<rect x="-46" y="15" width="92" height="10" fill="#1B2A4A" stroke="#A08860" stroke-width="0.3" opacity="0.7"/><text x="-43" y="23" font-size="5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">CSP prevents unauthorized scripts</text>
+      <path d="M-54,28 L54,28 L62,40 L-62,40 Z" fill="url(#goldB)" stroke="#1B2A4A" stroke-width="0.7"/>
+    </g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">WEB SKIMMING</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Injected JS steals input</text>
+<circle cx="88" cy="271" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Payment + credential theft</text>
+<circle cx="88" cy="285" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">CSP prevents unauthorized scripts</text>
+<circle cx="88" cy="299" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Monitor for script changes</text>
+<g transform="translate(390,209)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#A08860" stroke-width="1.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">BROWSER-IN-BROWSER</text>
+<circle cx="348" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fake login rendered in page</text>
+<circle cx="348" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Cannot replicate OS address bar</text>
+<circle cx="348" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Check URL in actual browser bar</text>
+<circle cx="348" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">User awareness is the defense</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -174,19 +257,108 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Cloud Security Framework</text>
-  <g id="pg2-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Shared Responsibility: Provider secures infra — You secure identity, data, config</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Provider: physical DC, hypervisor, network · Customer: IAM, data, bucket access, app security, encryption</text></g>
-  <g id="pg2-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">OAuth Governance: Admin consent required for org data access</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Users grant third-party apps persistent access without scrutiny · Review permissions vs stated function</text></g>
-  <g id="pg2-hl2" class="svg-hl"><rect x="20" y="192" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="216" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Shadow IT: CASB Discovery + Enforcement</text>
-    <text x="36" y="234" font-size="10" fill="#D6CCBC" font-family="system-ui">Employees adopt unapproved cloud services for unmet needs · CASB reveals hundreds of services in large orgs</text></g>
-  <g id="pg2-hl3" class="svg-hl"><rect x="20" y="268" width="480" height="58" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="292" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CSPM: Continuous Cloud IAM + Config Assessment</text>
-    <text x="36" y="310" font-size="10" fill="#D6CCBC" font-family="system-ui">Root keys, wildcard permissions, public buckets = highest priority · Automated remediation for high-confidence findings</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">CLOUD SECURITY FRAMEWORK</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,72)">
+<rect x="-45" y="-36" width="90" height="14" rx="2" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="0" y="-27" text-anchor="middle" font-size="6.5" fill="#C4AA88" font-weight="600" font-family="IBM Plex Mono,monospace">Provider: DC + hypervisor + net</text>
+<rect x="-40" y="-18" width="80" height="14" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<text x="0" y="-9" text-anchor="middle" font-size="6.5" fill="#A08860" font-weight="600" font-family="IBM Plex Mono,monospace">Customer: IAM + data + config</text>
+<rect x="-35" y="0" width="70" height="14" rx="2" fill="#1B2A4A" stroke="#D6CCBC" stroke-width="1.2"/>
+<text x="0" y="9" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-weight="600" font-family="IBM Plex Mono,monospace">App security: customer owns</text>
+<rect x="-30" y="18" width="60" height="14" rx="2" fill="#1B2A4A" stroke="#2a3a5e" stroke-width="1.2"/>
+<text x="0" y="27" text-anchor="middle" font-size="6.5" fill="#2a3a5e" font-weight="600" font-family="IBM Plex Mono,monospace">Encryption config: customer owns</text>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">SHARED RESPONSIBILITY</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Provider: DC + hypervisor + net</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Customer: IAM + data + config</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">App security: customer owns</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Encryption config: customer owns</text>
+<g transform="translate(390,64)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#5BA3D9" opacity="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">OAUTH GOVERNANCE</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Admin consent for org data</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Users grant persistent access</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Review permissions quarterly</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Permissions vs stated function</text>
+<g transform="translate(130,217)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">SHADOW IT CASB</text>
+<circle cx="88" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Discover unsanctioned SaaS</text>
+<circle cx="88" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Block high-risk unmanaged apps</text>
+<circle cx="88" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Redirect to approved alternatives</text>
+<circle cx="88" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Governance extends to shadow IT</text>
+<g transform="translate(390,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">CLOUD MISCONFIGURATION</text>
+<circle cx="348" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Public S3 buckets</text>
+<circle cx="348" cy="271" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Open security groups</text>
+<circle cx="348" cy="285" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">No MFA on root account</text>
+<circle cx="348" cy="299" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">CSPM scans continuously</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -231,21 +403,101 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Web Gateway Architecture</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">SWG: URL Filtering + SSL Inspection</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Category-based allow/block/warn · Decrypt-inspect-re-encrypt HTTPS · Threat intelligence enrichment</text>
-    <text x="36" y="96" font-size="10" fill="#8A7D6B" font-family="system-ui">Requires root cert on managed endpoints · Privacy policy for personal browsing categories</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="120" width="480" height="68" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="144" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DNS Filtering: Protocol-Agnostic Coverage</text>
-    <text x="36" y="162" font-size="10" fill="#D6CCBC" font-family="system-ui">Blocks at resolution — no connection formed · Covers IoT, OT, unmanaged devices · All protocols blocked</text>
-    <text x="36" y="180" font-size="10" fill="#8A7D6B" font-family="system-ui">Enforce: block alt DNS servers at firewall to prevent bypass via 8.8.8.8 or DoH</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Threat Intelligence Integration</text>
-    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Sub-hour updates on attacker infrastructure · Free: CISA, Spamhaus, abuse.ch · Commercial: higher fidelity</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="278" width="480" height="48" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="299" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">BYOD: MDM (full control) or MAM (app container)</text>
-    <text x="36" y="315" font-size="10" fill="#D6CCBC" font-family="system-ui">Define what data is permitted on personal devices · Policy must address lost/stolen device data wipe</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">WEB GATEWAY ARCHITECTURE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">SECURE WEB GATEWAY</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">URL category filtering</text>
+<circle cx="88" cy="126" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">SSL inspection + threat intel</text>
+<circle cx="88" cy="140" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Decrypt·inspect·re-encrypt</text>
+<circle cx="88" cy="154" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Root cert on managed endpoints</text>
+<g transform="translate(390,72)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">DNS FILTERING</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Blocks at resolution</text>
+<circle cx="348" cy="126" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">No connection formed</text>
+<circle cx="348" cy="140" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="144" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Covers IoT + OT + unmanaged</text>
+<circle cx="348" cy="154" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="158" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">All protocols blocked, not just HTTP</text>
+<g transform="translate(130,209)">
+<ellipse cx="0" cy="20" rx="12.6" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-9,0 Q-9,-18 0,-18 Q9,-18 9,0" fill="none" stroke="#A08860" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-13" y="0" width="26" height="18" rx="3" fill="#1B2A4A" stroke="#A08860" stroke-width="1.6"/>
+<circle cx="0" cy="7" r="4" fill="#A08860" opacity="0.8"/>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">BROWSER ISOLATION</text>
+<circle cx="88" cy="257" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remote exec in cloud container</text>
+<circle cx="88" cy="271" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Only pixels delivered locally</text>
+<circle cx="88" cy="285" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Zero-day cannot execute locally</text>
+<circle cx="88" cy="299" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="95" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Full isolation for risky sites</text>
+<g transform="translate(390,209)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">CASB INTEGRATION</text>
+<circle cx="348" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Inline or API mode</text>
+<circle cx="348" cy="271" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="275" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Enforce DLP on cloud uploads</text>
+<circle cx="348" cy="285" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="289" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Block risky sanctioned-app actions</text>
+<circle cx="348" cy="299" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="303" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Context: device posture-based</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -290,19 +542,84 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Internet Threat Incident Response</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Web App Exploitation: Identify → Webshell Hunt → WAF Contain</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">WAF + app logs for exploit method · File integrity monitoring for webshell detection · Patch or take offline</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Cloud Misconfiguration: Correct → Inventory → Access Logs → Notify</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Fix access controls immediately · Bucket access logs show who accessed what · NY DFS 72-hr notification threshold</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Malvertising / Watering Hole: Proxy Logs → EDR → Triage</text>
-    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Web proxy identifies visitors → cross-reference EDR alerts → investigate matched devices · Notify site operator</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="296" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Credential Exposure: Reset → Revoke Sessions → Auth Log Review</text>
-    <text x="36" y="314" font-size="10" fill="#D6CCBC" font-family="system-ui">Dark web monitoring alerts → force resets → revoke sessions → check auth logs for exposure window access</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">INTERNET THREAT INCIDENT RESPONSE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<rect x="28" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<circle cx="72" cy="91" r="12" fill="#0f1a32" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="72" y="95" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">1</text>
+<text x="72" y="113" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">WEB APP EXPLOIT</text>
+<text x="72" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">WAF + app logs</text>
+<text x="72" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Identify exploit method</text>
+<text x="72" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">File integrity → webshell</text>
+<text x="72" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Patch before returning</text>
+<text x="72" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Webshell hunt required</text>
+<line x1="116" y1="107" x2="147" y2="107" stroke="#C4AA88" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="147" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<circle cx="191" cy="91" r="12" fill="#0f1a32" stroke="#5BA3D9" stroke-width="1.2"/>
+<text x="191" y="95" text-anchor="middle" font-size="10" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">2</text>
+<text x="191" y="113" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">CLOUD MISCONFIG</text>
+<text x="191" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fix access controls immediately</text>
+<text x="191" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Bucket logs show access</text>
+<text x="191" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">NY DFS 72hr threshold</text>
+<text x="191" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">NPI accessible = notification</text>
+<text x="191" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Document remediation</text>
+<line x1="235" y1="107" x2="266" y2="107" stroke="#5BA3D9" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="266" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<circle cx="310" cy="91" r="12" fill="#0f1a32" stroke="#A08860" stroke-width="1.2"/>
+<text x="310" y="95" text-anchor="middle" font-size="10" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">3</text>
+<text x="310" y="113" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">MALVERTISING</text>
+<text x="310" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Proxy + DNS logs → source URL</text>
+<text x="310" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">EDR shows execution chain</text>
+<text x="310" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Block source at gateway</text>
+<text x="310" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Triage affected endpoints</text>
+<text x="310" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Patch browser immediately</text>
+<line x1="354" y1="107" x2="385" y2="107" stroke="#A08860" stroke-width="1" marker-end="url(#arr)" opacity="0.5"/>
+<rect x="385" y="75" width="88" height="120" rx="6" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<circle cx="429" cy="91" r="12" fill="#0f1a32" stroke="#2d6a2d" stroke-width="1.2"/>
+<text x="429" y="95" text-anchor="middle" font-size="10" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">4</text>
+<text x="429" y="113" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">EXTENSION COMPROMISE</text>
+<text x="429" y="131" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Remove via MDM policy</text>
+<text x="429" y="145" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Audit OAuth grants</text>
+<text x="429" y="159" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Revoke consent grants</text>
+<text x="429" y="173" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Check all affected users</text>
+<text x="429" y="187" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Update extension policy</text>
+<text x="260" y="278" text-anchor="middle" font-size="8" fill="#A08860" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">internet threat incident response</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -347,26 +664,80 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">BROWSER THREATS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Exploit kits · Extensions · Skimming</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CSP prevents unauthorized scripts</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Patch + remove unused plugins</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CLOUD SECURITY</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Shared responsibility · OAuth admin</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CASB shadow IT · CSPM IAM</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Customer owns the config</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">WEB GATEWAY</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">SWG URL + SSL inspection</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">DNS blocks all protocols</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">TI integration + BYOD policy</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">INCIDENT RESPONSE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Web app · Cloud misconfig</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Malvertising · Credential expose</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Dark web monitoring ongoing</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">INTERNET SECURITY SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,64)">
+<ellipse cx="0" cy="26" rx="15.399999999999999" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-22 L22,-16 L22,6 Q22,26 0,30 Q-22,26 -22,6 L-22,-16 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+</g><text x="130" y="96" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">BROWSER THREATS</text>
+<circle cx="88" cy="112" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="95" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Exploit kits·Extensions·Skimming</text>
+<g transform="translate(390,72) scale(1.3)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="390" y="96" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">CLOUD SECURITY</text>
+<circle cx="348" cy="112" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="355" y="116" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Shared resp·OAuth·Shadow IT·CSPM</text>
+<g transform="translate(130,211)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-20 20,20 -20,20" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="16" text-anchor="middle" font-size="14.0" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="241" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">WEB GATEWAY</text>
+<circle cx="88" cy="257" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="95" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">SWG·DNS filter·Browser iso·CASB</text>
+<g transform="translate(390,217)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="241" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">INCIDENT RESPONSE</text>
+<circle cx="348" cy="257" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="355" y="261" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Web exploit·Cloud·Malvertising·Extension</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">

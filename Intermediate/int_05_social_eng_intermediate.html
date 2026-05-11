@@ -117,19 +117,79 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Phishing Attack Architecture</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Proxy Framework (Evilginx2 / Modlishka)</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Victim connects through attacker proxy to real service · Session cookie captured · OTP MFA defeated</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Domain Spoofing</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Typosquatting · Homoglyphs (Cyrillic a vs Latin a) · Subdomain abuse · Monitor CT logs for early detection</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">OSINT Targeting (LinkedIn · GitHub · Job Postings)</text>
-    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Org chart · Email format · Technology stack · Project names → Convincing spear phishing pretext</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="296" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Only Defense Against Proxy Phishing: FIDO2/WebAuthn</text>
-    <text x="36" y="314" font-size="10" fill="#D6CCBC" font-family="system-ui">Origin binding makes proxy relay cryptographically impossible — authenticator refuses wrong domain</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">PHISHING ATTACK ARCHITECTURE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,96)">
+<ellipse cx="2" cy="36" rx="16" ry="2.5" fill="#0f1a32" opacity="0.4"/>
+<path d="M-14,-8 Q-14,-18 0,-18 Q14,-18 14,-8 L16,34 L-16,34 Z" fill="#0f1a32" stroke="#A08860" stroke-width="0.6"/>
+<path d="M-12,-8 Q-12,-16 -4,-17" fill="none" stroke="#2a3a5e" stroke-width="0.5"/>
+<ellipse cx="0" cy="-3" rx="8" ry="7" fill="#000000"/>
+<circle cx="-3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<circle cx="3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<text x="0" y="48" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">ATTACKER</text>
+</g><text x="130" y="136" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">EVILGINX PROXY</text>
+<text x="130" y="148" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Victim ↔ Attacker ↔ Real Site</text>
+<text x="130" y="160" text-anchor="middle" font-size="6" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">FIDO2 only defense</text>
+<rect x="338" y="78" width="104" height="16" rx="2" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="0.8"/>
+<text x="390" y="89" text-anchor="middle" font-size="7.5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">bank.com</text>
+<rect x="338" y="100" width="104" height="16" rx="2" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="390" y="111" text-anchor="middle" font-size="7.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">bαnk.com</text>
+<rect x="338" y="122" width="104" height="16" rx="2" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="390" y="133" text-anchor="middle" font-size="7.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">bank-secure.com</text>
+<text x="390" y="148" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">DOMAIN SPOOFING</text>
+<text x="390" y="160" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Typosquat · Homoglyphs · Sub</text>
+<circle cx="98" cy="229" r="14" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<text x="98" y="234" text-anchor="middle" font-size="6" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">Linke</text>
+<circle cx="130" cy="229" r="14" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<text x="130" y="234" text-anchor="middle" font-size="6" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">GitHu</text>
+<circle cx="162" cy="229" r="14" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<text x="162" y="234" text-anchor="middle" font-size="6" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">Job P</text>
+<text x="130" y="263" text-anchor="middle" font-size="6.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">OSINT → SPEAR-PHISH</text>
+<text x="130" y="275" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Attacker knows org chart + vendors</text>
+<text x="130" y="303" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">OSINT TARGETING</text>
+<rect x="342" y="223" width="96" height="18" rx="3" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.7"/>
+<text x="390" y="235" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">HTML SMUGGLE</text>
+<rect x="342" y="247" width="96" height="18" rx="3" fill="#1B2A4A" stroke="#A08860" stroke-width="0.7"/>
+<text x="390" y="259" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">QR CODE</text>
+<rect x="342" y="271" width="96" height="18" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="0.7"/>
+<text x="390" y="283" text-anchor="middle" font-size="7" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">OLE MACRO</text>
+<text x="390" y="301" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">PAYLOAD DELIVERY</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -174,35 +234,80 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">BEC Attack Variants and Controls</text>
-  <g id="pg2-hl0" class="svg-hl" transform="translate(130,110)">
-    <rect x="-100" y="-68" width="200" height="136" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text y="-44" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CEO FRAUD</text>
-    <text y="-24" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Executive impersonation</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Urgency + confidentiality</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Wire transfer request</text>
-    <text y="30" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Fix: Out-of-band verify</text></g>
-  <g id="pg2-hl1" class="svg-hl" transform="translate(390,110)">
-    <rect x="-100" y="-68" width="200" height="136" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text y="-44" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">VENDOR IMPERSONATION</text>
-    <text y="-24" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Banking change request</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Lookalike vendor domain</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Timed to real payment</text>
-    <text y="30" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Fix: Callback on file number</text></g>
-  <g id="pg2-hl2" class="svg-hl" transform="translate(130,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">ACCOUNT TAKEOVER</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Real account — passes all auth</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Observes then inserts</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">No spoofed domain</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Fix: Behavioral monitoring</text></g>
-  <g id="pg2-hl3" class="svg-hl" transform="translate(390,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">CONTROLS</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Out-of-band verify</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Dual authorization</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Pre-verified callback</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Procedural — not technical</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">BEC ATTACK VARIANTS AND CONTROLS</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,88)">
+<rect x="-22" y="-14" width="44" height="30" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+<rect x="-22" y="-14" width="44" height="30" fill="#9B2B2B" opacity="0.1"/>
+<path d="M-22,-14 L0,2 L22,-14" fill="none" stroke="#9B2B2B" stroke-width="0.7"/>
+<text x="0" y="5" text-anchor="middle" font-size="5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">⚠ URGENT</text>
+</g><text x="130" y="112" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">CEO FRAUD</text>
+<text x="130" y="126" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Wire transfer urgent</text>
+<text x="130" y="138" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Executive impersonation</text>
+<text x="130" y="150" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fix: out-of-band verify</text>
+<g transform="translate(390,88)">
+<rect x="-22" y="-14" width="44" height="30" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+<rect x="-22" y="-14" width="44" height="30" fill="#9B2B2B" opacity="0.1"/>
+<path d="M-22,-14 L0,2 L22,-14" fill="none" stroke="#9B2B2B" stroke-width="0.7"/>
+<text x="0" y="5" text-anchor="middle" font-size="5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">⚠ URGENT</text>
+</g><text x="390" y="112" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">VENDOR IMPERSONATE</text>
+<text x="390" y="126" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Updated banking info</text>
+<text x="390" y="138" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Lookalike domain email</text>
+<text x="390" y="150" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fix: callback verification</text>
+<g transform="translate(130,233)">
+<rect x="-22" y="-14" width="44" height="30" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+<rect x="-22" y="-14" width="44" height="30" fill="#9B2B2B" opacity="0.1"/>
+<path d="M-22,-14 L0,2 L22,-14" fill="none" stroke="#9B2B2B" stroke-width="0.7"/>
+<text x="0" y="5" text-anchor="middle" font-size="5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">⚠ URGENT</text>
+</g><text x="130" y="257" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">PAYROLL DIVERSION</text>
+<text x="130" y="271" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Direct deposit change</text>
+<text x="130" y="283" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">HR team targeted</text>
+<text x="130" y="295" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fix: call from known number</text>
+<g transform="translate(390,233)">
+<rect x="-22" y="-14" width="44" height="30" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+<rect x="-22" y="-14" width="44" height="30" fill="#9B2B2B" opacity="0.1"/>
+<path d="M-22,-14 L0,2 L22,-14" fill="none" stroke="#9B2B2B" stroke-width="0.7"/>
+<text x="0" y="5" text-anchor="middle" font-size="5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">⚠ URGENT</text>
+</g><text x="390" y="257" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">INVOICE FRAUD</text>
+<text x="390" y="271" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Altered banking details</text>
+<text x="390" y="283" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Finance team targeted</text>
+<text x="390" y="295" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fix: dual approval required</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -247,19 +352,106 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Multi-Channel Social Engineering</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Vishing + AI Voice Cloning</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Caller ID spoofed · Short audio sample → cloned voice · Recognized voice disarms analytical skepticism</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Smishing + QR Code Attacks</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Truncated URLs · Package / bank pretexts · QR stickers bypass URL inspection entirely</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Physical: Tailgating · USB Baiting · Impersonation</text>
-    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Bypasses all network controls · Exploits courtesy norms · Curiosity delivers malware payload</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="36" y="295" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Multi-Channel Escalation Pattern</text>
-    <text x="36" y="313" font-size="10" fill="#D6CCBC" font-family="system-ui">Preliminary contact establishes context → Call arrives expected → Rapport built → High-stakes request</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">MULTI-CHANNEL SOCIAL ENGINEERING</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<rect x="36" y="65" width="128" height="180" rx="6" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.2"/>
+<rect x="36" y="65" width="128" height="20" rx="4" fill="#9B2B2B" opacity="0.15"/>
+<text x="100" y="81" text-anchor="middle" font-size="7.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">VISHING + AI CLONING</text>
+<g transform="translate(100,129)">
+<ellipse cx="1" cy="48" rx="20" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-24" y="-46" width="49" height="86" rx="7" fill="url(#scr)" stroke="#C4AA88" stroke-width="1.3"/>
+<rect x="-20" y="-40" width="41" height="68" rx="2" fill="#0f1a32"/>
+<rect x="-7" y="-44" width="14" height="2" rx="1" fill="#A08860"/>
+<circle cx="0" cy="36" r="3" fill="#A08860" stroke="#C4AA88" stroke-width="0.5"/>
+<text x="0" y="-30" text-anchor="middle" font-size="4.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">INCOMING CALL</text>
+<circle cx="0" cy="-18" r="9" fill="#2a3a5e" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="0" cy="-21" r="3" fill="#C4AA88"/>
+<path d="M-5,-13 Q-5,-16 0,-16 Q5,-16 5,-13" fill="#C4AA88"/>
+<text x="0" y="-3" text-anchor="middle" font-size="5.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">"IT DEPT"</text>
+<circle cx="0" cy="5" r="3.5" fill="#9B2B2B"/>
+<line x1="-2" y1="3" x2="2" y2="7" stroke="#ffffff" stroke-width="1"/>
+<line x1="-2" y1="7" x2="2" y2="3" stroke="#ffffff" stroke-width="1"/>
+<circle cx="-10" cy="23" r="4" fill="#9B2B2B"/>
+<text x="-10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✕</text>
+<circle cx="10" cy="23" r="4" fill="#2d6a2d"/>
+<text x="10" y="25" text-anchor="middle" font-size="5" fill="#D6CCBC">✓</text>
+</g><circle cx="48" cy="177" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="54" y="181" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Caller ID spoofed</text>
+<circle cx="48" cy="193" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="54" y="197" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Short sample → cloned voice</text>
+<circle cx="48" cy="209" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="54" y="213" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Recognized voice disarms</text>
+<circle cx="48" cy="225" r="2.5" fill="#9B2B2B" opacity="0.7"/>
+<text x="54" y="229" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Verify via callback to known #</text>
+<rect x="196" y="65" width="128" height="180" rx="6" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<rect x="196" y="65" width="128" height="20" rx="4" fill="#5BA3D9" opacity="0.15"/>
+<text x="260" y="81" text-anchor="middle" font-size="7.5" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">SMISHING + QR CODES</text>
+<rect x="238" y="103" width="44" height="44" rx="3" fill="#0f1a32" stroke="#5BA3D9" stroke-width="0.8"/>
+<text x="260" y="128" text-anchor="middle" font-size="18" fill="#5BA3D9">⬛</text>
+<text x="260" y="143" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">QR CODE</text>
+<circle cx="208" cy="177" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="214" y="181" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Truncated URLs</text>
+<circle cx="208" cy="193" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="214" y="197" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Bank/package pretexts</text>
+<circle cx="208" cy="209" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="214" y="213" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">QR stickers bypass inspection</text>
+<circle cx="208" cy="225" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="214" y="229" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Treat unexpected QR as suspect</text>
+<rect x="356" y="65" width="128" height="180" rx="6" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<rect x="356" y="65" width="128" height="20" rx="4" fill="#A08860" opacity="0.15"/>
+<text x="420" y="81" text-anchor="middle" font-size="7.5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">PHYSICAL TECHNIQUES</text>
+<g transform="translate(420,125)">
+<ellipse cx="2" cy="36" rx="16" ry="2.5" fill="#0f1a32" opacity="0.4"/>
+<path d="M-14,-8 Q-14,-18 0,-18 Q14,-18 14,-8 L16,34 L-16,34 Z" fill="#0f1a32" stroke="#A08860" stroke-width="0.6"/>
+<path d="M-12,-8 Q-12,-16 -4,-17" fill="none" stroke="#2a3a5e" stroke-width="0.5"/>
+<ellipse cx="0" cy="-3" rx="8" ry="7" fill="#000000"/>
+<circle cx="-3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<circle cx="3" cy="-4" r="1.2" fill="#9B2B2B"/>
+<text x="0" y="48" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">ATTACKER</text>
+</g><circle cx="368" cy="177" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="374" y="181" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Tailgating → courtesy</text>
+<circle cx="368" cy="193" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="374" y="197" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">USB baiting → curiosity</text>
+<circle cx="368" cy="209" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="374" y="213" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Impersonation → authority</text>
+<circle cx="368" cy="225" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="374" y="229" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">All target human behavior</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -304,19 +496,84 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Defense Layers Against Social Engineering</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Technical: DMARC · Gateway · Safe Links · Browser Isolation</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Reduces phishing volume · Cannot stop account takeover BEC or no-link social engineering</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="116" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="140" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Simulation: Varied pretexts · Instant training · Track reporting rate</text>
-    <text x="36" y="158" font-size="10" fill="#D6CCBC" font-family="system-ui">Learning tool not punishment · High reporting rate is the success metric · Match real campaign quality</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="194" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text x="36" y="218" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Reporting Culture: No blame · Visible response · Recognition</text>
-    <text x="36" y="236" font-size="10" fill="#D6CCBC" font-family="system-ui">Every report = threat intelligence · Fast reports protect the organization · Suppress blame not reporting</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="272" width="480" height="54" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="295" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Metrics: Reporting rate · Time to report · Incident rate trends</text>
-    <text x="36" y="313" font-size="10" fill="#D6CCBC" font-family="system-ui">Click rate alone is insufficient · Reporting rate + incident reduction = actual resilience</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">DEFENSE LAYERS AGAINST SOCIAL ENGINEERING</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<rect x="78" y="60" width="104" height="88" rx="6" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="130" y="76" text-anchor="middle" font-size="7.5" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">TECHNICAL CONTROLS</text>
+<circle cx="90" cy="92" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="97" y="96" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">DMARC p=reject</text>
+<circle cx="90" cy="106" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="97" y="110" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Secure email gateway</text>
+<circle cx="90" cy="120" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="97" y="124" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Safe Links + sandbox</text>
+<circle cx="90" cy="134" r="2.5" fill="#C4AA88" opacity="0.7"/>
+<text x="97" y="138" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Browser isolation</text>
+<rect x="338" y="60" width="104" height="88" rx="6" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<text x="390" y="76" text-anchor="middle" font-size="7.5" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">PHISHING SIMULATION</text>
+<circle cx="350" cy="92" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="357" y="96" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Varied pretexts</text>
+<circle cx="350" cy="106" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="357" y="110" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Instant training on click</text>
+<circle cx="350" cy="120" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="357" y="124" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Track REPORTING rate</text>
+<circle cx="350" cy="134" r="2.5" fill="#5BA3D9" opacity="0.7"/>
+<text x="357" y="138" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">High report rate = success</text>
+<rect x="78" y="205" width="104" height="88" rx="6" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<text x="130" y="221" text-anchor="middle" font-size="7.5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">REPORTING CULTURE</text>
+<circle cx="90" cy="237" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="97" y="241" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">No-blame environment</text>
+<circle cx="90" cy="251" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="97" y="255" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Visible security response</text>
+<circle cx="90" cy="265" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="97" y="269" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Recognize reporters</text>
+<circle cx="90" cy="279" r="2.5" fill="#2d6a2d" opacity="0.7"/>
+<text x="97" y="283" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Fear suppresses reports</text>
+<rect x="338" y="205" width="104" height="88" rx="6" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<text x="390" y="221" text-anchor="middle" font-size="7.5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">PROCESS CONTROLS</text>
+<circle cx="350" cy="237" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="357" y="241" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Out-of-band wire verify</text>
+<circle cx="350" cy="251" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="357" y="255" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Payment change callback</text>
+<circle cx="350" cy="265" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="357" y="269" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Access request confirm</text>
+<circle cx="350" cy="279" r="2.5" fill="#A08860" opacity="0.7"/>
+<text x="357" y="283" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Sans,sans-serif">Friction = intentional</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -361,26 +618,64 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">PHISHING INFRA</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Proxy kits · Domain spoofing</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">OSINT-driven targeting</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Only FIDO2 is immune</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">BEC</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">CEO fraud · Vendor impersonation</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Account takeover BEC</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Procedural controls defeat</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">MULTI-CHANNEL</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Vishing + AI cloning</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Smishing · Physical · QR</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Constructed legitimacy</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">DEFENSE</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Technical reduces volume</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Reporting culture = key</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Reporting rate &gt; click rate</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">SOCIAL ENGINEERING — SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,102)">
+<ellipse cx="0" cy="24" rx="14.0" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-20 L20,-14 L20,6 Q20,24 0,28 Q-20,24 -20,6 L-20,-14 Z" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+</g><text x="130" y="138" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">PHISHING INFRA</text>
+<text x="130" y="151" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Proxy·Domain·OSINT</text>
+<g transform="translate(390,102)">
+<ellipse cx="0" cy="24" rx="14.0" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-20 L20,-14 L20,6 Q20,24 0,28 Q-20,24 -20,6 L-20,-14 Z" fill="#1B2A4A" stroke="#A08860" stroke-width="1.8"/>
+</g><text x="390" y="138" text-anchor="middle" font-size="8" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">BEC VARIANTS</text>
+<text x="390" y="151" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">CEO·Vendor·Payroll·Invoice</text>
+<g transform="translate(130,247)">
+<ellipse cx="0" cy="24" rx="14.0" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-20 L20,-14 L20,6 Q20,24 0,28 Q-20,24 -20,6 L-20,-14 Z" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+</g><text x="130" y="283" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">MULTI-CHANNEL</text>
+<text x="130" y="296" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Vishing·Smishing·Physical</text>
+<g transform="translate(390,247)">
+<ellipse cx="0" cy="24" rx="14.0" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-20 L20,-14 L20,6 Q20,24 0,28 Q-20,24 -20,6 L-20,-14 Z" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.8"/>
+</g><text x="390" y="283" text-anchor="middle" font-size="8" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">DEFENSE STRATEGY</text>
+<text x="390" y="296" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Technical+Sim+Culture+Process</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">

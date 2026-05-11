@@ -117,19 +117,94 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Core Security Design Principles</text>
-  <g id="pg1-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">Defense in Depth — Layered Independent Controls</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Firewall + Segmentation + EDR + Auth + Monitoring · Failure of one layer does not defeat all security</text></g>
-  <g id="pg1-hl1" class="svg-hl"><rect x="20" y="114" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="138" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Least Privilege — Minimum Access for Each Function</text>
-    <text x="36" y="156" font-size="10" fill="#D6CCBC" font-family="system-ui">Over-provisioning is the default · Limits blast radius · Service accounts, apps, and users all apply</text></g>
-  <g id="pg1-hl2" class="svg-hl"><rect x="20" y="190" width="480" height="62" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="214" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Fail Secure — Control Failure Defaults to Protected State</text>
-    <text x="36" y="232" font-size="10" fill="#D6CCBC" font-family="system-ui">Block on failure, not allow · Authentication failure = deny · Accept availability impact over security impact</text></g>
-  <g id="pg1-hl3" class="svg-hl"><rect x="20" y="266" width="480" height="60" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="290" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Separation of Duties — Multiple Actors for Critical Functions</text>
-    <text x="36" y="308" font-size="10" fill="#D6CCBC" font-family="system-ui">No single person authorizes + executes · Limits insider threat + compromised account impact · Requires process design</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">CORE SECURITY DESIGN PRINCIPLES</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<ellipse cx="130" cy="116" rx="82" ry="45" fill="url(#halo)" opacity="0"/><g transform="translate(130,106)">
+<rect x="-45" y="-45" width="90" height="14" rx="2" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="0" y="-36" text-anchor="middle" font-size="6.5" fill="#C4AA88" font-weight="600" font-family="IBM Plex Mono,monospace">MONITORING</text>
+<rect x="-40" y="-27" width="80" height="14" rx="2" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<text x="0" y="-18" text-anchor="middle" font-size="6.5" fill="#5BA3D9" font-weight="600" font-family="IBM Plex Mono,monospace">AUTHENTICATION</text>
+<rect x="-35" y="-9" width="70" height="14" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="1.2"/>
+<text x="0" y="0" text-anchor="middle" font-size="6.5" fill="#A08860" font-weight="600" font-family="IBM Plex Mono,monospace">EDR/AV</text>
+<rect x="-30" y="9" width="60" height="14" rx="2" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<text x="0" y="18" text-anchor="middle" font-size="6.5" fill="#2d6a2d" font-weight="600" font-family="IBM Plex Mono,monospace">FIREWALL</text>
+<rect x="-25" y="27" width="50" height="14" rx="2" fill="#1B2A4A" stroke="#D6CCBC" stroke-width="1.2"/>
+<text x="0" y="36" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-weight="600" font-family="IBM Plex Mono,monospace">DATA</text>
+</g><text x="130" y="176" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">DEFENSE IN DEPTH</text>
+<g transform="translate(390,108) scale(1.3)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#C4AA88" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#C4AA88" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+</g>
+<rect x="339" y="134" width="14" height="20" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="346" cy="148" r="2" fill="#A08860" opacity="0.4"/>
+<rect x="361" y="134" width="14" height="20" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="368" cy="148" r="2" fill="#A08860" opacity="0.4"/>
+<rect x="383" y="134" width="14" height="20" rx="1" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.5"/>
+<path d="383,144 A7,10 0 0,1 397,144" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<circle cx="390" cy="148" r="2" fill="#5BA3D9" opacity="1"/>
+<rect x="405" y="134" width="14" height="20" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="412" cy="148" r="2" fill="#A08860" opacity="0.4"/>
+<rect x="427" y="134" width="14" height="20" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<circle cx="434" cy="148" r="2" fill="#A08860" opacity="0.4"/>
+<text x="390" y="170" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">LEAST PRIVILEGE</text>
+<rect x="100" y="217" width="60" height="78" rx="3" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
+<rect x="102" y="219" width="56" height="74" rx="2" fill="#0f1a32"/>
+<line x1="130" y1="217" x2="130" y2="295" stroke="#A08860" stroke-width="0.7" opacity="0.5"/>
+<circle cx="148" cy="259" r="4" fill="#A08860"/>
+<g transform="translate(130,299)">
+<ellipse cx="0" cy="16" rx="9.799999999999999" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-7,0 Q-7,-14 0,-14 Q7,-14 7,0" fill="none" stroke="#2d6a2d" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-11" y="0" width="22" height="14" rx="3" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.6"/>
+<circle cx="0" cy="5" r="4" fill="#2d6a2d" opacity="0.8"/>
+</g><text x="130" y="329" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">FAIL SECURE</text>
+<circle cx="362" cy="223" r="9" fill="url(#goldB)" stroke="#0f1a32" stroke-width="0.7"/>
+<path d="M352,239 Q352,246 352,261 L372,261 Q372,246 372,239 Z" fill="url(#goldB)" stroke="#0f1a32" stroke-width="0.7"/>
+<rect x="382.4" y="265" width="16" height="8" rx="1" fill="#C4AA88" opacity="0.8" transform="translate(-8,0)"/>
+<circle cx="418" cy="223" r="9" fill="url(#goldB)" stroke="#0f1a32" stroke-width="0.7"/>
+<path d="M408,239 Q408,246 408,261 L428,261 Q428,246 428,239 Z" fill="url(#goldB)" stroke="#0f1a32" stroke-width="0.7"/>
+<rect x="393.6" y="265" width="16" height="8" rx="1" fill="#C4AA88" opacity="0.8" transform="translate(-8,0)"/>
+<line x1="370" y1="269" x2="410" y2="269" stroke="#A08860" stroke-width="0.8" stroke-dasharray="2,2"/>
+<text x="390" y="267" text-anchor="middle" font-size="7" fill="#A08860" font-family="IBM Plex Mono,monospace">+</text>
+<text x="390" y="309" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">SEPARATION OF DUTIES</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg1">
@@ -174,35 +249,114 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Security Architecture Patterns</text>
-  <g id="pg2-hl0" class="svg-hl" transform="translate(130,110)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text y="-40" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">ZERO TRUST</text>
-    <text y="-22" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Verify every request</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Identity + device + behavior</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Network location ≠ trust</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Progressive implementation</text></g>
-  <g id="pg2-hl1" class="svg-hl" transform="translate(390,110)">
-    <rect x="-100" y="-65" width="200" height="130" rx="10" fill="#1B2A4A" stroke="#C4AA88" stroke-width="2"/>
-    <text y="-40" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">API SECURITY</text>
-    <text y="-22" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Auth + AuthZ + Validation</text>
-    <text y="-8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Rate limiting + Logging</text>
-    <text y="8" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Gateway centralizes controls</text>
-    <text y="28" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Internal APIs also require auth</text></g>
-  <g id="pg2-hl2" class="svg-hl" transform="translate(130,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">CRYPTO ARCHITECTURE</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">AES-256, TLS 1.3, SHA-256+</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">HSM for key storage</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Crypto-agile design</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">PQC-ready for long-lived data</text></g>
-  <g id="pg2-hl3" class="svg-hl" transform="translate(390,264)">
-    <rect x="-100" y="-55" width="200" height="110" rx="10" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-32" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">RESILIENCE</text>
-    <text y="-14" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Redundancy + geo distribution</text>
-    <text y="2" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">Graceful degradation</text>
-    <text y="18" text-anchor="middle" font-size="9" fill="#D6CCBC" font-family="system-ui">DDoS scrubbing + CDN</text>
-    <text y="40" text-anchor="middle" font-size="9" fill="#8A7D6B" font-family="system-ui">Test RTO/RPO under real conditions</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">SECURITY ARCHITECTURE PATTERNS</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<ellipse cx="130" cy="108" rx="44" ry="22" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<ellipse cx="130" cy="108" rx="20" ry="20" fill="#0f1a32" stroke="#A08860" stroke-width="0.8"/>
+<circle cx="130" cy="108" r="8" fill="#C4AA88" opacity="0.7"/>
+<circle cx="130" cy="108" r="3" fill="#0f1a32"/>
+<text x="130" y="136" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">NEVER TRUST</text>
+<text x="130" y="146" text-anchor="middle" font-size="7" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">ALWAYS VERIFY</text>
+<text x="130" y="166" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">ZERO TRUST</text>
+<rect x="354" y="86" width="72" height="44" rx="4" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.5"/>
+<text x="390" y="104" text-anchor="middle" font-size="7" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">API GATEWAY</text>
+<text x="390" y="118" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Auth · Rate Limit</text>
+<text x="390" y="128" text-anchor="middle" font-size="6" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Log · Validate</text>
+<line x1="330" y1="108" x2="354" y2="108" stroke="#A08860" stroke-width="1.2" marker-end="url(#arr)"/>
+<line x1="426" y1="108" x2="450" y2="108" stroke="#2d6a2d" stroke-width="1.2" marker-end="url(#arr)"/>
+<text x="338" y="104" font-size="5.5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">client</text>
+<text x="430" y="104" font-size="5.5" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">service</text>
+<text x="390" y="156" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">API SECURITY</text>
+<g transform="translate(130,221) scale(1.2)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#C4AA88" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#C4AA88" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#C4AA88" stroke-width="2" stroke-linecap="round"/>
+</g>
+<line x1="130" y1="241" x2="100" y2="257" stroke="#A08860" stroke-width="0.8"/>
+<line x1="130" y1="241" x2="160" y2="257" stroke="#A08860" stroke-width="0.8"/>
+<g transform="translate(100,265) scale(0.8)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#5BA3D9" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#5BA3D9" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#5BA3D9" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g transform="translate(160,265) scale(0.8)">
+<circle cx="-12" cy="0" r="9" fill="#1B2A4A" stroke="#7EC8A0" stroke-width="1.8"/>
+<circle cx="-12" cy="0" r="5" fill="none" stroke="#7EC8A0" stroke-width="1.2"/>
+<line x1="-3" y1="0" x2="18" y2="0" stroke="#7EC8A0" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="14" y1="0" x2="14" y2="5" stroke="#7EC8A0" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="5" stroke="#7EC8A0" stroke-width="2" stroke-linecap="round"/>
+</g>
+<text x="100" y="281" text-anchor="middle" font-size="5.5" fill="#5BA3D9" font-family="IBM Plex Mono,monospace">KEK</text>
+<text x="160" y="281" text-anchor="middle" font-size="5.5" fill="#7EC8A0" font-family="IBM Plex Mono,monospace">DEK</text>
+<text x="130" y="215" text-anchor="middle" font-size="5.5" fill="#C4AA88" font-family="IBM Plex Mono,monospace">ROOT CA</text>
+<text x="130" y="307" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">CRYPTO ARCHITECTURE</text>
+<rect x="374" y="219" width="32" height="16" rx="2" fill="#1B2A4A" stroke="#2d6a2d" stroke-width="1.2"/>
+<text x="390" y="230" text-anchor="middle" font-size="6" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">LB</text>
+<line x1="390" y1="235" x2="362" y2="251" stroke="#2d6a2d" stroke-width="0.8"/>
+<line x1="390" y1="235" x2="418" y2="251" stroke="#2d6a2d" stroke-width="0.8"/>
+<g transform="translate(362,275)">
+<ellipse cx="2" cy="40" rx="30" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-28" y="-16" width="56" height="13" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<rect x="-26" y="-14" width="28" height="9" fill="#0f1a32" rx="1"/>
+<circle cx="20" cy="-9.5" r="2" fill="#2d6a2d"/>
+<circle cx="24" cy="-9.5" r="2" fill="#A08860" opacity="0.5"/>
+<rect x="-28" y="0" width="56" height="13" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<rect x="-26" y="2" width="28" height="9" fill="#0f1a32" rx="1"/>
+<circle cx="20" cy="6.5" r="2" fill="#9B2B2B"/>
+<circle cx="24" cy="6.5" r="2" fill="#A08860" opacity="0.5"/>
+<text x="0" y="-24" text-anchor="middle" font-size="6" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">SRV-A</text>
+</g><g transform="translate(418,275)">
+<ellipse cx="2" cy="40" rx="30" ry="3" fill="#0f1a32" opacity="0.35" filter="url(#sh)"/>
+<rect x="-28" y="-16" width="56" height="13" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<rect x="-26" y="-14" width="28" height="9" fill="#0f1a32" rx="1"/>
+<circle cx="20" cy="-9.5" r="2" fill="#2d6a2d"/>
+<circle cx="24" cy="-9.5" r="2" fill="#A08860" opacity="0.5"/>
+<rect x="-28" y="0" width="56" height="13" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<rect x="-26" y="2" width="28" height="9" fill="#0f1a32" rx="1"/>
+<circle cx="20" cy="6.5" r="2" fill="#9B2B2B"/>
+<circle cx="24" cy="6.5" r="2" fill="#A08860" opacity="0.5"/>
+<text x="0" y="-24" text-anchor="middle" font-size="6" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">SRV-B</text>
+</g><text x="390" y="315" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">RESILIENCE</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg2">
@@ -247,19 +401,106 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Threat Modeling Process</text>
-  <g id="pg3-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">STRIDE Threat Categories</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">Spoofing · Tampering · Repudiation · Information Disclosure · Denial of Service · Elevation of Privilege</text>
-    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Apply systematically to every component and data flow crossing a trust boundary</text></g>
-  <g id="pg3-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="148" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Attack Trees — Modeling Attacker Paths</text>
-    <text x="36" y="166" font-size="10" fill="#D6CCBC" font-family="system-ui">Goal at root · OR/AND branches · Reveals which controls block the most paths efficiently</text></g>
-  <g id="pg3-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Data Flow Diagrams — Trust Boundary Analysis</text>
-    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Where does NPI live, move, and get processed? · Every trust boundary crossing = security control required</text></g>
-  <g id="pg3-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="303" font-size="10" fill="#D6CCBC" font-family="system-ui">Most valuable early in design · Applicable to existing systems for gap identification · Recurring practice for material changes</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">THREAT MODELING PROCESS</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<polygon points="144.0,78.0 137.0,90.1 123.0,90.1 116.0,78.0 123.0,65.9 137.0,65.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="130.0" y="81.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">S</text>
+<polygon points="176.9,97.0 169.9,109.1 155.9,109.1 148.9,97.0 155.9,84.9 169.9,84.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="162.9089653438087" y="100.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">T</text>
+<polygon points="176.9,135.0 169.9,147.1 155.9,147.1 148.9,135.0 155.9,122.9 169.9,122.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="162.9089653438087" y="138.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">R</text>
+<polygon points="144.0,154.0 137.0,166.1 123.0,166.1 116.0,154.0 123.0,141.9 137.0,141.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="130.0" y="157.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">I</text>
+<polygon points="111.1,135.0 104.1,147.1 90.1,147.1 83.1,135.0 90.1,122.9 104.1,122.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="97.09103465619133" y="138.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">D</text>
+<polygon points="111.1,97.0 104.1,109.1 90.1,109.1 83.1,97.0 90.1,84.9 104.1,84.9" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="0.8"/>
+<text x="97.09103465619134" y="100.0" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">E</text>
+<text x="130" y="119" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">STRIDE</text>
+<text x="130" y="180" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">THREAT CATEGORIES</text>
+<text x="390" y="64" text-anchor="middle" font-size="6" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">GOAL</text>
+<rect x="370" y="72" width="40" height="12" rx="2" fill="#9B2B2B" opacity="0.2" stroke="#9B2B2B" stroke-width="0.7"/>
+<line x1="390" y1="84" x2="360" y2="98" stroke="#A08860" stroke-width="0.8"/>
+<line x1="390" y1="84" x2="420" y2="98" stroke="#A08860" stroke-width="0.8"/>
+<text x="360" y="98" text-anchor="middle" font-size="5.5" fill="#A08860" font-family="IBM Plex Mono,monospace">OR</text>
+<rect x="342" y="104" width="36" height="10" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<line x1="360" y1="114" x2="354" y2="128" stroke="#A08860" stroke-width="0.6"/>
+<rect x="342" y="128" width="24" height="8" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.5" opacity="0.7"/>
+<line x1="360" y1="114" x2="378" y2="128" stroke="#A08860" stroke-width="0.6"/>
+<rect x="366" y="128" width="24" height="8" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.5" opacity="0.7"/>
+<text x="420" y="98" text-anchor="middle" font-size="5.5" fill="#A08860" font-family="IBM Plex Mono,monospace">OR</text>
+<rect x="402" y="104" width="36" height="10" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.6"/>
+<line x1="420" y1="114" x2="414" y2="128" stroke="#A08860" stroke-width="0.6"/>
+<rect x="402" y="128" width="24" height="8" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.5" opacity="0.7"/>
+<line x1="420" y1="114" x2="438" y2="128" stroke="#A08860" stroke-width="0.6"/>
+<rect x="426" y="128" width="24" height="8" rx="1" fill="#1B2A4A" stroke="#A08860" stroke-width="0.5" opacity="0.7"/>
+<text x="390" y="160" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">ATTACK TREES</text>
+<rect x="78" y="223" width="40" height="24" rx="3" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<text x="98" y="238" text-anchor="middle" font-size="5.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">USER</text>
+<line x1="118" y1="235" x2="142" y2="235" stroke="#A08860" stroke-width="0.8" marker-end="url(#arr)" stroke-dasharray="2,2"/>
+<rect x="142" y="223" width="40" height="24" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="0.8"/>
+<text x="162" y="238" text-anchor="middle" font-size="5.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">APP</text>
+<line x1="130" y1="251" x2="130" y2="265" stroke="#9B2B2B" stroke-width="1.5" stroke-dasharray="3,2"/>
+<text x="130" y="247" text-anchor="middle" font-size="6" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">TRUST BOUNDARY</text>
+<rect x="78" y="269" width="40" height="24" rx="3" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<text x="98" y="284" text-anchor="middle" font-size="5.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">DB</text>
+<line x1="162" y1="247" x2="162" y2="269" stroke="#A08860" stroke-width="0.8" marker-end="url(#arr)"/>
+<text x="130" y="309" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">DATA FLOW DIAGRAMS</text>
+<rect x="363" y="227" width="18" height="18" fill="#9B2B2B" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="372" y="239" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">H</text>
+<rect x="381" y="227" width="18" height="18" fill="#9B2B2B" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="390" y="239" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">C</text>
+<rect x="399" y="227" width="18" height="18" fill="#9B2B2B" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="408" y="239" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">C</text>
+<rect x="363" y="245" width="18" height="18" fill="#9B2B2B" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="372" y="257" text-anchor="middle" font-size="7" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">M</text>
+<rect x="381" y="245" width="18" height="18" fill="#A08860" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="390" y="257" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">H</text>
+<rect x="399" y="245" width="18" height="18" fill="#A08860" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="408" y="257" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">C</text>
+<rect x="363" y="263" width="18" height="18" fill="#A08860" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="372" y="275" text-anchor="middle" font-size="7" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">L</text>
+<rect x="381" y="263" width="18" height="18" fill="#2d6a2d" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="390" y="275" text-anchor="middle" font-size="7" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">M</text>
+<rect x="399" y="263" width="18" height="18" fill="#2d6a2d" opacity="0.25" stroke="#0f1a32" stroke-width="0.4"/>
+<text x="408" y="275" text-anchor="middle" font-size="7" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">H</text>
+<text x="390" y="285" text-anchor="middle" font-size="6" fill="#A08860" font-family="IBM Plex Mono,monospace">Impact × Likelihood</text>
+<text x="390" y="305" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">RISK SCORING</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg3">
@@ -304,19 +545,86 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <text x="260" y="24" text-anchor="middle" font-size="13" fill="#D6CCBC" font-weight="600" font-family="system-ui">Insurance Agency Security Architecture</text>
-  <g id="pg4-hl0" class="svg-hl"><rect x="20" y="38" width="480" height="72" rx="8" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="2"/>
-    <text x="36" y="62" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">NY DFS 500 Architectural Requirements</text>
-    <text x="36" y="80" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA for NPI access · Encryption of NPI at rest and in transit · PAM for privileged accounts · JIT access workflows</text>
-    <text x="36" y="98" font-size="10" fill="#8A7D6B" font-family="system-ui">Performance-based: document why your implementation achieves each outcome</text></g>
-  <g id="pg4-hl1" class="svg-hl"><rect x="20" y="124" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text x="36" y="148" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">Third-Party Architecture (500.11)</text>
-    <text x="36" y="166" font-size="10" fill="#D6CCBC" font-family="system-ui">Minimum access · Secure auth at integration boundary · Monitor third-party API calls · Assess before granting access</text></g>
-  <g id="pg4-hl2" class="svg-hl"><rect x="20" y="202" width="480" height="64" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="226" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">Architecture Documentation: Living Documents</text>
-    <text x="36" y="244" font-size="10" fill="#D6CCBC" font-family="system-ui">Network diagrams · DFDs · Crypto inventory · Access control architecture · IR architecture · Maintained current</text></g>
-  <g id="pg4-hl3" class="svg-hl"><rect x="20" y="280" width="480" height="46" rx="8" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text x="36" y="303" font-size="10" fill="#D6CCBC" font-family="system-ui">Architecture review integrated into change management · New systems and significant changes receive security review before deployment</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">INSURANCE AGENCY ARCHITECTURE</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<circle cx="130" cy="102" r="38" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<text x="130" y="92" text-anchor="middle" font-size="7" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">NY DFS 500</text>
+<text x="102" y="108" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">✓ MFA for NPI</text>
+<text x="102" y="119" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">✓ Encrypt at rest</text>
+<text x="102" y="130" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">✓ PAM accounts</text>
+<text x="102" y="141" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">✓ JIT access</text>
+<text x="130" y="156" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">NY DFS 500 CONTROLS</text>
+<rect x="372" y="82" width="36" height="52" rx="3" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.2"/>
+<text x="390" y="96" text-anchor="middle" font-size="6" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">SECURITY</text>
+<text x="390" y="106" text-anchor="middle" font-size="6" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">GATEWAY</text>
+<g transform="translate(390,120)">
+<ellipse cx="0" cy="12" rx="7.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-5,0 Q-5,-10 0,-10 Q5,-10 5,0" fill="none" stroke="#C4AA88" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-9" y="0" width="18" height="10" rx="3" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.6"/>
+<circle cx="0" cy="3" r="4" fill="#C4AA88" opacity="0.8"/>
+</g><rect x="316" y="96" width="32" height="24" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.7"/>
+<text x="332" y="111" text-anchor="middle" font-size="5.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Vendor</text>
+<line x1="348" y1="108" x2="348" y2="108" stroke="#A08860" stroke-width="0.8" marker-end="url(#arr)"/>
+<rect x="432" y="96" width="32" height="24" rx="2" fill="#1B2A4A" stroke="#A08860" stroke-width="0.7"/>
+<text x="448" y="111" text-anchor="middle" font-size="5.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Internal</text>
+<line x1="372" y1="108" x2="408" y2="108" stroke="#A08860" stroke-width="0.8" marker-end="url(#arr)"/>
+<text x="390" y="160" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">THIRD-PARTY CONTROLS</text>
+<rect x="70" y="219" width="120" height="68" rx="3" fill="none" stroke="#9B2B2B" stroke-width="1.5"/>
+<text x="74" y="228" font-size="5.5" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">INTERNET</text>
+<rect x="82" y="225" width="96" height="56" rx="3" fill="none" stroke="#A08860" stroke-width="1.3"/>
+<text x="86" y="234" font-size="5.5" fill="#A08860" font-weight="700" font-family="IBM Plex Mono,monospace">DMZ</text>
+<rect x="94" y="231" width="72" height="44" rx="3" fill="none" stroke="#5BA3D9" stroke-width="1.1"/>
+<text x="98" y="240" font-size="5.5" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">USER ZONE</text>
+<rect x="106" y="237" width="48" height="32" rx="3" fill="none" stroke="#2d6a2d" stroke-width="0.8999999999999999"/>
+<text x="110" y="246" font-size="5.5" fill="#2d6a2d" font-weight="700" font-family="IBM Plex Mono,monospace">DATA ZONE</text>
+<text x="130" y="305" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">SEGMENTATION ZONES</text>
+<rect x="342" y="219" width="96" height="60" rx="3" fill="#1B2A4A" stroke="#5BA3D9" stroke-width="1.2"/>
+<text x="390" y="233" text-anchor="middle" font-size="6" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">SIEM · LOGGING</text>
+<rect x="348" y="245" width="80" height="8" rx="1" fill="#2d6a2d" opacity="0.2" stroke="#2d6a2d" stroke-width="0.4"/>
+<text x="350" y="252" font-size="5" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">EVENT: login OK</text>
+<rect x="348" y="256" width="60" height="8" rx="1" fill="#9B2B2B" opacity="0.2" stroke="#9B2B2B" stroke-width="0.4"/>
+<text x="350" y="263" font-size="5" fill="#9B2B2B" font-family="IBM Plex Mono,monospace">⚠ ALERT: lateral move</text>
+<rect x="348" y="267" width="80" height="8" rx="1" fill="#2d6a2d" opacity="0.2" stroke="#2d6a2d" stroke-width="0.4"/>
+<text x="350" y="274" font-size="5" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">EVENT: login OK</text>
+<rect x="348" y="278" width="80" height="8" rx="1" fill="#2d6a2d" opacity="0.2" stroke="#2d6a2d" stroke-width="0.4"/>
+<text x="350" y="285" font-size="5" fill="#2d6a2d" font-family="IBM Plex Mono,monospace">EVENT: login OK</text>
+<text x="390" y="295" text-anchor="middle" font-size="10" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="1.5">DETECTION + LOGGING</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg4">
@@ -361,26 +669,75 @@ body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-ser
   <div class="page-cols">
     <div class="col-diagram">
       <div class="svg-pad"><svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-  <g id="pg5-hl0" class="svg-hl" transform="translate(140,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#1B2A4A" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#1B2A4A" font-weight="700" font-family="system-ui">CORE PRINCIPLES</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Defense in depth · Least privilege</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Fail secure · Separation of duties</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Foundational — all architecture builds on these</text></g>
-  <g id="pg5-hl1" class="svg-hl" transform="translate(380,100)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#C4AA88" font-weight="700" font-family="system-ui">PATTERNS</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Zero trust · API security</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Crypto architecture · Resilience</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Apply patterns to design decisions</text></g>
-  <g id="pg5-hl2" class="svg-hl" transform="translate(140,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">THREAT MODELING</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">STRIDE · Attack trees · DFDs</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Trust boundary analysis</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Recurring — not one-time</text></g>
-  <g id="pg5-hl3" class="svg-hl" transform="translate(380,240)"><rect x="-110" y="-55" width="220" height="110" rx="12" fill="#1B2A4A" stroke="#A08860" stroke-width="1.5"/>
-    <text y="-28" text-anchor="middle" font-size="11" fill="#A08860" font-weight="700" font-family="system-ui">NY DFS 500</text>
-    <text y="-8" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">MFA · Encryption · PAM · 500.11</text>
-    <text y="10" text-anchor="middle" font-size="10" fill="#D6CCBC" font-family="system-ui">Living documentation required</text>
-    <text y="30" text-anchor="middle" font-size="10" fill="#8A7D6B" font-family="system-ui">Architecture review in change mgmt</text></g>
+<defs>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C4AA88" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#C4AA88" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="scr" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#0f1a32"/>
+  </linearGradient>
+  <linearGradient id="goldB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#E8D4B0"/><stop offset="100%" stop-color="#A08860"/>
+  </linearGradient>
+  <linearGradient id="navyB" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2a3a5e"/><stop offset="100%" stop-color="#1B2A4A"/>
+  </linearGradient>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#A08860"/>
+  </marker>
+  <marker id="arr_r" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,1 L7,4 L0,7 Z" fill="#9B2B2B"/>
+  </marker>
+</defs>
+<!-- Background -->
+<rect width="520" height="340" fill="#0f1a32"/>
+<rect width="520" height="340" fill="url(#scr)" opacity="0.4"/>
+<!-- dot pattern -->
+<pattern id="dp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="1" cy="1" r="0.8" fill="#C4AA88" opacity="0.05"/>
+</pattern>
+<rect width="520" height="340" fill="url(#dp)"/>
+<!-- Title bar -->
+<rect x="0" y="0" width="520" height="38" fill="#0f1a32" opacity="0.85"/>
+<line x1="18" y1="38" x2="502" y2="38" stroke="#C4AA88" stroke-width="0.5" opacity="0.4"/>
+<text x="260" y="24" text-anchor="middle" font-size="12" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace" letter-spacing="2.5">SECURITY ARCHITECTURE — SUMMARY</text>
+<line x1="260" y1="44" x2="260" y2="334" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<line x1="18" y1="189" x2="502" y2="189" stroke="#A08860" stroke-width="0.4" opacity="0.25" stroke-dasharray="4,5"/>
+<g transform="translate(130,110)">
+<ellipse cx="0" cy="36" rx="22.4" ry="4" fill="#0f1a32" opacity="0.3" filter="url(#sh)"/>
+<path d="M0,-32 L32,-26 L32,6 Q32,36 0,40 Q-32,36 -32,6 L-32,-26 Z" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.8"/>
+<text x="0" y="4" text-anchor="middle" font-size="14" fill="#C4AA88">✓</text>
+</g><text x="130" y="156" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">CORE PRINCIPLES</text>
+<text x="130" y="168" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">Depth · Privilege · Fail Secure · SoD</text>
+<g transform="translate(390,108)">
+<circle cx="0" cy="0" r="7" fill="#C4AA88" stroke="#0f1a32" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="-30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="-30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="0.0" y2="30.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="0.0" cy="30.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+<line x1="0" y1="0" x2="-30.0" y2="0.0" stroke="#A08860" stroke-width="0.8" opacity="0.6"/>
+<circle cx="-30.0" cy="0.0" r="5" fill="#1B2A4A" stroke="#A08860" stroke-width="0.8"/>
+</g><text x="390" y="154" text-anchor="middle" font-size="8" fill="#5BA3D9" font-weight="700" font-family="IBM Plex Mono,monospace">PATTERNS</text>
+<text x="390" y="166" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">ZeroTrust · API · Crypto · Resilience</text>
+<g transform="translate(130,247)">
+<ellipse cx="0" cy="24" rx="15.399999999999999" ry="3" fill="#0f1a32" opacity="0.3"/>
+<polygon points="0,-22 22,22 -22,22" fill="#1B2A4A" stroke="#9B2B2B" stroke-width="1.8"/>
+<text x="0" y="18" text-anchor="middle" font-size="15.399999999999999" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">!</text>
+</g><text x="130" y="281" text-anchor="middle" font-size="8" fill="#9B2B2B" font-weight="700" font-family="IBM Plex Mono,monospace">THREAT MODELING</text>
+<text x="130" y="293" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">STRIDE · Trees · DFDs · Risk</text>
+<g transform="translate(390,247)">
+<ellipse cx="0" cy="22" rx="14.0" ry="3" fill="#0f1a32" opacity="0.3"/>
+<path d="M-10,0 Q-10,-20 0,-20 Q10,-20 10,0" fill="none" stroke="#C4AA88" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="-14" y="0" width="28" height="20" rx="3" fill="#1B2A4A" stroke="#C4AA88" stroke-width="1.6"/>
+<circle cx="0" cy="8" r="4" fill="#C4AA88" opacity="0.8"/>
+</g><text x="390" y="285" text-anchor="middle" font-size="8" fill="#C4AA88" font-weight="700" font-family="IBM Plex Mono,monospace">INSURANCE ARCH</text>
+<text x="390" y="297" text-anchor="middle" font-size="6.5" fill="#D6CCBC" font-family="IBM Plex Mono,monospace">NY DFS 500 · 3rd-Party · Zones</text>
 </svg></div>
     </div>
     <div class="col-content" id="cc-pg5">
